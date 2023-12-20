@@ -1,0 +1,440 @@
+
+
+
+.header-auth{
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 2px 16px hsla(220, 32%, 8%, .3);
+  z-index: var(--z-fixed);
+  border: black;
+ 
+}
+
+#reg{
+  background-color: #fff;
+  height: 641px;
+  z-index: 9999;
+  padding-top: 60px;
+}
+
+#login{
+  background-color: #fff;
+  height: 641px;
+  z-index: 9999;
+  padding-top: 60px;
+}
+.container-auth{
+
+    position: relative;
+    max-width: 1920px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 150%;
+    width: 1920px;
+    background: #fff;
+    padding: 40px 30px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    perspective: 2700px;
+    z-index: 9999;
+  }
+
+ 
+
+
+  .container-auth .cover{
+    background-image: url(../assets//Images/ClippifyWelcome.svg);
+     /* Set the image size to 25% of its original size horizontally */
+    background-position: right center;
+    background-size: 190%;
+    position: absolute;
+   
+    height: 1080px;
+    border-radius: 10px;
+    width: 1050px;
+    left: 50%;
+    top: -25%;
+  }
+
+   .container-auth .cover .front,
+   .container-auth .cover .back{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+  }
+
+  .text{
+    padding-left: 50px;
+  }
+
+  .text a{
+    color: #000;
+    opacity: 0.4;
+    font-size: 13px;
+  }
+
+  .text a:hover{
+    color: #000;
+    opacity: 1;
+    font-size: 13px;
+  }
+
+  .container-auth .cover .text{
+    position: absolute;
+    z-index: 130;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+  }
+
+  .cover .text .text-1,
+  .cover .text .text-2{
+    font-size: 25px;
+    font-weight: 600;
+    color: #fff;
+    text-align: center;
+  }
+
+  .cover .text .text-2{
+    font-size: 15px;
+    font-weight: 500;
+  }
+  
+  .container-auth .forms{
+    height: 100%;
+    width: 100%;
+    background: white;
+  }
+
+
+/*FORMS SETTINGS*/
+  .form-content .login-form,
+  .form-content .signup-form{
+    width: calc(100% / 2 - 200px);
+    padding-top: 100px;
+    padding-left: 200px;
+  }
+
+
+  .forms .form-content .title{
+    position: relative;
+    font-size: 24px;
+    font-weight: 500;
+    color: #333;
+  }
+
+
+  .forms .form-content .title:before{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 25px;
+    background: #61ffdf;
+  }
+
+
+  .forms .signup-form  .title:before{
+    width: 20px;
+  }
+  .forms .form-content .input-boxes{
+    margin-top: 30px;
+  }
+  /*INPUTS*/
+  .forms .form-content .input-box{
+    display: flex;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+    margin: 20px 0;
+    position: relative;
+  }
+  .form-content .input-box input{
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: none;
+    padding: 0 30px;
+    font-size: 16px;
+    font-weight: 500;
+    border-bottom: 2px solid rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+  }
+  .form-content .input-box input:focus,
+  .form-content .input-box input:valid{
+    border-color: #61ffdf;
+  }
+  .form-content .input-box i{
+    position: absolute;
+    color: #61ffdf;
+    font-size: 17px;
+  }
+  .forms .form-content .text{
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+  }
+  .forms .form-content .text a{
+    text-decoration: none;
+  }
+  .forms .form-content .text a:hover{
+    text-decoration: underline;
+  }
+  .forms .form-content .button{
+    color: #fff;
+    margin-top: 40px;
+  }
+  .forms .form-content .button input{
+    color: #fff;
+    font-weight: 500;
+    background: #61ffdf;
+    border-radius: 6px;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .forms .form-content .button input:hover{
+    background: #fff;
+    color: black;
+    font-weight: 600;
+    box-shadow: 0 2px 16px hsla(220, 32%, 8%, .3);
+  }
+  .forms .form-content label{
+    color: #61ffdf;
+    cursor: pointer;
+  }
+  .forms .form-content label:hover{
+    text-decoration: underline;
+  }
+  .forms .form-content .login-text,
+  .forms .form-content .sign-up-text{
+    text-align: center;
+    margin-top: 25px;
+  }
+  .container-auth #flip{
+    display: none;
+  }
+  @media (max-width: 730px) {
+    .container .cover{
+      display: none;
+    }
+    .form-content .login-form,
+    .form-content .signup-form{
+      width: 100%;
+    }
+    .form-content .signup-form{
+      display: none;
+    }
+    .container-auth #flip:checked ~ .forms .signup-form{
+      display: block;
+    }
+    .container-auth #flip:checked ~ .forms .login-form{
+      display: none;
+    }
+  }
+
+  /*Google*/
+
+
+
+
+
+.google-btn {
+  width: 450px;
+  height: 42px;
+  background-color: #4285f4;
+  border-radius: 2px;
+  border-radius: 30px;
+  box-shadow: 0 3px 4px 0 rgba(0,0,0,.25);
+  margin-top: 30px;
+  margin-bottom: 10px;
+  margin-right: 20px;
+  margin-left: 40px;
+  .google-icon-wrapper {
+    position: absolute;
+    margin-top: 1px;
+    margin-left: 1px;
+    width: 40px;
+    height: 40px;
+    border-radius: 2px;
+    background-color: #fff;
+    border-radius: 30px;
+  }
+  .google-icon {
+    position: absolute;
+    margin-top: 11px;
+    margin-left: 11px;
+    width: 18px;
+    height: 18px;
+  }
+  .btn-text {
+    float: right;
+    padding-right: 130px;
+    margin: 11px 11px 0 0;
+    
+    color: #fff;
+    font-size: 14px;
+    letter-spacing: 0.7px;
+    
+    
+  }
+  &:hover {
+    box-shadow: 0 0 6px #4285f4;
+    cursor: pointer;
+  }
+  &:active {
+    background: #1669F2;
+  }
+}
+
+
+.apple-btn{
+    width: 450px;
+    height: 42px;
+    background-color: black;
+    border-radius: 2px;
+    box-shadow: 0 3px 4px 0 rgba(0,0,0,.25);
+    border-radius: 30px;
+    margin-left: 40px;
+
+
+    .apple-icon-wrapper {
+        position: absolute;
+        margin-top: 1px;
+        margin-left: 1px;
+        width: 40px;
+        height: 40px;
+        border-radius: 2px;
+        background-color: #fff;
+        border-radius: 30px;
+      }
+      .apple-icon {
+        position: absolute;
+        margin-top: 11px;
+        margin-left: 11px;
+        width: 18px;
+        height: 18px;
+      }
+      .btn-text {
+        float: right;
+        margin: 11px 11px 0 0;
+        color: #fff;
+        font-size: 14px;
+        letter-spacing: 0.2px;
+       
+        padding-right: 140px;
+      }
+      &:hover {
+        box-shadow: 0 0 6px white;
+        cursor: pointer;
+      }
+      &:active {
+        background: black;
+      }
+
+}
+
+/* The switch - the box around the slider */
+.switch-remember {
+  /* Variables */
+ --switch_width: 2em;
+ --switch_height: 1em;
+ --thumb_color: #e8e8e8;
+ --track_color: #e8e8e8;
+ --track_active_color: #888;
+ --outline_color: #000;
+ font-size: 17px;
+ position: relative;
+ display: inline-block;
+ width: var(--switch_width);
+ height: var(--switch_height);
+ margin-bottom: -100px;
+}
+
+/* Hide default HTML checkbox */
+.switch-remember input {
+ opacity: 0;
+ width: 0;
+ height: 0;
+}
+
+/* The slider */
+.slider-remember {
+ box-sizing: border-box;
+ border: 2px solid var(--outline_color);
+ position: absolute;
+ cursor: pointer;
+ top: 0;
+ left: 0;
+ right: 0;
+ bottom: 0;
+ background-color: var(--track_color);
+ transition: .15s;
+ border-radius: var(--switch_height);
+}
+
+.slider-remember:before {
+ box-sizing: border-box;
+ position: absolute;
+ content: "";
+ height: var(--switch_height);
+ width: var(--switch_height);
+ border: 2px solid var(--outline_color);
+ border-radius: 100%;
+ left: -2px;
+ bottom: -2px;
+ background-color: var(--thumb_color);
+ transform: translateY(-0.2em);
+ box-shadow: 0 0.2em 0 var(--outline_color);
+ transition: .15s;
+}
+
+input:checked + .slider-remember {
+ background-color: var(--track_active_color);
+}
+
+input:focus-visible + .slider-remember {
+ box-shadow: 0 0 0 2px var(--track_active_color);
+}
+
+/* Raise thumb when hovered */
+input:hover + .slider-remember:before {
+ transform: translateY(-0.3em);
+ box-shadow: 0 0.3em 0 var(--outline_color);
+}
+
+input:checked + .slider-remember:before {
+ transform: translateX(calc(var(--switch_width) - var(--switch_height))) translateY(-0.2em);
+}
+
+/* Raise thumb when hovered & checked */
+input:hover:checked + .slider-remember:before {
+ transform: translateX(calc(var(--switch_width) - var(--switch_height))) translateY(-0.3em);
+ box-shadow: 0 0.3em 0 var(--outline_color);
+}
+
+.userRemember{
+  display: flex;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  margin-left: 50px;
+}
+
+.userRemember h4{
+  padding-left: 10px;
+  margin-top: -3px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
