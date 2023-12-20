@@ -558,7 +558,6 @@ useEffect(() => {
 
 
 return (
-
 <div className='file'>
     <div className='zero_bar-row2'> 
       <div className='back-button'>
@@ -754,7 +753,6 @@ return (
       <BasicSpeedDial togglePopup={togglePopup} />
     </div>
 </div>
-
 )}
 export default File
 
