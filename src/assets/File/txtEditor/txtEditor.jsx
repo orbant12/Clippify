@@ -1,3 +1,6 @@
+
+//DESC: This is the rich text editor and the chatbot
+
 import ExampleTheme from "./themes/themeEditor";
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
 import React, {useEffect, useState} from "react";
@@ -26,25 +29,19 @@ import StateUpdater  from "./plugins/htmlPlugin"
 import { getFunctions, httpsCallable } from "firebase/functions";
 import {app,storage} from "../../../firebase"
 import { getDownloadURL, ref} from 'firebase/storage';
-
 import 'firebase/functions';
 //GPT
-
 import ChatMessage from "../chatMessage"
-
-
-
 
 
 export default function Editor({setData,setContent,audioUrl,passTranscription,isSubscribed}) {
 
-const [initialEditorState, setInitialEditorState] = useState(null)
 
+const [initialEditorState, setInitialEditorState] = useState(null)
 
 const loadContent = async () => {
   // 'empty' editor
   const value = '{"root":{"children":[{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1}],"direction":null,"format":"","indent":0,"type":"root","version":1}}';
-
   return value;
 }
 
@@ -53,31 +50,28 @@ useEffect(() => {
   setInitialEditorState(initialEditorState)
 },[])
 
-
 const editorConfig = {
-
-
-    // The editor theme
-    theme: ExampleTheme,
-    editorState: initialEditorState,
-    // Handling of errors during update
-    onError(error) {
-      throw error;
-    },
-    // Any custom nodes go here
-    nodes: [
-      HeadingNode,
-      ListNode,
-      ListItemNode,
-      QuoteNode,
-      CodeNode,
-      CodeHighlightNode,
-      TableNode,
-      TableCellNode,
-      TableRowNode,
-      AutoLinkNode,
-      LinkNode
-    ]
+  // The editor theme
+  theme: ExampleTheme,
+  editorState: initialEditorState,
+  // Handling of errors during update
+  onError(error) {
+    throw error;
+  },
+  // Any custom nodes go here
+  nodes: [
+    HeadingNode,
+    ListNode,
+    ListItemNode,
+    QuoteNode,
+    CodeNode,
+    CodeHighlightNode,
+    TableNode,
+    TableCellNode,
+    TableRowNode,
+    AutoLinkNode,
+    LinkNode
+  ]
 };
 
 const functions = getFunctions(app);
@@ -301,134 +295,134 @@ const handleSummerising = async () =>{
 
 }
 
- return (
-  <LexicalComposer initialConfig={editorConfig}>
-    <div className="editor-container">
-      <ToolbarPlugin isActive={setIsAiActive} />
-      {!isAiActive ? (
-        <div className={`editor-inner ${!isFirstQuestion ? 'active' : ''}`}>
-          <RichTextPlugin
-            contentEditable={
-              <ContentEditable className="editor-input" />
-            }
-            ErrorBoundary={LexicalErrorBoundary}
-          />
-          <OnChangePlugin onChange={editorState => editorStateRef.current = editorState} />
-          <OnChangePlugin onChange={() => {
-    if (editorStateRef.current) {
-      setContent(JSON.stringify(editorStateRef.current))
-    }
-  }}/>
-          <StateUpdater initialHtml={`${setData}`} />
-          <HistoryPlugin />
-          <TreeViewPlugin />
-          <AutoFocusPlugin />
-          <CodeHighlightPlugin />
-          <ListPlugin />
-          <LinkPlugin />
-          <AutoLinkPlugin />
-          <ListMaxIndentLevelPlugin maxDepth={7} />
-          <MarkdownShortcutPlugin transformers={TRANSFORMERS} />
-        </div>
-      ) : 
+return (
+<LexicalComposer initialConfig={editorConfig}>
+  <div className="editor-container">
+    <ToolbarPlugin isActive={setIsAiActive} />
+    {!isAiActive ? (
       <div className={`editor-inner ${!isFirstQuestion ? 'active' : ''}`}>
-      {isFirstQuestion ? (
-        <div className="ai-input-cont">
-          <h1 className="ai_title">Use Clippify Ai</h1>
-         
-          
-          <div className="feature-boxes">
-       { !isScriptLoaded?( 
-            !isScriptLoading? ( 
-              <div className="feature_1"  onClick={handleScriptLoading}>
-                  <h2>Analyze the Script</h2>
-                  <h5>Ask your question if it's highlighted</h5>
-              </div>):(
-                 <div className="feature_1">
-                 <h2>Scipt Loading</h2>
-                 <h5>It may take some times...</h5>
-             </div>
-              )
-              ):(
-                <div className="feature_1" style={{borderColor:"aquamarine"}} onClick={handleScriptLoaded}>
-                 <h2>Scipt is Ready</h2>
-                 <h5>Ask Anyithing I Click to Undo</h5>
-             </div>
-             )}
-
-            {!summerisingIsLoading?(
-              <div className="feature_2" onClick={handleSummerising}>
-                  <h2>Summarise the video</h2>
-                  <h5>However you want</h5>
-              </div>):(
-                  <div className="feature_2" style={{borderColor:"aquamarine"}} onClick={handleSummerising}>
-                  <h2>Processing</h2>
-                  <h5>It may take some times</h5>
-              </div>
-              )}
-          </div>
-          {!isScriptLoaded ? (
-        <input type="text" value={aiTxt} className="ai-input" placeholder="Ask me anything" onChange={handleInputChange} onKeyPress={handleEnterPress}/>
-        ):(
-          <input type="text" value={aiTxt} className="ai-input" placeholder="The Video Script is Loaded" onChange={handleInputChange} onKeyPress={handleEnterPress}/>
-        )
-      }
-     
-        </div>
-         ) : (
-          <>
-          <div className="editor-inner2">
-          <div className="chat-cont">
-              <h1 className="chat-log-title">Chat Log</h1>
-              <hr className="chat-log-hr"/>
-      {chatLog.map((message,index) => (
-           <ChatMessage key={index} message={message}/>
-            ))}
+        <RichTextPlugin
+          contentEditable={
+            <ContentEditable className="editor-input" />
+          }
+          ErrorBoundary={LexicalErrorBoundary}
+        />
+        <OnChangePlugin onChange={editorState => editorStateRef.current = editorState} />
+        <OnChangePlugin onChange={() => {
+  if (editorStateRef.current) {
+    setContent(JSON.stringify(editorStateRef.current))
+  }
+}}/>
+        <StateUpdater initialHtml={`${setData}`} />
+        <HistoryPlugin />
+        <TreeViewPlugin />
+        <AutoFocusPlugin />
+        <CodeHighlightPlugin />
+        <ListPlugin />
+        <LinkPlugin />
+        <AutoLinkPlugin />
+        <ListMaxIndentLevelPlugin maxDepth={7} />
+        <MarkdownShortcutPlugin transformers={TRANSFORMERS} />
+      </div>
+    ) : 
+    <div className={`editor-inner ${!isFirstQuestion ? 'active' : ''}`}>
+    {isFirstQuestion ? (
+      <div className="ai-input-cont">
+        <h1 className="ai_title">Use Clippify Ai</h1>
+        
+        
+        <div className="feature-boxes">
+      { !isScriptLoaded?( 
+          !isScriptLoading? ( 
+            <div className="feature_1"  onClick={handleScriptLoading}>
+                <h2>Analyze the Script</h2>
+                <h5>Ask your question if it's highlighted</h5>
+            </div>):(
+                <div className="feature_1">
+                <h2>Scipt Loading</h2>
+                <h5>It may take some times...</h5>
             </div>
-            
-          </div>
-          <div className="input_bar_2_stage">
-          <div className="feature-boxes">
-          { !isScriptLoaded?( 
-              !isScriptLoading? ( 
-              <div className="feature_1" onClick={handleScriptLoading}>
-                  <h2>Analyze the Script</h2>
-                  <h5>If it's green you can ask your question</h5>
-              </div>):(
-                 <div className="feature_1">
-                 <h2>Scipt Loading</h2>
-                 <h5>It may take some times...</h5>
-             </div>
-              )
-              ):(
+            )
+            ):(
               <div className="feature_1" style={{borderColor:"aquamarine"}} onClick={handleScriptLoaded}>
-                 <h2>Scipt is Ready</h2>
-                 <h5>Click to Undo</h5>
-             </div>
-             )}
+                <h2>Scipt is Ready</h2>
+                <h5>Ask Anyithing I Click to Undo</h5>
+            </div>
+            )}
+
+          {!summerisingIsLoading?(
+            <div className="feature_2" onClick={handleSummerising}>
+                <h2>Summarise the video</h2>
+                <h5>However you want</h5>
+            </div>):(
+                <div className="feature_2" style={{borderColor:"aquamarine"}} onClick={handleSummerising}>
+                <h2>Processing</h2>
+                <h5>It may take some times</h5>
+            </div>
+            )}
+        </div>
+        {!isScriptLoaded ? (
+      <input type="text" value={aiTxt} className="ai-input" placeholder="Ask me anything" onChange={handleInputChange} onKeyPress={handleEnterPress}/>
+      ):(
+        <input type="text" value={aiTxt} className="ai-input" placeholder="The Video Script is Loaded" onChange={handleInputChange} onKeyPress={handleEnterPress}/>
+      )
+    }
+    
+      </div>
+        ) : (
+        <>
+        <div className="editor-inner2">
+        <div className="chat-cont">
+            <h1 className="chat-log-title">Chat Log</h1>
+            <hr className="chat-log-hr"/>
+    {chatLog.map((message,index) => (
+          <ChatMessage key={index} message={message}/>
+          ))}
+          </div>
+          
+        </div>
+        <div className="input_bar_2_stage">
+        <div className="feature-boxes">
+        { !isScriptLoaded?( 
+            !isScriptLoading? ( 
+            <div className="feature_1" onClick={handleScriptLoading}>
+                <h2>Analyze the Script</h2>
+                <h5>If it's green you can ask your question</h5>
+            </div>):(
+                <div className="feature_1">
+                <h2>Scipt Loading</h2>
+                <h5>It may take some times...</h5>
+            </div>
+            )
+            ):(
+            <div className="feature_1" style={{borderColor:"aquamarine"}} onClick={handleScriptLoaded}>
+                <h2>Scipt is Ready</h2>
+                <h5>Click to Undo</h5>
+            </div>
+            )}
 
 {!summerisingIsLoading?(
-              <div className="feature_2" onClick={handleSummerising}>
-                  <h2>Summarise the video</h2>
-                  <h5>However you want</h5>
-              </div>):(
-                  <div className="feature_2" style={{borderColor:"aquamarine"}} onClick={handleSummerising}>
-                   <h2>Processing</h2>
-                  <h5>It may take some times</h5>
-              </div>
-              )}
-          </div>
-      {!isScriptLoaded ? (
-        <input type="text" value={aiTxt} className="ai-input" placeholder="Ask me anything" onChange={handleInputChange} onKeyPress={handleEnterPress}/>
-        ):(
-          <input type="text" value={aiTxt} className="ai-input" placeholder="The Video Script is Loaded" onChange={handleInputChange} onKeyPress={handleEnterPress}/>
-        )
-      }
+            <div className="feature_2" onClick={handleSummerising}>
+                <h2>Summarise the video</h2>
+                <h5>However you want</h5>
+            </div>):(
+                <div className="feature_2" style={{borderColor:"aquamarine"}} onClick={handleSummerising}>
+                  <h2>Processing</h2>
+                <h5>It may take some times</h5>
+            </div>
+            )}
         </div>
-        </>
-        )}
-        </div>}
-    </div>
-  </LexicalComposer>
+    {!isScriptLoaded ? (
+      <input type="text" value={aiTxt} className="ai-input" placeholder="Ask me anything" onChange={handleInputChange} onKeyPress={handleEnterPress}/>
+      ):(
+        <input type="text" value={aiTxt} className="ai-input" placeholder="The Video Script is Loaded" onChange={handleInputChange} onKeyPress={handleEnterPress}/>
+      )
+    }
+      </div>
+      </>
+      )}
+      </div>}
+  </div>
+</LexicalComposer>
 );
 }

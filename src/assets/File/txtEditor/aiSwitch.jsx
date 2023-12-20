@@ -1,3 +1,5 @@
+//DESC: This is the switch component displayed on the editor right 
+
 import * as React from 'react';
 import { useState } from 'react';
 import { styled } from '@mui/material/styles';
@@ -53,7 +55,9 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
+
 export default function CustomizedSwitches({isActive}) {
+
 
 const [isAiActive,setIsAiActive] =useState(false)
 
@@ -67,12 +71,12 @@ const toggleAi = () =>{
   }
 }
 
-  return (
-      <FormControlLabel
-        onClick={toggleAi}
-        control={<MaterialUISwitch sx={{ ml: 40}} defaultChecked />}
-        label="Ai"
-      />
+return (
+  <FormControlLabel
+    onClick={toggleAi}
+    control={<MaterialUISwitch sx={{ ml: 40}} defaultChecked />}
+    label="Ai"
+  />
 
-  );
+);
 }
