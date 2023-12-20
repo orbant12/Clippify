@@ -2,26 +2,20 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate} from "react-router-dom";
 import { useAuth } from '../context/UserAuthContext';
-
 //FIREBASE
-import { 
-    doc, collection, getDoc, query,setDoc,getDocs,startAfter,limit,endBefore,limitToLast,orderBy,deleteDoc, Timestamp
-  } from "firebase/firestore";
+import { doc, collection, getDoc, query,setDoc,getDocs,startAfter,limit,endBefore,limitToLast,orderBy,deleteDoc, updateDoc } from "firebase/firestore";
 import { db,storage } from "../firebase";
 import { ref, uploadString, getDownloadURL,deleteObject,uploadBytes } from 'firebase/storage';
 import {v4} from "uuid";
-
 //ICONS
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import DesignServicesIcon from '@mui/icons-material/DesignServices';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-
 //MUI
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
-
 //ASSETS
 import FrameVideo from '../assets/File/videoFrame';
 import Editor from '../assets/File/txtEditor/txtEditor';
@@ -37,13 +31,14 @@ import BasicSpeedDial from "../assets/FileAdd/addBtn";
 import ToggleButtons from "../assets/File/mainShow"
 import FullFrameVideo from "../assets/File/fullVideoFrame"
 import DelayingAppearance from "../assets/FileAdd/LoadingBtn";
-
 //CSS
 import '../Css/file.css'
 
 
 function File({prevUrl,mainFileURL}) {
 
+
+//<******************************VARIABLES*******************************>
 //FILE ELEMENT IN ARRAY 
 const [fileElements, setFileElements] = useState([])
 const [userData,setUserData] = useState([])
@@ -91,8 +86,11 @@ const { currentuser } = useAuth();
 const folderUrl = prevUrl // FOLDER URL
 const currentURL = id //File URL
 const navigate  = useNavigate()
- 
 
+
+//<******************************FUNCTIONS*******************************>
+
+//SET CHILDREN COUNT
 useEffect(() => {
   if(currentuser){
     if(fileElements.length !== 0){
@@ -102,31 +100,16 @@ useEffect(() => {
           const userDocRef = doc(db, "users", currentUserId);
           const folderElementRef = doc(userDocRef, "File-Storage", folderUrl);
           const fileChildrenRef = doc(folderElementRef ,"Files",currentURL);
-        // ONLY TEXT EDITOR CONTENT CHANGES
-        setDoc(fileChildrenRef, {
-          content: fileElements.content,
-          title: fileElements.title,
-          img: fileElements.img,
-          url: fileElements.url,
-          id: fileElements.id,
-          folder_id: fileElements.folder_id,
-          tag: fileElements.tag,
-          duration: fileElements.duration,
-          storage_path_video: fileElements.storage_path_video,
-          storage_path_audio: fileElements.storage_path_audio,
-          transcription: fileElements.transcription,
-          related_count: childrenFiles.length,
-          video_size: fileElements.video_size,
-        });
-
+          const numberOfChild = childrenFiles.length
+          updateDoc(fileChildrenRef, {
+            related_count: numberOfChild,
+          });
       }
     } 
   }
 }, [childrenFiles]);
 
-//FUNCTIONS_____________________________//
-
-//RECENT LOAD
+//RECENT LOAD SETTER
 const setRecentlyOpenned = async () => {
   if (currentuser) {
     //USER DATA AND FIRESTORE REFS
@@ -134,17 +117,9 @@ const setRecentlyOpenned = async () => {
     const userDocRef = doc(db, "users", currentUserId);
     const urlID = folderUrl;
     const recentDocRef = doc(db,"users",currentUserId,"File-Storage",urlID,"Files",currentURL)
-    const newData = {
-      id: userData.id,
-      fullname: userData.fullname,
-      email: userData.email,
-      subscription: userData.subscription,
+    updateDoc(recentDocRef, {
       recent: recentDocRef,
-      storage_take: userData.storage_take,
-      profilePictureURL: userData.profilePictureURL,
-      user_since: userData.user_since,
-    }
-    setDoc(userDocRef,newData)
+    });
     console.log("recent sett succ") 
   }
 }
@@ -187,22 +162,19 @@ const fetchData = async () => {
     window.location.href = "/"
   }
 };
+
 //FECT CHILDREN ELEMENTS
 const fetchChildren = async () => {
-  // Calculate the total number of items ALLOWED
-const totalItems = 6;
-// Number of items to display per page
-const pageSize = 3;
-//Pagination bar display
-const totalPageCount = Math.ceil(totalItems / pageSize);
-setTotalPages(totalPageCount);
+  const totalItems = 6;
+  const pageSize = 3;
+  const totalPageCount = Math.ceil(totalItems / pageSize);
+  setTotalPages(totalPageCount);
   if (currentuser) {
     //USER DATA AND FIRESTORE REF
     const currentUserId = currentuser.uid;
     const userDocRef = doc(db, "users", currentUserId);
     const folderElementRef = doc(userDocRef, "File-Storage", folderUrl);
     const fileChildrenRef = collection(folderElementRef ,"Files",currentURL,"Children");
-
     //QUERY WITH 3 LIMIT
     const queryRef = query(fileChildrenRef,orderBy("id","asc"), limit(pageSize));
     try {
@@ -224,9 +196,8 @@ setTotalPages(totalPageCount);
   }
 }
 
-//USE EFFECT TO CALL LOAD DATA ON PAGE___________________________//
+//ON LOAD FETCH DATA
 useEffect(() => {
-  //PASSING URL FORWARD
   mainFileURL(currentURL)
   fetchData();
   fetchChildren();
@@ -240,7 +211,7 @@ useEffect(() => {
   }
 }, [userData]);
 
-//MODAL ACTIVE LOGIC STATES._____________________________//
+//MODAL ACTIVE LOGIC STATES
 const togglePopup = () => {
   if(currentuser && childrenFiles.length < 3){
     setIsActive(!isActive);
@@ -263,12 +234,11 @@ const pickedPopup = () => {
   } else if (selectedPopUp == 0) {
     togglePopup();
     setIsLinkActive(!isLinkActive)
- }
+  }
 };
 
-//RELATED FILE CREATION.________________________________________________//
+//RELATED FILE CREATION
 const createRelatedFile = async () => {
-        
   //STORAGE SETUP
   if (currentuser){
     //USER ID
@@ -283,7 +253,6 @@ const createRelatedFile = async () => {
     const relatedFiles = collection(docRef,"Files",currentURL,"Children")
     const fileRef = doc(db, "users", currentUserId, "File-Storage",urlID,"Files",currentURL); 
     const relatedFilesRef = doc(relatedFiles)
-
     //TYPE for AUDIO
     const audioMetadata = {
         contentType: 'audio/mp3',
@@ -317,38 +286,17 @@ const createRelatedFile = async () => {
     //STORAGE URL
     const userVideoURL = storageURL
 
-    const newFile = {
-      title: fileElements.title,
-      img: fileElements.img,
-      url: fileElements.url,
-      id: fileElements.id,
-      folder_id: fileElements.folder_id,
-      tag: fileElements.tag,
-      duration: fileElements.duration,
-      storage_path_video: fileElements.storage_path_video,
-      storage_path_audio: fileElements.storage_path_audio,
-      content: fileElements.content,
-      transcription: fileElements.transcription,
+    await updateDoc(fileRef, {
       video_size: fileElements.video_size + videoSize,
       related_count: childrenFiles.length + 1,
-    };
-
-    await setDoc(fileRef,newFile)
-
-    const newData = {
-      id: userData.id,
-      fullname: userData.fullname,
-      email: userData.email,
-      subscription: userData.subscription,
+    });
+    await updateDoc(userRef, {
       storage_take: userData.storage_take + videoSize,
-      profilePictureURL: userData.profilePictureURL,
-      user_since: userData.user_since,
-    }
-  
-    await setDoc(userRef,newData)
+    });
     await fetchData()
     console.log("recent sett succ")
-    //CHILDREN FILE ELEMENTS
+
+    //CHILDREN FILE ELEMENTS & CREATION
     const newRelatedFile = {
     title: userFileTitle,
     img: userFileImage,
@@ -363,7 +311,6 @@ const createRelatedFile = async () => {
     transcription:"",
     video_size: videoSize,
     };
-
     //SETTING THE CHILDREN FILE TO FIRESTORE
     setDoc(relatedFilesRef, newRelatedFile)
     .then(() => {
@@ -375,7 +322,6 @@ const createRelatedFile = async () => {
       ]);
     })
   };
-
   //HIDE POP UP LOGIC
   if(isLinkActive){ 
     setIsLinkActive(false)
@@ -392,14 +338,12 @@ const nextPage= async () =>{
     const userDocRef = doc(db, "users", currentUserId);
     const folderElementRef = doc(userDocRef, "File-Storage", folderUrl);
     const fileChildrenRef = collection(folderElementRef ,"Files",currentURL,"Children");
-
     //PAGINATION NEXT LOGIC
     if (currentPage < totalPages) {
       try {
         if (lastVisible) {
           const queryRef = query(fileChildrenRef,orderBy("id","asc"),startAfter(lastVisible),limit(3));
           const querySnapshot = await getDocs(queryRef);
-  
           if (!querySnapshot.empty) {
             const newLastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
             console.log(newLastVisible)
@@ -408,7 +352,6 @@ const nextPage= async () =>{
             // Process the documents and add them to the state
             const newChildrenFiles = querySnapshot.docs.map((doc) => doc.data());
             setChildrenFiles([...newChildrenFiles]);
-
           } else {
             console.log("No more documents to load.");
           }
@@ -422,85 +365,69 @@ const nextPage= async () =>{
 
 //PAGINATION PREV PAGE
 async function fetchPreviousPage() {
-if(currentuser){
-  //USER DATA AND FIRESTORE REF
-  const currentUserId = currentuser.uid;
-  const userDocRef = doc(db, "users", currentUserId);
-  const folderElementRef = doc(userDocRef, "File-Storage", folderUrl);
-  const fileChildrenRef = collection(folderElementRef ,"Files",currentURL,"Children");
-
-  //PAGINATION PREV LOGIC
-  if (currentPage > 1) {
-    try {
-      if (!firstVisible) {
-        console.log("No previous page available.");
-        return;
+  if(currentuser){
+    //USER DATA AND FIRESTORE REF
+    const currentUserId = currentuser.uid;
+    const userDocRef = doc(db, "users", currentUserId);
+    const folderElementRef = doc(userDocRef, "File-Storage", folderUrl);
+    const fileChildrenRef = collection(folderElementRef ,"Files",currentURL,"Children");
+    //PAGINATION PREV LOGIC
+    if (currentPage > 1) {
+      try {
+        if (!firstVisible) {
+          console.log("No previous page available.");
+          return;
+        }
+        // Start before the firstVisible document
+        const queryRef = query(fileChildrenRef,orderBy("id","asc"),endBefore(lastVisible),limitToLast(3));
+        const querySnapshot = await getDocs(queryRef);
+        if (!querySnapshot.empty) {
+          const newLastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
+          setLastVisible(newLastVisible);
+          setCurrentPage(currentPage - 1);
+          const newChildrenFiles = querySnapshot.docs.map((doc) => doc.data());
+          setChildrenFiles([...newChildrenFiles]);
+        } else {
+          console.log("No previous documents available.");
+        }
+      } catch (error) {
+        console.error("Error fetching documents: ", error);
       }
-      // Start before the firstVisible document
-      const queryRef = query(fileChildrenRef,orderBy("id","asc"),endBefore(lastVisible),limitToLast(3));
-      const querySnapshot = await getDocs(queryRef);
-
-      if (!querySnapshot.empty) {
-        const newLastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
-        setLastVisible(newLastVisible);
-        setCurrentPage(currentPage - 1);
-        const newChildrenFiles = querySnapshot.docs.map((doc) => doc.data());
-        setChildrenFiles([...newChildrenFiles]);
-      } else {
-        console.log("No previous documents available.");
-      }
-    } catch (error) {
-      console.error("Error fetching documents: ", error);
     }
   }
 }
-}
 
-//SAVE RICH TEXT EDITOR CONTENT.________________________________________//
+//SAVE RICH TEXT EDITOR CONTENT
 useEffect(() => {
-const storeHTMLContentInFirestore = async (htmlContent) => {
-  try {
-      //USER DATA AND FIRESTORE REF
-      const currentUserId = currentuser.uid; 
-      const userDocRef = doc(db, "users", currentUserId);
-      const folderElementRef = doc(userDocRef, "File-Storage", folderUrl);
-      const fileChildrenRef = doc(folderElementRef ,"Files",currentURL);
-      const numberOfChild = childrenFiles.length
-      //TXT EDITOR JSON
-      const editorContent = htmlContent
-     
-    // ONLY TEXT EDITOR CONTENT CHANGES
-    await setDoc(fileChildrenRef, {
-      content: editorContent,
-      title: fileElements.title,
-      img: fileElements.img,
-      url: fileElements.url,
-      id: fileElements.id,
-      folder_id: folderUrl,
-      tag: fileElements.tag,
-      duration: fileElements.duration,
-      storage_path_video: fileElements.storage_path_video,
-      storage_path_audio: fileElements.storage_path_audio,
-      transcription: fileElements.transcription,
-      related_count: numberOfChild,
-      video_size: fileElements.video_size,
-    });
-    setNewContentUpdate(editorContent)
-    console.log("HTML content stored in Firestore.");
-  
-  } catch (error) {
-    console.error("Error storing HTML content: ", error);
-  }
-};
-storeHTMLContentInFirestore(saveContent)
+  const storeHTMLContentInFirestore = async (htmlContent) => {
+    try {
+        //USER DATA AND FIRESTORE REF
+        const currentUserId = currentuser.uid; 
+        const userDocRef = doc(db, "users", currentUserId);
+        const folderElementRef = doc(userDocRef, "File-Storage", folderUrl);
+        const fileChildrenRef = doc(folderElementRef ,"Files",currentURL);
+        const numberOfChild = childrenFiles.length
+        //TXT EDITOR JSON
+        const editorContent = htmlContent
+      
+      // ONLY TEXT EDITOR CONTENT CHANGES
+      await updateDoc(fileChildrenRef, {
+        content: editorContent,
+      });
+      setNewContentUpdate(editorContent)
+      console.log("HTML content stored in Firestore.");
+    } catch (error) {
+      console.error("Error storing HTML content: ", error);
+    }
+  };
+  storeHTMLContentInFirestore(saveContent)
 }, [saveContent]);
 
-//DELETE SECTION.-______________________________________________//
-  //ARE YOU SURE MODAL
+//<******************************DELETE*******************************>
+//ARE YOU SURE MODAL
 const [open, setOpen] = useState(false);
 
 const handleOpen = () => {
-
   if(childrenFiles.length === 0){
     setOpen(true);
   }else{
@@ -523,18 +450,15 @@ const style = {
 
 //DELETE FOLDER CODE
 const handleDelete = async () => {
-// DATA TO DELETE
   //USER DATA
   const currentUserId = currentuser.uid;
   const colRef = doc(db,"users",currentUserId,"File-Storage",folderUrl,"Files",currentURL);
   const userRef = doc(db,"users",currentUserId);
- 
   //STORAGE DATA
   const videoRef = ref(storage, fileElements.storage_path_video);
   const audioRef = ref(storage, fileElements.storage_path_audio);
   const transName = `${fileElements.storage_path_audio + ".wav_transcription.txt"}`
   const transcriptRef = ref(storage,transName)
-
   //DELETE VIDEO
   await deleteObject(videoRef).then(() => {
     console.log("video deleted")
@@ -554,16 +478,9 @@ const handleDelete = async () => {
     console.log(error)
   });
   //DELETE FROM USER
-  const newData = {
-    id: userData.id,
-    fullname: userData.fullname,
-    email: userData.email,
-    subscription: userData.subscription,
+  await updateDoc(userRef, {
     storage_take: userData.storage_take - fileElements.video_size,
-    profilePictureURL: userData.profilePictureURL,
-    user_since: userData.user_since,
-  }
-  await setDoc(userRef,newData)
+  });
 //DELETE DOCUMENTS FIRESTORE
   await deleteDoc(colRef);
   console.log('All Document successfully deleted !');
@@ -571,12 +488,11 @@ const handleDelete = async () => {
   navigate(`/folder/${folderUrl}`);   
 };
 
-//EDIT FOLDER TITLE.________________________________________//
+//EDIT FOLDER TITLE
 const handleTitleClick = () => {
   setIsEditing(true);
   console.log(isEditing)
 };
-
 const handleTitleChange = (e) => {
   setNewTitle(e.target.value);
 };
@@ -590,47 +506,19 @@ const handleTitleBlur = async () => {
     const folderURL = folderUrl;
     //CURRENT FILE PATH
     const urlID = id; 
-
     const docRef = doc(db, "users", currentUserId, "File-Storage",folderURL,"Files",urlID);
     //TITLE CHANGES ONLY
-    const newFile = {
-    title: editedTitle,
-    img: fileElements.img,
-    url: fileElements.url,
-    id: fileElements.id,
-    folder_id: folderUrl,
-    tag: fileElements.tag,
-    duration: fileElements.duration,
-    storage_path_video:fileElements.storage_path_video,
-    storage_path_audio: fileElements.storage_path_audio,
-    content: fileElements.content,
-    transcription: fileElements.transcription,
-    related_count: fileElements.related_count,
-    video_size: fileElements.video_size,
-    };
-
     if(editedTitle != ""){
-      await setDoc(docRef, newFile)
+      await updateDoc(docRef, {
+        title: editedTitle,
+      });
       console.log("Title Updated")
       setIsEditing(false);
     }else{
       alert("No title were given !")
-      const newFile = {
-    title: "Empty",
-    img: fileElements.img,
-    url: fileElements.url,
-    id: fileElements.id,
-    folder_id: folderUrl,
-    tag: fileElements.tag,
-    duration: fileElements.duration,
-    storage_path_video: fileElements.storage_path_video,
-    storage_path_audio: fileElements.storage_path_audio,
-    content: fileElements.content,
-    transcription: fileElements.transcription,
-    related_count: fileElements.related_count,
-    video_size: fileElements.video_size,
-      };
-      await setDoc(docRef, newFile)
+      await updateDoc(docRef, {
+        title: "Empty",
+      });
       setIsEditing(false);
     }
   }
@@ -642,13 +530,12 @@ const handleKeyUp = (e) => {
   }
 };
 
-//  BACK BTN.____________________________________//
+//BACK BTN
 const navigateBack = () => {
   navigate(`/folder/${folderUrl}`);
 };
 
-
-//  TRANSCRIPTION UPDATE.___________________//
+//  TRANSCRIPTION UPDATE
 useEffect(() => {
   if(currentuser){ 
     try{
@@ -659,20 +546,8 @@ useEffect(() => {
       //Transcription Text
       const transcription_data = transcriptionData
       // Create a new document in Firestore with the HTML content
-      setDoc(fileChildrenRef, {
-        content: fileElements.content,
-        title: fileElements.title,
-        img: fileElements.img,
-        url: fileElements.url,
-        id: fileElements.id,
-        folder_id: folderUrl,
-        tag: fileElements.tag,
-        duration: fileElements.duration,
-        storage_path_video: fileElements.storage_path_video,
-        storage_path_audio: fileElements.storage_path_audio,
+      updateDoc(fileChildrenRef, {
         transcription: transcription_data,
-        related_count: childrenFiles.length,
-        video_size: fileElements.video_size,
       });
       console.log("Transcription Stored");
     } catch(error) {
@@ -680,212 +555,206 @@ useEffect(() => {
     }
   }
 }, [transcriptionData]);
-  
+
 
 return (
+
 <div className='file'>
     <div className='zero_bar-row2'> 
       <div className='back-button'>
-      <ArrowBackIosNewIcon onClick={navigateBack} sx={{p:1}}/> 
+        <ArrowBackIosNewIcon onClick={navigateBack} sx={{p:1}}/> 
       </div>
-   </div>
+    </div>
     <div className='file-page'>
-    
-         {/*1 BAR */}
-      
-        <div className='first_bar-title'>
-           
-            {/*LEFT Side*/}
-            <div className='first_bar-left'>
-            <div className='first_bar-tag-label'>{fileElements.tag}</div>
-            {isEditing ? (
-        <input
-          className="folder-input-change"
-          type="text"
-          value={newTitle}
-          onChange={handleTitleChange}
-          onKeyPress={handleKeyUp}
-          autoFocus
-        />
-        
-       
-        
-        
-
-      ) : (
-        <h2 className="first_bar-txt" onClick={handleTitleClick}>
-          
-          {newTitle}
-        </h2>
-      )}
-      {isEditing ? <h5 style={{opacity:0.8,paddingTop:5}}>Press Enter to OK</h5>:null}
-                
-            </div>
-
-             {/*RIGHT Side*/} 
-            <div>
-                <DesignServicesIcon sx={{fontSize:30}} className='first_bar-edit' onClick={handleTitleClick}  />
-                <DeleteForeverIcon sx={{fontSize:30,ml:3}} className='first_bar-delete' onClick={handleOpen} />
-                <Modal
-              open={open}
-            
-            aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Are You Sure ?
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-           You will lose all of your documents permanently
-          </Typography>
-          <Button sx={{color:'red',ml:32,mt:5}} onClick={handleDelete}>DELETE</Button>
-        </Box>
-      </Modal>
-            </div>
+      {/*1 BAR */}
+      <div className='first_bar-title'>
+        {/*LEFT Side*/}
+        <div className='first_bar-left'>
+          <div className='first_bar-tag-label'>{fileElements.tag}</div>
+          {isEditing ? (
+            <input
+              className="folder-input-change"
+              type="text"
+              value={newTitle}
+              onChange={handleTitleChange}
+              onKeyPress={handleKeyUp}
+              autoFocus
+            />
+          ) : (
+            <h2 className="first_bar-txt" onClick={handleTitleClick}>
+              {newTitle}
+            </h2>
+          )}
+          {isEditing ? <h5 style={{opacity:0.8,paddingTop:5}}>Press Enter to OK</h5>:null} 
         </div>
 
-         {/*2 BAR */}
-         
-         <div className='sec_bar-cont'>
+        {/*RIGHT Side*/} 
+        <div>
+          <DesignServicesIcon sx={{fontSize:30}} className='first_bar-edit' onClick={handleTitleClick}  />
+          <DeleteForeverIcon sx={{fontSize:30,ml:3}} className='first_bar-delete' onClick={handleOpen} />
+          <Modal
+            open={open}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              <Typography id="modal-modal-title" variant="h6" component="h2">
+                Are You Sure ?
+              </Typography>
+              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                You will lose all of your documents permanently
+              </Typography>
+              <Button sx={{color:'red',ml:32,mt:5}} onClick={handleDelete}>DELETE</Button>
+            </Box>
+          </Modal>
+        </div>
 
-             {/*VIDEO FRAME With PAG*/}
+      </div>
+      {/*2 BAR */}
+      <div className='sec_bar-cont'>
+        {/*VIDEO FRAME With PAG*/}
         {!secBarState?
           <>
             <div className='sec_bar-video'>
-            <FrameVideo crossOrigin="anonymous" videoSrc={fileElements.url} />
+              <FrameVideo crossOrigin="anonymous" videoSrc={fileElements.url} />
             </div>
-        
             {/*CLIPS COLLECTION*/}
             <div className='sec_bar-clips-cont'>
-            {childrenFiles.length === 0 ? (
-              <p style={{textAlign:"center",marginTop:80,opacity:0.6}} >No related videos added</p>
-            ) : (
-            childrenFiles.map(element => (
-              element && element.id ? (
-            <div className="clip-sec" key={element.id}>
-            {/* You might want to uncomment the Link component if needed */}
-             <Link to={`/folder/${folderUrl}/${currentURL}/${element.id}`}> 
-              <RelatedVideoBar imgURL={element.img} relatedDuration={(element.duration).match(/\d+:\d+:\d+/)[0]} relatedTag={element.tag} relatedTitle={element.title}/>
-            </Link> 
-          </div>
-              ):null
-           ))
-          )}
-              
+              {childrenFiles.length === 0 ? (
+                <p style={{textAlign:"center",marginTop:80,opacity:0.6}} >No related videos added</p>
+              ) : (
+                childrenFiles.map(element => (
+                  element && element.id ? (
+                    <div className="clip-sec" key={element.id}>
+                      {/* You might want to uncomment the Link component if needed */}
+                      <Link to={`/folder/${folderUrl}/${currentURL}/${element.id}`}> 
+                        <RelatedVideoBar imgURL={element.img} relatedDuration={(element.duration).match(/\d+:\d+:\d+/)[0]} relatedTag={element.tag} relatedTitle={element.title}/>
+                      </Link> 
+                    </div>
+                  ):null
+                ))
+              )}
+                
               <div className='pagination-bar'>
-              <PaginationUi 
-              fetchNextPage={nextPage} 
-              fetchPreviousPage={fetchPreviousPage}
-              currentPage={currentPage}
-              totalPages={totalPages}
-              /> {/*Pagination Bottom Bar*/}
+                <PaginationUi 
+                  fetchNextPage={nextPage} 
+                  fetchPreviousPage={fetchPreviousPage}
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                /> {/*Pagination Bottom Bar*/}
               </div>
             </div>
           </>:(
-                  <div className='sec_bar-video-main'>
-                  <FullFrameVideo crossOrigin="anonymous" videoSrc={fileElements.url} />
-                  </div>
-          )}
-          
-         </div>
-         <div className='main-view-select'>
-              <ToggleButtons secBarState={setSecBarState}/>
-              </div>
-          {/*3 BAR*/}
-          <div className='third_bar-features-cont'>
-              
-            <div className='third_bar-top'>
-
-               
-   
+            <div className='sec_bar-video-main'>
+              <FullFrameVideo crossOrigin="anonymous" videoSrc={fileElements.url} />
             </div>
-            <div className='rich-txt-editor'>
-            
-                <Editor isSubscribed={userData.subscription}  data={setGeneratedHtml} setData={newContentUpdate} setContent={setSaveContent} audioUrl={fileElements.storage_path_audio} passTranscription={setTranscriptionData}/> 
-                   
-                          {/*EDITOR*/}
+          )}
+      </div>
+       {/*TOGGLE BUTTON */}
+      <div className='main-view-select'>
+        <ToggleButtons secBarState={setSecBarState}/>
+      </div>
+      {/*3 BAR*/}
+      <div className='third_bar-features-cont'>
+        <div className='third_bar-top'>
+        </div>
+        <div className='rich-txt-editor'>
+          {/*EDITOR*/}
+          <Editor 
+            isSubscribed={userData.subscription}  
+            data={setGeneratedHtml} 
+            setData={newContentUpdate} 
+            setContent={setSaveContent} 
+            audioUrl={fileElements.storage_path_audio} 
+            passTranscription={setTranscriptionData}
+          /> 
+        </div>
+      </div>
+      {/*MODAL  */}
+      {isActive? 
+        <div className= {`popup-fodler ${isActive ? 'active' : ''}`}id="relatedAdd" onSubmit={handleSubmit}>
+          <div className="overlay-relatedAdd"></div>
+          <div className="content-relatedAdd">
+            <div className="close-btn-relatedAdd" onClick={togglePopup} id="popClose">&times;</div>
+            <h1 className='relatedAdd-title'>Related Clip</h1>
+            <div className="relatedAdd-con">
+                <DividerStack setSelectedPopUp={setSelectedPopUp}/>                                                                            
+            </div>
+              <Button id="btn-relatedAdd" onClick={pickedPopup} variant="contained">Create</Button>
+          </div>   
+        </div>:null
+      }
+      {/*LINK MODAl  */}
+      <div className= {`popup-fodler ${isLinkActive ? 'active' : ''}`}id="related-link" onSubmit={handleSubmit}>
+        <div className="overlay-related-link"></div>
+        <div className="content-related-link">
+          <div className="close-btn-related-link" onClick={pickedPopup} id="popClose-link">Back</div>
+          <TextFieldFile fileTitle={setFileTitle}/>
+          <div className="related-con-link">
+            <div className="related-link-box">
+              {linkProvided?
+                <h2 className="txt-field-title">Paste in The URL</h2>:null
+              }
+              <VideoUrlApp 
+                setPassedDataUrl={setTrimmedVideoFile} 
+                subscriptionState={userData.subscription} setCreateBtn={setIsAddedOn} 
+                linkProvided={setLinkProvided} 
+                fileImage={setFileImage} 
+                setExtractMeta={setMetaData} 
+                setPassedAudioDataUrl={setAudioFile}
+              />
+            </div>
+            <div className="related-link-notes">
+              <h1>Add Features </h1>
+              {/**/}
+              <ZeroWidthStack/>
+              {/*TAGS */}
+              <MultipleSelectCheckmarks selectedTag={setTag}/>
             </div>
           </div>
-  
-      {/*MODAL  */}
-              {
-              isActive? <div className= {`popup-fodler ${isActive ? 'active' : ''}`}id="relatedAdd" onSubmit={handleSubmit}>
-                    <div className="overlay-relatedAdd"></div>
-                    <div className="content-relatedAdd">
-                      <div className="close-btn-relatedAdd" onClick={togglePopup} id="popClose">&times;</div>
-                      <h1 className='relatedAdd-title'>Related Clip</h1>
-                      <div className="relatedAdd-con">
-                          <DividerStack setSelectedPopUp={setSelectedPopUp}/>                                                                            
-                      </div>
-                      <Button id="btn-relatedAdd" onClick={pickedPopup} variant="contained">Create</Button>
-                    </div>
-            
-              </div>:null
+          {isAddedOn? 
+            <div 
+              className="create-btn-bottom3" 
+              onClick={createRelatedFile} 
+            >
+              <DelayingAppearance 
+                id="create-upload" 
+                variant="contained"
+              />
+            </div>:null
+          }
+        </div>
+      </div>
+      {/*Upload MODAl  */}
+      <div className= {`popup-fodler ${isUploadActive ? 'active' : ''}`}id="related-upload" onSubmit={handleSubmit}>
+        <div className="overlay-related-upload"></div>
+        <div className="content-related-upload">
+          <div className="close-related-upload" onClick={pickedPopup} id="popClose-upload">Back</div>
+          <TextFieldFile fileTitle={setFileTitle}/>
+          <div className="related-con-upload">
+              {/*<MultipleSelectCheckmarks />*/}
+              <div className="related-upload-box">
+                {
+                uploadProvided?<h2 className="txt-field-title2">Upload File</h2>:null
               }
-                  {/*LINK MODAl  */}
-            <div className= {`popup-fodler ${isLinkActive ? 'active' : ''}`}id="related-link" onSubmit={handleSubmit}>
-                    <div className="overlay-related-link"></div>
-                    <div className="content-related-link">
-                      <div className="close-btn-related-link" onClick={pickedPopup} id="popClose-link">Back</div>
-                      <TextFieldFile fileTitle={setFileTitle}/>
-                      <div className="related-con-link">
-                          
-                          <div className="related-link-box">
-                            {
-                            linkProvided?<h2 className="txt-field-title">Paste in The URL</h2>:null
-                          }
-                          
-                          <VideoUrlApp setPassedDataUrl={setTrimmedVideoFile} subscriptionState={userData.subscription} setCreateBtn={setIsAddedOn} linkProvided={setLinkProvided} fileImage={setFileImage} setExtractMeta={setMetaData} setPassedAudioDataUrl={setAudioFile} />
-  
-                          </div>
-                          <div className="related-link-notes">
-                            <h1>Add Features </h1>
-                            {/**/}
-                            <ZeroWidthStack/>
-                            {/*TAGS */}
-                            <MultipleSelectCheckmarks selectedTag={setTag}/>
-                          </div>
-                        </div>
-                        {
-                        isAddedOn? <div className="create-btn-bottom3" onClick={createRelatedFile} ><DelayingAppearance id="create-upload" variant="contained"/></div> :null
-                      }
-                    </div>
-                  </div>
-
-                           {/*Upload MODAl  */}
-            <div className= {`popup-fodler ${isUploadActive ? 'active' : ''}`}id="related-upload" onSubmit={handleSubmit}>
-                    <div className="overlay-related-upload"></div>
-                    <div className="content-related-upload">
-                      <div className="close-related-upload" onClick={pickedPopup} id="popClose-upload">Back</div>
-                      <TextFieldFile fileTitle={setFileTitle}/>
-                      <div className="related-con-upload">
-                          {/*<MultipleSelectCheckmarks />*/}
-                          <div className="related-upload-box">
-                            {
-                            uploadProvided?<h2 className="txt-field-title2">Upload File</h2>:null
-                          }
-                          <VideoApp subscriptionState={userData.subscription} setCreateBtn={setIsAddedOn} uploadProvided={setUploadProvided} fileImage={setFileImage} videoURL={setTrimmedVideoFile} setExtractMeta={setMetaData} setPassedAudioDataUrl={setAudioFile}/>
-                          </div>
-                          <div className="related-upload-notes">
-                            <h1>Add Features </h1>
-                            <h5>You can add them later</h5>
-                            <ZeroWidthStack/>
-                            <MultipleSelectCheckmarks selectedTag={setTag}/>
-                          </div>                          
-                      </div>
-                      {
-                        isAddedOn? <div className="create-btn-bottom2" onClick={createRelatedFile} ><DelayingAppearance id="create-upload" variant="contained"/></div> :null
-                      }
-                      
-                    </div>
-             
-    
+              <VideoApp subscriptionState={userData.subscription} setCreateBtn={setIsAddedOn} uploadProvided={setUploadProvided} fileImage={setFileImage} videoURL={setTrimmedVideoFile} setExtractMeta={setMetaData} setPassedAudioDataUrl={setAudioFile}/>
               </div>
-              <BasicSpeedDial togglePopup={togglePopup} />
+              <div className="related-upload-notes">
+                <h1>Add Features </h1>
+                <h5>You can add them later</h5>
+                <ZeroWidthStack/>
+                <MultipleSelectCheckmarks selectedTag={setTag}/>
+              </div>                          
+          </div>
+          {isAddedOn? 
+            <div className="create-btn-bottom2" onClick={createRelatedFile} ><DelayingAppearance id="create-upload" variant="contained"/></div> :null
+          }
+        </div>
+      </div>
+      <BasicSpeedDial togglePopup={togglePopup} />
     </div>
 </div>
-)
-}
+
+)}
 export default File
 
