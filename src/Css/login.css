@@ -15,10 +15,13 @@
 }
 
 #reg{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 1000px;
   background-color: #fff;
-  height: 641px;
   z-index: 9999;
-  padding-top: 60px;
 }
 
 #login{
@@ -28,46 +31,17 @@
   padding-top: 60px;
 }
 .container-auth{
-
     position: relative;
-    max-width: 1920px;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    height: 150%;
-    width: 1920px;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
     background: #fff;
-    padding: 40px 30px;
     box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-    perspective: 2700px;
     z-index: 9999;
   }
 
  
-
-
-  .container-auth .cover{
-    background-image: url(../assets//Images/ClippifyWelcome.svg);
-     /* Set the image size to 25% of its original size horizontally */
-    background-position: right center;
-    background-size: 190%;
-    position: absolute;
-   
-    height: 1080px;
-    border-radius: 10px;
-    width: 1050px;
-    left: 50%;
-    top: -25%;
-  }
-
-   .container-auth .cover .front,
-   .container-auth .cover .back{
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-  }
 
   .text{
     padding-left: 50px;
@@ -85,45 +59,29 @@
     font-size: 13px;
   }
 
-  .container-auth .cover .text{
-    position: absolute;
-    z-index: 130;
-    height: 100%;
-    width: 100%;
+
+
+
+
+  
+  .container-auth .forms{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    
-  }
-
-  .cover .text .text-1,
-  .cover .text .text-2{
-    font-size: 25px;
-    font-weight: 600;
-    color: #fff;
-    text-align: center;
-  }
-
-  .cover .text .text-2{
-    font-size: 15px;
-    font-weight: 500;
-  }
-  
-  .container-auth .forms{
-    height: 100%;
     width: 100%;
     background: white;
+    border: 1px solid #e6e6e6;
+
   }
 
-
-/*FORMS SETTINGS*/
-  .form-content .login-form,
-  .form-content .signup-form{
-    width: calc(100% / 2 - 200px);
-    padding-top: 100px;
-    padding-left: 200px;
+.form-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
   }
+
 
 
   .forms .form-content .title{
@@ -150,6 +108,9 @@
   }
   .forms .form-content .input-boxes{
     margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
   }
   /*INPUTS*/
   .forms .form-content .input-box{

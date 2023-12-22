@@ -123,8 +123,6 @@ return(
   <div className="container-auth"> 
     <div className="forms">
       <div className="form-content">
-        <div className="cover" />
-
         <div className="login-form">
           <div className="title">Login</div>
         

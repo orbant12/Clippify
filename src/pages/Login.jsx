@@ -128,8 +128,6 @@ return (
   <div className="container-auth">
     <div className="forms">
       <div className="form-content">
-        <div className="cover"></div>
-        <div className="signup-form">
           <div className="title">Signup</div>
 
           {/* REGISTER FORM */}
@@ -210,7 +208,6 @@ return (
           </form>
         </div>
       </div>
-    </div>
   </div>
 </div>
 );
