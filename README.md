@@ -2,7 +2,7 @@
 
 ## Clippify Overview
 
-Welcome to [Your Project Name], a comprehensive and multifaceted project that showcases my mastery of various technologies and skills relevant to the tech industry. This README is designed to provide a detailed insight into the key components and accomplishments of this project, specifically tailored for a tech job recruiter.
+Welcome to Clippify, a comprehensive and multifaceted project that showcases my mastery of various technologies and skills relevant to the tech industry. This README is designed to provide a detailed insight into the key components and accomplishments of this project, specifically tailored for a tech job recruiter.
 
 ### Table of Contents
 1. [Technologies Used](#technologies-used)
@@ -15,7 +15,7 @@ Welcome to [Your Project Name], a comprehensive and multifaceted project that sh
     - [5. Live Database with Firebase Changes on Snapshot](#live-database-with-firebase-changes-on-snapshot)
     - [6. Lexical Editor for Rich Text Editor State Management](#lexical-editor-for-rich-text-editor-state-management)
     - [7. Stripe API Integration](#stripe-api-integration)
-    - [8. Plain CSS styling from scratch] (#css-styling)
+    - [8. Plain CSS styling from scratch](#css-styling)
     - [9. Own Policies and Terms of Use](#own-policies-and-terms-of-use)
 4. [Getting Started](#getting-started)
 5. [Usage and Demos](#usage-and-demos)
