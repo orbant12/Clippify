@@ -14,7 +14,7 @@ const { currentuser } = useAuth();
 const [UserData, setUserData] = useState([]);
 
 //SIDEBAR TOGGLE
-const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
 useEffect(() => {
     const fetchData = async () => {

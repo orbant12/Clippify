@@ -14,7 +14,7 @@ const MenuProps = {
   PaperProps: {
     style: {
       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
+      width:"100%",
     },
   },
 };
@@ -52,7 +52,7 @@ const handleChange = (event) => {
 
 return (
     <div>
-      <FormControl sx={{ m: 1, width: 800 }}>
+      <FormControl sx={{ m: 1, width: "100%" }}>
         <InputLabel id="demo-multiple-chip-label">Category</InputLabel>
         <Select
           labelId="demo-multiple-chip-label"

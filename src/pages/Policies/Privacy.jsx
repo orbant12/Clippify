@@ -359,46 +359,7 @@ return(
 
     </div>
 
-    <footer style={{width:1920,alignSelf:"center"}} className="footer">
-        <div className="container-footer">
-            <div className="row">
-                <div className="footer-col">
-                    <h4>company</h4>
-                    <ul>
-                        <li><a href="/support/contact-us">about us</a></li>
-                        <li><a href="/policies/legal/terms">Terms of Use</a></li>
-                        <li><a href="/policies/legal/privacy-policy">privacy policy</a></li>
-                        
-                    </ul>
-                </div>
-                <div className="footer-col">
-                    <h4>get help</h4>
-                    <ul>
-                        <li><a href="/policies">FAQ</a></li>
-                        <li><a href="/subscription">subscription</a></li>
-                        <li><a href="/settings">cancel & returns</a></li>
-                        <li><a href="/settings">payment options</a></li>
-                    </ul>
-                </div>
-                <div className="footer-col">
-                    <h4>Contact Us</h4>
-                    <ul>
-                        <li><a href="/support/contact-us">Customer Support</a></li>
-                        <li><a href="/support/feedback">Any Questions ?</a></li>
-                    </ul>
-                </div>
-                <div className="footer-col">
-                    <h4>follow us</h4>
-                    <div className="social-links">
-                        <a href="#"><i className="fab fa-facebook-f"></i></a>
-                        <a href="#"><i className="fab fa-twitter"></i></a>
-                        <a href="https://www.instagram.com/echotheorca.app/"><i className="fab fa-instagram"></i></a>
-                        <a href="https://www.youtube.com/channel/UCA5s3Bjs3MiXWnsg_Wn10hQ"><i className="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+
 </div>
 )
 }

@@ -54,7 +54,7 @@ const Faq_Fifth__Description = (
 
 
 return(
-<div className="legal-page">
+<div className="legal">
     <div className="legal-nav-bar">
         <a href="/"> <h2>Home</h2></a>
         <a href="/policies"><h4>Overview</h4></a>
@@ -109,7 +109,7 @@ return(
         </div>
     </div>
 
-    <div className='frth-bar' style={{marginBottom:100,alignContent:"center",alignItems:"center",marginTop:-100}}>
+    <div className='frth-bar' style={{alignContent:"center",alignItems:"center",marginTop:-100,height:1000}}>
         <hr />
 
         <div>

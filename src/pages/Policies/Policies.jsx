@@ -72,13 +72,13 @@ return(
 
     <div className="policies-cont">
         <div className="policies-title">
-            <h2 style={{fontSize:30,marginTop:10}}>Policies</h2>
+            <h2>Policies</h2>
             <hr style={{marginTop:10}}/>
         </div>
 
         <div className="policies-table">
-            <a href="/policies/security">
-                <div className="policy-box">
+            <a className="policy-box" href="/policies/security">
+           
                     <VpnLockIcon className="highlight-icon"/>
 
                     <div>
@@ -86,59 +86,58 @@ return(
                         <h6>Read how we make sure for your data Security</h6>
                     </div>
 
-                </div>
+           
             </a>
 
-            <a href="/policies/legal/privacy-policy">
-                <div className="policy-box">
+            <a className="policy-box" href="/policies/legal/privacy-policy">
+            
                     <AddModeratorIcon className="highlight-icon" />
                     <div>
                         <h2>Privacy Policy</h2>
                         <h6>Read how we make sure for your data Security</h6>
                     </div>
-                </div>
+           
             </a>
 
-            <a href="/policies/legal/terms">
-                <div className="policy-box">
+            <a className="policy-box" href="/policies/legal/terms">
+           
                     <AutoStoriesIcon className="highlight-icon" />
                     <div>
                         <h2>Terms of Use</h2>
                         <h6>Read how we make sure for your data Security</h6>
                     </div>
-                </div>
+           
             </a>
         </div>
 
         <div className="policies-table">
-            <a href="/policies/legal/acceptable-use-policy">
-                <div className="policy-box">
+            <a className="policy-box" href="/policies/legal/acceptable-use-policy">
+               
                     <GavelIcon className="highlight-icon" />
                     <div>
                         <h2>Acceptable Use Policy</h2>
                         <h6>Read how we make sure for your data Security</h6>
                     </div>
-                </div>
+             
             </a>
 
-            <a href="/policies/legal/terms">
-                <div className="policy-box">
+            <a className="policy-box" href="/policies/legal/terms">
+           
                     <PsychologyAltIcon className="highlight-icon" />
                     <div>
                         <h2>Ai Product Terms</h2>
                         <h6>Read how we make sure for your data Security</h6>
                     </div>
-                </div>
+              
             </a>
 
-            <a href="/policies/support/about-us">
-                <div className="policy-box">
+            <a className="policy-box" href="/policies/support/about-us">
                     <ApartmentIcon  className="highlight-icon"/>
                     <div>
                         <h2>About Us</h2>
                         <h6>Read how we make sure for your data Security</h6>
                     </div>
-                </div>
+              
             </a>
         </div>
     </div>

@@ -15,11 +15,11 @@ return(
    <div className="terms-title">
       <h1>Cookies Policy</h1>
       <hr style={{width:270,marginBottom:10,borderColor:"black"}}/>
-      <h6>Welcome to Clippify - We use cookies and similar technologies, such as pixel tags and clear GIFs (also known as web beacons), on our website (the “Website”) and app to store information or gain access to information stored on your device or computer. You can find out more about cookies and similar technologies, and how we use them, in the information set out below. Any information that we collect will be used in accordance with our <a href="/policies/legal/privacy-policy">Privacy Policy</a> .</h6>
+      <h6 style={{maxWidth:"100%"}}>Welcome to Clippify - We use cookies and similar technologies, such as pixel tags and clear GIFs (also known as web beacons), on our website (the “Website”) and app to store information or gain access to information stored on your device or computer. You can find out more about cookies and similar technologies, and how we use them, in the information set out below. Any information that we collect will be used in accordance with our <a href="/policies/legal/privacy-policy">Privacy Policy</a> .</h6>
    </div>
 
    <div style={{paddingTop:10}} className="terms-title">
-      <h6>If you do not accept the use of these cookies or similar technologies, you can disable them by following the instructions in this policy below or by changing your browser settings so that cookies or similar technologies from our Website or app cannot be placed on your computer or mobile device.</h6>
+      <h6 style={{maxWidth:"100%"}}>If you do not accept the use of these cookies or similar technologies, you can disable them by following the instructions in this policy below or by changing your browser settings so that cookies or similar technologies from our Website or app cannot be placed on your computer or mobile device.</h6>
    </div>
 
    <div className="terms-list">
@@ -191,46 +191,6 @@ return(
       </div>
    </div>
 
-   <footer style={{width:1920,alignSelf:"center"}} className="footer">
-      <div className="container-footer">
-         <div className="row">
-            <div className="footer-col">
-               <h4>company</h4>
-               <ul>
-                  <li><a href="/support/contact-us">about us</a></li>
-                  <li><a href="/policies/legal/terms">Terms of Use</a></li>
-                  <li><a href="/policies/legal/privacy-policy">privacy policy</a></li>
-                  
-               </ul>
-            </div>
-            <div className="footer-col">
-               <h4>get help</h4>
-               <ul>
-                  <li><a href="/policies">FAQ</a></li>
-                  <li><a href="/subscription">subscription</a></li>
-                  <li><a href="/settings">cancel & returns</a></li>
-                  <li><a href="/settings">payment options</a></li>
-               </ul>
-            </div>
-            <div className="footer-col">
-               <h4>Contact Us</h4>
-               <ul>
-                  <li><a href="/support/contact-us">Customer Support</a></li>
-                  <li><a href="/support/feedback">Any Questions ?</a></li>
-               </ul>
-            </div>
-            <div className="footer-col">
-               <h4>follow us</h4>
-               <div className="social-links">
-                  <a href="#"><i className="fab fa-facebook-f"></i></a>
-                  <a href="#"><i className="fab fa-twitter"></i></a>
-                  <a href="https://www.instagram.com/echotheorca.app/"><i className="fab fa-instagram"></i></a>
-                  <a href="https://www.youtube.com/channel/UCA5s3Bjs3MiXWnsg_Wn10hQ"><i className="fab fa-youtube"></i></a>
-               </div>
-            </div>
-         </div>
-      </div>
-   </footer>
 </div>
 )};
 

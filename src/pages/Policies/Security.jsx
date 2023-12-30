@@ -8,7 +8,7 @@ import StorageIcon from '@mui/icons-material/Storage';
 
 const Security = () =>{
 return(
-<div className="legal-page">
+<div className="legal">
     <div className="legal-nav-bar">
         <a href="/"><h2>Home</h2></a>
         <a href="/policies"><h4>Overview</h4></a>
@@ -20,7 +20,7 @@ return(
 
     <div className="legal-page-title" style={{textAlign:"center"}}>
         <h2>Security Features</h2>
-        <h6 style={{width:500,fontSize:10}}>Your trust is at the center of what we do and why security is a top priority for us. Our products, processes and systems are designed to protect our users and data.</h6>
+        <h6 style={{width:"30%",opacity:0.6}}>Your trust is at the center of what we do and why security is a top priority for us. Our products, processes and systems are designed to protect our users and data.</h6>
     </div>
 
     <div className="security-features-cont">
@@ -77,7 +77,7 @@ return(
     <div className="firebase-security">
         <div className="firebase-sec-title">
             <h2>How can I be sure that Clippify is safe ?</h2>
-            <hr style={{width:740,borderColor:"black"}} />
+            <hr style={{width:"100%",borderColor:"black"}} />
         </div>
 
         <div className="firebase-sec-desc">

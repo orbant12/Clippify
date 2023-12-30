@@ -111,7 +111,7 @@ const handleReportSubmit = async () =>{
 
 
 return(
-<div className="legal-page">
+<div className="legal">
     <div className="legal-nav-bar">
         <a href="/"><h2>Home</h2></a>
         <a href="/policies"><h4>Overview</h4></a>
@@ -193,7 +193,7 @@ return(
             <input type="text" className="input-txt" onChange={handleReportTitle} value={reportTitle}/>
         </div>
 
-        <hr style={{width:840,borderColor:"black"}} />
+        <hr style={{width:"100%",borderColor:"black"}} />
 
         <div className="report-select">
             <div>
@@ -203,7 +203,7 @@ return(
             <MultipleSelectChip reportCategory={setReportCategory}/>
         </div>
 
-        <hr style={{width:840,borderColor:"black"}} />
+        <hr style={{width:"100%",borderColor:"black"}} />
 
         <div className="report-upload">
             <div>
@@ -216,7 +216,7 @@ return(
             </div>
         </div>
 
-        <hr style={{width:840,borderColor:"black"}} />
+        <hr style={{width:"100%",borderColor:"black"}} />
 
         <div className="report-desc">
             <div>
@@ -224,7 +224,7 @@ return(
                 <h2>Description</h2>
                 <h6>Please give a detailed description about your problem</h6>
             </div>
-            <textarea style={{width:840,height:300,padding:10}} onChange={handleReportDescription} value={reportDescription}  />
+            <textarea style={{width:"100%",height:300,padding:10}} onChange={handleReportDescription} value={reportDescription}  />
         </div>
 
         <div className="report-send">
