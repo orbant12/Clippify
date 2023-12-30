@@ -111,7 +111,6 @@ useEffect(() => {
 
 return (
 <div className="home">
-  <div id="userCrated-Files">
   <div className='welcome-row'>
     <div>
       <h1>Welcome Back, {userData.fullname}</h1>
@@ -187,7 +186,6 @@ return (
       </div>
     </div>
   </div>
-</div>
 )}
 
 

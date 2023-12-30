@@ -191,38 +191,36 @@ return(
                     <div className='included-2'>
                         <div className='included-col'>
                             <CheckCircleOutlineOutlinedIcon/>
-                            <h3 >Store up to 100/gb</h3>
+                            <h3>Store up to 100/gb</h3>
                         </div>
-
-                        <div className='included-col2'>
+            
+                        <div className='included-col'>
                             <CheckCircleOutlineOutlinedIcon/>
                             <h3 >Unlimited Ai Access</h3>
                         </div>
-                    </div>
-
-                    <div className='included-2'>
+                
                         <div className='included-col'>
                             <CheckCircleOutlineOutlinedIcon/>
                             <h3>Script Analising Ai</h3>
                         </div>
                     
-                        <div className='included-col3'>
+                        <div className='included-col'>
                             <CheckCircleOutlineOutlinedIcon/>
                             <h3>Unlimited Related Video's</h3>
                         </div>
-                    </div>
-
-                    <div className='included-3'>
-                        <CheckCircleOutlineOutlinedIcon/>
-                        <h3>Store Clips with No Limitations</h3>
+                
+                        <div className='included-col'>
+                            <CheckCircleOutlineOutlinedIcon/>
+                            <h3>Store Clips with No Limitations</h3>
+                        </div>
                     </div>
 
                     <div className='sub-btn'>
                         <div className='btn-box'>
-                            <h3 className='btn-txt' onClick={upgradeToMonthly}>Get Professional</h3>
+                            <h3 className='btn-txt' onClick={upgradeToYearly}>Get Professional</h3>
                         </div>
                         <div className='price'>
-                            <h3>10$ / Month</h3>
+                            <h3>10$ / Monthly</h3>
                         </div>
                     </div>
                 </div>
@@ -238,32 +236,28 @@ return(
                     <div className='included-2'>
                         <div className='included-col'>
                             <CheckCircleOutlineOutlinedIcon/>
-                            <h3 className='included-col-txt'>Store up to 100/gb</h3>
+                            <h3>Store up to 100/gb</h3>
                         </div>
             
-                        <div className='included-col2'>
+                        <div className='included-col'>
                             <CheckCircleOutlineOutlinedIcon/>
                             <h3 >Unlimited Ai Access</h3>
                         </div>
                 
-                    </div>
-
-                    <div className='included-2'>
                         <div className='included-col'>
                             <CheckCircleOutlineOutlinedIcon/>
                             <h3>Script Analising Ai</h3>
                         </div>
                     
-                        <div className='included-col3'>
+                        <div className='included-col'>
                             <CheckCircleOutlineOutlinedIcon/>
                             <h3>Unlimited Related Video's</h3>
                         </div>
                 
-                    </div>
-
-                    <div className='included-3'>
-                        <CheckCircleOutlineOutlinedIcon/>
-                        <h3>Store Clips with No Limitations</h3>
+                        <div className='included-col'>
+                            <CheckCircleOutlineOutlinedIcon/>
+                            <h3>Store Clips with No Limitations</h3>
+                        </div>
                     </div>
 
                     <div className='sub-btn'>
@@ -389,7 +383,7 @@ return(
         <FaqBar FaqTitle={Faq_Fifth_Title} FaqDesc={Faq_Fifth__Description}/>
     </div>
 
-    <footer style={{width:1920,alignSelf:"center",textAlign:"left"}} className="footer">
+    <footer style={{width:"100%",alignSelf:"center",textAlign:"left"}} className="footer">
         <div className="container-footer">
             <div className="row">
                 <div className="footer-col">

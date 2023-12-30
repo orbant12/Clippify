@@ -1,12 +1,14 @@
 
 /*****************< 1.) Welcome Row >*******************/
 .home{
+  display: flex;
+  flex-direction: column;
   padding-left: 100px;
   top: 0;
   left: 350px;
   width: 100%;
   transition: all 0.3s ease;
-overflow: hidden;
+  overflow: hidden;
 }
 
 .cloud{
@@ -14,10 +16,9 @@ overflow: hidden;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    height: 100px;
     padding-right: 50px;
-
 }
+
 .cloud-title{
     font-size: 20px;
 }
@@ -26,10 +27,19 @@ overflow: hidden;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 100%;
+  align-items: center;
+  margin-right: auto;
+  margin-left: auto;
+  width: 80%;
   padding-top: 50px;
   padding-left: 50px;
   padding-right: 50px;
+  margin-bottom: 30px;
+}
+
+.welcome-row h1{
+  font-size: 30px;
+  font-weight: 700;
 }
 
 /*****************< 2.) Recently Row >*******************/
@@ -386,6 +396,7 @@ color: var(--primary-color-light);
   color: var(--text-color);
 }
 
+/*====== RESPONSIVENESS =====*/
 
 @media (max-width: 768px) {
   .home{
@@ -405,5 +416,36 @@ color: var(--primary-color-light);
 .home .ag-format-container {
   width: 100%;
 
+}
+
+.welcome-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
+  padding-top: 50px;
+  margin-bottom: 30px;
+}
+
+.welcome-row h1{
+  font-size: 20px;
+  font-weight: 700;
+  width: 300px;
+  flex-wrap: nowrap;
+  overflow: ellipsis;
+}
+.welcome-row h6{
+  font-size: 10px;
+}
+
+.cloud-title{
+  font-size: 5px;
+}
+
+.cloud h5{
+  font-size: 5px;
 }
 }
