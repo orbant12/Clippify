@@ -25,14 +25,15 @@ import '../../Css/folder.css'
 
     const handleItemClick = (index) => {
       setSelectedItem(index);
-      setSelectedPopUp(index);
+      if (index == 0) setSelectedPopUp("link");
+      else if (index == 1) setSelectedPopUp("upload");
     };
     return (
       <div className='selection-row'> 
         <Stack
           direction="row"
          // divider={<Divider orientation="vertical" flexItem />}
-          spacing={10}
+          spacing={2}
           className='card-stack'
         >
           <Item 
@@ -45,7 +46,7 @@ import '../../Css/folder.css'
             </div>
             <div className='item-desc'>
             <h5>You can insert your desired video URL and create clips out of you video</h5></div></Item>
-          <h3 className='or-txt'>Or</h3>
+            <h3 className='or-txt'>Or</h3>
           <Item 
             className={`card-item`}
             onClick={() => handleItemClick(1)}

@@ -6,6 +6,8 @@ import VideoFilePicker from "./videoFilePicker";
 import OutputVideo from "./videoPlayer";
 import OutputVideo2 from "./outputNoDown"
 import RangeInput from "./videoRangeInput";
+import Form from 'react-bootstrap/Form';
+
 
 import './global.css'
 
@@ -23,7 +25,7 @@ const FF = createFFmpeg({
   })();
   
 
-function VideoApp({setCreateBtn,uploadProvided,fileImage,videoURL,setExtractMeta,setPassedAudioDataUrl,subscriptionState}) {
+function VideoApp({fileImage,videoURL,setExtractMeta,setPassedAudioDataUrl,subscriptionState,handleTitleInput}) {
 
 
 const [inputVideoFile, setInputVideoFile] = useState(null);
@@ -44,6 +46,8 @@ const [addedShow,setAddedShow]=useState(true)
 const [deletedState,setDeletedState]=useState(true)
 const [backState,setBackState]=useState(false)
 
+const [mediaTitle,setMediaTitle] = useState("Untitled")
+
 const [isEditing, setIsEditing] = useState(false);
 const [clipTitle, setClipTitle] = useState('Your Clip Title');
 const [loadingText, setLoadingText] = useState("Loading...");
@@ -54,7 +58,6 @@ const handleChange = async (e) => {
   console.log(file);
   setInputVideoFile(file);
   setDeletedState(true);
-  uploadProvided();
   setURL(await helpers.readFileAsBase64(file));
 };
   
@@ -158,7 +161,6 @@ const toggleVideoApp = async () => {
   setVideoAppShow(false);
   setSaveBtn(true);
   setAddedShow(false);
-  setCreateBtn(true);
 }
 
 const deleteAction = async () => {
@@ -168,7 +170,6 @@ const deleteAction = async () => {
   setInputVideoFile(null);
   setDeletedState(false);
   setTrimmedVideoFile(null);
-  setCreateBtn(false);
   uploadProvided(true);
   setBackState(false)
 }
@@ -231,7 +232,7 @@ const handleTrim = async () => {
     setLoadingText(`Loading...`)
   }
 
-  if(subscriptionState == true){
+  //if(subscriptionState == true){
       setTrimIsProcessing(true);
       setShow(false);
       if(deletedState == false){
@@ -270,53 +271,53 @@ const handleTrim = async () => {
       } finally {
         setTrimIsProcessing(false);
       }
-  }else if (subscriptionState == false && offsetLenght < 10) {
-      setTrimIsProcessing(true);
-      setShow(false);
-      if(deletedState == false){
-        setDeletedState(!deletedState)
-      }
-      setShowBtn(true);
-      setSaveBtn(false);
-      try {
-        FF.FS("writeFile", inputVideoFile.name, await fetchFile(inputVideoFile));
-        await FF.run(
-          "-ss",
-          helpers.toTimeString(startTime),
-          "-i",
-          inputVideoFile.name,
-          "-t",
-          helpers.toTimeString(offset),
-          "-c:v",
-          "copy",
-          "ping.mp4"
-        );
-        const data = FF.FS("readFile", "ping.mp4");
-        console.log(data);
-        // EXTRACT SIZE
-        await setVideoSize(data);
+  // }else if (subscriptionState == false && offsetLenght < 10) {
+  //     setTrimIsProcessing(true);
+  //     setShow(false);
+  //     if(deletedState == false){
+  //       setDeletedState(!deletedState)
+  //     }
+  //     setShowBtn(true);
+  //     setSaveBtn(false);
+  //     try {
+  //       FF.FS("writeFile", inputVideoFile.name, await fetchFile(inputVideoFile));
+  //       await FF.run(
+  //         "-ss",
+  //         helpers.toTimeString(startTime),
+  //         "-i",
+  //         inputVideoFile.name,
+  //         "-t",
+  //         helpers.toTimeString(offset),
+  //         "-c:v",
+  //         "copy",
+  //         "ping.mp4"
+  //       );
+  //       const data = FF.FS("readFile", "ping.mp4");
+  //       console.log(data);
+  //       // EXTRACT SIZE
+  //       await setVideoSize(data);
 
-        const dataURL = await helpers.readFileAsBase64(
-          new Blob([data.buffer], { type: "video/mp4" })
-        );
-          //SIZE
+  //       const dataURL = await helpers.readFileAsBase64(
+  //         new Blob([data.buffer], { type: "video/mp4" })
+  //       );
+  //         //SIZE
       
-        await handleAudioTrim()
+  //       await handleAudioTrim()
      
-        //SAVE THE URL
-        videoURL(dataURL)
-        //VIdeo File
-        setTrimmedVideoFile(dataURL);
+  //       //SAVE THE URL
+  //       videoURL(dataURL)
+  //       //VIdeo File
+  //       setTrimmedVideoFile(dataURL);
       
              
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setTrimIsProcessing(false);
-      }
-  }else{
-    alert("Please Subscribe to Trim Videos Longer Than 10 Minutes")
-  }
+  //     } catch (error) {
+  //       console.log(error);
+  //     } finally {
+  //       setTrimIsProcessing(false);
+  //     }
+  // }else{
+  //   alert("Please Subscribe to Trim Videos Longer Than 10 Minutes")
+  // }
 };
 
 const handleEditClick = () => {
@@ -336,6 +337,11 @@ const HandleBack = () => {
   setShow(!show)
   setDeletedState(!deletedState)
   setBackState(true)
+}
+
+const handleMediaTitle = (event) => {
+  setMediaTitle(event.target.value);
+  handleTitleInput(event.target.value)
 }
 
 return (
@@ -385,8 +391,9 @@ return (
                 controls
                 muted
                 onLoadedMetadata={handleLoadedData}
-                width="450"
-              ></video>
+                crossOrigin="anonymous"
+              >
+              </video>
             </div>
           </VideoFilePicker>:null
         }
@@ -437,25 +444,21 @@ return (
       <div className="added">
         <OutputVideo2 videoSrc={trimmedVideoFile} />
         <HighlightOffIcon className="added-delete-btn" onClick={deleteAction}/>
-        <div className="added-video-desc">
-          {isEditing ? (
-            <div className="change-container">
-              <input
-                className="custom-video-input"
-                type="text"
-                value={clipTitle}
-                onChange={handleTitleChange}
-              />
-              <div className="custom-video-title-btn" onClick={handleTitleSave}>Save</div>
-            </div>
-          ) : (
-            <div className="edit-row-video-title">
-              <h4>{clipTitle}</h4>
-              <EditIcon className="added-edit-btn" onClick={handleEditClick} />
-            </div>
-          )}
+        <div style={{marginTop:15}}>
+        <label htmlFor="">Title</label>
+        <Form.Control size="lg" onChange={(e) => handleMediaTitle(e)} value={mediaTitle} type="text" placeholder="Untitled" />
         </div>
-       
+      
+        <div style={{marginTop:10}}>
+        <hr />
+        <label htmlFor="">Add Tags</label>
+        <Form.Select aria-label="Default select example">
+        <option>Tags</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </Form.Select>
+        </div>
       </div>:null        
     }
 </div>
@@ -464,6 +467,3 @@ return (
 
 export default VideoApp
   
-
-
-

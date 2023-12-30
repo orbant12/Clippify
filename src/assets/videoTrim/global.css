@@ -11,11 +11,8 @@
     display: grid;
     place-items: center;
     font-weight: 700;
-    height: 250px;
-   
-    
-
-    width: 500px;
+    height: 400px;
+    width: 465px;
   }
   #file_picker_small {
     padding: 3rem 2rem;
@@ -27,7 +24,7 @@
 .range-picker{
     position: absolute;
     display: block;
-    padding-top: 370px;
+    padding-top:300px;
   }
 
 .range_pack{
@@ -44,6 +41,7 @@
   right: 0;
   transform: translateY(-50%);
   top: 50%;
+ 
   background-color: transparent;
 }
 
@@ -155,34 +153,38 @@
 /*Video and INPUT and OUTPUT*/
 
 .deck {
-  max-width: 1200px;  
-  display: grid;
+  max-width: 465px;  
+  display: flex;
+  flex-direction: column;
   align-items: center;
- margin-top: -150px;
-  justify-content: space-between;
- 
-}
+  margin-top: 10px;
+  width: 650px;
 
-
-
-
-.bord_g_2 {
-  border: 2px solid rgb(230, 220, 220);
-  
-}
-
-.p_2 {
-  padding: 2rem;
+  height: 400px;
 }
 
 .grid_txt_2 {
     
-  align-items: center;
-  width: 500px;
-  margin-left: 30px;
-  margin-bottom: -200px;
-  
+  width: 465px;
+  display: flex;
+  flex-direction: column;
+  margin-right: auto;
+  margin-left: auto;
+  justify-content: center;
+ 
 }
+
+.bord_g_2{
+  border: 2px solid rgb(230, 220, 220);
+  width: 465px;
+}
+
+.bord_g_2 video{
+  border: 2px solid rgb(230, 220, 220);
+  max-width: 465px;
+}
+
+
 .down-btn{
   
   margin-bottom: -910px;
@@ -209,19 +211,22 @@
 /*SAVE BTN and LOADING*/
 
 .btn-container{
-  padding-top: 330px;
-  padding-left: 190px;
- 
+  padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+  align-items: center;
 
 } 
 div .btn2 {
-   
+  align-items: center;
   border-radius: 10px;
-  padding-top: 8px;
-  font-size: 20px;
+  padding: 10px;
+  font-size: 18px;
   font-weight: 600;
-  width: 200px;
-  height: 50px;
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+ 
   background-color: #0a57fe;
   color: #f3f3f3;
   
@@ -241,19 +246,25 @@ div .btn2:hover{
   flex-direction: column;
   justify-content: center;
   padding-top: 10px;
-
-
-  width: 200px;
+  align-items: center;
+  width: 80px;
 }
 
 .back-btn-txt{
   border: 1px solid black;
   font-weight: 300;
   color: white;
-  padding: 5px;
+  align-items: center;
+
+  padding: 1px 10px;
   background-color: #000;
   border-radius: 10px;
 }
+.back-btn-txt h3{
+  padding-top: 5px;
+  font-size: 15px;
+}
+
 .back-btn-txt:hover{
  transform: scale(0.96);
  cursor: pointer;
@@ -276,7 +287,6 @@ div .btn2:hover{
 .added{
   display: grid;
   grid-template-columns: 1fr;
-  margin-top: -90px;
 }
 
 .added-delete-btn:hover{
@@ -407,4 +417,3 @@ div .btn2:hover{
 }
 
 /*URL*/
-

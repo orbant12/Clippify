@@ -1,33 +1,25 @@
 //REACT & Contexts
 import * as React from 'react';
 import { useEffect, useState } from "react";
-import { useParams,useNavigate} from "react-router-dom";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useAuth } from '../context/UserAuthContext';
 //FIREBASE
-import { ref, uploadString, getDownloadURL, uploadBytes,deleteObject} from 'firebase/storage';
-import {v4} from "uuid";
-import { app,storage } from "../firebase";
-import { getFirestore,doc, collection, getDoc,setDoc,getDocs,deleteDoc, updateDoc} from  'firebase/firestore';
+import { collection, deleteDoc, doc, getDoc, getDocs, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
+import { deleteObject, getDownloadURL, ref, uploadBytes, uploadString } from 'firebase/storage';
+import { v4 } from "uuid";
+import { app, storage } from "../firebase";
 //ASSETS
-import VideoApp from "../assets/videoTrim/videoApp";
-import VideoUrlApp from "../assets/videoTrim/videoUrlApp";
-import ZeroWidthStack from "../assets/FileAdd/featureSelect";
-import BasicSpeedDial from "../assets/FileAdd/addBtn"
 import FileCard from "../assets/FileAdd/fileCard";
-import MultipleSelectCheckmarks from '../assets/FileAdd/tagbar'
-import TextFieldFile from '../assets/FileAdd/textField'
-import DividerStack from "../assets/FileAdd/fileAddCards";
-import DelayingAppearance from "../assets/FileAdd/LoadingBtn";
-//MUI
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
-import Button from '@mui/material/Button';
+
 //ICONS
 import DesignServicesIcon from '@mui/icons-material/DesignServices';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+
+//ASSETS
+
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Example from "../assets/FileAdd/VideoUpload";
 //CSS
 import '../Css/folder.css';
 
@@ -413,17 +405,11 @@ const navigateBack = () => {
 
 
 return(
-<div className='folder-container'>
-  <div className='zero_bar-row-folder'> 
-    <div className='back-button-folder'>
-      <ArrowBackIosNewIcon onClick={navigateBack}/> 
-    </div>
-  </div>
-  <div className="folder" >
-    {/*FIRST BAR*/}
-    <div className='first_bar-title'>    
-      <div className="first_bar-left" >
-        {isEditing ? (
+
+<Container fluid style={{width:"85%",justifyContent:"center",alignItems:"center"}} >
+  <Row style={{width:"100%",marginRight:"auto",marginLeft:"auto",paddingTop:50,alignItems:"center",justifyContent:"space-between"}}>
+    <Col >
+    {isEditing ? (
           <input
             className="folder-input-change"
             type="text"
@@ -440,136 +426,33 @@ return(
         {isEditing ? 
           <h5 style={{opacity:0.8,paddingTop:5}}>Press Enter to OK</h5>:null
         }
+    </Col>
+   
+      <Col className='col-auto' style={{border:"1px solid black"}} >
+          <DesignServicesIcon/>
+      </Col>
+      <Col className='col-auto' style={{border:"1px solid black"}} >
+          <DesignServicesIcon/>
+      </Col>
+ 
+  </Row>
+  <Row>
+    <Col>
+    {userFile.map((file) => (
+      <Link to={`/folder/${id}/${file.id}`}>
+      <div key={file.id}>
+        <FileCard imgSrc={file.img} title={file.title} tags={file.tag} video_size={file.video_size} />
       </div>
-      <div>
-        <DesignServicesIcon sx={{fontSize:30}} className='first_bar-edit' onClick={handleTitleClick} />
-        <DeleteForeverIcon sx={{fontSize:30,ml:3}} className='first_bar-delete' onClick={handleOpen} />
-        <Modal
-          open={open}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Are You Sure ?
-            </Typography>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              You will lose all of your documents permanently
-            </Typography>
-            <Button sx={{color:'red',ml:32,mt:5}} onClick={handleDelete}>DELETE</Button>
-          </Box>
-        </Modal>
-      </div>
-    </div>
-    {/*MODAL  */}
-    {isActive?
-      <div 
-        className= {`popup-fodler ${isActive ? 'active' : ''}`}
-        id="popup-1" onSubmit={handleSubmit}
-      >
-        <div className="overlay-popup-fodler"></div>
-        <div className="content-popup-fodler">
-          <div className="close-btn-fodler" onClick={togglePopup} id="popClose">&times;</div>
-          <h1 className="Add-New-title">Add New</h1>
-          <div className="popup-fodler-con">
-            {/*<MultipleSelectCheckmarks />*/}
-            <DividerStack setSelectedPopUp={setSelectedPopUp}/>
-          </div>
-          <Button id="add-btn-file" onClick={pickedPopup} variant="contained">Create</Button>
-        </div>
-      </div>:null
-    }
-    {/*LINK MODAl  */}
-    {isLinkActive?
-      <div 
-        className= {`popup-fodler ${isLinkActive ? 'active' : ''}`}
-        id="popup-link" 
-        onSubmit={handleSubmit}
-      >
-        <div className="overlay-popup-fodler-link"></div>
-        <div className="content-popup-fodler-link">
-          <div className="close-btn-fodler-link" onClick={pickedPopup} id="popClose-link">Back</div>
-          <TextFieldFile fileTitle={setFileTitle}/>
-          <div className="popup-fodler-con-link">
-            {/*<MultipleSelectCheckmarks />*/}
-            <div className="add-link2">
-              {linkProvided?
-                <h2 className="txt-field-title">Paste in The URL</h2>:null
-              }
-              <VideoUrlApp 
-                subscriptionState={userData.subscription} 
-                setCreateBtn={setIsAddedOn} 
-                setPassedDataUrl={setTrimmedVideoFile} 
-                linkProvided={setLinkProvided} 
-                fileImage={setFileImage} 
-                setExtractMeta={setMetaData} 
-                setPassedAudioDataUrl={setAudioFile}
-              />
-            </div>
-            <div className="add-link-notes2">
-              <h1>Add Features </h1>
-              {/**/}
-              <ZeroWidthStack/>
-              {/*TAGS */}
-              <MultipleSelectCheckmarks selectedTag={setTag}/>
-            </div>
-          </div>
-          {isAddedOn?
-            <div className="create-btn-bottom" onClick={createFile}><DelayingAppearance id="create-upload2" variant="contained"/></div> :null
-          }
-        </div>
-      </div>:null
-    }
-    {/*Upload MODAl  */}
-    {isUploadActive?
-      <div className= {`popup-fodler ${isUploadActive ? 'active' : ''}`}id="popup-upload" onSubmit={handleSubmit}>
-        <div className="overlay-popup-fodler-upload"></div>
-        <div className="content-popup-fodler-upload">
-          <div className="close-btn-fodler-upload" onClick={pickedPopup} id="popClose-upload">Back</div>
-          <TextFieldFile fileTitle={setFileTitle}/>
-          <div className="popup-fodler-con-upload">
-              {/*<MultipleSelectCheckmarks />*/}
-            <div className="add-link">
-              {uploadProvided?
-                <h2 className="txt-field-title2">Upload File</h2>:null
-              }
-              <VideoApp subscriptionState={userData.subscription} setCreateBtn={setIsAddedOn} videoURL={setTrimmedVideoFile} uploadProvided={setUploadProvided} fileImage={setFileImage}  setExtractMeta={setMetaData} setPassedAudioDataUrl={setAudioFile}/>
-            </div>
-            <div className="add-link-notes">
-              <h1>Add Features </h1>
-              <h5>You can add them later</h5>
-              <ZeroWidthStack/>
-              <MultipleSelectCheckmarks selectedTag={setTag}/>
-            </div>                          
-          </div>
-          {isAddedOn? 
-            <div className="create-btn-bottom-1" onClick={createFile}><DelayingAppearance id="create-upload" variant="contained"/></div> :null
-          }
-        </div>
-      </div>:null
-    }
-    {/*SEC BAR*/}
-    {!isActive && !isLinkActive && !isUploadActive?
-      <div className="file-map-container">
-        {userFile.length === 0 ? (
-          <div className="no-doc">No files added</div>
-        ) : (
-          userFile.map((file) =>
-            file && file.id ? (
-              <div key={file.id}>
-                <Link to={`/folder/${folderID}/${file.id}`}>
-                  {file && file.img && file.title && (
-                    <FileCard imgSrc={file.img} imgAlt="file img" title={file.title} tags={file.tag} related_count={file.related_count} video_size={file.video_size}/>
-                  )}
-                </Link>
-              </div>
-            ):null)
-        )}
-      </div>:null 
-    }
-    <BasicSpeedDial togglePopup={togglePopup} />
-  </div>     
-</div>
+      </Link>
+    ))}
+    </Col>
+  </Row>
+
+<Row>
+<Example handleUploadTrigger={createFile} setTitleInput={setFileTitle} setFileImageEXT={setFileImage} setExtractMetaEXT={setMetaData} setPassedAudioDataUrlEXT={setAudioFile} setVideoUrlEXT={setTrimmedVideoFile} />
+</Row>
+</Container>
+
 )
 }
 

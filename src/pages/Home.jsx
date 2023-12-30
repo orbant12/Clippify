@@ -112,49 +112,18 @@ useEffect(() => {
 return (
 <div className="home">
   <div id="userCrated-Files">
-    <div className="home-card">
-        <div className='usage-box'>
-          {/*TITLE*/}
-          <div className='usage-title'>
-              <h1 className='title-main'>See Your Limits</h1>
-              <h3 className='title-sub'>You can upgrade your plan to extend these limits <a href="/subscription">click here</a> to see the subscription plans</h3>
-          </div>
-          {/*CLOUD SPACE*/}
-          <div className='cloud'>
-            <div><CircularWithValueLabel progress={userData.storage_take / 1000000 / 1000} className='cloud-progress'/></div>
-            {userData.subscription ?(<h5>{(userData.storage_take / 1000000 / 1000).toFixed(2)} / 100 GB</h5>):(<h5>{(userData.storage_take / 1000000 / 1000).toFixed(2)} / 10 GB</h5>)}
-            <h2 className='cloud-title'>Cloud Storage</h2>
-          </div>
-          <hr />
-          {/*CLOUD SPACE*/}
-          <div className='follow-title'>
-            <h1>Follow us for the latest news</h1>
-            <div className='follow-row'>
-              <a style={{color:"black"}} href="https://www.instagram.com/clippify.app/"> 
-                <div className='socialMedia'>
-                  <InstagramIcon />
-                  <h3>Instagram</h3>
-                </div>
-              </a>
-
-              <a style={{color:"black"}} href="https://www.tiktok.com/@clippify.app">
-                <div className='socialMedia'>
-                  <ScreenshotIcon />
-                  <h3>Tiktok</h3>
-                </div>
-              </a>
-              <div className='socialMedia'>
-                <YouTubeIcon />
-                <h3>YouTube</h3>
-              </div>
-              <div className='socialMedia'>
-                <TwitterIcon />
-                <h3>Twitter</h3>
-              </div>
-            </div>
-          </div>
-        </div>
+  <div className='welcome-row'>
+    <div>
+      <h1>Welcome Back, {userData.fullname}</h1>
+      <h6>Clippify is the place to learn and save information</h6>
     </div>
+    <div className='cloud'>
+      <div><CircularWithValueLabel progress={userData.storage_take / 1000000 / 1000} className='cloud-progress'/></div>
+        {userData.subscription ?(<h5>{(userData.storage_take / 1000000 / 1000).toFixed(2)} / 100 GB</h5>):(<h5>{(userData.storage_take / 1000000 / 1000).toFixed(2)} / 10 GB</h5>)}
+      <h2 className='cloud-title'>Cloud Storage</h2>
+    </div>
+  </div>
+
     {/*RECENTLY ADDED*/}
     <div className="memory_title">
       <h2>Recently Openned</h2>

@@ -123,7 +123,8 @@
 .home .ag-format-container {
 
     margin: 0 auto 0 20px;
-    padding-left: 100px;
+    width: 100%;
+  
  
   }
   
@@ -143,10 +144,8 @@
   .ag-courses_box2 {
     display: flex;
     justify-content: left;
-    margin: 0 15px 30px;
- 
-    padding: 20px 0;
-    padding-bottom: 50px;
+    width: 70%;
+    padding-bottom: 80px;
   }
   .ag-courses_item {
     -ms-flex-preferred-size: calc(33.33333% - 30px);
@@ -314,127 +313,13 @@ opacity: 0.8;
  display: inline;
 }
 
-
-@media (1670px <= width <= 1780px) {
-
-  .home .ag-format-container {
-
-
-    margin: 0 auto 0 20px;
-    margin-left: -60px;
-  }
-   
-  
+.welcome-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 50px;
+  padding-left: 50px;
+  padding-right: 50px;
 }
 
-@media (1500px <= width <= 1670px) {
-
-    
-   
-
-  .home .ag-format-container {
-
-
-  margin: 0 auto 0 20px;
-  padding-left: 80px;
-}
- 
-}
-
-@media (1350px <= width <= 1500px) {
-
-
-
-.home .ag-format-container {
-
-
-  width: 1300px;
-  margin: 0 auto 0 20px;
-  margin-left: -60px;
-}
-
-.home .ag-courses-item_link {
-  display: block;
-  padding: 30px 20px;
-  width: 350px;
-  overflow: hidden;
-
-  position: relative;
-}
-
-.home .ag-courses-item_link_plus {
-  display: block;
-  padding: 30px 20px;
-  background-color: none;
-  border: 2px dashed black;
-  border-radius: 30px;
-  overflow: hidden;
-  width: 350px;
- 
-
-  position: relative;
-}
-
-.home .ag-courses-item_title_plus{
-  min-height: 80px;
-  margin: 45px 140px 0px;
-
-  font-weight: bold;
-  font-size: 30px;
-  color: black;
-
-  z-index: 2;
-  position: relative;
-}
- 
-}
-
-
-@media (1024px <= width <= 1350px) {
-
-    
-  
-
-  .home .ag-format-container {
-
-width: 1100px;
-  margin: 0 auto 0 auto;
- margin-left: -60px;
-}
-
-.home .ag-courses-item_link {
-  display: block;
-  padding: 30px 20px;
-  width: 300px;
-  overflow: hidden;
-
-  position: relative;
-}
-
-.home .ag-courses-item_link_plus {
-  display: block;
-  padding: 30px 20px;
-  background-color: none;
-  border: 2px dashed black;
-  border-radius: 30px;
-  overflow: hidden;
-  width: 300px;
- 
-
-  position: relative;
-}
-
-.home .ag-courses-item_title_plus{
-  min-height: 80px;
-  margin: 45px 115px 0px;
-
-  font-weight: bold;
-  font-size: 30px;
-  color: black;
-
-  z-index: 2;
-  position: relative;
-}
-
- 
-}

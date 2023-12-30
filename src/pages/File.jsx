@@ -35,6 +35,11 @@ import DelayingAppearance from "../assets/FileAdd/LoadingBtn";
 import '../Css/file.css'
 
 
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+
+
 function File({prevUrl,mainFileURL}) {
 
 
@@ -558,7 +563,7 @@ useEffect(() => {
 
 
 return (
-<div className='file'>
+<Container fluid>
     <div className='zero_bar-row2'> 
       <div className='back-button'>
         <ArrowBackIosNewIcon onClick={navigateBack} sx={{p:1}}/> 
@@ -566,49 +571,33 @@ return (
     </div>
     <div className='file-page'>
       {/*1 BAR */}
-      <div className='first_bar-title'>
-        {/*LEFT Side*/}
-        <div className='first_bar-left'>
-          <div className='first_bar-tag-label'>{fileElements.tag}</div>
-          {isEditing ? (
-            <input
-              className="folder-input-change"
-              type="text"
-              value={newTitle}
-              onChange={handleTitleChange}
-              onKeyPress={handleKeyUp}
-              autoFocus
-            />
-          ) : (
-            <h2 className="first_bar-txt" onClick={handleTitleClick}>
-              {newTitle}
-            </h2>
-          )}
-          {isEditing ? <h5 style={{opacity:0.8,paddingTop:5}}>Press Enter to OK</h5>:null} 
-        </div>
-
-        {/*RIGHT Side*/} 
-        <div>
-          <DesignServicesIcon sx={{fontSize:30}} className='first_bar-edit' onClick={handleTitleClick}  />
-          <DeleteForeverIcon sx={{fontSize:30,ml:3}} className='first_bar-delete' onClick={handleOpen} />
-          <Modal
-            open={open}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
-            <Box sx={style}>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                Are You Sure ?
-              </Typography>
-              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                You will lose all of your documents permanently
-              </Typography>
-              <Button sx={{color:'red',ml:32,mt:5}} onClick={handleDelete}>DELETE</Button>
-            </Box>
-          </Modal>
-        </div>
-
-      </div>
+      <Row style={{width:"80%",marginRight:"auto",marginLeft:"auto",paddingTop:20,alignItems:"center"}}>
+        <Col >
+        {isEditing ? (
+              <input
+                className="folder-input-change"
+                type="text"
+                value={newTitle}
+                onChange={handleTitleChange}
+                onKeyPress={handleKeyUp}
+                autoFocus
+              />
+            ) : (
+              <h2 className="first_bar-txt" onClick={handleTitleClick}>
+                {newTitle}
+              </h2>
+            )}
+            {isEditing ? 
+              <h5 style={{opacity:0.8,paddingTop:5}}>Press Enter to OK</h5>:null
+            }
+        </Col>
+        <Col className='col-auto' style={{border:"1px solid black"}} >
+            <DesignServicesIcon/>
+        </Col>
+        <Col className='col-auto' style={{border:"1px solid black"}} >
+            <DesignServicesIcon/>
+        </Col>
+    </Row>
       {/*2 BAR */}
       <div className='sec_bar-cont'>
         {/*VIDEO FRAME With PAG*/}
@@ -655,8 +644,6 @@ return (
       </div>
       {/*3 BAR*/}
       <div className='third_bar-features-cont'>
-        <div className='third_bar-top'>
-        </div>
         <div className='rich-txt-editor'>
           {/*EDITOR*/}
           <Editor 
@@ -752,7 +739,7 @@ return (
       </div>
       <BasicSpeedDial togglePopup={togglePopup} />
     </div>
-</div>
+
+</Container>
 )}
 export default File
-
