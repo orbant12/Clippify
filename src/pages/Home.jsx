@@ -128,7 +128,7 @@ return (
     <div className="memory_title">
       <h2>Recently Openned</h2>
     </div>
-    <div className="ag-format-container">
+    <div className="folder-card-container">
       <div className="ag-courses_box2">
         {/*ADDED DOM*/}
         {recentFiles.length === 0 ? (
@@ -150,8 +150,8 @@ return (
     <div className="memory_title" >
       <h2>Your Memory</h2>
     </div>
-    <div className="ag-format-container" > 
-      <div className="ag-courses_box" >
+    <div className="folder-card-container" > 
+      <div className="folder-card-box" >
         {/*ADDED DOM*/}
         {folders.length === 0 ? (
           <div className="no-folder">

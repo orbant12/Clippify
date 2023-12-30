@@ -366,57 +366,7 @@ a {
 
 
 
-  /*Plus*/
   
-  .ag-courses_item_plus {
-    -ms-flex-preferred-size: calc(33.33333% - 30px);
-    flex-basis: calc(33.33333% - 30px);
-    margin: 0 15px 50px;
-    box-shadow: rgba(0,0,0,1.0);
-  
-    overflow: hidden;
-    cursor: pointer;
-    border-radius: 20px;
-  }
-  
-  .ag-courses-item_link_plus {
-    display: block;
-    padding: 30px 20px;
-    background-color: none;
-    border: 2px dashed black;
-    border-radius: 30px;
-    overflow: hidden;
-    width: 400px;
-   
-  
-    position: relative;
-  }
-  
-  .ag-courses-item_link_plus:hover{
-    background-color: #fff;
-    transition: ease-in-out 0.3s;
-    
-  }
-  
-  
-  .ag-courses-item_title_plus{
-    min-height: 80px;
-    margin: 45px 170px 0px;
-  
-    font-weight: bold;
-    font-size: 30px;
-    color: black;
-  
-    z-index: 2;
-    position: relative;
-  }
-  .ag-courses-item_bg_plus{
-   background-color: none;
-  }
-  
-
-
-
 
 
 
@@ -437,7 +387,7 @@ a {
 /*MEMORY*/
 
 .memory{
-  margin-top: 100px;
+padding-top: 50px;
 }
 
 .memory_title_memory h2{
@@ -751,151 +701,60 @@ a {
   width: 440px;
 }
 .memory .ag-format-container {
-  width: 1400px;
-  margin: 0 auto 0 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
   padding-left: 100px;
-
 }
 
 /*Pricing*/
 
+/*Plus*/
+  
+.ag-courses_item_plus {
+  -ms-flex-preferred-size: calc(33.33333% - 30px);
+  flex-basis: calc(33.33333% - 30px);
+
+  box-shadow: rgba(0,0,0,1.0);
+
+  margin-right: 5px;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 20px;
+  width: 100%;
+  min-width: 300px;
+  margin-left: 23px;
+}
 
 
 
-@media (1670px <= width <= 1780px) {
+.ag-courses-item_link_plus {
+  display: block;
+  padding: 30px 20px;
+  background-color: none;
+  border: 2px dashed black;
+  border-radius: 30px;
+  overflow: hidden;
+  width: 100%;
+  min-width: 300px;
+ 
 
-  .memory .ag-format-container {
+  position: relative;
+}
 
-    width: 1400px;
-    margin: 0 auto 0 20px;
-    padding-left: 100px;
-  }
-   
-  .memory .popup .content-popup {
-    position: relative;
-    background:#fff;
-    border: 3px solid black;
-    width:400px;
-    height:230px;
-    text-align:center;
-    border-radius: 30px;
-    margin: 0 15px 30px;
-
-  }
+.ag-courses-item_link_plus:hover{
+  background-color: #fff;
+  transition: ease-in-out 0.3s;
   
 }
 
-@media (1500px <= width <= 1670px) {
 
-    
-   
-  .memory #popup-plus .content-popup {
-    position: relative;
-    background:#fff;
-    border: 3px solid black;
-    width:400px;
-    height:230px;
-    text-align:center;
-    border-radius: 30px;
-    margin: 0 15px 30px;
-
- }
- .memory .btn-add-file {
-  position: relative;
-  margin-right: 90px;
-
-  background-color: transparent;
-  color: black;
-  font-size: 13px;
-  font-weight: 600;
-  border-radius: 10px;
-  width: 120px;
-  height: 60px;
-  border: none;
-  text-transform: uppercase;
-  cursor: pointer;
-  overflow: hidden;
-  box-shadow: 0 10px 20px rgba(51, 51, 51, 0.2);
-  transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
-}
- .memory .ag-format-container {
-
-  width: 1400px;
-  margin: 0 auto 0 20px;
-  padding-left: 110px;
-}
- 
-}
-
-@media (1350px <= width <= 1500px) {
-
-    
-   
-  .memory .popup .content-popup {
-    position: relative;
-    background:#fff;
-    border: 3px solid black;
-    width:400px;
-    height:230px;
-    text-align:center;
-    border-radius: 30px;
-    margin: 0 15px 30px;
-
- }
- .memory .btn-add-file {
-  position: relative;
-  margin-right: 100px;
-
-  background-color: transparent;
-  color: black;
-  font-size: 13px;
-  font-weight: 600;
-  border-radius: 10px;
-  width: 110px;
-  height: 60px;
-  border: none;
-  text-transform: uppercase;
-  cursor: pointer;
-  overflow: hidden;
-  box-shadow: 0 10px 20px rgba(51, 51, 51, 0.2);
-  transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
-}
-
-
-
- .memory .ag-format-container {
-
-
-  width: 1400px;
-  margin: 0 auto 0 20px;
-  padding-left: 150px;
-}
-
-.memory .ag-courses-item_link {
-  display: block;
-  padding: 30px 20px;
-  width: 350px;
-  overflow: hidden;
-
-  position: relative;
-}
-
-.memory .ag-courses-item_link_plus {
-  display: block;
-  padding: 30px 20px;
-  background-color: none;
-  border: 2px dashed black;
-  border-radius: 30px;
-  overflow: hidden;
-  width: 350px;
- 
-
-  position: relative;
-}
-
-.memory .ag-courses-item_title_plus{
+.ag-courses-item_title_plus{
   min-height: 80px;
-  margin: 45px 140px 0px;
+  margin: 45px 170px 0px;
 
   font-weight: bold;
   font-size: 30px;
@@ -904,89 +763,18 @@ a {
   z-index: 2;
   position: relative;
 }
- 
+.ag-courses-item_bg_plus{
+ background-color: none;
 }
 
-
-@media (1024px <= width <= 1350px) {
-
-    
-   
-  .memory .popup .content-popup {
-    position: relative;
-    background:#fff;
-    border: 3px solid black;
-    width:400px;
-    height:230px;
-    text-align:center;
-    border-radius: 30px;
-    margin: 0 15px 30px;
-   
-
- }
- .memory .btn-add-file {
-  position: relative;
-  margin-right: 100px;
-
-  background-color: transparent;
-  color: black;
-  font-size: 13px;
-  font-weight: 600;
-  border-radius: 10px;
-  width: 100px;
-  height: 60px;
-  border: none;
-  text-transform: uppercase;
-  cursor: pointer;
-  overflow: hidden;
-  box-shadow: 0 10px 20px rgba(51, 51, 51, 0.2);
-  transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+@media (max-width: 768px) {
+  .memory .ag-format-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+    padding-left: 0px;
+  }
 }
-
- .memory .ag-format-container {
-
-  width: 1100px;
-  margin: 0 auto 0 20px;
-  padding-left: 30px;
-}
-
-.memory .ag-courses-item_link {
-  display: block;
-  padding: 30px 20px;
-  width: 300px;
-  overflow: hidden;
-
-  position: relative;
-}
-
-.memory .ag-courses-item_link_plus {
-  display: block;
-  padding: 30px 20px;
-  background-color: none;
-  border: 2px dashed black;
-  border-radius: 30px;
-  overflow: hidden;
-  width: 300px;
- 
-
-  position: relative;
-}
-
-.memory .ag-courses-item_title_plus{
-  min-height: 80px;
-  margin: 45px 115px 0px;
-
-  font-weight: bold;
-  font-size: 30px;
-  color: black;
-
-  z-index: 2;
-  position: relative;
-}
-
-
-
- 
-}
-
-

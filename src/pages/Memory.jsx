@@ -9,7 +9,7 @@ import { db } from '../firebase';
 
 // CSS
 import '../Css/styles.css';
-import '../Css/sidebar.css';
+
 
 // ICONS
 import SnippetFolderIcon from '@mui/icons-material/SnippetFolder';
@@ -118,14 +118,14 @@ return (
       <div className="ag-courses_box" id="div-container">
         {!isPlusClicked ? (
           <div
-            className="ag-courses_item_plus"
+            className="ag-courses_item"
             id="popOpen"
             onClick={togglePopup}
           >
-            <a className="ag-courses-item_link_plus">
-              <div className="ag-courses-item_bg_plus"></div>
+            <a className="ag-courses-item_link">
+              <div className="ag-courses-item_bg"></div>
 
-              <div className="ag-courses-item_title_plus">
+              <div className="ag-courses-item_title">
                 <i className="bx bx-plus icon"></i>
               </div>
             </a>
