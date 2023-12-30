@@ -130,7 +130,7 @@ return (
     </div>
     <div className="folder-card-container">
       <div className="ag-courses_box2">
-        {/*ADDED DOM*/}
+        {/*ADDED DOCUMENT*/}
         {recentFiles.length === 0 ? (
           <div className="no-document">No Recent Clips's added</div>
         ) : (
@@ -147,12 +147,13 @@ return (
         )}
       </div>
     </div>
+    {/*FODLER ADDED*/}
     <div className="memory_title" >
       <h2>Your Memory</h2>
     </div>
     <div className="folder-card-container" > 
       <div className="folder-card-box" >
-        {/*ADDED DOM*/}
+        {/*ADDED FOLDER*/}
         {folders.length === 0 ? (
           <div className="no-folder">
             <a href="/memory" className='no-folder-a' >No Folders Yet <br />

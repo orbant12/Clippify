@@ -1255,3 +1255,230 @@ padding: 10px;
   width: 200px;
   align-self: center;
 }
+
+/*======FILE=====*/
+
+#dark .file .content-related-upload{
+
+  background:var(--dark-primary-color-light);
+
+}
+
+#dark .file .close-related-upload{
+  background:black;
+  color:white;
+}
+
+#dark .file .popup-fodler.active .close-related-upload:hover{
+  color: var(--dark-primary-color);
+}
+
+
+#dark .file .content-related-link{
+
+  background:var(--dark-primary-color-light);
+
+}
+
+#dark .file .close-btn-related-link{
+  background:black;
+  color:white;
+}
+
+#dark .file .popup-fodler.active .close-btn-related-link:hover{
+  color: var(--dark-primary-color);
+}
+
+#dark .file .content-relatedAdd{
+  background:var(--dark-primary-color-light);
+
+}
+
+#dark .file .close-btn-relatedAdd{
+  background:black;
+  color:var(--dark-primary-color);
+  border: 1px solid black;
+}
+
+#dark .file .relatedAdd-title{
+  color: var(--dark-text-color);
+}
+
+#dark .file #btn-relatedAdd{
+  background-color: var(--dark-primary-color);
+  color: var(--dark-body-color);
+  font-weight: 900;
+}
+
+/**/
+#light .file .content-related-upload{
+  background:var(--primary-color-light);
+}
+
+#light .file .close-related-upload{
+  background:black;
+  color:white;
+}
+
+#light .file .popup-fodler.active .close-related-upload:hover{
+  color: var(--primary-color);
+}
+
+#light .file .content-related-link{
+  background:var(--primary-color-light);
+}
+
+#light .file .close-btn-related-link{
+  background:black;
+  color:white;
+}
+
+#light .file .popup-fodler.active .close-btn-related-link:hover{
+  color: var(--primary-color);
+}
+
+#light .file .content-relatedAdd{
+  background:var(--primary-color-light);
+}
+
+#light .file .close-btn-relatedAdd{
+  background:black;
+  color:var(--primary-color);
+  border: 1px solid black;
+}
+
+#light .file .relatedAdd-title{
+  color: var(--dark-body-color);
+}
+
+#light .file #btn-relatedAdd{
+  background-color: var(--primary-color);
+  color: var(--dark-body-color);
+  font-weight: 600;
+}
+
+#dark .editor-inner {
+    background: var(--primary-color-light);
+    border: 2px solid black;
+
+  }
+
+#dark .toolbar {
+  background: var(--dark-primary-color-light);
+  border: 2px solid black;
+}
+
+#dark .toolbar .toolbar-item:hover:not([disabled]) {
+    background-color: var(--dark-primary-color);
+  }
+  
+  #dark .toolbar .divider {
+
+    background-color: var(--dark-body-color);
+
+  }
+#dark .pagination{
+    color: var(--dark-primary-color);
+}
+#dark .sec_bar-clip{ 
+    border: 2px solid var(--dark-primary-color);  
+}
+
+#dark .sec_bar-clip:hover{
+    border: 2px solid black;
+}
+#dark .subtitle{
+  color: var(--dark-text-color);
+}
+
+#dark .sub-tag{
+    color: var(--dark-text-color);
+}
+#dark .sec_bar-clip-duration{
+    color: var(--dark-text-color);
+}
+
+#dark .chat-message.chatgpt{
+  background-color: var(--dark-primary-color);
+  color: black;
+  
+}
+
+#dark  .avatar.chatgpt {
+  background-color: var(--dark-primary-color);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+#dark .first_bar-tag-label{
+  color: var(--dark-primary-color);
+  opacity: 0.6;
+}
+
+/*Ligth MODE*/
+
+#light .editor-inner {
+    background: var(--primary-color-light);
+    border: 2px solid black;
+    border-top:  2px solid black;
+}
+
+#light .toolbar {
+  background: var(--primary-color-light);
+  border: 2px solid black;
+  border-bottom:  3px solid black;
+  margin-bottom: 0px;
+}
+
+#light .toolbar .toolbar-item:hover:not([disabled]) {
+  background-color: var(--primary-color);
+}
+  
+#light .toolbar .divider {
+  background-color: var(--dark-primary-color-light);
+}
+
+#light .pagination{
+  color: var(--primary-color);
+}
+
+#light .sec_bar-clip{ 
+  border: 2px solid var(--primary-color);  
+}
+
+#light .sec_bar-clip:hover{
+  border: 2px solid black;
+}
+
+#light .subtitle{
+  color: var(--text-color);
+}
+
+#light .sub-tag{
+  color: var(--text-color);
+}
+#light .sec_bar-clip-duration{
+  color: var(--text-color);
+}
+
+#light .folder-input-change{
+  border: 0px solid var(--primary-color);
+}
+
+#light .chat-message.chatgpt{
+  background-color: var(--primary-color);
+  color: black; 
+}
+  
+#light  .avatar.chatgpt {
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+  
+#light .first_bar-tag-label{
+  color: var(--text-color);
+  opacity: 0.6;
+}

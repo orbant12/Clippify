@@ -149,3 +149,366 @@
 
     color: var(--dark-text-color);
   }
+
+/* ================ COLOR FODLER ====================== */
+
+/* DARK _ MODE*/
+#dark .back-button-folder{
+  border: 2px solid black;
+  color: var(--dark-primary-color);
+  background-color: black;
+}
+
+
+#dark .back-button-folder:hover{
+  border: 2px solid black;
+  color: black;
+  background-color: var(--dark-primary-color);
+}
+
+#dark .folder-input-change{
+  border: 0px solid var(--dark-primary-color);;
+}
+
+#dark .first_bar-delete{
+  color: var(--dark-text-color);
+}
+#dark .first_bar-txt{
+  color: var(--dark-text-color);
+}
+
+#dark .first_bar-edit{
+  color: var(--dark-text-color);
+}
+#dark .first_bar-edit:hover{
+  color: var(--dark-primary-color);
+}
+
+
+
+#dark .no-doc{
+color: var(--dark-text-color);
+}
+
+#dark .file-map{
+  border: 4px solid black;
+  border-top: 4px solid black;
+  border-bottom: 10px solid black;
+  border-right: 10px solid black;
+  background-color: rgba(110, 108, 108, 0.5); 
+  backdrop-filter: blur(10px); /* Adjust the blur amount as needed */
+}
+
+#dark .file-map:hover{
+  background-color: black;
+}
+
+
+#dark .related-video-cont{
+  color: var(--dark-primary-color);
+}
+#dark .related-video{
+  color: var(--dark-primary-color);
+}
+#dark .storage-take-number{
+  color: var(--dark-primary-color);
+}
+
+#dark .add-icon-tag:hover{
+
+    color: var(--dark-text-color);
+  }
+
+  
+  #dark .content-popup-fodler{
+    background:var(--dark-primary-color-light);
+  border: 1px solid black;
+}
+
+#dark .content-popup-fodler-link{
+  background:var(--dark-primary-color-light);
+  border: 1px solid black;
+
+}
+
+
+#dark .popup-fodler.active .close-btn-fodler-link{
+
+  background:black;
+  color:white;
+
+}
+#dark .popup-fodler.active .close-btn-fodler-link:hover{
+
+  background:black;
+  color:var(--dark-primary-color);
+
+}
+
+#dark .content-popup-fodler-upload{
+  background:var(--dark-primary-color-light);
+  border: 1px solid black;
+}
+
+#dark .close-btn-fodler-upload{
+  background:black;
+  color:white;
+}
+#dark .close-btn-fodler-upload:hover{
+  background:black;
+  color:var(--dark-primary-color);
+}
+
+#dark .card_style_plus{
+  border: 2px dashed black;
+}
+
+#dark .card_style_plus:hover{
+  background-color: #fff;
+}
+
+#dark .card_bg_plus{
+background-color: none;
+}
+
+#dark .card_title_plus{
+  color: var(--dark-text-color);
+}
+
+#dark .card-container-file {
+  box-shadow: 0px 10px 8px #999;
+  background-color: var(--dark-primary-color-light);
+}
+
+#dark .card-btn-file {
+  background-color: var(--dark-primary-color);
+  color: var(--dark-text-color);
+}
+
+#dark .item-desc{
+
+}
+
+#dark  .Add-New-title{
+  color: white
+}
+
+#dark .card-item{
+  background-color: var(--dark-body-color);
+}
+
+#dark .item-box-link {
+color: var(--dark-text-color);
+}
+
+#dark .item-desc {
+color: var(--dark-text-color);
+}
+
+#dark .or-txt{
+color: var(--dark-text-color);
+}
+
+#dark #add-btn-file{
+background-color: var(--dark-primary-color);
+color: var(--dark-body-color);
+font-weight: 900;
+}
+
+#dark #create-upload{
+background-color: var(--dark-primary-color);
+color: var(--dark-body-color);
+font-weight: 900;
+}
+
+#dark .image_box {
+display: flex;
+align-items: flex-start;
+border: 2px solid var(--dark-primary-color);
+position: absolute;
+height: 5rem;
+/* overflow: hidden; */
+border-radius: 10px; 
+}
+
+#dark .clip_box {
+border: 10px solid var(--dark-primary-color);
+position: absolute;
+height: 110%;
+box-shadow: 2000 0 5px 10px red, -400px 0 5px -10px red;
+transform: translateY(-5%);
+border-radius: 10px;
+
+}
+
+#dark .clip_box_des {
+width: 1.3rem;
+height: 100%;
+background-color: var(--dark-primary-color);
+position: absolute;
+z-index: -1;
+display: flex;
+gap: 3px;
+align-items: center;
+justify-content: space-around;
+}
+
+#dark div .btn2 {
+ 
+border-radius: 10px;
+padding-top: 8px;
+font-size: 20px;
+font-weight: 600;
+width: 200px;
+height: 50px;
+background-color: var(--dark-primary-color);
+color: var(--dark-body-color);
+
+
+}
+
+/*LIGHT _ MODE*/
+
+#light .back-button-folder{
+  border: 2px solid black;
+  color: var(--primary-color);
+  background-color: black;
+}
+#light .storage-take-number{
+  color: var(--primary-color);
+}
+
+#light .back-button-folder:hover{
+  border: 2px solid black;
+  color: black;
+  background-color: var(--primary-color);
+}
+
+#light .folder-input-change{
+  border: 0px solid var(--primary-color);;
+}
+
+#light .first_bar-delete{
+  color: var(--dark-body-color);
+}
+
+#light .first_bar-delete:hover{
+  color: red;
+}
+
+#light .first_bar-txt{
+  color: var(--text-color);
+}
+
+#light .first_bar-edit{
+color: var(--dark-body-color);
+}
+#light .first_bar-edit:hover{
+  color: var(--primary-color);
+}
+
+
+
+#light .no-doc{
+color: var(--text-color);
+}
+
+#light .file-map{
+  border: 2px solid black;
+  border-top: 2px solid black;
+  border-bottom: 8px solid black;
+  border-right: 8px solid black;
+  background-color: white; 
+  backdrop-filter: blur(10px); /* Adjust the blur amount as needed */
+}
+
+#light .file-map:hover{
+  background-color: black;
+}
+
+
+#light .related-video{
+  color: var(--primary-color);
+}
+
+#light .related-video-cont{
+  color: var(--dark-primary-color);
+}
+
+#light .add-icon-tag:hover{
+
+    color: var(--text-color);
+  }
+
+  
+  #light .content-popup-fodler{
+  background:var(--primary-color-light);
+  border: 1px solid black;
+}
+
+#light .content-popup-fodler-link{
+  background:var(--primary-color-light);
+  border: 1px solid black;
+}
+
+
+#light .popup-fodler.active .close-btn-fodler-link{
+
+  background:black;
+  color:white;
+
+}
+#light .popup-fodler.active .close-btn-fodler-link:hover{
+
+  background:black;
+  color:var(--primary-color);
+
+}
+
+#light .content-popup-fodler-upload{
+  background:var(--primary-color-light);
+  border: 1px solid black;
+}
+
+#light .close-btn-fodler-upload{
+  background:black;
+  color:white;
+}
+#light .close-btn-fodler-upload:hover{
+  background:black;
+  color:var(--primary-color);
+}
+
+#light .card_style_plus{
+  border: 2px dashed black;
+}
+
+#light .card_style_plus:hover{
+  background-color: #fff;
+}
+
+#light .card_bg_plus{
+background-color: none;
+}
+
+#light .card_title_plus{
+  color: var(--text-color);
+}
+
+#light .card-container-file {
+  box-shadow: 0px 10px 8px #999;
+  background-color: var(--primary-color-light);
+}
+
+#light .card-btn-file {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+}
+
+#light .item-desc{
+
+}
+
+#light  .Add-New-title{
+
+}

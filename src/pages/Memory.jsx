@@ -8,7 +8,8 @@ import { collection, doc, setDoc, getDocs } from 'firebase/firestore';
 import { db } from '../firebase';
 
 // CSS
-import '../Css/styles.css';
+
+import '../Css/memory.css';
 
 
 // ICONS
@@ -110,7 +111,7 @@ const togglePopup = () => {
 
 return (
 <div className="memory">
-  <section id="userCreated-Files">
+
     <div className="memory_title_memory">
       <h2>Your Memory</h2>
     </div>
@@ -220,6 +221,5 @@ return (
         })}
       </div>
     </div>
-  </section>
 </div>
 );}

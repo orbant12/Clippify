@@ -164,6 +164,245 @@
  
 }
 
+
+/* ============SETTINGS=============== */
+
+#dark .settings hr{
+    border-color: black;
+  }
+  
+  #dark .settings h6,#dark .settings h4,#dark .settings h5{
+    color: var(--primary-color-light);
+    font-weight: 500;
+   
+  }
+  
+  #dark .settings h1{
+    color: var(--primary-color-light);
+   
+  }
+  #dark .settings .profile-title-txt{
+    color: var(--dark-text-color);
+  }
+  
+  #dark .settings .highlighter{
+    color: var(--dark-primary-color);
+    opacity: 0.8;
+  }
+   
+  #dark .settings .profile-first-row h5{
+    color: var(--primary-color-light);
+  }
+  
+  #dark .settings .section-settings-left{
+    padding: 5px;
+    border: 2px solid var(--dark-primary-color);
+    color: var(--text-color);
+  }
+  
+  #dark .settings .section-settings-right{
+    padding: 5px;
+    border: 2px solid var(--dark-primary-color);
+    border-left: 0px solid black;
+    color: var(--text-color);
+  }
+  
+  #dark .settings .section-settings{
+    padding: 5px;
+    border: 2px solid var(--dark-primary-color);
+    border-left: 0px solid black;
+    color: var(--text-color);
+  
+  }
+  
+  #dark .settings .section-settings:hover{
+    transform: scale(1.06);
+    cursor: pointer;
+    color: var(--dark-text-color);
+    border-left: 3px solid black;
+  
+    border-right: 3px solid black;
+  }
+  #dark .settings .section-settings-left:hover{
+    transform: scale(1.03);
+    cursor: pointer;
+    color: var(--dark-text-color);
+    border-left: 2px solid var(--dark-primary-color);
+    border-right: 3px solid black;
+  }
+  #dark .settings .section-settings-right:hover{
+    transform: scale(1.06);
+    cursor: pointer;
+    color: var(--dark-text-color);
+    border-right: 2px solid var(--dark-primary-color);
+    border-left: 4px solid black;
+  }
+  
+  #dark .settings .submit-settings-btn{
+    background-color: var(--dark-primary-color);
+    font-weight: 400;
+    box-shadow: rgb(74, 74, 83);
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: black;
+    cursor: pointer;
+  }
+  
+  #dark .settings input{
+    background-color: var(--dark-primary-color-light);
+    color:var(--dark-text-color);
+    font-weight: 400;
+    padding: 10px;
+    border: 1px solid var(--dark-primary-color);
+    opacity: 0.8;
+  }
+  
+  #dark .settings .manage-payment-button{
+    background-color: var(--dark-primary-color);
+    padding: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    border: 2px solid black;
+  }
+  
+  #dark .settings .manage-payment-button:hover{
+    background-color: white;
+    padding: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: ease .1s;
+    transform: scale(1.06);
+  }
+  #dark .settings .manage-payment-button:active{
+  
+    transition: ease .1s;
+    transform: scale(0.92);
+  }
+  
+  #dark .settings .history-table-title{
+    color: var(--dark-text-color);
+  }
+  
+  
+  
+  #light .settings hr{
+    border-color: white;
+  }
+  
+  #light .settings h6,#light .settings h4,#light .settings h5{
+    color: var(--color-light);
+    font-weight: 600;
+   
+  }
+  
+  #light .settings h1{
+    color: var(--color-light);
+   
+  }
+  #light .settings .profile-title-txt{
+    color: var(--color-light);
+  }
+  
+  
+  #light .settings .highlighter{
+    color: var(--dark-sidebar-color);
+    opacity: 0.8;
+  }
+  
+  #light .settings .section-settings-left{
+    padding: 5px;
+    border: 2px solid var(--primary-color);
+    color: var(--dark-primary-color-light);
+  }
+  
+  #light .settings .section-settings-right{
+    padding: 5px;
+    border: 2px solid var(--primary-color);
+    border-left: 0px solid gray;
+    color: var(--dark-primary-color-light);
+  }
+  
+  #light .settings .section-settings{
+    padding: 5px;
+    border: 2px solid var(--primary-color);
+    border-left: 0px solid gray;
+    color: var(--dark-primary-color-light);
+  
+  }
+  
+  #light .settings .section-settings:hover{
+    transform: scale(1.06);
+    cursor: pointer;
+    border-left: 3px solid gray;
+    color: var(--color-light);
+    border-right: 3px solid gray;
+  }
+  #light .settings .section-settings-left:hover{
+    transform: scale(1.03);
+    cursor: pointer;
+    border-left: 2px solid var(--primary-color);
+    border-right: 3px solid gray;
+    color: var(--color-light);
+  }
+  #light .settings .section-settings-right:hover{
+    transform: scale(1.06);
+    cursor: pointer;
+    border-right: 2px solid var(--primary-color);
+    border-left: 4px solid gray;
+    color: var(--color-light);
+  }
+  
+  #light .settings .submit-settings-btn{
+    background-color: var(--primary-color);
+    font-weight: 400;
+    box-shadow: rgb(74, 74, 83);
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 5px;
+    color: black;
+    cursor: pointer;
+  }
+  
+  #light .settings input{
+    background-color: var(--primary-color-light);
+    color:var(--text-color);
+    font-weight: 400;
+    padding: 10px;
+    border: 1px solid var(--primary-color);
+    opacity: 0.8;
+  }
+  
+  #light .settings .manage-payment-button{
+    background-color: var(--primary-color);
+    padding: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    border: 2px solid black;
+  }
+  
+  #light .settings .manage-payment-button:hover{
+    background-color: var(--color-light);
+    padding: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: ease .1s;
+    transform: scale(1.06);
+  }
+  #light .settings .manage-payment-button:active{
+  
+    transition: ease .1s;
+    transform: scale(0.92);
+  }
+  
+  
+  
   
 
 

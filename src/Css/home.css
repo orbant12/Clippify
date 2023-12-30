@@ -1,5 +1,14 @@
 
 /*****************< 1.) Welcome Row >*******************/
+.home{
+  padding-left: 100px;
+  top: 0;
+  left: 350px;
+  width: 100%;
+  transition: all 0.3s ease;
+overflow: hidden;
+}
+
 .cloud{
     display: flex;
     flex-direction: column;
@@ -33,7 +42,10 @@
 /*****************< 3.) Cards >*******************/
 
 .home .folder-card-container {
-    margin: 0 auto 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
     width: 100%; 
 }
   
@@ -220,5 +232,178 @@ opacity: 0.8;
   display: inline;
 }
 
+/* ===== HOME ===== */
+
+/*DARK _ MODE*/
+#dark .home-card{
+  background-color: rgba(156, 255, 185, 0.45);
+}
+#dark .cloud-title{
+  color: var(--dark-text-color);
+}
+
+#dark .follow-title h1{
+color: var(--dark-text-color);
+}
+
+#dark .follow-row a:any-link{
+color: var(--dark-primary-color);
+}
 
 
+#dark .memory_title h2{
+  color: var(--dark-text-color);
+}
+#dark .memory_title h2 a{
+  color: var(--dark-text-color);
+}
+#dark .memory_title h2 a:hover{
+ color: var(--primary-color);
+}
+#dark .ag-courses-item_link{
+  border: 4px solid black;
+  border-top: 4px solid black;
+  border-bottom: 10px solid black;
+  border-right: 10px solid black;
+  border-radius: 20px;
+  background-color: var(--dark-primary-color-light);
+
+}
+#dark .ag-courses-item_link:hover,
+.ag-courses-item_link:hover .ag-courses-item_date {
+color: var(--dark-primary-color-light);
+}
+#dark .ag-courses-item_title{
+  color: var(--dark-text-color);
+}
+
+#dark .ag-courses-item_date-box h3{
+  color: var(--dark-text-color);
+}
+#dark .ag-folder-icon{
+    color: var(--dark-text-color);
+}
+#dark .ag-auto-sync{
+    color: var(--dark-text-color);
+}  
+#dark .auto-sync h6{
+   color: var(--dark-text-color);
+ }
+
+#dark  .no-folder{
+  color: var(--dark-text-color);
+  }
+#dark .no-folder a{
+    color: var(--dark-text-color);
+    }
+#dark .no-document{
+  color: var(--dark-text-color);
+}
+
+#dark .title-main{
+  color: var(--dark-text-color);
+}
+
+#dark .title-sub a{
+  color: var(--dark-primary-color);
+}
+#dark .title-sub{
+  color: var(--dark-text-color);
+}
+
+/*LIGHT _ MODE*/
+
+#light .home-card{
+  background-color: rgba(156, 255, 185, 0.45);
+}
+#light .cloud-title{
+  color: var(--text-color);
+}
+
+#light .follow-title h1{
+color: var(--dark-body-color);
+}
+
+#light .follow-row a:any-link{
+color: var(--primary-color);
+}
+#light .memory_title h2{
+  color: var(--text-color);
+}
+#light .memory_title h2 a{
+  color: var(--text-color);
+}
+#light .memory_title h2 a:hover{
+ color: var(--primary-color);
+}
+#light .ag-courses-item_link{
+  border: 2px solid black;
+  border-top: 2px solid black;
+  border-bottom: 8px solid black;
+  border-right: 8px solid black;
+  border-radius: 20px;
+  background-color: white;
+}
+#light .ag-courses-item_link:hover,
+.ag-courses-item_link:hover .ag-courses-item_date {
+color: var(--primary-color-light);
+}
+#light .ag-courses-item_title{
+  color: var(--text-color);
+}
+
+#light .ag-courses-item_date-box h3{
+  color: var(--text-color);
+}
+#light .ag-folder-icon{
+    color: var(--text-color);
+}
+#light .ag-auto-sync{
+    color: var(--text-color);
+}  
+#light .auto-sync h6{
+   color: var(--text-color);
+ }
+
+ #light  .no-folder{
+  color: var(--text-color);
+  }
+  #light .no-folder a{
+    color: var(--text-color);
+    }
+  #light .no-document{
+  color: var(--text-color);
+}
+
+#light .title-main{
+  color: var(--text-color);
+}
+
+#light .title-sub a{
+  color: var(--primary-color);
+}
+#light .title-sub{
+  color: var(--text-color);
+}
+
+
+@media (max-width: 768px) {
+  .home{
+    padding-left: 0px;
+    top: 0;
+    width: 100%;  
+    transition: all 0.3s ease;
+
+}
+
+.sidebar.close ~ .home{
+  left: 0px;
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+}
+.home .ag-format-container {
+  width: 100%;
+
+}
+}
