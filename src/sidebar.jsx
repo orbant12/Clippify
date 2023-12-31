@@ -5,6 +5,7 @@ import { useAuth } from './context/UserAuthContext';
 import {  doc, getDoc} from "firebase/firestore";
 import Avatar from '@mui/material/Avatar';
 import MenuIcon from '@mui/icons-material/Menu';
+import '../src/Css/sidebar.css'
 
 function SideBar({themeSwitch}) {
 
@@ -15,6 +16,8 @@ const [UserData, setUserData] = useState([]);
 
 //SIDEBAR TOGGLE
 const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+const [currentPath, setCurrentPath] = useState(window.location.pathname);
 
 useEffect(() => {
     const fetchData = async () => {
@@ -38,6 +41,7 @@ useEffect(() => {
     };
     // Call fetchData
     fetchData();
+    setCurrentPath(window.location.pathname);
 }, [currentuser]);
 
 //SIGN OUT
@@ -58,8 +62,8 @@ const barToggle = () => {
 
 return ( 
 
-<>
-    <div className='sidebaropener' >
+<div style={currentPath != "/landing" ?{}:{display:"none"}}>
+    <div className='sidebaropener'>
         <MenuIcon onClick={() => setIsSidebarOpen(!isSidebarOpen)} />
         <div className="sidebar" style={isSidebarOpen?{display:"block"}:null} >
         <header>
@@ -200,7 +204,7 @@ return (
             </div>
         </div>
     </nav>
-</>
+</div>
 
 )}
 

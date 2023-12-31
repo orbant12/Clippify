@@ -3,13 +3,14 @@ import React, { useState } from 'react'
 import { useAuth } from '../context/UserAuthContext'
 
 //CSS
+import '../Css/auth.css'
 import '../Css/login.css'
 
 //FIREBASE
 import { auth, db} from "../firebase";
 import { signInWithPopup, GoogleAuthProvider, sendPasswordResetEmail} from "firebase/auth";
 import { collection, doc, setDoc} from "firebase/firestore";
-
+import { Link } from 'react-router-dom';
 
 const SignIn = () => { 
 
@@ -114,74 +115,44 @@ const handleForgotPass = async() => {
 
 
 return(
-<div id='reg'>
-
-  <div id='login-mobile' style={{alignContent:"center"}}>
-    <h1>Clippify is Avalible on Pc or Laptop !!</h1>
-  </div>
-
-  <div className="container-auth"> 
-    <div className="forms">
-      <div className="form-content">
-        <div className="login-form">
-          <div className="title">Login</div>
-        
-          <form onSubmit={SubmitHandler} >
-            <div className="input-boxes">
-
-              <div className="input-box" id="userEmail2" >
-                <i className="fas fa-envelope"></i>
-                <input type="text" placeholder="Enter your email" name="email" value={user.email} onChange={UserHandler}   required/>
-              </div>
-
-              <div className="input-box" id="userPassword2">
-                <i className="fas fa-lock"></i>
-                <input type="password" placeholder="Enter your password" name="password" value={user.password} onChange={UserHandler} required/>
-              </div>
-
-              <div className="userRemember">
-                <label className="switch-remember">
-                  <input type="checkbox"/>
-                  <span className="slider-remember"></span>
-                </label>
-                <h4>Remember Me</h4>
-              </div>
-
-              <div className="text" onClick={handleForgotPass} >
-                <a href="#" >Forgot password?</a>
-              </div>
-              
-              <div className="button input-box">
-                <input  type="submit" />
-              </div>
-
-              <div style={{display:"none"}}  className="google-btn" onClick={googleSignIn}>
-                <div className="google-icon-wrapper">
-                  <img crossOrigin="anonymous" className="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
-                </div>
-                <p className="btn-text"><b>Sign in with Google</b></p>
-              </div>
-
-              <div style={{display:"none"}} className="apple-btn" id="btnApple">
-                <div className="apple-icon-wrapper">
-                  <img crossOrigin="anonymous" className="apple-icon" src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"/>
-                </div>
-                <p className="btn-text" ><b>Sign in with Apple</b></p>
-              </div>
-
-              <div className="text sign-up-text">Don't have an account?
-                <a href="/register">Sigup now</a>
-              </div>
-
-            </div>
-          </form>
-
+<div className='login-page'>
+  <div className='login-container'>
+    <div className='login-title'>
+      <h1>Sign in</h1>
+      <hr />
+    </div>
+    <div className='login-form'>
+      <form onSubmit={SubmitHandler}>
+        <div className='login-input'>
+          <input
+            type='email'
+            name='email'
+            placeholder='Email'
+            value={user.email}
+            onChange={UserHandler}
+          />
         </div>
-
-      </div>
+        <div className='login-input'>
+          <input
+            type='password'
+            name='password'
+            placeholder='Password'
+            value={user.password}
+            onChange={UserHandler}
+          />
+        </div>
+        <div className='login-input'>
+          <button type='submit'>Sign in</button>
+        </div>
+      </form>
+    </div>
+    <div className='login-bottom'>
+      <h6>Not a user yet ? <a href='/register'>Register</a></h6>
     </div>
   </div>
-
+  <Link to={"/support/contact-us"} style={{marginTop:20}}> 
+      <h6 style={{fontSize:12}}>Contact / Support</h6>
+  </Link>
 </div>
 )};
 

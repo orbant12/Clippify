@@ -18,7 +18,6 @@
 .file-map{
   width: 80%;
   height: 200px;
-  border: 1px solid black;
   margin-top: 50px;
   margin-left: auto;
   margin-right: auto;
@@ -26,6 +25,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   transition: ease .2s;
   background-color: rgba(252, 252, 252, 0.5); 
   backdrop-filter: blur(10px); /* Adjust the blur amount as needed */
@@ -56,7 +56,8 @@
   flex-direction: column;
   justify-content: space-between;
   text-align: left;
-  width: 100%;
+  min-width: 100px;
+  width: 80%;
   margin: 20px;
 }
 .related-video{
@@ -123,14 +124,7 @@
   padding-top: 20px;
 }
 
-.file-map{
-  border: 4px solid black;
-  border-top: 4px solid black;
-  border-bottom: 10px solid black;
-  border-right: 10px solid black;
-  background-color: rgba(110, 108, 108, 0.5); 
-  backdrop-filter: blur(10px); /* Adjust the blur amount as needed */
-}
+
 
 .file-map:hover{
   background-color: black;
@@ -191,12 +185,11 @@ color: var(--dark-text-color);
 }
 
 #dark .file-map{
-  border: 4px solid black;
-  border-top: 4px solid black;
-  border-bottom: 10px solid black;
-  border-right: 10px solid black;
-  background-color: rgba(110, 108, 108, 0.5); 
-  backdrop-filter: blur(10px); /* Adjust the blur amount as needed */
+  border: 2px solid black;
+  border-top: 3px solid black;
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+  background-color: var(--dark-primary-color-light);
 }
 
 #dark .file-map:hover{
@@ -414,12 +407,11 @@ color: var(--text-color);
 }
 
 #light .file-map{
-  border: 2px solid black;
-  border-top: 2px solid black;
-  border-bottom: 8px solid black;
-  border-right: 8px solid black;
-  background-color: white; 
-  backdrop-filter: blur(10px); /* Adjust the blur amount as needed */
+  border: 2px groove var(--primary-color);
+  border-top: 1px solid var(--primary-color);
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  box-shadow: 0px 10px 8px #999;
 }
 
 #light .file-map:hover{

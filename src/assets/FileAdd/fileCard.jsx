@@ -19,7 +19,7 @@ const FileCard = ({
       <div className="related-video-cont">
         <div className="related-video">
       <VideoLibraryIcon/>
-        <h5>{related_count} Related Video's</h5>
+        <h5>{related_count}</h5>
         </div>
         <h5 className="storage-take-number">{(video_size / 1000000).toFixed(2)} Mb</h5>
       </div>

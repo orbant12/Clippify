@@ -1,9 +1,14 @@
 
+a{
+    text-decoration: none;
+}
+
 .landing-page{
   z-index: 9999;
   width: 100%;
   height: 100%;
   background-color: white;
+  overflow: hidden;
 }
 
 #welcome-page{
@@ -14,7 +19,8 @@
   margin-left: auto;
   justify-content: center;
   background:white;
-  margin-bottom: 50px;
+  margin-bottom: 100px;
+  margin-top: 100px;
   padding-top: 88px;
 }
 
@@ -402,10 +408,10 @@
 #usecase{
     width: 100%;
     background: #61ffdf;
-    height: 250px;
+    height: 200px;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
 }
 
 #usecase2{
@@ -413,33 +419,22 @@
     background: #61ffdf;
     height: 250px;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
+
+    justify-content: center;
 }
 
-.usecase-type a{
-
-    font-weight: 500;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    margin-top: 15px;
-    width: 200px;
-
-  
-}
-.usecase-type{
-
-
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  text-align: center;
-  width: 300px;
+.usecase-type h5{
+  font-size: 15px;
+  font-weight: 600;
+  opacity: 0.8;
   background-color: #fff;
+  padding: 10px;
   border-radius: 8px;
-  height: 50px;
+}
 
+.usecase-type{
+  text-align: center;
 }
 
 .usecase-type:hover{
@@ -473,32 +468,42 @@
 }
 
 .block{
-    display: grid;
-    grid-template-columns: 1fr 1fr ;
-    padding-left: 100px;
-    padding-top: 110px;
+    display: flex;
+    flex-direction:column;
+    width: 100%;
   
+}
+
+.block-title{
+    font-size: 20px;
+    width: 100%;
+    padding-left: 10px;
+    font-weight: 600;
+    opacity: 0.8;
 }
 
 .block2{
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   z-index: 999;
-  padding-left: 100px;
-  width: 100%;
-  padding-top: 110px;
+  margin-right: auto;
+  margin-left: auto;
+
+
 }
 .echo-for-container{
     display: flex;
     flex-direction: row;
-    margin-top: -30px;
+    margin-right: auto;
+    margin-left: auto;
+
 }
 
 .echo-for{
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
   height: 110px;
   padding-right: 30px;
 }
@@ -510,24 +515,6 @@
     
  
 }
-
-.cloud_sync{
-    display: grid;
-    grid-template-columns: 1fr;
-    align-items: center;
-    text-align: center;
-    margin-top: -50px;
-    padding-left: 300px;
-}
-
-.cloud_sync h4{
-    text-align: center;
-    display: inline-flex;
-    padding-top: 20px;
-    margin-left: -45px;
-}
-
-
 
 /*Pricing*/
 
@@ -1117,4 +1104,68 @@ ul{
     border-radius: 20px;
     position: relative;
   }
+  .welcome-text h2{
+    color: black;
+    background-image: linear-gradient(180deg, black ,  #61ffdf);
+    -webkit-background-clip: text;
+    color: transparent;
+    font-weight: 600;
+    font-size: 18px;
+  
+  }
+  
+  .welcome-text h3{
+    color: black;
+    background-image: linear-gradient(180deg, black ,  #61ffdf);
+    -webkit-background-clip: text;
+    color: transparent;
+    font-weight: 600;
+    font-size: 18px;
+  }
+  
+  .welcome-text h6{
+    width: 60%;
+    padding-top: 20px ;
+    color: gray;
+    text-align: center;
+    font-size: 6px;
+  }
+  
+  .w_text_animated{
+    background: linear-gradient(180deg, black ,  #61ffdf);
+    color: transparent;
+    -webkit-text-stroke: 1px #2b3f2f;
+    background-image:  url(../assets/Images/back.png);
+    -webkit-background-clip: text;
+    background-position: 0 0;
+    animation: back 20s linear infinite;
+    padding-left: 10px;
+    font-size: 18px;
+  }
+  .welcome-text{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding-top: 0px;
+    margin-top: -50px;
+    margin-bottom: -50px;
+  }
+  .block{
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  
+}
+.usecase-type h5{
+  font-size: 10px;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+}
+
 }

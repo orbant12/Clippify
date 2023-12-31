@@ -3,7 +3,7 @@ import "../Css/login.css"
 import "../Css/style.css"
 import "../Css/styles.css"
 //REACT
-import React, {useState} from "react"
+import React, {useState,useEffect} from "react"
 //ASSETS AND IMAGES AND ICONS
 import AnualSwitch from "../assets/Pricing/anualSwitch"
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
@@ -31,41 +31,52 @@ const [isYearlyOn, setIsYearlyOn] = useState(false);
 
 //<******************************FUNCTIONS*******************************>
 
-const startClippify = () => {
-   window.location.href = "/login"
-}
+
+const [isActive, setIsActive] = useState(false);
+
+ const handleBurgerMenuOpen2 = () => {
+   setIsActive(!isActive);
+   
+ }
+ 
+ const handleBurgerMenuClose2 = () => {
+   setIsActive(!isActive);
+ }
+ 
+
 
 return(
 <div className="landing-page">
    {/*NAV HEADER*/}
-   <nav>
-    <div className={`nav-bar`}>
-      <i className='bx bx-menu sidebarOpen'/>
-      <span className="logo navLogo"><a href="/">Clippify</a></span>
-      <div className="menu">
-        <div className="logo-toggle">
-          <span className="logo"><a href="#">SurferSoftware</a></span>
-          <i className='bx bx-x siderbarClose'></i>
+   <nav className={isActive ? "active":""}>
+    <div className="nav-bar active">
+      <i className='bx bx-menu sidebarOpen' onClick={handleBurgerMenuOpen2}/>
+      <span className="logo navLogo"><a style={{marginRight:20,fontWeight:600,color:"black",opacity:0.6}} href="/">Clippfiy</a></span>
+      <div className="menu show">
+        <div className="logo-toggle ">
+          <span className="logo"><a href="#">Clippify</a></span>
+          <i className='bx bx-x siderbarClose' onClick={handleBurgerMenuClose2}></i>
         </div>
         <ul className="nav-links">
           <li><a href="/">Home</a></li>
-          <li><a  href="/about-me">About</a></li>
-          <li><a href="/portfolio">Portfolio</a></li>
-          <li><a href="/services">Services</a></li>
-          <li><a href="/contact">Contact</a></li>
+          <li><a  href="#clipping">Features</a></li>
+          <li><a href="/portfolio">Policies</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="/support/contact-us">Contact</a></li>
         </ul>
       </div>
       <div className="darkLight-searchBox">
-        <div className="dark-light">
-          <Link to={"https://www.upwork.com/freelancers/~019974bc76858e091b"}>
-            <i className='bx bx-cart moon'></i>
+   
+          <Link style={{color:"black",paddingTop:5,position:"absolute",right:20}} to={"/login"}>
+            <h6 style={{border:"2px solid black",borderRadius:20,padding:8,fontSize:10,backgroundColor:"white",fontWeight:600}}>Try for Free</h6>
           </Link>
           
-        </div>
 
       </div>
     </div>
   </nav>
+        
+
 
    {/*1Row*/}
    <section id="welcome-page" >
@@ -87,7 +98,8 @@ return(
    {/*3Row*/}
    <section id="usecase2">
       <div className="block2">
-         <h1>Approved and Used by</h1>
+         <h1 style={{fontWeight:600}}>More Then 100 + Users</h1>
+         <h3 style={{opacity:0.6,fontSize:10}}>Join The Community</h3>
       </div>
    </section>
 
@@ -130,32 +142,32 @@ return(
    {/*5Row*/}
    <section id="usecase">
       <div className="block">
-         <h1>Clippify is best for Saving :</h1>
+         <h1 className="block-title">Clippify is best for Saving :</h1>
          <div className="echo-for-container">
             <div className="echo-for">
                <div className="usecase-type">
-                  <a href="#" >
+                 
                      <h5>Students</h5>
-                  </a>
+              
                </div>
 
                <div className="usecase-type">
-                  <a href="#" >
+               
                      <h5>Content Creators</h5>
-                  </a>
+               
                </div>
             </div>
 
             <div className="echo-for">
                <div className="usecase-type">
-                  <a href="#" >
-                     <h5>Idea / Inspiration Hunters</h5>
-                  </a>
+             
+                     <h5>Idea / Inspiration </h5>
+          
                </div>
                <div className="usecase-type">
-                  <a href="#" >
+               
                      <h5>Podcast Listeners</h5>
-                  </a>
+         
                </div>
             </div>
          </div>
@@ -204,7 +216,7 @@ return(
       <div style={{marginRight:"auto",marginLeft:"auto",marginBottom:-50}} >
           <h1 style={{fontSize:40,fontWeight:600}}>Pricing</h1>
       </div>
-      <div className='s-bar' style={{marginRight:"auto",marginLeft:"auto"}}>
+      <div id="pricing" className='s-bar' style={{marginRight:"auto",marginLeft:"auto"}}>
          <div className='sub-box'>
                <div className='box-title'>
                   <h3 className='title-tag'>Basic</h3>

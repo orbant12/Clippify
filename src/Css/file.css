@@ -12,8 +12,6 @@
   position: absolute;
   left: 30px;
   top: 70px;
-
-  
 }
 .zero_bar-row2{
   position: absolute;
@@ -1354,9 +1352,6 @@ padding: 10px;
 
 #dark  .avatar.chatgpt {
   background-color: var(--dark-primary-color);
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
 }
 
 #dark .first_bar-tag-label{
@@ -1376,7 +1371,7 @@ padding: 10px;
   background: var(--primary-color-light);
   border: 2px solid black;
   border-bottom:  3px solid black;
-  margin-bottom: 0px;
+
 }
 
 #light .toolbar .toolbar-item:hover:not([disabled]) {
@@ -1421,9 +1416,6 @@ padding: 10px;
   
 #light  .avatar.chatgpt {
   background-color: var(--primary-color);
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
 }
   
 #light .first_bar-tag-label{

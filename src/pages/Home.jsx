@@ -122,13 +122,13 @@ return (
       <h2 className='cloud-title'>Cloud Storage</h2>
     </div>
   </div>
-
+<hr />
     {/*RECENTLY ADDED*/}
     <div className="memory_title">
       <h2>Recently Openned</h2>
     </div>
     <div className="folder-card-container">
-      <div className="ag-courses_box2">
+   
         {/*ADDED DOCUMENT*/}
         {recentFiles.length === 0 ? (
           <div className="no-document">No Recent Clips's added</div>
@@ -145,7 +145,7 @@ return (
           </Link>
         )}
       </div>
-    </div>
+    <hr />
     {/*FODLER ADDED*/}
     <div className="memory_title" >
       <h2>Your Memory</h2>
