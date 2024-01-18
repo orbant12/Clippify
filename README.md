@@ -66,18 +66,25 @@ Welcome to Clippify, a comprehensive and multifaceted project that showcases my 
 ### 1. FFMPEG Syntax and Media Manipulation
 
 [Include a brief description of how FFMPEG was used in your project and the specific functionalities it provides.]
+Code Here : https://github.com/orbant12/Node-Express-Clippify/blob/main/src/assets/videoTrim/videoApp.jsx
+All Video Trimming Components : https://github.com/orbant12/Node-Express-Clippify/tree/main/src/assets/videoTrim
 
 ### 2. Self-trained Neural Network for Video Transcript Extraction
 
 [Provide an overview of the neural network you built, its architecture, and how it is utilized for video transcript extraction.]
+Jupiter Notebook: https://github.com/orbant12/Automatic_Speech_Recognition-CNN
 
 ### 3. OpenAI API Implementation
 
 [Explain the integration of the OpenAI API and how it enhances the project's capabilities, particularly in the development of the ChatBot.]
+Code Here: https://github.com/orbant12/Node-Express-Clippify/blob/main/functions/src/index.ts
 
 ### 4. Authentication and User Data Flow with Firebase
 
 [Detail the implementation of user authentication and data flow using Firebase, emphasizing security measures and user management.]
+Context: https://github.com/orbant12/Node-Express-Clippify/blob/main/src/context/UserAuthContext.jsx
+Login: https://github.com/orbant12/Node-Express-Clippify/blob/main/src/pages/SignIn.jsx
+Registration: https://github.com/orbant12/Node-Express-Clippify/blob/main/src/pages/Login.jsx
 
 ### 5. Live Database with Firebase Changes on Snapshot
 
@@ -86,18 +93,23 @@ Welcome to Clippify, a comprehensive and multifaceted project that showcases my 
 ### 6. Lexical Editor for Rich Text Editor State Management
 
 [Discuss the purpose and functionality of the lexical editor, emphasizing its role in managing rich text editor states.]
+Code Here: https://github.com/orbant12/Node-Express-Clippify/blob/main/src/assets/File/txtEditor/txtEditor.jsx
 
 ### 7. Stripe API Integration
 
 [Provide insights into the integration of the Stripe API, its setup, and how it facilitates payment processing and information storage.]
+Code Here: https://github.com/orbant12/Node-Express-Clippify/tree/main/src/assets/Subscription
 
 ### 8. CSS Styling
 
 [Provide insights into the integration of the Stripe API, its setup, and how it facilitates payment processing and information storage.]
+Code Here : https://github.com/orbant12/Node-Express-Clippify/tree/main/src/Css
+Theme Switch: https://github.com/orbant12/Node-Express-Clippify/blob/main/src/App.jsx
 
 ### 9. Own Policies and Terms of Use
 
 [Explain the development and implementation of custom policies and terms of use, underlining the commitment to legal and ethical standards.]
+Code Here: https://github.com/orbant12/Node-Express-Clippify/tree/main/src/pages/Policies
 
 ---
 
