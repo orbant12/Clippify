@@ -123,19 +123,12 @@ Implemented secure user authentication and managed data flow using Firebase, ens
 
 ## Usage and Demos
 
-[Include examples, screenshots, or links to demos that showcase the various features and functionalities of your project.]
+1. **You can access the software:**
+- https://clippify.net
+- https://github.com/orbant12/Node-Express-Clippify.git
 
----
-
-## Contributing
-
-[Specify guidelines for contribution, if applicable. Include information on how others can contribute to the project.]
-
----
-
-## License
-
-[Specify the project's license information. Include details on how the code can be used, modified, and distributed.]
+2. **You will need:**
+- Create a Clippify Account
 
 ---
 
