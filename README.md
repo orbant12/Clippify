@@ -1,6 +1,4 @@
-# Project README
-
-## Clippify Overview
+# Clippify README
 
 Welcome to Clippify, a comprehensive and multifaceted project that showcases my mastery of various technologies and skills relevant to the tech industry. This README is designed to provide a detailed insight into the key components and accomplishments of this project, specifically tailored for a tech job recruiter.
 
@@ -27,15 +25,17 @@ Welcome to Clippify, a comprehensive and multifaceted project that showcases my 
 
 ## Technologies Used
 
-- FFMPEG
+- FFmpeg
+- REACT
+- Python
 - TensorFlow
 - Numpy
-- Flask
-- OpenAI API
-- Firebase
+- Pandas
 - Stripe API
-- CSS
-- REACT
+- OpenAI API
+- Firebase Firestore
+- Firebase Authentication
+- Firebase Storage
   
 ---
 
@@ -43,7 +43,7 @@ Welcome to Clippify, a comprehensive and multifaceted project that showcases my 
 
 1. **Mastery of FFMPEG Syntax:** Proficient in manipulating media files (mp3, mp4, blob, blob64, URL, data URL) using FFMPEG, showcasing a deep understanding of multimedia processing.
 
-2. **Self-trained Neural Network for Video Transcript Extraction:** Built a neural network using TensorFlow and Numpy for video transcript extraction, demonstrating expertise in machine learning and natural language processing.
+2. **Self-trained Neural Network for Video Transcript Extraction:** Built a Convolutional Neural Network using TensorFlow, Numpy, Pandas for video transcript extraction, demonstrating expertise in machine learning and natural language processing.
 
 3. **OpenAI API Implementation:** Successfully integrated the OpenAI API to create a ChatBot, showcasing proficiency in leveraging external APIs for advanced functionality.
 
@@ -101,9 +101,25 @@ Welcome to Clippify, a comprehensive and multifaceted project that showcases my 
 
 ---
 
-## Getting Started
+## Problems and Solutions
 
-[Include instructions on how to clone, install, and set up the project locally. Provide any prerequisites and configuration steps.]
+1. **ASR Network only accept mp3 / wav files:** To solve this problem, I needed to convert a copy of the mp4 to mp3 and upload it to the storage as two seperate files with the same ID (ID.mp4, ID.mp3). For this solution I have made the storage architecture so every user has his own file named with his UID with these inside - userID/FolderID/FileID/ where ID.mp4, ID.mp3, ID.transcript will take place.
+
+2. **CORS Isolation for SharedArrayBuffer:** After considering the limitations, I have decided to use CORS Isolation to be able to use FFmpeg for trimming, converting, timeline bar and thubnail extraction.
+
+3. **CORS Isolated Storage Access:** Google Console
+
+4. **Rich Text Editor State Extraction for Cross Platform Accessability:** Implemented secure user authentication and managed data flow using Firebase, ensuring a robust and scalable user management system.
+
+5. **:** Developed a dynamic system that reflects real-time changes in the Firebase database, demonstrating skills in live data synchronization.
+
+6. **Lexical Editor for Rich Text Editor State Management:** Created a lexical editor for managing rich text editor states, showcasing expertise in front-end development and state management.
+
+7. **Stripe API Integration:** Implemented Stripe API for payment processing, including setup, proper JSON data fetching, and secure storage of payment information for features like invoices, prices, and subscription states.
+
+8. **Plain CSS Styling: ** Each Page has its own .css file, layout, and position made with flexbox, components styling written inside the page where the component is placed, there are two types of color themes. (#dark, #light) 
+
+10. **Own Policies and Terms of Use:** Drafted and implemented custom policies and terms of use, highlighting a commitment to legal and ethical considerations in software development.
 
 ---
 
