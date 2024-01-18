@@ -127,7 +127,7 @@ return (
     <div className="memory_title">
       <h2>Recently Openned</h2>
     </div>
-    <div className="folder-card-container">
+    <div className="folder-card-container" style={{padding:50}}>
    
         {/*ADDED DOCUMENT*/}
         {recentFiles.length === 0 ? (

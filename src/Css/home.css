@@ -58,6 +58,7 @@
     align-items: left;
     justify-content: center;
     width: 100%; 
+    
 }
   
 .folder-card-box {
@@ -253,6 +254,11 @@ opacity: 0.8;
   color: var(--dark-text-color);
 }
 
+#dark .cloud h5{
+  color: var(--dark-text-color);
+  opacity: 0.6;
+}
+
 #dark .follow-title h1{
 color: var(--dark-text-color);
 }
@@ -322,12 +328,25 @@ color: var(--dark-primary-color-light);
   color: var(--dark-text-color);
 }
 
+#dark .welcome-row div h1{
+  color: white;
+}
+
+#dark .welcome-row div h6{
+  opacity: 0.5;
+  color: white;
+}
+
 /*LIGHT _ MODE*/
 
 #light .home-card{
   background-color: rgba(156, 255, 185, 0.45);
 }
 #light .cloud-title{
+  color: var(--text-color);
+}
+
+#light .cloud h6{
   color: var(--text-color);
 }
 

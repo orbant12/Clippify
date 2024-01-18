@@ -24,7 +24,7 @@ const FileCard = ({
         <h5 className="storage-take-number">{(video_size / 1000000).toFixed(2)} Mb</h5>
       </div>
      
-      <h5 style={{color:"black"}}>Tag: {tags}</h5>
+      <h5 >Tag: {tags}</h5>
     </div>
   </div>
   );

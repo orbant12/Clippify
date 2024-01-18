@@ -1335,13 +1335,16 @@ padding: 10px;
 }
 #dark .subtitle{
   color: var(--dark-text-color);
+  font-size: 15px;
 }
 
 #dark .sub-tag{
     color: var(--dark-text-color);
+    font-size: 10px;
 }
 #dark .sec_bar-clip-duration{
     color: var(--dark-text-color);
+    font-size: 10px;
 }
 
 #dark .chat-message.chatgpt{
@@ -1396,13 +1399,16 @@ padding: 10px;
 
 #light .subtitle{
   color: var(--text-color);
+  font-size: 15px;
 }
 
 #light .sub-tag{
   color: var(--text-color);
+  font-size: 10px;
 }
 #light .sec_bar-clip-duration{
   color: var(--text-color);
+  font-size: 10px;
 }
 
 #light .folder-input-change{
