@@ -23,15 +23,14 @@ useEffect(() => {
         try {
             if (currentuser) {
                 const currentUserId = currentuser.uid;
-                const response = await fetch(`http://localhost:3000/user/${currentUserId}/documents`, {
-                    method: 'POST',
+                //FETCH USER DATA
+                const response = await fetch(`http://localhost:3000/user/${currentUserId}`, {
+                    method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ id:currentUserId }),
                 });
                 const user = await response.json();
-    
                 if (user) {
                     setUserData(user);
                 } else {
@@ -46,28 +45,14 @@ useEffect(() => {
     // Call fetchData
     fetchData();
     setCurrentPath(window.location.pathname);
+    console.log(currentuser)
 }, [currentuser]);
+
 
 //SIGN OUT
 const userSignOut = async() => {
-    try {
-        const response = await fetch('http://localhost:3000/logout', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-        if (response.ok) {
-            const user = await response.json();
-            setUserData(user);
-            console.log('User logout successfully:', user);
-        } else {
-            const error = await response.json();
-            console.error('Logout failed:', error);
-        }
-    } catch (error) {
-        console.log(error)
-    }
+    signOut(auth);
+    console.log("logged out")
 };
 
 //SideBr toggle

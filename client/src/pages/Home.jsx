@@ -2,9 +2,8 @@
 import React, { useState, useEffect  } from 'react';
 import { useAuth } from '../context/UserAuthContext'
 import { Link } from 'react-router-dom';
-//FIREBASE
-import { collection, doc, getDocs,query,limit,getDoc} from 'firebase/firestore';
-import { db } from "../firebase";
+
+
 //CSS
 import '../Css/styles.css'
 import '../Css/sidebar.css'
@@ -16,10 +15,6 @@ import FileCard from '../assets/FileAdd/fileCard.jsx'
 import SnippetFolderIcon from '@mui/icons-material/SnippetFolder';
 import CloudSyncIcon from '@mui/icons-material/CloudSync';
 import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import YouTubeIcon from '@mui/icons-material/YouTube';
-import ScreenshotIcon from '@mui/icons-material/Screenshot';
-import TwitterIcon from '@mui/icons-material/Twitter';
 
 
 export function Home({folderUrl}) {
@@ -39,38 +34,45 @@ const [userData, setUserData] = useState([]);
 
 //UPDATES DEPENDING ON USER "FILE-Storage" DOCS
 useEffect(() => {
-  if (!currentuser) {
-    setFolders([]);
-    console.log("No user logged in");
-    return;
-  }
-  // USER ID & FIRESTORE REF
-  const currentUserId = currentuser.uid;
-  console.log(currentUserId)
-  const colRef = collection(db, "users", currentUserId, "File-Storage");
-  // Fetch all documents (folders) in the subcollection
-  getDocs(colRef)
-    .then((querySnapshot) => {
-      const userFolders = [];
-      querySnapshot.forEach((doc) => {
-        userFolders.push({ id: doc.id, ...doc.data() });
-      });
-    setFolders(userFolders);
+  const fetchUserFolder = async () => {
+    if (!currentuser) {
+      setFolders([]);
+      console.log("No user logged in");
+      return;
+    }
+    // USER ID & FIRESTORE REF
+    const currentUserId = currentuser.uid;
+    //const colRef = collection(db, "users", currentUserId, "File-Storage");
+  const folderResponse = await fetch(`http://localhost:3000/folder/${currentUserId}`,{
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
     })
-    .catch((error) => {
-      console.error("Error fetching user folders: ", error);
-    });
+    if (folderResponse.status === 200) {
+      // Document exists, retrieve its data
+      const folderData = await folderResponse.json();
+      setFolders(folderData);
+    } else {
+      console.log("Document does not exist.");
+      setFolders([]); // Set to null or handle accordingly
+    }   
+  }
     //FETCH USER DATA
-    const fetchData = async () => {
+  const fetchData = async () => {
       try {
         if (currentuser) {
           const currentUserId = currentuser.uid;
-          const userDocRef = doc(db, "users", currentUserId);
-          const docSnapshot = await getDoc(userDocRef);
-          if (docSnapshot.exists()) {
-            // Document exists, retrieve its data
-            const elementData = docSnapshot.data();
-            setUserData(elementData);
+          //const userDocRef = doc(db, "users", currentUserId);
+          const response = await fetch(`http://localhost:3000/user/${currentUserId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+          });
+          const user = await response.json();
+          if (user) {
+            setUserData(user);
           } else {
             console.log("Document does not exist.");
             setUserData(null); // Set to null or handle accordingly
@@ -79,9 +81,10 @@ useEffect(() => {
       } catch (error) {
         console.error("Error getting document: ", error);
       }
-    };
-    // Call fetchData
-    fetchData();
+  };
+  // Call fetchData
+  fetchData();
+  fetchUserFolder();
 }, [currentuser]);
 
 //RECENTLY ADDED
@@ -90,11 +93,19 @@ useEffect(() => {
     try{
       if (userData !== null) {
         const fileChildrenRef = userData.recent;
+        //MAKING FOLDER URL ID GLOBAL
         folderUrl(userData.folder_id)
-        const docSnapshot = await getDoc(fileChildrenRef)
-        if (docSnapshot.exists()) {
+        //FETCHIN FOR RECENT FILE
+        const response =  await fetch(`http://localhost:3000/recent`, {
+            method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ fileChildrenRef }),
+        });
+        if (response.status === 200) {
           // Document exists, retrieve its data
-          const elementData = docSnapshot.data();
+          const elementData = await response.json();
           setRecentFiles(elementData);
           console.log(elementData.folder_id)
           folderUrl(elementData.folder_id)
