@@ -3,14 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/UserAuthContext';
 import { Link } from 'react-router-dom';
 
-// FIRESTORE
-import { collection, doc, setDoc, getDocs } from 'firebase/firestore';
-import { db } from '../firebase';
-
 // CSS
-
 import '../Css/memory.css';
-
 
 // ICONS
 import SnippetFolderIcon from '@mui/icons-material/SnippetFolder';
@@ -33,26 +27,35 @@ const [isPlusClicked, setIsPlusClicked] = useState(false);
 
 //<******************************FUNCTIONS*******************************>
 
+//FETCH USER SPECIFIC FOLDER
+const fetchUserFolder = async () => {
+  if (!currentuser) {
+    setFolders([]);
+    console.log("No user logged in");
+    return;
+  }
+  // USER ID & FIRESTORE REF
+  const currentUserId = currentuser.uid;
+  //const colRef = collection(db, "users", currentUserId, "File-Storage");
+const folderResponse = await fetch(`http://localhost:3000/folder/${currentUserId}`,{
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+  if (folderResponse.status === 200) {
+    // Document exists, retrieve its data
+    const folderData = await folderResponse.json();
+    setFolders(folderData);
+  } else {
+    console.log("Document does not exist.");
+    setFolders([]); // Set to null or handle accordingly
+  }   
+}
+
 // UPDATES DEPENDING ON USER "FILE-Storage" DOCS.
 useEffect(() => {
-  if (currentuser) {
-    // USER ID & FIRESTORE REF
-    const currentUserId = currentuser.uid;
-    const colRef = collection(db, 'users', currentUserId, 'File-Storage');
-
-    // GET ALL FOLDERS
-    getDocs(colRef)
-      .then((querySnapshot) => {
-        const userFolders = [];
-        querySnapshot.forEach((doc) => {
-          userFolders.push({ id: doc.id, ...doc.data() });
-        });
-        setFolders(userFolders);
-      })
-      .catch((error) => {
-        console.error('Error fetching user folders: ', error);
-      });
-  }
+  fetchUserFolder();
 }, [currentuser]);
 
 // SETDOCS DETAILS.
@@ -60,22 +63,32 @@ function addFolder() {
   if (currentuser) {
     // USER ID & FIRESTORE REF
     const currentUserId = currentuser.uid;
-    const docRef = collection(db, 'users', currentUserId, 'File-Storage');
-    const newFolderRef = doc(docRef);
+    //CUSTOM FOLDER NON STRING UID
+    const folderUID = Math.random().toString(36).substring(2, 15);
+    //const docRef = collection(db, 'users', currentUserId, 'File-Storage');
     // CREATED FOLDER DETAILS
     const newFolder = {
       title: folderTitle,
       color: folderColor,
-      id: newFolderRef.id,
+      id: folderUID,
       files_count: 0,
     };
-    // SET FOLDER DETAILS TO FIRESTORE
-    setDoc(newFolderRef, newFolder).then(() => {
-      setFolders((currentFolders) => [
-        ...currentFolders,
-        { id: newFolderRef.id, ...newFolder },
-      ]);
-    });
+    // HTTP POST
+    fetch(`http://localhost:3000/folder-create/${currentUserId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({folderData:newFolder,folderId:folderUID}),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        alert("Folder Added Successfully")
+        fetchUserFolder();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 }
 
