@@ -43,7 +43,7 @@ useEffect(() => {
     // USER ID & FIRESTORE REF
     const currentUserId = currentuser.uid;
     //const colRef = collection(db, "users", currentUserId, "File-Storage");
-  const folderResponse = await fetch(`http://localhost:3000/folder/${currentUserId}`,{
+  const folderResponse = await fetch(`http://localhost:3000/user/folder/${currentUserId}`,{
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

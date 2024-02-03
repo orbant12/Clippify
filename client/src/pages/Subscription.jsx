@@ -14,8 +14,8 @@ import { getCheckoutUrl,getPortalUrl } from "../assets/Subscription/checkOutUrl"
 import '../Css/pricing.css';
 
 //FIREBASE
-import { app,db } from "../firebase";
-import {  doc, getDoc} from "firebase/firestore";
+import { app } from "../firebase";
+
 
 
 const Subscription = () =>{
@@ -84,20 +84,24 @@ useEffect(() => {
         try {
             if (currentuser) {
                 const currentUserId = currentuser.uid;
-                const userDocRef = doc(db, "users", currentUserId);
-                const docSnapshot = await getDoc(userDocRef);
-                if (docSnapshot.exists()) {
-                    // Document exists, retrieve its data
-                    const elementData = docSnapshot.data();
-                    setUserData(elementData);
+                //FETCH USER DATA
+                const response = await fetch(`http://localhost:3000/user/${currentUserId}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+                const user = await response.json();
+                if (user) {
+                    setUserData(user);
                 } else {
                     console.log("Document does not exist.");
                     setUserData(null); // Set to null or handle accordingly
-                };
-            }
+                }
+            } 
         } catch (error) {
-        console.error("Error getting document: ", error);
-        };
+            console.error("Error getting document: ", error);
+        }
     };
     fetchData();
 }, [currentuser]);
@@ -217,7 +221,7 @@ return(
 
                     <div className='sub-btn'>
                         <div className='btn-box'>
-                            <h3 className='btn-txt' onClick={upgradeToYearly}>Get Professional</h3>
+                            <h3 className='btn-txt' onClick={upgradeToMonthly}>Get Professional</h3>
                         </div>
                         <div className='price'>
                             <h3>10$ / Monthly</h3>
