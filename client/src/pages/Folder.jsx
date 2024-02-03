@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useAuth } from '../context/UserAuthContext';
 //FIREBASE
-import { collection, deleteDoc, doc, getDoc, getDocs, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
+import { getFirestore, collection, doc, updateDoc, setDoc, deleteDoc } from 'firebase/firestore';
 import { deleteObject, getDownloadURL, ref, uploadBytes, uploadString } from 'firebase/storage';
 import { v4 } from "uuid";
 import { app, storage } from "../firebase";
@@ -125,58 +125,40 @@ const fetchData = async () => {
   };
 };
 
-//USEEFFECT TO FETCH ELEMENTS
-useEffect(() => {
-  //UPDATES DISPLAY DEPENDING ON USER "FILE-Storage" DOCS
+//FETCH FILES IN FOLDER
+const fetchUserFolder = async () => {
   if (!currentuser) {
-    // No user is logged in, clear the folders
     setUserFile([]);
+    console.log("No user logged in");
     return;
-  };
-  //USER ID & STORAGE REF
-  const currentUserId = currentuser.uid;
-  const urlID = id; 
-  const colRef = collection(db, "users", currentUserId, "File-Storage",urlID,"Files");
-  //FETCH AND DISPLAY FOLDER ELEMENTS
-  getDocs(colRef)
-  .then((querySnapshot) => {
-    const userFiles = [];
-    querySnapshot.forEach((doc) => {
-        userFiles.push({ id: doc.id, ...doc.data() });
-    });
-    setUserFile(userFiles);
-  })
-  .catch((error) => {
-    console.error("Error fetching user folders: ", error);
-  });
-  const fetchUserFolder = async () => {
-    if (!currentuser) {
-      setFolders([]);
-      console.log("No user logged in");
-      return;
-    }
-    // USER ID & FIRESTORE REF
-    const currentUserId = currentuser.uid;
-    //const colRef = collection(db, "users", currentUserId, "File-Storage");
-  const folderResponse = await fetch(`http://localhost:3000/folder/file`,{
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ userId: currentUserId, folderId: urlID}),
-    })
-    if (folderResponse.status === 200) {
-      // Document exists, retrieve its data
-      const folderData = await folderResponse.json();
-      setFolders(folderData);
-    } else {
-      console.log("Document does not exist.");
-      setFolders([]); // Set to null or handle accordingly
-    }   
   }
+  // USER ID & FIRESTORE REF
+  const currentUserId = currentuser.uid;
+  const urlID = id;
+  //const colRef = collection(db, "users", currentUserId, "File-Storage");
+const folderResponse = await fetch(`http://localhost:3000/folder/file`,{
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ userId: currentUserId, folderId: urlID}),
+  })
+  if (folderResponse.status === 200) {
+    // Document exists, retrieve its data
+    const folderData = await folderResponse.json();
+    setUserFile(folderData);
+  } else {
+    console.log("Document does not exist.");
+    setUserFile([]); // Set to null or handle accordingly
+  }   
+}
+
+//ON PAGE LOAD AND REFRESH
+useEffect(() => {
   folderURL(folderID);
   // Call fetchData
   fetchData();
+  fetchUserFolder();
 }, [id, currentuser]);
 
 // MODAL POP UP LOGIC
@@ -206,9 +188,8 @@ const createFile = async () => {
   if (currentuser && metaData.videoDuration < 10 && userData.subscription == false) {
     const currentUserId = currentuser.uid;
     const urlID = id;
-    const docRef = collection(db, "users", currentUserId, "File-Storage",urlID,"Files");
-    const userRef = doc(db,"users",currentUserId)
-    const folderFiles = doc(docRef)
+  
+    const folderFileId = `file_${v4()}`
     // STORAGE
     const audioMetadata = {
       contentType: 'audio/mp3',
@@ -218,8 +199,8 @@ const createFile = async () => {
     const metaName = `videos/${allName}`
     const audioName = `audio/${allName}`
     // PATH NAME
-    const storagePathVideo = `${"users"+ "/" + currentuser.uid + "/" + folderElements.id + "/" + folderFiles.id + "/" + metaName}`;
-    const storagePathAudio = `${"users"+ "/" + currentuser.uid + "/" + folderElements.id + "/" + folderFiles.id + "/" + audioName}`;
+    const storagePathVideo = `${"users"+ "/" + currentuser.uid + "/" + urlID + "/" + folderFileId + "/" + metaName}`;
+    const storagePathAudio = `${"users"+ "/" + currentuser.uid + "/" + urlID + "/" + folderFileId + "/" + audioName}`;
     // STORAGE REF
     const videoRef = ref(storage, storagePathVideo);
     const audioRef = ref(storage, storagePathAudio);
@@ -228,7 +209,7 @@ const createFile = async () => {
     await uploadBytes(audioRef, audioFile,audioMetadata)
     // VIDEO URL
     const storageURL =  await getDownloadURL(videoRef);
-    console.log("Video Uploaded")
+    console.log("Video Uploaded To Storage")
     // Title
     const userFileTitle = fileTitle
     // Image URL
@@ -245,7 +226,7 @@ const createFile = async () => {
       title: userFileTitle,
       img: userFileImage,
       url: userVideoURL,
-      id: folderFiles.id,
+      id: folderFileId,
       folder_id: folderID,
       tag: userTag,
       duration: metaData.videoDurationString,
@@ -256,27 +237,29 @@ const createFile = async () => {
       video_size: videoSize
     };
 
-    //UPDATE LOCAL SCREEN
-    setDoc(folderFiles, newFile)
-    .then(() => {
-      setUserFile((currentFolders) => [
-      ...currentFolders,
-      { id: folderFiles.id, ...newFile },
-      console.log(userFile)
-      ]);
-    });
-
-    updateDoc(userRef,{
-      storage_take: userData.storage_take + videoSize,
+    //UPDATE VIDEO
+    const createResponse = await fetch(`http://localhost:3000/folder/file-create/${folderID}`,{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ fileToUpload: newFile, userId: currentUserId, currentStorageTake: userData.storage_take, videoSize: videoSize}),
     })
+    if (createResponse.status === 200) {
+      // Document exists, retrieve its data
+      const StatusLog = await createResponse.json();
+      console.log(StatusLog)
+    }else  {
+      alert("Something went wrong, try refreshing the page !");
+    }
+    //UPDATE LOCAL SCREEN
     await fetchData()
+    await fetchUserFolder()
 
   } else if(currentuser && userData.subscription == true) {
     const currentUserId = currentuser.uid;
     const urlID = id;
-    const docRef = collection(db, "users", currentUserId, "File-Storage",urlID,"Files");
-    const userRef = doc(db,"users",currentUserId)
-    const folderFiles = doc(docRef)
+    const folderFileId = `file_${v4()}`
     // STORAGE
     const audioMetadata = {
       contentType: 'audio/mp3',
@@ -286,8 +269,8 @@ const createFile = async () => {
     const metaName = `videos/${allName}`
     const audioName = `audio/${allName}`
     // PATH NAME
-    const storagePathVideo = `${"users"+ "/" + currentuser.uid + "/" + folderElements.id + "/" + folderFiles.id + "/" + metaName}`;
-    const storagePathAudio = `${"users"+ "/" + currentuser.uid + "/" + folderElements.id + "/" + folderFiles.id + "/" + audioName}`;
+    const storagePathVideo = `${"users"+ "/" + currentuser.uid + "/" + urlID + "/" + folderFileId + "/" + metaName}`;
+    const storagePathAudio = `${"users"+ "/" + currentuser.uid + "/" + urlID + "/" + folderFileId + "/" + audioName}`;
     // STORAGE REF
     const videoRef = ref(storage, storagePathVideo);
     const audioRef = ref(storage, storagePathAudio);
@@ -314,10 +297,10 @@ const createFile = async () => {
       title: userFileTitle,
       img: userFileImage,
       url: userVideoURL,
-      id: folderFiles.id,
+      id: folderFileId,
       folder_id: folderID,
       tag: userTag,
-      duration: formattedDuration,
+      duration: metaData.videoDurationString,
       storage_path_video: storagePathVideo,
       storage_path_audio: storagePathAudio,
       transcription:"",
@@ -325,20 +308,24 @@ const createFile = async () => {
       video_size: videoSize
     };
 
-    //UPDATE LOCAL SCREEN
-    setDoc(folderFiles, newFile)
-    .then(() => {
-      setUserFile((currentFolders) => [
-      ...currentFolders,
-      { id: folderFiles.id, ...newFile },
-      console.log(userFile)
-      ]);
-    });
-
-    updateDoc(userRef,{
-      storage_take: userData.storage_take + videoSize,
+    //UPDATE VIDEO
+    const createResponse = await fetch(`http://localhost:3000/folder/file-create/${folderID}`,{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ fileToUpload: newFile, userId: currentUserId, currentStorageTake: userData.storage_take, videoSize: videoSize}),
     })
+    if (createResponse.status === 200) {
+      // Document exists, retrieve its data
+      const StatusLog = await createResponse.json();
+      console.log(StatusLog)
+    }else if (createResponse.status === 400) {
+      alert("Something went wrong, try refreshing the page !");
+    }
+    //UPDATE LOCAL SCREEN
     await fetchData()
+    await fetchUserFolder()
   }else{
     alert("Clip is too long for free users ! If you want to save longer then 10 minutes clips, please upgrade your account !")
   }

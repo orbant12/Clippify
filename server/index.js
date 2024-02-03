@@ -77,8 +77,6 @@ app.post('/folder/file', async (req, res) => {
     try {
         const id = req.body.userId;
         const folder = req.body.folderId;
-        console.log(id);
-        console.log(folder);
         const files = await db.collection('users').doc(id).collection('File-Storage').doc(folder).collection('Files').get();
         const filesData = files.docs.map(doc => doc.data());
         res.json(filesData);
@@ -93,8 +91,6 @@ app.post('/folder/:id', async (req, res) => {
     try {
         const id = req.body.userId;
         const folder = req.body.folderId;
-        console.log(id);
-        console.log(folder);
         const folderData = await db.collection('users').doc(id).collection('File-Storage').doc(folder).get();
         const folderPassData = folderData.data();
         res.json(folderPassData);
@@ -103,6 +99,25 @@ app.post('/folder/:id', async (req, res) => {
     }
 }
 );
+
+//<****************************FILE*******************************>
+
+// CREATE USER SPECIFIC FILE IN FOLDER -- 1 File Create
+app.post('/folder/file-create/:id', async (req, res) => {
+    try {
+        const folderId = req.params.id;
+        const newFile = req.body.fileToUpload;
+        const userID = req.body.userId;
+        const userStorageTake = req.body.currentStorageTake;
+        const videoSize = req.body.videoSize;
+        const newFileId = newFile.id;
+        const response = await db.collection('users').doc(userID).collection('File-Storage').doc(folderId).collection('Files').doc(newFileId).set(newFile);
+        const updateStorageTake = await db.collection('users').update({ storage_take: userStorageTake + videoSize });
+        res.json({"Video Uploaded": response, "Storage Updated": updateStorageTake});
+    } catch (error) {
+        res.json(error);
+    }
+});
 
 
 //<************************RECENT FILE*******************************>
