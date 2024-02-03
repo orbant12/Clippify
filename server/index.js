@@ -30,9 +30,9 @@ app.use(express.urlencoded({ extended: true }));
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
 
-// FIREBASE FIRESTORE
+//<****************************USER*******************************>
 
-// GET USER DOCUMENT
+// GET USER DETAILS -- 1 User
 app.get('/user/:id', async (req, res) => {
     try {
         const id = req.params.id;
@@ -44,22 +44,11 @@ app.get('/user/:id', async (req, res) => {
     }
 });
 
-//RECENT FILE GET -- NOT WORKING
-app.post('/recent', async (req, res) => {
-    try {
-        const id = req.body.fileChildren;
-       
-        const recentFile = await id.get();
-        const recentFileData = recentFile.data();
-        res.json(recentFileData);
-    } catch (error) {
-        res.json(error);
-    }
-});
 
-// GET USER SPECIFIC FOLDERS
+//<****************************FOLDER*******************************>
 
-app.get('/folder/:id', async (req, res) => {
+// GET ALL USER SPECIFIC FOLDERS -- Many Folders
+app.get('/user/folder/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const folders = await db.collection('users').doc(id).collection('File-Storage').get();
@@ -70,8 +59,7 @@ app.get('/folder/:id', async (req, res) => {
     }
 });
 
-// POST USER SPECIFIC FOLDERS
-
+// CREATE USER SPECIFIC FOLDERS -- 1 Folder
 app.post('/folder-create/:id', async (req, res) => {
     try {
         const id = req.params.id;
@@ -79,6 +67,54 @@ app.post('/folder-create/:id', async (req, res) => {
         const response = await db.collection('users').doc(id).collection('File-Storage').add(folder);
         const responseID = await db.collection('users').doc(id).collection('File-Storage').doc(response.id).update({ id: response.id });
         res.json(response);
+    } catch (error) {
+        res.json(error);
+    }
+});
+
+// GET ALL FILES IN A SPECIFIC FOLDER -- Many Files
+app.post('/folder/file', async (req, res) => {
+    try {
+        const id = req.body.userId;
+        const folder = req.body.folderId;
+        console.log(id);
+        console.log(folder);
+        const files = await db.collection('users').doc(id).collection('File-Storage').doc(folder).collection('Files').get();
+        const filesData = files.docs.map(doc => doc.data());
+        res.json(filesData);
+    } catch (error) {
+        res.json(error);
+    }
+}
+);
+
+// FETCH SPECIFIC FOLDER DETAILS -- 1 Folder
+app.post('/folder/:id', async (req, res) => {
+    try {
+        const id = req.body.userId;
+        const folder = req.body.folderId;
+        console.log(id);
+        console.log(folder);
+        const folderData = await db.collection('users').doc(id).collection('File-Storage').doc(folder).get();
+        const folderPassData = folderData.data();
+        res.json(folderPassData);
+    } catch (error) {
+        res.json(error);
+    }
+}
+);
+
+
+//<************************RECENT FILE*******************************>
+
+//FETCH RECENT FILE -- NOT WORKING
+app.post('/recent', async (req, res) => {
+    try {
+        const id = req.body.fileChildren;
+       
+        const recentFile = await id.get();
+        const recentFileData = recentFile.data();
+        res.json(recentFileData);
     } catch (error) {
         res.json(error);
     }

@@ -86,25 +86,33 @@ const fetchData = async () => {
   try {
     if (currentuser) {
       const currentUserId = currentuser.uid;
-      const urlID = id;
-      // USER ID & FIRESTORE REF     
-      const userDocRef = doc(db, "users", currentUserId);
-      const folderElementRef = doc(userDocRef, "File-Storage", urlID);  
+      const urlID = id; 
       // Folder ELEMENT FETCH
-      const userSnapshot = await getDoc(userDocRef);
-      const docSnapshot = await getDoc(folderElementRef);
-      if (docSnapshot.exists()) {
+      const userSnapshot = await fetch(`http://localhost:3000/user/${currentUserId}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+      });
+      const docSnapshot = await fetch(`http://localhost:3000/folder/${urlID}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userId: currentUserId, folderId: urlID}),
+      });
+      if (docSnapshot.status === 200) {
         // Document exists, retrieve its data
-        const elementData = docSnapshot.data();
+        const elementData = await docSnapshot.json();
         setFolderElements(elementData);
         setNewTitle(elementData.title);
       } else {
         console.log("Document does not exist.");
         setFolderElements(null);
       };
-      if (userSnapshot.exists()) {
+      if (userSnapshot.status === 200) {
         // Document exists, retrieve its data
-        const elementUserData = userSnapshot.data();
+        const elementUserData = await userSnapshot.json();
         setUserData(elementUserData)
       } else {
         console.log("Document does not exist.");
@@ -141,6 +149,31 @@ useEffect(() => {
   .catch((error) => {
     console.error("Error fetching user folders: ", error);
   });
+  const fetchUserFolder = async () => {
+    if (!currentuser) {
+      setFolders([]);
+      console.log("No user logged in");
+      return;
+    }
+    // USER ID & FIRESTORE REF
+    const currentUserId = currentuser.uid;
+    //const colRef = collection(db, "users", currentUserId, "File-Storage");
+  const folderResponse = await fetch(`http://localhost:3000/folder/file`,{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userId: currentUserId, folderId: urlID}),
+    })
+    if (folderResponse.status === 200) {
+      // Document exists, retrieve its data
+      const folderData = await folderResponse.json();
+      setFolders(folderData);
+    } else {
+      console.log("Document does not exist.");
+      setFolders([]); // Set to null or handle accordingly
+    }   
+  }
   folderURL(folderID);
   // Call fetchData
   fetchData();
