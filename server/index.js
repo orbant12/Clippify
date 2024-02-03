@@ -97,10 +97,48 @@ app.post('/folder/:id', async (req, res) => {
     } catch (error) {
         res.json(error);
     }
-}
-);
+});
 
-//<****************************FILE*******************************>
+//UPDATE FILE COUNT IN FOLDER -- 1 Folder
+
+app.post('/folder/update-count/:id', async (req, res) => {
+    try {
+        const folderId = req.params.id;
+        const userID = req.body.userId;
+        const fileCount = req.body.fileCount;
+        const response = await db.collection('users').doc(userID).collection('File-Storage').doc(folderId).update({ file_count: fileCount });
+        res.json(response);
+    } catch (error) {
+        res.json(error);
+    }
+});
+
+//UPDATE FOLDER NAME -- 1 Folder
+
+app.post('/folder/update-title/:id', async (req, res) => {
+    try {
+        const folderId = req.params.id;
+        const userID = req.body.userId;
+        const folderName = req.body.folderTitle;
+        const response = await db.collection('users').doc(userID).collection('File-Storage').doc(folderId).update({ title: folderName });
+        res.json(response);
+    } catch (error) {
+        res.json(error);
+    }
+});
+
+//DELETE FOLDER -- 1 Folder
+
+app.post('/folder/delete/:id', async (req, res) => {
+    try {
+        const folderId = req.params.id;
+        const userID = req.body.userId;
+        const response = await db.collection('users').doc(userID).collection('File-Storage').doc(folderId).delete();
+        res.json(response);
+    } catch (error) {
+        res.json(error);
+    }
+});
 
 // CREATE USER SPECIFIC FILE IN FOLDER -- 1 File Create
 app.post('/folder/file-create/:id', async (req, res) => {
@@ -120,6 +158,38 @@ app.post('/folder/file-create/:id', async (req, res) => {
 });
 
 
+//<****************************FILE*******************************>
+
+
+// UPDATE FILE RELATED COUNTER -- 1 File
+app.post('/file/update-count/:id', async (req, res) => {
+    try {
+        const fileId = req.params.id;
+        const userID = req.body.userId;
+        const fileCount = req.body.relatedCount;
+        const response = await db.collection('users').doc(userID).collection('File-Storage').doc(fileId).update({ related_count: fileCount });
+        res.json(response);
+    } catch (error) {
+        res.json(error);
+    }
+});
+
+// FETCH SPECIFIC FILE DETAILS -- 1 File
+
+app.post('/file/:id', async (req, res) => {
+    try {
+        const userId = req.body.userId;
+        const folderID = req.body.folderId;
+        const fileID = req.params.id;
+        const fileData = await db.collection('users').doc(userId).collection('File-Storage').doc(folderID).collection('Files').doc(fileID).get();
+        const filePassData = fileData.data();
+        res.json(filePassData);
+    } catch (error) {
+        res.json(error);
+    }
+});
+
+
 //<************************RECENT FILE*******************************>
 
 //FETCH RECENT FILE -- NOT WORKING
@@ -130,6 +200,18 @@ app.post('/recent', async (req, res) => {
         const recentFile = await id.get();
         const recentFileData = recentFile.data();
         res.json(recentFileData);
+    } catch (error) {
+        res.json(error);
+    }
+});
+
+// UPDATE RECENT FILE -- 1 File
+app.post('/recent/update/:id', async (req, res) => {
+    try {
+        const userID = req.params.id;
+        const recentFileRef = req.body.recent;
+        const response = await db.collection('users').doc(userID).update({ recent: recentFileRef });
+        res.json(response);
     } catch (error) {
         res.json(error);
     }

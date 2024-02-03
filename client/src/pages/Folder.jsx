@@ -3,11 +3,12 @@ import * as React from 'react';
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useAuth } from '../context/UserAuthContext';
+
 //FIREBASE
-import { getFirestore, collection, doc, updateDoc, setDoc, deleteDoc } from 'firebase/firestore';
 import { deleteObject, getDownloadURL, ref, uploadBytes, uploadString } from 'firebase/storage';
 import { v4 } from "uuid";
-import { app, storage } from "../firebase";
+import { storage } from "../firebase";
+
 //ASSETS
 import FileCard from "../assets/FileAdd/fileCard";
 
@@ -15,11 +16,11 @@ import FileCard from "../assets/FileAdd/fileCard";
 import DesignServicesIcon from '@mui/icons-material/DesignServices';
 
 //ASSETS
-
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Example from "../assets/FileAdd/VideoUpload";
+
 //CSS
 import '../Css/folder.css';
 
@@ -30,7 +31,7 @@ function Folder({folderURL}) {
 //<******************************VARIABLES*******************************>
 
 //COMMON VARIABLES
-const db = getFirestore(app);
+
 const navigate  = useNavigate()
 const { currentuser } = useAuth();
 const { id } = useParams();
@@ -73,10 +74,14 @@ useEffect(() => {
     if(folderElements.length !== 0){
       const currentUserId = currentuser.uid;
       const urlID = id;
-      const folderRef = doc(db,"users",currentUserId,"File-Storage",urlID)
-      updateDoc(folderRef,{
-        files_count: userFile.length,
+      fetch(`http://localhost:3000/folder/update-count/${urlID}`,{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userId: currentUserId, fileCount: userFile.length}),
       })
+
     }
   }
 }, [userFile]);
@@ -365,7 +370,13 @@ const handleDelete = async () => {
     // USER UID
     const currentUserId = currentuser.uid;
     // FIRESTORE REF TO DELETE
-    await deleteDoc(doc(db,"users",currentUserId,"File-Storage",folderID));
+    const deleteResponse = await fetch(`http://localhost:3000/folder/delete/${folderID}`,{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userId: currentUserId}),
+    })
     console.log('Document successfully deleted');
     // DELETE FOLDER FROM STORAGE
     await deleteObject(videoRef).then(() => {
@@ -393,19 +404,26 @@ const handleTitleBlur = async () => {
   //USER DATA & FIRESTORE REF
   const currentUserId = currentuser.uid;
   const urlID = id; 
-  const docRef = doc(db, "users", currentUserId, "File-Storage",urlID);
   //NEW TITLE
   const editedTitle = newTitle;
   if (editedTitle != "") {
-    await updateDoc(docRef, {
-      title: editedTitle,
+    await fetch(`http://localhost:3000/folder/update-title/${urlID}`,{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userId: currentUserId, folderTitle: editedTitle}),
     })
     setIsEditing(false);
   } else {
     //IF STAYED EMPTY
     alert("No title were given !")
-    await updateDoc(docRef,{
-      title: "Empty",
+    await fetch(`http://localhost:3000/folder/update-title/${urlID}`,{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userId: currentUserId, folderTitle: editedTitle}),
     })
     setIsEditing(false);
   }
