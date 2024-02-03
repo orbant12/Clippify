@@ -12,29 +12,19 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import DesignServicesIcon from '@mui/icons-material/DesignServices';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 //MUI
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
-import Box from '@mui/material/Box';
+
 //ASSETS
 import FrameVideo from '../assets/File/videoFrame';
 import Editor from '../assets/File/txtEditor/txtEditor';
 import RelatedVideoBar from '../assets/File/relatedVideo';
 import PaginationUi from '../assets/File/paginationUI';
-import DividerStack from "../assets/FileAdd/fileAddCards";
-import VideoApp from "../assets/videoTrim/videoApp";
-import VideoUrlApp from "../assets/videoTrim/videoUrlApp";
-import ZeroWidthStack from "../assets/FileAdd/featureSelect";
-import MultipleSelectCheckmarks from '../assets/FileAdd/tagbar';
-import TextFieldFile from '../assets/FileAdd/textField';
-import BasicSpeedDial from "../assets/FileAdd/addBtn";
 import ToggleButtons from "../assets/File/mainShow"
 import FullFrameVideo from "../assets/File/fullVideoFrame"
-import DelayingAppearance from "../assets/FileAdd/LoadingBtn";
+
 //CSS
 import '../Css/file.css'
 
-
+//BS
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -106,8 +96,15 @@ useEffect(() => {
           const folderElementRef = doc(userDocRef, "File-Storage", folderUrl);
           const fileChildrenRef = doc(folderElementRef ,"Files",currentURL);
           const numberOfChild = childrenFiles.length
-          updateDoc(fileChildrenRef, {
-            related_count: numberOfChild,
+          fetch(`localhost:3000/file/update-count/${currentURL}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              relatedCount: numberOfChild,
+              userId: currentUserId,
+            }),
           });
       }
     } 
@@ -118,14 +115,17 @@ useEffect(() => {
 const setRecentlyOpenned = async () => {
   if (currentuser) {
     //USER DATA AND FIRESTORE REFS
-    const currentUserId = currentuser.uid;  
-    const userDocRef = doc(db, "users", currentUserId);
-    const urlID = folderUrl;
-    const recentDocRef = doc(db,"users",currentUserId,"File-Storage",urlID,"Files",currentURL)
-    updateDoc(recentDocRef, {
-      recent: recentDocRef,
+    const currentUserId = currentuser.uid;
+    const recentDocRef = `/folder/${folderUrl}/${currentURL}`;
+    fetch(`localhost:3000/recent/update/${currentUserId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        recent: recentDocRef,
+      }),
     });
-    console.log("recent sett succ") 
   }
 }
 
@@ -140,11 +140,22 @@ const fetchData = async () => {
       const folderElementRef = doc(userDocRef, "File-Storage", urlID);
       const fileElementRef = doc(folderElementRef ,"Files",currentURL);
       //Folder ELEMENT FETCH
-      const userSnapshot = await getDoc(userDocRef);
-      const docSnapshot = await getDoc(fileElementRef);
-      if (docSnapshot.exists()) {
+      //await getDoc(userDocRef);
+      const userSnapshot = await fetch(`localhost:3000/user/${currentUserId}`)
+      const docSnapshot = await fetch(`localhost:3000/file/${currentURL}`,{
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          folderId: urlID,
+          userId: currentUserId,
+        }),
+      
+      })
+      if (docSnapshot.status === 200) {
         // Document exists, retrieve its data
-        const elementData = docSnapshot.data();
+        const elementData = await docSnapshot.json();
         setFileElements(elementData);
         setNewTitle(elementData.title)
       
@@ -153,9 +164,9 @@ const fetchData = async () => {
         console.log("Document does not exist.");
         setFileElements(null); // Set to null if not exists
       }
-      if (userSnapshot.exists()) {
+      if (userSnapshot.status === 200) {
         // Document exists, retrieve its data
-        const elementUserData = userSnapshot.data();
+        const elementUserData = await userSnapshot.json();
         setUserData(elementUserData)
       } else {
         console.log("Document does not exist.");
@@ -167,6 +178,8 @@ const fetchData = async () => {
     window.location.href = "/"
   }
 };
+
+//CHECKPOINT___________________________________________________________!!!!!
 
 //FECT CHILDREN ELEMENTS
 const fetchChildren = async () => {

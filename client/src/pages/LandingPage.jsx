@@ -3,15 +3,11 @@ import "../Css/login.css"
 import "../Css/style.css"
 import "../Css/styles.css"
 //REACT
-import React, {useState,useEffect} from "react"
+import React, {useState} from "react"
 //ASSETS AND IMAGES AND ICONS
-import AnualSwitch from "../assets/Pricing/anualSwitch"
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
 import laptopOnly from '../assets/Images/file-page.svg';
 import phoneOnly from '../assets/Images/Landing-Ai.svg';
-import supporter1 from '../assets/Images/supporter-2.svg';
-import supporter2 from '../assets/Images/support-3.svg';
-import googleSVG from '../assets/Images/google.svg';
 import clippingFeature from '../assets/Images/Landing-clipping-cornered.svg';
 import notesFeature from '../assets/Images/Landing-notes_feature.svg';
 import relatedFeature from '../assets/Images/Landing-related-feature-cornered.svg';
@@ -43,8 +39,6 @@ const [isActive, setIsActive] = useState(false);
    setIsActive(!isActive);
  }
  
-
-
 return(
 <div className="landing-page">
    {/*NAV HEADER*/}
