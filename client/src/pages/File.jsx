@@ -92,11 +92,8 @@ useEffect(() => {
       if(childrenFiles){
         //USER DATA AND FIRESTORE REF
           const currentUserId = currentuser.uid; 
-          const userDocRef = doc(db, "users", currentUserId);
-          const folderElementRef = doc(userDocRef, "File-Storage", folderUrl);
-          const fileChildrenRef = doc(folderElementRef ,"Files",currentURL);
           const numberOfChild = childrenFiles.length
-          fetch(`localhost:3000/file/update-count/${currentURL}`, {
+          fetch(`http://localhost:3000/file/update-count/${currentURL}`, {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",
@@ -117,8 +114,8 @@ const setRecentlyOpenned = async () => {
     //USER DATA AND FIRESTORE REFS
     const currentUserId = currentuser.uid;
     const recentDocRef = `/folder/${folderUrl}/${currentURL}`;
-    fetch(`localhost:3000/recent/update/${currentUserId}`, {
-      method: "PUT",
+    fetch(`http://localhost:3000/recent/update/${currentUserId}`, {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
@@ -136,13 +133,10 @@ const fetchData = async () => {
       //USER DATA AND FIRESTORE REFS
       const currentUserId = currentuser.uid;
       const urlID = folderUrl;
-      const userDocRef = doc(db, "users", currentUserId);
-      const folderElementRef = doc(userDocRef, "File-Storage", urlID);
-      const fileElementRef = doc(folderElementRef ,"Files",currentURL);
       //Folder ELEMENT FETCH
       //await getDoc(userDocRef);
-      const userSnapshot = await fetch(`localhost:3000/user/${currentUserId}`)
-      const docSnapshot = await fetch(`localhost:3000/file/${currentURL}`,{
+      const userSnapshot = await fetch(`http://localhost:3000/user/${currentUserId}`)
+      const docSnapshot = await fetch(`http://localhost:3000/file/${currentURL}`,{
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -175,11 +169,9 @@ const fetchData = async () => {
     }
   } catch (error) {
     console.error("Error getting file: ", error);
-    window.location.href = "/"
+    //window.location.href = "/"
   }
 };
-
-//CHECKPOINT___________________________________________________________!!!!!
 
 //FECT CHILDREN ELEMENTS
 const fetchChildren = async () => {
@@ -190,27 +182,41 @@ const fetchChildren = async () => {
   if (currentuser) {
     //USER DATA AND FIRESTORE REF
     const currentUserId = currentuser.uid;
-    const userDocRef = doc(db, "users", currentUserId);
-    const folderElementRef = doc(userDocRef, "File-Storage", folderUrl);
-    const fileChildrenRef = collection(folderElementRef ,"Files",currentURL,"Children");
     //QUERY WITH 3 LIMIT
-    const queryRef = query(fileChildrenRef,orderBy("id","asc"), limit(pageSize));
-    try {
-      const querySnapshot = await getDocs(queryRef);
-      if (!querySnapshot.empty) {
-        const newLastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
-        setLastVisible(newLastVisible);
-        setFirstVisible(querySnapshot.docs[0]);
+   // Assuming this code is within an async function
+const queryResponse = await fetch(`http://localhost:3000/file/children/${currentURL}`, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    folderId: folderUrl,
+    userId: currentUserId,
+    pageLimit: pageSize,
+    lastDocumentId: lastVisible ? lastVisible.id : null, // Send the ID of the last document for pagination
+  }),
+});
 
-        // Process the documents and add them to the state
-        const newChildrenFiles = querySnapshot.docs.map((doc) => doc.data());
-        setChildrenFiles([...newChildrenFiles]);
-      } else {
-        console.log("No more documents to load.");
-      }
-    } catch (error) {
-      console.error("Error fetching documents: ", error);
-    }
+try {
+  const querySnapshot = await queryResponse.json();
+  if (querySnapshot.data.length > 0) {
+    // Update lastVisible and firstVisible
+    const newLastVisible = querySnapshot.lastDocumentId;
+    setLastVisible(newLastVisible);
+    setFirstVisible(querySnapshot.data[0]);
+
+    // Process the documents and add them to the state
+    setChildrenFiles((prevChildrenFiles) => [
+      ...prevChildrenFiles,
+      ...querySnapshot.data,
+    ]);
+  } else {
+    console.log("No more documents to load.");
+  }
+} catch (error) {
+  console.error("Error fetching documents: ", error);
+}
+
   }
 }
 
@@ -255,6 +261,8 @@ const pickedPopup = () => {
   }
 };
 
+//CHECKPOINT _____!!!
+
 //RELATED FILE CREATION
 const createRelatedFile = async () => {
   //STORAGE SETUP
@@ -279,9 +287,10 @@ const createRelatedFile = async () => {
     const allName = `${v4() + metaData.videoName}`
     const metaName = `videos/${allName}`
     const audioName = `audio/${allName}`
+    const relatedFileUID = `r_file_${v4()}`
     //STORAGE PATH NAMES
-    const storagePathVideo = `${"users"+ "/" + currentuser.uid + "/" + urlID + "/" + currentURL + "/" + relatedFilesRef.id + "/" + metaName}`
-    const storagePathAudio = `${"users"+ "/" + currentuser.uid + "/" + urlID + "/" + currentURL + "/" + relatedFilesRef.id + "/" + audioName}`
+    const storagePathVideo = `${"users"+ "/" + currentuser.uid + "/" + urlID + "/" + currentURL + "/" + relatedFileUID + "/" + metaName}`
+    const storagePathAudio = `${"users"+ "/" + currentuser.uid + "/" + urlID + "/" + currentURL + "/" + relatedFileUID + "/" + audioName}`
     //STORAGE REFRENCES
     const videoRef = ref(storage, storagePathVideo);
     const audioRef = ref(storage, storagePathAudio);
@@ -319,7 +328,7 @@ const createRelatedFile = async () => {
     title: userFileTitle,
     img: userFileImage,
     url: userVideoURL,
-    id: relatedFilesRef.id,
+    id: relatedFileUID,
     folder_id: folderUrl,
     tag: userTag,
     duration: metaData.videoDurationString,

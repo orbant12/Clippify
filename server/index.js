@@ -175,7 +175,6 @@ app.post('/file/update-count/:id', async (req, res) => {
 });
 
 // FETCH SPECIFIC FILE DETAILS -- 1 File
-
 app.post('/file/:id', async (req, res) => {
     try {
         const userId = req.body.userId;
@@ -184,6 +183,42 @@ app.post('/file/:id', async (req, res) => {
         const fileData = await db.collection('users').doc(userId).collection('File-Storage').doc(folderID).collection('Files').doc(fileID).get();
         const filePassData = fileData.data();
         res.json(filePassData);
+    } catch (error) {
+        res.json(error);
+    }
+});
+
+// QUERY CHILDREN FILES -- Many Files
+app.post('/file/children/:id', async (req, res) => {
+    try {
+        const fileId = req.params.id;
+        const folderId = req.body.folderId;
+        const userId = req.body.userId;
+        const pageLimit = req.body.pageLimit;
+        const lastDocumentId = req.body.lastDocumentId; // Add this line to get the last document ID from the request body
+
+        let query = db.collection('users').doc(userId).collection('File-Storage').doc(folderId).collection('Files').doc(fileId).collection('Children')
+            .orderBy('id', 'asc')
+            .limit(pageLimit);
+
+        if (lastDocumentId) {
+            query = query.startAfter(lastDocumentId); // Use startAfter to start from the document after the last document in the previous page
+        }
+
+        const querySnapshot = await query.get();
+
+        const queryData = [];
+        querySnapshot.forEach(doc => {
+            queryData.push(doc.data());
+        });
+
+        // Get the last document from the current page
+        const lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
+
+        res.json({
+            data: queryData,
+            lastDocumentId: lastVisible ? lastVisible.id : null // Send the ID of the last document in the current page for pagination
+        });
     } catch (error) {
         res.json(error);
     }
