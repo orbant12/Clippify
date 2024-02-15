@@ -12,6 +12,7 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import DesignServicesIcon from '@mui/icons-material/DesignServices';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 //MUI
+import DeleteIcon from '@mui/icons-material/Delete';
 
 //ASSETS
 import FrameVideo from '../assets/File/videoFrame';
@@ -593,7 +594,7 @@ return (
     </div>
     <div className='file-page'>
       {/*1 BAR */}
-      <Row style={{width:"80%",marginRight:"auto",marginLeft:"auto",paddingTop:20,alignItems:"center"}}>
+      <Row style={{width:"80%",marginRight:"auto",marginLeft:"auto",paddingTop:70,alignItems:"center"}}>
         <Col >
         {isEditing ? (
               <input
@@ -613,12 +614,12 @@ return (
               <h5 style={{opacity:0.8,paddingTop:5}}>Press Enter to OK</h5>:null
             }
         </Col>
-        <Col className='col-auto' style={{border:"1px solid black"}} >
-            <DesignServicesIcon/>
-        </Col>
-        <Col className='col-auto' style={{border:"1px solid black"}} >
-            <DesignServicesIcon/>
-        </Col>
+        <Col className='col-auto folder-edit-btn' style={{cursor:"pointer"}} >
+          <DesignServicesIcon onClick={handleTitleClick}/>
+      </Col>
+      <Col className='col-auto folder-delete-btn' style={{cursor:"pointer"}} >
+          <DeleteIcon onClick={handleDelete}/>
+      </Col>
     </Row>
       {/*2 BAR */}
       <div className='sec_bar-cont'>
