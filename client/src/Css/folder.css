@@ -20,6 +20,7 @@
   height: 200px;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 50px;
   border-radius: 30px;
   display: flex;
   flex-direction: row;
@@ -143,6 +144,26 @@
     color: var(--dark-text-color);
   }
 
+.folder-edit-btn{
+  opacity: 0.5;
+}
+
+.folder-edit-btn:hover{
+  opacity: 1;
+  cursor: pointer;
+}
+
+.folder-delete-btn{
+  color: red;
+  opacity: 0.5;
+}
+
+.folder-delete-btn:hover{
+  opacity: 1;
+  cursor: pointer;
+}
+
+
 /* ================ COLOR FODLER ====================== */
 
 /* DARK _ MODE*/
@@ -168,6 +189,8 @@
 }
 #dark .first_bar-txt{
   color: var(--dark-text-color);
+  font-weight: 650;
+  font-size: 25px;
 }
 
 #dark .first_bar-edit{
@@ -396,6 +419,8 @@ color: var(--dark-body-color);
 
 #light .first_bar-txt{
   color: var(--text-color);
+  font-weight: 650;
+  font-size: 25px;
 }
 
 #light .first_bar-edit{

@@ -14,6 +14,7 @@ import FileCard from "../assets/FileAdd/fileCard";
 
 //ICONS
 import DesignServicesIcon from '@mui/icons-material/DesignServices';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 //ASSETS
 import Col from 'react-bootstrap/Col';
@@ -466,15 +467,15 @@ return(
         }
     </Col>
    
-      <Col className='col-auto' style={{border:"1px solid black"}} >
-          <DesignServicesIcon/>
+      <Col className='col-auto folder-edit-btn' style={{cursor:"pointer"}} >
+          <DesignServicesIcon onClick={handleTitleClick}/>
       </Col>
-      <Col className='col-auto' style={{border:"1px solid black"}} >
-          <DesignServicesIcon/>
+      <Col className='col-auto folder-delete-btn' style={{cursor:"pointer"}} >
+          <DeleteIcon onClick={handleDelete}/>
       </Col>
  
   </Row>
-  <Row>
+  <Row style={{marginTop:50}}>
     <Col>
     {userFile.map((file) => (
       <Link to={`/folder/${id}/${file.id}`}>

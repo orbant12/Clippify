@@ -84,9 +84,11 @@
 }
 
 .sec_bar-video-main{
-  margin-left: 100px;
-  margin-bottom: -50px;
-  margin-top: -50px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .sec_bar-clips-cont{
@@ -524,6 +526,8 @@ pre::-webkit-scrollbar-thumb {
 
 .toolbar {
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   margin-bottom: 1px;
   background: #fff;
   padding: 4px;
@@ -531,7 +535,20 @@ pre::-webkit-scrollbar-thumb {
   border-top-right-radius: 10px;
   vertical-align: middle;
   width: 100%;
-  overflow-x: scroll;
+}
+
+@media (max-width: 1300px) {
+  .toolbar {
+    display: flex;
+    margin-bottom: 1px;
+    background: #fff;
+    padding: 4px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    vertical-align: middle;
+    width: 100%;
+    overflow-x: scroll;
+  }
 }
 
 .toolbar button.toolbar-item {
@@ -1108,16 +1125,18 @@ margin-left: 180px;
 /*Full Video Frame*/
 
 .full-grid{ 
-  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .full-bord_g_2{
   border: none;
 }
 
-.full-bord_g_2 video{
+.full-grid video{
   border-radius: 30px;
-  width: 800px;
+  width: 300px;
 }
 
 /*AI Chat*/
