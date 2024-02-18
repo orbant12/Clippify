@@ -5,8 +5,10 @@ const port = 3000;
 const credentials = require('./key.json');
 const firebaseAdmin = require("firebase-admin");
 const cors = require('cors');
-
-
+const ytdl = require('ytdl-core');
+const readline = require('readline');
+const fs = require('fs');
+const path = require('path');
 //RUN CLIENT
 
 
@@ -201,11 +203,17 @@ app.post('/file/children/:id', async (req, res) => {
             .orderBy('id', 'asc')
             .limit(pageLimit);
 
+        //WITHOUT LIMIT
+        let ForCountquery = db.collection('users').doc(userId).collection('File-Storage').doc(folderId).collection('Files').doc(fileId).collection('Children')
+
         if (lastDocumentId) {
             query = query.startAfter(lastDocumentId); // Use startAfter to start from the document after the last document in the previous page
         }
 
         const querySnapshot = await query.get();
+        
+        const forCountSnapshot = await ForCountquery.get();
+        const forCountData = forCountSnapshot.docs.map(doc => doc.data());
 
         const queryData = [];
         querySnapshot.forEach(doc => {
@@ -217,7 +225,8 @@ app.post('/file/children/:id', async (req, res) => {
 
         res.json({
             data: queryData,
-            lastDocumentId: lastVisible ? lastVisible.id : null // Send the ID of the last document in the current page for pagination
+            lastDocumentId: lastVisible ? lastVisible.id : null, // Send the ID of the last document in the current page for pagination
+            totalPages: forCountData.length, // Calculate the total number of pages
         });
     } catch (error) {
         res.json(error);
@@ -252,3 +261,64 @@ app.post('/recent/update/:id', async (req, res) => {
     }
 });
 
+
+//<************************YOUTUBE MP4 DOWNLOADER*******************************>
+
+app.post('/youtube-mp4', async (req, res) => {
+    try {
+        const videoUrl = req.body.videoUrl;
+        console.log(videoUrl);
+        await download(videoUrl, res);
+    } catch (error) {
+        console.error('Error fetching or converting the video:', error);
+        res.status(500).send('Error fetching or converting the video');
+    }
+});
+
+async function download(videoLink, res) {
+    try {
+        let n = Math.floor(Math.random() * 10000);
+        let url = videoLink;
+        let videID = ytdl.getURLVideoID(url);
+
+        const video = ytdl(url);
+
+        // Get Info
+        ytdl.getInfo(videID).then(info => {
+            console.log('title:', info.videoDetails.title);
+            console.log('rating:', info.player_response.videoDetails.averageRating);
+            console.log('uploaded by:', info.videoDetails.author.name);
+        });
+
+        res.setHeader('Content-Disposition', 'attachment; filename="video.mp4"');
+        res.setHeader('Content-Type', 'video/mp4');
+
+        video.pipe(res); // Pipe the video stream directly to the response object
+    } catch (error) {
+        console.error('Error downloading the video:', error);
+        throw error;
+    }
+}
+
+
+
+//<************************RELATED FILE*******************************>
+
+// CREATE RELATED FILE -- 1 File
+
+app.post('/related-file/add', async (req, res) => {
+    try {
+        const folderId = req.body.folderId;
+        const fileId = req.body.fileId;
+        const userId = req.body.userId;
+        const relatedFile = req.body.relatedFile;
+        const userStorageTake = req.body.currentStorageTake;
+        const videoSize = req.body.videoSize;
+        const newFileId = relatedFile.id;
+        const response = await db.collection('users').doc(userId).collection('File-Storage').doc(folderId).collection('Files').doc(fileId).collection('Children').doc(newFileId).set(relatedFile);
+        const updateStorageTake = await db.collection('users').update({ storage_take: userStorageTake + videoSize });
+        res.json({"Video Uploaded": response, "Storage Updated": updateStorageTake});
+    } catch (error) {
+        res.json(error);
+    }
+});
