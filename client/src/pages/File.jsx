@@ -10,7 +10,6 @@ import {v4} from "uuid";
 //ICONS
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import DesignServicesIcon from '@mui/icons-material/DesignServices';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 //MUI
 import DeleteIcon from '@mui/icons-material/Delete';
 
@@ -29,6 +28,8 @@ import '../Css/file.css'
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
+
+import Example from "../assets/FileAdd/VideoUpload";
 
 
 function File({prevUrl,mainFileURL}) {
@@ -86,6 +87,7 @@ const navigate  = useNavigate()
 
 //<******************************FUNCTIONS*******************************>
 
+
 //SET CHILDREN COUNT
 useEffect(() => {
   if(currentuser){
@@ -95,7 +97,7 @@ useEffect(() => {
           const currentUserId = currentuser.uid; 
           const numberOfChild = childrenFiles.length
           fetch(`http://localhost:3000/file/update-count/${currentURL}`, {
-            method: "PUT",
+            method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
@@ -176,49 +178,39 @@ const fetchData = async () => {
 
 //FECT CHILDREN ELEMENTS
 const fetchChildren = async () => {
-  const totalItems = 6;
-  const pageSize = 3;
-  const totalPageCount = Math.ceil(totalItems / pageSize);
-  setTotalPages(totalPageCount);
-  if (currentuser) {
-    //USER DATA AND FIRESTORE REF
+  if(currentuser){
+    //PAGINATION INITIAL STATE FETCH FROM REST API
     const currentUserId = currentuser.uid;
-    //QUERY WITH 3 LIMIT
-   // Assuming this code is within an async function
-const queryResponse = await fetch(`http://localhost:3000/file/children/${currentURL}`, {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify({
-    folderId: folderUrl,
-    userId: currentUserId,
-    pageLimit: pageSize,
-    lastDocumentId: lastVisible ? lastVisible.id : null, // Send the ID of the last document for pagination
-  }),
-});
-
-try {
-  const querySnapshot = await queryResponse.json();
-  if (querySnapshot.data.length > 0) {
-    // Update lastVisible and firstVisible
-    const newLastVisible = querySnapshot.lastDocumentId;
-    setLastVisible(newLastVisible);
-    setFirstVisible(querySnapshot.data[0]);
-
-    // Process the documents and add them to the state
-    setChildrenFiles((prevChildrenFiles) => [
-      ...prevChildrenFiles,
-      ...querySnapshot.data,
-    ]);
-  } else {
-    console.log("No more documents to load.");
+    const urlID = folderUrl;
+    const queryResponse = await fetch(`http://localhost:3000/file/children/${currentURL}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        folderId: urlID,
+        userId: currentUserId,
+        pageLimit: 3,
+      }),
+    });
+    try {
+      const querySnapshot = await queryResponse.json();
+      if (querySnapshot.data.length > 0) {
+        // Update lastVisible and firstVisible
+        const newLastVisible = querySnapshot.lastDocumentId;
+        setLastVisible(newLastVisible);
+        setFirstVisible(querySnapshot.data[0]);
+        // Process the documents and add them to the state
+        setChildrenFiles(querySnapshot.data);
+        setTotalPages(querySnapshot.totalPages);
+      } else {
+        console.log("No documents to load.");
+      }
+    } catch (error) {
+      console.error("Error fetching documents: ", error);
+    
   }
-} catch (error) {
-  console.error("Error fetching documents: ", error);
 }
-
-  }
 }
 
 //ON LOAD FETCH DATA
@@ -236,50 +228,14 @@ useEffect(() => {
   }
 }, [userData]);
 
-//MODAL ACTIVE LOGIC STATES
-const togglePopup = () => {
-  if(currentuser && childrenFiles.length < 3){
-    setIsActive(!isActive);
-  }else if (currentuser && childrenFiles.length >= 3 && userData.subscription === false){
-    alert("You can only add 3 related clips as a Free User !")
-  }else if (currentuser && childrenFiles.length >= 3 && userData.subscription === true){
-    setIsActive(!isActive);
-  }
-};
-
-function handleSubmit(e) {
-  e.preventDefault();
-  togglePopup();
-}
-
-const pickedPopup = () => {
-  if(selectedPopUp == 1){
-    togglePopup();
-    setIsUploadActive(!isUploadActive)
-  } else if (selectedPopUp == 0) {
-    togglePopup();
-    setIsLinkActive(!isLinkActive)
-  }
-};
-
-//CHECKPOINT _____!!!
-
 //RELATED FILE CREATION
 const createRelatedFile = async () => {
   //STORAGE SETUP
   if (currentuser){
-    //USER ID
-    const currentUserId = currentuser.uid;
     //Fodler PATH
     const urlID = folderUrl;
     //CURRENT FILE PATH
     const currentURL = id
-    //FIRESTORE REFS
-    const userRef = doc(db,"users",currentUserId)
-    const docRef = doc(db, "users", currentUserId, "File-Storage",urlID); 
-    const relatedFiles = collection(docRef,"Files",currentURL,"Children")
-    const fileRef = doc(db, "users", currentUserId, "File-Storage",urlID,"Files",currentURL); 
-    const relatedFilesRef = doc(relatedFiles)
     //TYPE for AUDIO
     const audioMetadata = {
         contentType: 'audio/mp3',
@@ -314,41 +270,44 @@ const createRelatedFile = async () => {
     //STORAGE URL
     const userVideoURL = storageURL
 
-    await updateDoc(fileRef, {
-      video_size: fileElements.video_size + videoSize,
-      related_count: childrenFiles.length + 1,
-    });
-    await updateDoc(userRef, {
-      storage_take: userData.storage_take + videoSize,
-    });
     await fetchData()
     console.log("recent sett succ")
 
     //CHILDREN FILE ELEMENTS & CREATION
     const newRelatedFile = {
-    title: userFileTitle,
-    img: userFileImage,
-    url: userVideoURL,
-    id: relatedFileUID,
-    folder_id: folderUrl,
-    tag: userTag,
-    duration: metaData.videoDurationString,
-    storage_path_video:storagePathVideo,
-    storage_path_audio:storagePathAudio,
-    content: generatedHtml,
-    transcription:"",
-    video_size: videoSize,
+      title: userFileTitle,
+      img: userFileImage,
+      url: userVideoURL,
+      id: relatedFileUID,
+      folder_id: folderUrl,
+      tag: userTag,
+      duration: metaData.videoDurationString,
+      storage_path_video:storagePathVideo,
+      storage_path_audio:storagePathAudio,
+      content: generatedHtml,
+      transcription:"",
+      video_size: videoSize,
     };
     //SETTING THE CHILDREN FILE TO FIRESTORE
-    setDoc(relatedFilesRef, newRelatedFile)
-    .then(() => {
-      // Folder added successfully, you can update your local state if needed
-      setChildrenFiles((currentFolders) => [
-        ...currentFolders,
-        { id: relatedFilesRef.id, ...newRelatedFile},
-        console.log(childrenFiles)
-      ]);
-    })
+    const response = await fetch(`http://localhost:3000/related-file/add`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        folderId: folderUrl,
+        userId: currentuser.uid,
+        fileId: currentURL,
+        relatedFile: newRelatedFile,
+        currentStorageTake: userData.storage_take,
+        videoSize: videoSize,
+      }),
+    });
+    if (response.status === 200) {
+      console.log("Related file added successfully");
+    } else {
+      console.log("Error adding related file");
+    }
   };
   //HIDE POP UP LOGIC
   if(isLinkActive){ 
@@ -358,72 +317,79 @@ const createRelatedFile = async () => {
   }
 };
 
-//Pagination NEXT PAGE
-const nextPage= async () =>{
-  if(currentuser){
-    //USER DATA AND FIRESTORE REF
-    const currentUserId = currentuser.uid;
-    const userDocRef = doc(db, "users", currentUserId);
-    const folderElementRef = doc(userDocRef, "File-Storage", folderUrl);
-    const fileChildrenRef = collection(folderElementRef ,"Files",currentURL,"Children");
-    //PAGINATION NEXT LOGIC
-    if (currentPage < totalPages) {
-      try {
-        if (lastVisible) {
-          const queryRef = query(fileChildrenRef,orderBy("id","asc"),startAfter(lastVisible),limit(3));
-          const querySnapshot = await getDocs(queryRef);
-          if (!querySnapshot.empty) {
-            const newLastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
-            console.log(newLastVisible)
-            setLastVisible(newLastVisible);
-            setCurrentPage(currentPage + 1);
-            // Process the documents and add them to the state
-            const newChildrenFiles = querySnapshot.docs.map((doc) => doc.data());
-            setChildrenFiles([...newChildrenFiles]);
-          } else {
-            console.log("No more documents to load.");
-          }
-        }
-      } catch (error) {
-        console.error("Error fetching documents: ", error);
+//CHECKPOINT _____!!!
+
+
+// Pagination NEXT PAGE
+const nextPage = async () => {
+  if (currentuser) {
+    try {
+      const currentUserId = currentuser.uid;
+      const urlID = folderUrl;
+      const queryResponse = await fetch(`http://localhost:3000/file/children/${currentURL}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          folderId: urlID,
+          userId: currentUserId,
+          pageLimit: 3,
+          lastDocumentId: lastVisible ? lastVisible.id : null, // Send the ID of the last document for pagination
+        }),
+      });
+
+      const querySnapshot = await queryResponse.json();
+
+      if (querySnapshot.data.length > 0) {
+        const newLastVisible = querySnapshot.lastDocumentId;
+        setLastVisible(newLastVisible);
+        setFirstVisible(querySnapshot.data[0]);
+        setChildrenFiles(prevChildrenFiles => [...prevChildrenFiles, ...querySnapshot.data.filter(doc => !prevChildrenFiles.some(prevDoc => prevDoc.id === doc.id))]); // Append only new unique documents
+      } else {
+        console.log("No more documents to load.");
       }
+    } catch (error) {
+      console.error("Error fetching next page: ", error);
     }
   }
 };
 
-//PAGINATION PREV PAGE
-async function fetchPreviousPage() {
-  if(currentuser){
-    //USER DATA AND FIRESTORE REF
-    const currentUserId = currentuser.uid;
-    const userDocRef = doc(db, "users", currentUserId);
-    const folderElementRef = doc(userDocRef, "File-Storage", folderUrl);
-    const fileChildrenRef = collection(folderElementRef ,"Files",currentURL,"Children");
-    //PAGINATION PREV LOGIC
-    if (currentPage > 1) {
-      try {
-        if (!firstVisible) {
-          console.log("No previous page available.");
-          return;
-        }
-        // Start before the firstVisible document
-        const queryRef = query(fileChildrenRef,orderBy("id","asc"),endBefore(lastVisible),limitToLast(3));
-        const querySnapshot = await getDocs(queryRef);
-        if (!querySnapshot.empty) {
-          const newLastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
-          setLastVisible(newLastVisible);
-          setCurrentPage(currentPage - 1);
-          const newChildrenFiles = querySnapshot.docs.map((doc) => doc.data());
-          setChildrenFiles([...newChildrenFiles]);
-        } else {
-          console.log("No previous documents available.");
-        }
-      } catch (error) {
-        console.error("Error fetching documents: ", error);
+// Pagination PREVIOUS PAGE
+const fetchPreviousPage = async () => {
+  if (currentuser) {
+    try {
+      const currentUserId = currentuser.uid;
+      const urlID = folderUrl;
+      const queryResponse = await fetch(`http://localhost:3000/file/children/${currentURL}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          folderId: urlID,
+          userId: currentUserId,
+          pageLimit: 3,
+          firstDocumentId: firstVisible ? firstVisible.id : null, // Send the ID of the first document for pagination
+        }),
+      });
+
+      const querySnapshot = await queryResponse.json();
+
+      if (querySnapshot.data.length > 0) {
+        const newFirstVisible = querySnapshot.firstDocumentId;
+        setFirstVisible(newFirstVisible);
+        setLastVisible(querySnapshot.data[querySnapshot.data.length - 1]);
+        setChildrenFiles(prevChildrenFiles => [...querySnapshot.data.filter(doc => !prevChildrenFiles.some(prevDoc => prevDoc.id === doc.id)), ...prevChildrenFiles]); // Append only new unique documents
+      } else {
+        console.log("No more documents to load.");
       }
+    } catch (error) {
+      console.error("Error fetching previous page: ", error);
     }
   }
-}
+};
+
 
 //SAVE RICH TEXT EDITOR CONTENT
 useEffect(() => {
@@ -451,30 +417,7 @@ useEffect(() => {
   storeHTMLContentInFirestore(saveContent)
 }, [saveContent]);
 
-//<******************************DELETE*******************************>
-//ARE YOU SURE MODAL
-const [open, setOpen] = useState(false);
-
-const handleOpen = () => {
-  if(childrenFiles.length === 0){
-    setOpen(true);
-  }else{
-    alert("You need to delete all related clips first !")
-  }
-};
-
-//MODAL STYLING
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '1px solid #000',
-  boxShadow: 24,
-  p: 3,
-};
+//<*********************DELETE*********************>
 
 //DELETE FOLDER CODE
 const handleDelete = async () => {
@@ -521,6 +464,7 @@ const handleTitleClick = () => {
   setIsEditing(true);
   console.log(isEditing)
 };
+
 const handleTitleChange = (e) => {
   setNewTitle(e.target.value);
 };
@@ -680,6 +624,9 @@ return (
         </div>
       </div>
     </div>
+    <Row>
+      <Example handleUploadTrigger={createRelatedFile} setTitleInput={setFileTitle} setFileImageEXT={setFileImage} setExtractMetaEXT={setMetaData} setPassedAudioDataUrlEXT={setAudioFile} setVideoUrlEXT={setTrimmedVideoFile} />
+    </Row>
 
 </Container>
 )}

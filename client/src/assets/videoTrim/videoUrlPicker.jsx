@@ -3,16 +3,15 @@ import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import './global.css'
 import 'firebase/functions';
-import { getFunctions, httpsCallable } from "firebase/functions";
-import { app } from '../../firebase';
 
 function VideoUrlPicker({ showVideo, handleChange, children }) {
+
+//<==================================VARIABLES=============================================>
 
 const [videoUrl, setVideoUrl] = useState('');
 const [loading, setLoading] = useState(false);
 
-const functions = getFunctions(app);
-
+//<==================================FUNCTIONS=============================================>
 
 const handleUrlChange = async (event) => {
   const url = event.target.value;
@@ -54,10 +53,10 @@ const handleConvert = async () => {
     console.error('Error fetching or converting the video:', error);
 
   } finally {
-
     setLoading(false);
   }
 };
+
 
 return showVideo ? (
 

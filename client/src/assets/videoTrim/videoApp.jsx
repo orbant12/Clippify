@@ -7,14 +7,11 @@ import OutputVideo from "./videoPlayer";
 import OutputVideo2 from "./outputNoDown"
 import RangeInput from "./videoRangeInput";
 import Form from 'react-bootstrap/Form';
-
-
 import './global.css'
-
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-import EditIcon from '@mui/icons-material/Edit';
 
 
+//FMPEG SETUP
 const FF = createFFmpeg({
     log: true,
     corePath: "https://unpkg.com/@ffmpeg/core@0.10.0/dist/ffmpeg-core.js",
@@ -27,17 +24,24 @@ const FF = createFFmpeg({
 
 function VideoApp({fileImage,videoURL,setExtractMeta,setPassedAudioDataUrl,subscriptionState,handleTitleInput}) {
 
+//<==================================VARIABLES=============================================>
 
+//VIDEO META DATA
 const [inputVideoFile, setInputVideoFile] = useState(null);
 const [trimmedVideoFile, setTrimmedVideoFile] = useState(null);
 const [trimIsProcessing, setTrimIsProcessing] = useState(false);
 const [videoMeta, setVideoMeta] = useState(null);
 const [URL, setURL] = useState(null);
+
+//TIMELINE RANGE LOGIC
 const [rStart, setRstart] = useState(0); // 0%
 const [rEnd, setRend] = useState(10); // 10%
+
+//THIMBNAILS
 const [thumbnails, setThumbnails] = useState([]);
 const [thumbnailIsProcessing, setThumbnailIsProcessing] = useState(false);
 
+//LOGIC UX
 const [show,setShow]=useState(true)
 const [showBtn,setShowBtn]=useState(true)
 const [saveBtn,setSaveBtn]=useState(true)
@@ -45,13 +49,12 @@ const [videoAppShow,setVideoAppShow]=useState(true)
 const [addedShow,setAddedShow]=useState(true)
 const [deletedState,setDeletedState]=useState(true)
 const [backState,setBackState]=useState(false)
-
-const [mediaTitle,setMediaTitle] = useState("Untitled")
-
-const [isEditing, setIsEditing] = useState(false);
-const [clipTitle, setClipTitle] = useState('Your Clip Title');
 const [loadingText, setLoadingText] = useState("Loading...");
+
+//MEDIA TITLE
+const [mediaTitle,setMediaTitle] = useState("Untitled")
  
+//<==================================FUNCTIONS=============================================>
 
 const handleChange = async (e) => {
   let file = e.target.files[0];
@@ -318,19 +321,6 @@ const handleTrim = async () => {
   // }else{
   //   alert("Please Subscribe to Trim Videos Longer Than 10 Minutes")
   // }
-};
-
-const handleEditClick = () => {
-  setIsEditing(true);
-};
-
-const handleTitleChange = (event) => {
-  setClipTitle(event.target.value);
-};
-  
-const handleTitleSave = () => {
-  setIsEditing(false);
-  // You can save the edited title here, e.g., by making an API request.
 };
 
 const HandleBack = () => {

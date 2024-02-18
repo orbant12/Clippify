@@ -2,21 +2,21 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import BasicSpeedDial from "../../assets/FileAdd/addBtn"
-
 import DividerStack from "../../assets/FileAdd/fileAddCards"
 import VideoUrlApp from "../../assets/videoTrim/videoUrlApp"
 import VideoApp from "../../assets/videoTrim/videoApp"
 
+
 function Example({setTitleInput,setFileImageEXT,setExtractMetaEXT,setPassedAudioDataUrlEXT,setVideoUrlEXT,handleUploadTrigger}) {
   
+//<==================================VARIABLES=============================================>
+
   const [fullscreen, setFullscreen] = useState(true);
   const [show, setShow] = useState(false);
   const [selectedPopOut,setSelectedPopOut] = useState("");
   const [currentPage,setCurrentPage] = useState("selectMedia");
 
-
-
-
+  //<==================================FUNCTIONS=============================================>
 
   function handleShow(breakpoint) {
     setFullscreen(breakpoint);

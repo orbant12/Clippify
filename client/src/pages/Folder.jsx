@@ -39,17 +39,14 @@ const { id } = useParams();
 const folderID = id
 
 //MODAL ACTIVITY
-const [isActive, setIsActive] = useState(false);
 const [isLinkActive, setIsLinkActive] = useState(false);
 const [isUploadActive, setIsUploadActive] = useState(false);
-const [selectedPopUp, setSelectedPopUp] = useState(null);
 
 //CURRENT ELEMENTS IN ARRAY
 const [folderElements, setFolderElements] = useState([]);
 const [userData,setUserData] = useState([])
 
 //CREATE BTN AND EDITING ON MODAL
-const [isAddedOn, setIsAddedOn] = useState(false);
 const [isEditing, setIsEditing] = useState(false);
 
 //FILE CREATION
@@ -62,8 +59,6 @@ const [metaData, setMetaData] = useState(null)
 const [tag,setTag] = useState("")
 
 //Provided LINK/FILE
-const [linkProvided, setLinkProvided] = useState(true);
-const [uploadProvided, setUploadProvided] = useState(true);
 const [newTitle, setNewTitle] = useState(folderElements.title);
 
 
@@ -166,28 +161,6 @@ useEffect(() => {
   fetchData();
   fetchUserFolder();
 }, [id, currentuser]);
-
-// MODAL POP UP LOGIC
-const togglePopup = () => {
-  setIsActive(!isActive);
-};
-
-// HANDLE SUBMIT
-function handleSubmit(e) {
-  e.preventDefault();
-  togglePopup();
-};
-
-// SELECT POP UP LOGIC
-const pickedPopup = () => {
-  if (selectedPopUp == 1) {
-    togglePopup();
-    setIsUploadActive(!isUploadActive)
-  } else if (selectedPopUp == 0) {
-    togglePopup();
-    setIsLinkActive(!isLinkActive)
-  };
-};
 
 //SAVING FILE TO FIRESTORE
 const createFile = async () => {
@@ -343,25 +316,7 @@ const createFile = async () => {
   };
 };
 
-
-//<*****************************DELETE*******************************>
-
-//ARE YOU SURE MODAL
-const [open, setOpen] = useState(false);
-
-const handleOpen = () => setOpen(true);
-
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '1px solid #000',
-  boxShadow: 24,
-  p: 3,                          
-};
+//<**********DELETE*************>
 
 //DELETE FOLDER
 const handleDelete = async () => {
