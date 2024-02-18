@@ -40,7 +40,7 @@ function Example({setTitleInput,setFileImageEXT,setExtractMetaEXT,setPassedAudio
         </Modal.Header>
         <Modal.Body>
           {currentPage == "selectMedia" ? <DividerStack setSelectedPopUp={setSelectedPopOut} /> : null}
-          {currentPage == "link" ? <VideoUrlApp />:null}
+          {currentPage == "link" ? <VideoUrlApp handleTitleInput={setTitleInput} setExtractMeta={setExtractMetaEXT} setPassedAudioDataUrl={setPassedAudioDataUrlEXT} fileImage={setFileImageEXT} setPassedDataUrl={setVideoUrlEXT} />:null}
           {currentPage == "upload" ? <VideoApp handleTitleInput={setTitleInput} fileImage={setFileImageEXT} setExtractMeta={setExtractMetaEXT} setPassedAudioDataUrl={setPassedAudioDataUrlEXT} videoURL={setVideoUrlEXT}/>:null}
         </Modal.Body>
         <Modal.Footer>

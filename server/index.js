@@ -5,8 +5,10 @@ const port = 3000;
 const credentials = require('./key.json');
 const firebaseAdmin = require("firebase-admin");
 const cors = require('cors');
-
-
+const ytdl = require('ytdl-core');
+const readline = require('readline');
+const fs = require('fs');
+const path = require('path');
 //RUN CLIENT
 
 
@@ -252,3 +254,41 @@ app.post('/recent/update/:id', async (req, res) => {
     }
 });
 
+
+//<************************YOUTUBE MP4 DOWNLOADER*******************************>
+
+app.post('/youtube-mp4', async (req, res) => {
+    try {
+        const videoUrl = req.body.videoUrl;
+        console.log(videoUrl);
+        await download(videoUrl, res);
+    } catch (error) {
+        console.error('Error fetching or converting the video:', error);
+        res.status(500).send('Error fetching or converting the video');
+    }
+});
+
+async function download(videoLink, res) {
+    try {
+        let n = Math.floor(Math.random() * 10000);
+        let url = videoLink;
+        let videID = ytdl.getURLVideoID(url);
+
+        const video = ytdl(url);
+
+        // Get Info
+        ytdl.getInfo(videID).then(info => {
+            console.log('title:', info.videoDetails.title);
+            console.log('rating:', info.player_response.videoDetails.averageRating);
+            console.log('uploaded by:', info.videoDetails.author.name);
+        });
+
+        res.setHeader('Content-Disposition', 'attachment; filename="video.mp4"');
+        res.setHeader('Content-Type', 'video/mp4');
+
+        video.pipe(res); // Pipe the video stream directly to the response object
+    } catch (error) {
+        console.error('Error downloading the video:', error);
+        throw error;
+    }
+}

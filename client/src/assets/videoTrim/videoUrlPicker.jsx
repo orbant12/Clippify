@@ -22,15 +22,34 @@ const handleUrlChange = async (event) => {
 const handleConvert = async () => {
   try {
     setLoading(true);
-    const file = await fetch(videoUrl).then((response) => response.blob());
-    // Create a file object with a random name
+    const youtubeMP4_response = await fetch(`http://localhost:3000/youtube-mp4`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ videoUrl }),
+    });
+
+    if (!youtubeMP4_response.ok) {
+        throw new Error('Failed to fetch MP4 file');
+    }
+
+    // Retrieve the response body as an ArrayBuffer
+    const arrayBuffer = await youtubeMP4_response.arrayBuffer();
+
+    // Create a Blob from the ArrayBuffer
+    const mp4Blob = new Blob([arrayBuffer], { type: 'video/mp4' });
+
+    // Now you can use the mp4Blob as needed, for example, you can create a File object from it
     const fileName = `video_${Math.floor(Math.random() * 100000)}.mp4`;
-    const videoFile = new File([file], fileName, { type: 'video/mp4' });
-    await handleChange(videoFile); // Pass the video file to the parent component
+    const mp4File = new File([mp4Blob], fileName, { type: 'video/mp4' });
+
+    // Pass the video file to the parent component if needed
+    await handleChange(mp4File);
     
   } catch (error) {
     if(error.message === 'Failed to fetch'){
-      alert('This Video protected by law and cannot be downloaded. Convert it to mp4 format and upload it !')
+      alert(error)
     }
     console.error('Error fetching or converting the video:', error);
 
@@ -48,6 +67,7 @@ return showVideo ? (
 
 ) : (
   <div className={`url-picker`}>
+    <h5>Insert your Video URL</h5>
     <TextField
       InputProps={{ crossOrigin: 'anonymous' }} 
       fullWidth
