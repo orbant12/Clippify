@@ -317,9 +317,6 @@ const createRelatedFile = async () => {
   }
 };
 
-//CHECKPOINT _____!!!
-
-
 // Pagination NEXT PAGE
 const nextPage = async () => {
   if (currentuser) {
@@ -390,6 +387,8 @@ const fetchPreviousPage = async () => {
   }
 };
 
+
+//CHECKPOINT _____!!!
 
 //SAVE RICH TEXT EDITOR CONTENT
 useEffect(() => {
