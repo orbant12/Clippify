@@ -208,35 +208,43 @@ color: black;
 }
 .no-document{
   text-align: center;
-  padding-top: 100px;
+  padding: 50px;
   font-size: 20px;
   opacity: 0.2;
 }
 
 .no-folder{
   display: flex;
-  flex-direction: column;
-  margin-left: 630px;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
   text-align: center;
   padding: 20px;
   font-size: 20px;
-  opacity: 0.2;
+  opacity: 1;
   color: black;
   transition: ease-in-out .2s;
 }
 .no-folder a{
+  border: 1px solid black;
+  border-radius: 30px;
   padding: 20px;
   font-size: 20px;  
   color: black; 
+  width: 300px;
+  opacity: 0.2;
 }
 
-.no-folder:hover{
+.no-folder a:hover{
+width: 300px;
 cursor: pointer;
 padding: 10px;
 opacity: 1.0;
 border-radius: 20px;
 border: 2px dashed black;
-opacity: 0.8;
+opacity: 1;
 }
 
 .inline_txt{

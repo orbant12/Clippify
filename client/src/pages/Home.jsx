@@ -96,22 +96,25 @@ useEffect(() => {
         //MAKING FOLDER URL ID GLOBAL
         folderUrl(userData.folder_id)
         //FETCHIN FOR RECENT FILE
-        const response =  await fetch(`http://localhost:3000/recent`, {
-            method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ fileChildrenRef }),
-        });
-        if (response.status === 200) {
-          // Document exists, retrieve its data
-          const elementData = await response.json();
-          setRecentFiles(elementData);
-          console.log(elementData.folder_id)
-          folderUrl(elementData.folder_id)
-        } else {
-          console.log("Document does not exist.");
-          setRecentFiles([]); // Set to null or handle accordingly
+        if(fileChildrenRef){
+          const response =  await fetch(`http://localhost:3000/recent`, {
+              method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ fileChildrenRef }),
+          });
+          if (response.status === 200) {
+            // Document exists, retrieve its data
+            const elementData = await response.json();
+            console.log("Element Data" + elementData)
+            setRecentFiles(elementData);
+            console.log(elementData.folder_id)
+            folderUrl(elementData.folder_id)
+          } else {
+            console.log("Document does not exist.");
+            setRecentFiles([]); // Set to null or handle accordingly
+          }
         }
       }
     } catch(err) {
@@ -143,7 +146,7 @@ return (
     <div className="folder-card-container" style={{padding:50}}>
    
         {/*ADDED DOCUMENT*/}
-        {recentFiles.length === 0 ? (
+        {recentFiles.length == 0 ? (
           <div className="no-document">No Recent Clips's added</div>
         ) : (
           <Link to={`/folder/${recentFiles.folder_id}/${recentFiles.id}`}>
@@ -168,7 +171,7 @@ return (
         {/*ADDED FOLDER*/}
         {folders.length === 0 ? (
           <div className="no-folder">
-            <a href="/memory" className='no-folder-a' >No Folders Yet <br />
+            <a href="/memory" className='no-folder-a' >No Folder Added ! <br /> <span style={{fontSize:15}}>Click to Create ..</span><br />
               <div className='inline_txt'><CreateNewFolderIcon sx={{mt:3,pt:0}}/></div>
             </a>
           </div>
