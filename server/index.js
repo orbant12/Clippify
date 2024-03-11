@@ -239,9 +239,11 @@ app.post('/file/children/:id', async (req, res) => {
 //FETCH RECENT FILE -- NOT WORKING
 app.post('/recent', async (req, res) => {
     try {
-        const id = req.body.fileChildren;
-       
-        const recentFile = await id.get();
+        const id = req.body.fileChildrenRef;
+        console.log("2" + id)
+        const transformedFromJson = JSON.parse(id)
+        console.log("2" + transformedFromJson)
+        const recentFile = await transformedFromJson.get();
         const recentFileData = recentFile.data();
         res.json(recentFileData);
     } catch (error) {

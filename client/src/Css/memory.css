@@ -126,18 +126,15 @@
 
 /*COLOR PICKER Save Btn*/
 
-.color_saver.btn-add-file {
+.color_saver .btn-add-file {
     outline: 0;
     border: 0;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
     max-width: 140px;
     height: 50px;
     border-radius: 0.5em;
     box-shadow: 0 0.625em 1em 0 rgba(30, 143, 255, 0.35);
     overflow: hidden;
-    margin-left: 300px;
+    margin-left: 150px;
     margin-top: -30px;
 }
     
@@ -211,7 +208,7 @@
 
 .color-picker{
     border-radius: 30px;
-    margin-top: 10px;
+    margin-top: 0px;
     width: 200px;
 }
 
@@ -243,6 +240,7 @@
     box-shadow: 0 10px 20px rgba(51, 51, 51, 0.2);
     transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
     margin-right: 90px;
+    margin-top: -13px;
 }
 
 .btn-add-file::before {
