@@ -1,6 +1,6 @@
 # Clippify README
 
-Welcome to Clippify, a comprehensive and multifaceted project that showcases my mastery of various technologies and skills relevant to the tech industry. This README is designed to provide a detailed insight into the key components and accomplishments of this project, specifically tailored for a tech job recruiter.
+Welcome to Clippify, a comprehensive and multifaceted project that showcases my mastery of various technologies and skills relevant to the tech industry. This README is designed to provide a detailed insight into the key components and accomplishments of this project, specifically tailored for a tech job recruiter
 
 ### Table of Contents
 1. [Technologies Used](#technologies-used)
