@@ -138,13 +138,12 @@ return (
       <h2 className='cloud-title'>Cloud Storage</h2>
     </div>
   </div>
-<hr />
+  <hr className='divider-home' />
     {/*RECENTLY ADDED*/}
     <div className="memory_title">
       <h2>Recently Openned</h2>
     </div>
     <div className="folder-card-container" style={{padding:50}}>
-   
         {/*ADDED DOCUMENT*/}
         {recentFiles.length == 0 ? (
           <div className="no-document">No Recent Clips's added</div>
@@ -161,10 +160,10 @@ return (
           </Link>
         )}
       </div>
-    <hr />
+      <hr className='divider-home' />
     {/*FODLER ADDED*/}
     <div className="memory_title" >
-      <h2>Your Memory</h2>
+      <h2>Your Folders</h2>
     </div>
     <div className="folder-card-container" > 
       <div className="folder-card-box" >
