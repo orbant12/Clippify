@@ -52,6 +52,7 @@ const [isEditing, setIsEditing] = useState(false);
 //FILE CREATION
 const [userFile, setUserFile] = useState([]);
 const [fileTitle , setFileTitle] = useState("Untitled")
+const [fileTag, setFileTag ] = useState("")
 const [fileImage, setFileImage] = useState("")
 const [trimmedVideoFile, setTrimmedVideoFile] = useState(null);
 const [audioFile, setAudioFile] = useState(null);
@@ -194,7 +195,7 @@ const createFile = async () => {
     // Image URL
     const userFileImage = fileImage
     // TAG NAME 
-    const userTag = tag
+    const userTag = fileTag
     //VIDEO SIZE
     const videoSize = metaData.videoSize 
     // DURATION
@@ -298,13 +299,15 @@ const createFile = async () => {
     if (createResponse.status === 200) {
       // Document exists, retrieve its data
       const StatusLog = await createResponse.json();
-      console.log(StatusLog)
+      //Success Alert the client
+      alert("Your clip has been uploaded succesfully !")
     }else if (createResponse.status === 400) {
       alert("Something went wrong, try refreshing the page !");
     }
     //UPDATE LOCAL SCREEN
     await fetchData()
     await fetchUserFolder()
+
   }else{
     alert("Clip is too long for free users ! If you want to save longer then 10 minutes clips, please upgrade your account !")
   }
@@ -399,54 +402,55 @@ const navigateBack = () => {
 
 
 return(
-
-<Container fluid style={{width:"85%",justifyContent:"center",alignItems:"center"}} >
-  <Row style={{width:"100%",marginRight:"auto",marginLeft:"auto",paddingTop:50,alignItems:"center",justifyContent:"space-between"}}>
-    <Col >
-    {isEditing ? (
-          <input
-            className="folder-input-change"
-            type="text"
-            value={newTitle}
-            onChange={handleTitleChange}
-            onKeyPress={handleKeyUp}
-            autoFocus
-          />
-        ) : (
-          <h2 className="first_bar-txt" onClick={handleTitleClick}>
-            {newTitle}
-          </h2>
-        )}
-        {isEditing ? 
-          <h5 style={{opacity:0.8,paddingTop:5}}>Press Enter to OK</h5>:null
-        }
-    </Col>
-   
-      <Col className='col-auto folder-edit-btn' style={{cursor:"pointer"}} >
-          <DesignServicesIcon onClick={handleTitleClick}/>
+<div style={{display:"flex",flexDirection:"column",width:"100%"}}>
+  <Container fluid style={{width:"85%",justifyContent:"center",alignItems:"center"}} >
+    <Row style={{width:"80%",marginRight:"auto",marginLeft:"auto",paddingTop:50,alignItems:"center",justifyContent:"space-between"}}>
+      <Col >
+      {isEditing ? (
+            <input
+              className="folder-input-change"
+              type="text"
+              value={newTitle}
+              onChange={handleTitleChange}
+              onKeyPress={handleKeyUp}
+              autoFocus
+            />
+          ) : (
+            <h2 className="first_bar-txt" onClick={handleTitleClick}>
+              {newTitle}
+            </h2>
+          )}
+          {isEditing ? 
+            <h5 style={{opacity:0.8,paddingTop:5}}>Press Enter to OK</h5>:null
+          }
       </Col>
-      <Col className='col-auto folder-delete-btn' style={{cursor:"pointer"}} >
-          <DeleteIcon onClick={handleDelete}/>
+    
+        <Col className='col-auto folder-edit-btn' style={{cursor:"pointer"}} >
+            <DesignServicesIcon onClick={handleTitleClick}/>
+        </Col>
+        <Col className='col-auto folder-delete-btn' style={{cursor:"pointer"}} >
+            <DeleteIcon onClick={handleDelete}/>
+        </Col>
+  
+    </Row>
+
+    <Row style={{marginTop:10}}>
+      <Col>
+      {userFile.map((file) => (
+        <Link to={`/folder/${id}/${file.id}`}>
+        <div key={file.id}>
+          <FileCard imgSrc={file.img} title={file.title} tags={file.tag} video_size={file.video_size} />
+        </div>
+        </Link>
+      ))}
       </Col>
- 
-  </Row>
-  <Row style={{marginTop:50}}>
-    <Col>
-    {userFile.map((file) => (
-      <Link to={`/folder/${id}/${file.id}`}>
-      <div key={file.id}>
-        <FileCard imgSrc={file.img} title={file.title} tags={file.tag} video_size={file.video_size} />
-      </div>
-      </Link>
-    ))}
-    </Col>
-  </Row>
+    </Row>
 
-<Row>
-<Example handleUploadTrigger={createFile} setTitleInput={setFileTitle} setFileImageEXT={setFileImage} setExtractMetaEXT={setMetaData} setPassedAudioDataUrlEXT={setAudioFile} setVideoUrlEXT={setTrimmedVideoFile} />
-</Row>
-</Container>
-
+  <Row>
+    <Example setTagInput={setFileTag} handleUploadTrigger={createFile} setTitleInput={setFileTitle} setFileImageEXT={setFileImage} setExtractMetaEXT={setMetaData} setPassedAudioDataUrlEXT={setAudioFile} setVideoUrlEXT={setTrimmedVideoFile} />
+  </Row>
+  </Container>
+</div>
 )
 }
 

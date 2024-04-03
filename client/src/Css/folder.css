@@ -6,6 +6,7 @@
   display: grid;
   grid-template-columns: 1fr;
   align-items: center;
+  border: 1px solid green;
 }
 
 .no-doc{
@@ -46,7 +47,7 @@
 }
 .img-content{
   width: 250px;
-  border-radius: 20px;
+  border-radius: 10px;
   height: 150px;
 }
 
@@ -207,10 +208,10 @@ color: var(--dark-text-color);
 }
 
 #dark .file-map{
-  border: 2px solid black;
-  border-top-right-radius: 10px;
-  border-top-left-radius: 10px;
-  box-shadow: 8px 8px 0px var(--dark-primary-color);
+  border: 0px solid black;
+  border-radius: 10px;
+  background-color: rgb(18, 18, 18);
+  box-shadow: inset 1px 1px 4px 1px black;
 }
 
 #dark .file-map:hover{
@@ -437,10 +438,10 @@ color: var(--text-color);
 }
 
 #light .file-map{
-  border: 2px solid black;
-  border-top-right-radius: 10px;
-  border-top-left-radius: 10px;
-  box-shadow: 10px 5px 2px rgb(38, 38, 38);
+  border: 0px solid black;
+  border-radius: 10px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: inset 1px 1px 4px 1px black;
 }
 
 #light .file-map:hover{

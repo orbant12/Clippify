@@ -7,7 +7,7 @@ import '../../Css/folder.css'
 export default function BasicSpeedDial({togglePopup}) {
 
   return (
-    <Box id="add-btn-fodler" sx={{ height: 320, transform: 'translateZ(0px)', flexGrow: 1 }}>
+    <Box id="add-btn-fodler" sx={{ width:200, height: 320, transform: 'translateZ(0px)', flexGrow: 1 }}>
       <SpeedDial 
         onClick={togglePopup}
         ariaLabel="SpeedDial basic example"

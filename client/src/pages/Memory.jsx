@@ -126,7 +126,8 @@ return (
 <div className="memory">
 
     <div className="memory_title_memory">
-      <h2>Your Memory</h2>
+      <h2>Your Folders</h2>
+      <h6>Click on the folder to open and <span style={{borderBottom:"1px solid white"}}>see/add</span> your videos</h6>
     </div>
     <div className="ag-format-container">
       <div className="ag-courses_box" id="div-container">

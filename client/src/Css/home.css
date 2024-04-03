@@ -11,16 +11,32 @@
   overflow: hidden;
 }
 
-.cloud{
+#dark .cloud{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    padding-right: 50px;
+    background-color: rgb(0, 0, 0);
+    padding: 20px;
+    border-radius: 30px;
+    box-shadow: 1px 1px 3px 5px rgb(0, 0, 0);
+}
+
+#light .cloud{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgb(255, 255, 255);
+  padding: 20px;
+  border-radius: 30px;
+  border: 1px groove white;
+  box-shadow: 1px 1px 1px 0px rgb(255, 255, 255);
 }
 
 .cloud-title{
-    font-size: 20px;
+    font-size: 18px;
+    opacity: 0.6;
 }
 
 .welcome-row{
@@ -54,7 +70,7 @@
 }
 
 .memory_title h2 {
-    padding: 10px 30px;
+    padding: 10px 25px;
     font-size: 25px;
     border-radius: 10px;
     box-shadow: inset -1px -1px 6px 1px rgb(173, 173, 173);

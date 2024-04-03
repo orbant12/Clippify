@@ -92,24 +92,25 @@ useEffect(() => {
   const fetchRecent = async () => {
     try{
       if (userData !== null) {
-        const fileChildrenRef = userData.recent;
-        //MAKING FOLDER URL ID GLOBAL
-        folderUrl(userData.folder_id)
+        const recentFileId = userData.recent_file_id;
+        const recentFolderId = userData.recent_folder_id;
         //FETCHIN FOR RECENT FILE
-        if(fileChildrenRef){
+        if(recentFileId){
           const response =  await fetch(`http://localhost:3000/recent`, {
               method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ fileChildrenRef }),
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ 
+                recent_folder_id: recentFolderId,
+                recent_file_id: recentFileId,
+                user_Id: currentuser.uid
+              }),
           });
           if (response.status === 200) {
             // Document exists, retrieve its data
             const elementData = await response.json();
-            console.log("Element Data" + elementData)
             setRecentFiles(elementData);
-            console.log(elementData.folder_id)
             folderUrl(elementData.folder_id)
           } else {
             console.log("Document does not exist.");
@@ -146,7 +147,7 @@ return (
     <div className="folder-card-container" style={{padding:50}}>
         {/*ADDED DOCUMENT*/}
         {recentFiles.length == 0 ? (
-          <div className="no-document">No Recent Clips's added</div>
+          <div className="no-document">No Recent Clips's avalible yet...</div>
         ) : (
           <Link to={`/folder/${recentFiles.folder_id}/${recentFiles.id}`}>
             <FileCard 

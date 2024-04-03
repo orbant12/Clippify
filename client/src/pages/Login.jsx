@@ -16,7 +16,7 @@ import { Link } from 'react-router-dom';
 
 
 const Login = () => {
- 
+
 
 //REGISTER._________________________________________________//
 const {SignUp, currentuser} = useAuth()
@@ -24,7 +24,6 @@ const {SignUp, currentuser} = useAuth()
 const [userNamesArray, setUserNamesArray] = useState([])
 const [user, setUser] = useState({
   FullName: "",
-  userName: "",
   email: "",
   password: "",
 });
@@ -103,17 +102,16 @@ const UserHandler = (e) => {
 const SubmitHandler = async (e) => {
   e.preventDefault()
   const { email, password, FullName, userName } = user;
-  if (password == "" ||  email == "" || FullName == "" || userName == "") {
+  if (password == "" ||  email == "" || FullName == "" ) {
     alert("please fill All the field ")
   } else if (!password.length >= 6 ) {
     alert("Password Must be Greater then 6 Length")
   }else if (userNamesArray.includes(`@${userName}`)){
    alert("Username Already Taken")
   }else{
-    SignUp(email, password, FullName, userName)
+    SignUp(email, password, FullName)
     { currentuser && setUser({
         FullName: "",
-        userName: "",
         email: "",
         password: "",
       })
@@ -126,7 +124,7 @@ useEffect(() => {
   const fetchUsernames = async () => {
     const colRef = collection(db, "users");
     const snapshot = await getDocs(colRef);
-    const usernames = snapshot.docs.map(doc => doc.data().user_name);
+    const usernames = snapshot.docs.map(doc => doc.data().fullname);
     setUserNamesArray(usernames)
   };
   fetchUsernames();
@@ -150,20 +148,12 @@ return (
             onChange={UserHandler}
           />
         </div>
-        <div className='login-input'>
-          <input
-            type='Username'
-            name='userName'
-            placeholder='Username'
-            value={user.userName}
-            onChange={UserHandler}
-          />
-        </div>
+
         <div className='login-input'>
           <input
             type='text'
             name='FullName'
-            placeholder='Fullname'
+            placeholder='Username'
             value={user.FullName}
             onChange={UserHandler}
           />

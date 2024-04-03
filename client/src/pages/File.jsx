@@ -116,14 +116,14 @@ const setRecentlyOpenned = async () => {
   if (currentuser) {
     //USER DATA AND FIRESTORE REFS
     const currentUserId = currentuser.uid;
-    const recentDocRef = `/folder/${folderUrl}/${currentURL}`;
     fetch(`http://localhost:3000/recent/update/${currentUserId}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        recent: recentDocRef,
+        recent_folder_id: folderUrl,
+        recent_file_id: currentURL,
       }),
     });
   }
@@ -537,7 +537,7 @@ return (
     </div>
     <div className='file-page'>
       {/*1 BAR */}
-      <Row style={{width:"80%",marginRight:"auto",marginLeft:"auto",paddingTop:70,alignItems:"center"}}>
+      <Row style={{width:"70%",marginRight:"auto",marginLeft:"auto",paddingTop:70,alignItems:"center"}}>
         <Col >
         {isEditing ? (
               <input
