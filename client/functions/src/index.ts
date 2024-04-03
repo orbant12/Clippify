@@ -6,7 +6,11 @@ import OpenAI from "openai";
 
 // const corsHandler = cors({origin: true});
 
-
+const openai = new OpenAI({
+    organization: "org-1j559n72fko7IZSsTd5gtAAm",
+    apiKey: "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",
+});
+//
 
 // eslint-disable-next-line max-len
 export const openAIHttpFunctionSec = functions.https.onCall(async (data, response) => {
