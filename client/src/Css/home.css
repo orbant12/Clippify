@@ -103,6 +103,7 @@
   align-items: flex-start;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
+  align-items: center;
   
   padding: 50px 0;
 }
@@ -123,6 +124,8 @@
   
   border-radius: 20px;
 }
+
+
 
 .ag-courses-item_link:hover,
 .ag-courses-item_link:hover .ag-courses-item_date {

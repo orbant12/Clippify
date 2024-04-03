@@ -30,58 +30,64 @@ const [folders, setFolders] = useState([]);
 const [recentFiles, setRecentFiles] = useState([]);
 const [userData, setUserData] = useState([]);
 
+const [isPlusClicked,setIsPlusClicked] = useState(false)
+const [folderTitle, setFolderTitle] = useState('');
+const [folderColor, setFolderColor] = useState('');
+
 //<******************************FUNCTIONS*******************************>
+
+//FETCH USER DATA
+const fetchData = async () => {
+  try {
+    if (currentuser) {
+      const currentUserId = currentuser.uid;
+      //const userDocRef = doc(db, "users", currentUserId);
+      const response = await fetch(`http://localhost:3000/user/${currentUserId}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+      });
+      const user = await response.json();
+      if (user) {
+        setUserData(user);
+      } else {
+        console.log("Document does not exist.");
+        setUserData(null); // Set to null or handle accordingly
+      }
+    }
+  } catch (error) {
+    console.error("Error getting document: ", error);
+  }
+};
+
+const fetchUserFolder = async () => {
+  if (!currentuser) {
+    setFolders([]);
+    console.log("No user logged in");
+    return;
+  }
+  // USER ID & FIRESTORE REF
+  const currentUserId = currentuser.uid;
+  //const colRef = collection(db, "users", currentUserId, "File-Storage");
+const folderResponse = await fetch(`http://localhost:3000/user/folder/get/${currentUserId}`,{
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+  if (folderResponse.status === 200) {
+    // Document exists, retrieve its data
+    const folderData = await folderResponse.json();
+    setFolders(folderData);
+  } else {
+    console.log("Document does not exist.");
+    setFolders([]); // Set to null or handle accordingly
+  }   
+}
 
 //UPDATES DEPENDING ON USER "FILE-Storage" DOCS
 useEffect(() => {
-  const fetchUserFolder = async () => {
-    if (!currentuser) {
-      setFolders([]);
-      console.log("No user logged in");
-      return;
-    }
-    // USER ID & FIRESTORE REF
-    const currentUserId = currentuser.uid;
-    //const colRef = collection(db, "users", currentUserId, "File-Storage");
-  const folderResponse = await fetch(`http://localhost:3000/user/folder/${currentUserId}`,{
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-    if (folderResponse.status === 200) {
-      // Document exists, retrieve its data
-      const folderData = await folderResponse.json();
-      setFolders(folderData);
-    } else {
-      console.log("Document does not exist.");
-      setFolders([]); // Set to null or handle accordingly
-    }   
-  }
-    //FETCH USER DATA
-  const fetchData = async () => {
-      try {
-        if (currentuser) {
-          const currentUserId = currentuser.uid;
-          //const userDocRef = doc(db, "users", currentUserId);
-          const response = await fetch(`http://localhost:3000/user/${currentUserId}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-          });
-          const user = await response.json();
-          if (user) {
-            setUserData(user);
-          } else {
-            console.log("Document does not exist.");
-            setUserData(null); // Set to null or handle accordingly
-          }
-        }
-      } catch (error) {
-        console.error("Error getting document: ", error);
-      }
-  };
   // Call fetchData
   fetchData();
   fetchUserFolder();
@@ -125,6 +131,63 @@ useEffect(() => {
   fetchRecent();
 }, [userData]);
 
+// POP UP INPUTS
+const togglePopup = () => {
+  setIsPlusClicked(!isPlusClicked);
+};
+
+
+// SETDOCS DETAILS.
+function addFolder() {
+  if (currentuser) {
+    // USER ID & FIRESTORE REF
+    const currentUserId = currentuser.uid;
+    //CUSTOM FOLDER NON STRING UID
+    const folderUID = Math.random().toString(36).substring(2, 15);
+    //const docRef = collection(db, 'users', currentUserId, 'File-Storage');
+    // CREATED FOLDER DETAILS
+    const newFolder = {
+      title: folderTitle,
+      color: folderColor,
+      id: folderUID,
+      files_count: 0,
+    };
+    // HTTP POST
+    fetch(`http://localhost:3000/folder-create/${currentUserId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({folderData:newFolder,folderId:folderUID}),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        alert("Folder Added Successfully")
+        fetchUserFolder();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+}
+
+// CLICKED ON SUBMIT.
+function handleSubmit(e) {
+  if (folderTitle !== '' && folderColor !== '') {
+    e.preventDefault();
+    // POP UP CLOSE
+    togglePopup();
+    // ADD FOLDER TRIGGER
+    addFolder();
+    //FETC
+    fetchData()
+    // INPUT LISTENERS BACK TO DEFAULT
+    setFolderTitle('');
+    setFolderColor('');
+  } else {
+    alert('Please fill all the fields');
+  }
+}
 
 return (
 <div className="home">
@@ -169,6 +232,81 @@ return (
     <div className="folder-card-container" > 
       <div className="folder-card-box" >
         {/*ADDED FOLDER*/}
+        {!isPlusClicked ? (
+            <div
+              className="ag-courses_item"
+              id="popOpen"
+              onClick={togglePopup}
+            >
+              <a className="ag-courses-item_link" id='add_item_bg'> 
+                <div className="ag-courses-item_bg"></div>
+
+                <div className="ag-courses-item_title" style={{alignItems:"center",display:"flex",flexDirection:"row",justifyContent:"start",height:"100%"}}>
+                  <h4>+</h4>
+                  <h5 style={{paddingLeft:10,fontWeight:600,fontSize:23}}>Create Folder</h5>
+                </div>
+              </a>
+            </div>
+          ) : (
+            <div className={`popup`} id="popup-plus" onSubmit={handleSubmit}>
+              <div className="content-popup">
+                <div
+                  className="close-btn"
+                  onClick={togglePopup}
+                  id="popClose"
+                >
+                  &times;
+                </div>
+                <h1 className="popup-title">Create File</h1>
+                <div className="wave-group">
+                  <input
+                    value={folderTitle}
+                    type="text"
+                    className="input"
+                    id="user-container-title"
+                    onChange={(e) => setFolderTitle(e.target.value)}
+                  />
+                  <span className="bar"></span>
+                  <label className="label">
+                    <span className="label-char" style={{ '--index': 0 }}>
+                      T
+                    </span>
+                    <span className="label-char" style={{ '--index': 1 }}>
+                      i
+                    </span>
+                    <span className="label-char" style={{ '--index': 2 }}>
+                      t
+                    </span>
+                    <span className="label-char" style={{ '--index': 3 }}>
+                      l
+                    </span>
+                    <span className="label-char" style={{ '--index': 4 }}>
+                      e
+                    </span>
+                  </label>
+                  <div className="colorDiv">
+                    <p>Pick a Color</p>
+                    <div className="bottom-add-folder">
+                      <span className="color-picker">
+                        <label>
+                          <input
+                            type="color"
+                            value={folderColor}
+                            onChange={(e) => setFolderColor(e.target.value)}
+                            id="colorPicker"
+                          />
+                        </label>
+                      </span>
+                      <button
+                        className="btn-add-file"
+                        onClick={handleSubmit}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        )}
         {folders.length === 0 ? (
           <div className="no-folder">
             <a href="/memory" className='no-folder-a' >No Folder Added ! <br /> <span style={{fontSize:15}}>Click to Create ..</span><br />

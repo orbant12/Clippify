@@ -226,9 +226,13 @@
 
 #colorPicker{
     border: none;
-    height: 40px;
-    width: 100px;
-    padding: 0px;
+    height: 30px;
+    width: 80px;
+    border-radius: 50px;
+    border: 3px solid black;
+    background-color: transparent;
+    padding: 5px;
+    cursor: pointer;
 }
 
 .popup-title{
@@ -243,8 +247,8 @@
     font-size: 13px;
     font-weight: 600;
     border-radius: 10px;
-    width: 120px;
-    height: 60px;
+    width: 100px;
+    height: 50px;
     border: none;
     text-transform: uppercase;
     cursor: pointer;
@@ -383,8 +387,34 @@
     position: relative;
 }
 
-.ag-courses-item_bg_plus{
-    background-color: none;
+
+#dark #add_item_bg{
+    background-color: #121212;
+    border: 4px solid black;
+    padding: 10px 20px;
+    height: 150px;
+}
+
+#dark #add_item_bg:hover{
+    background-color: #000000;
+    cursor: pointer;
+    padding: 10px 20px;
+    height: 150px;
+}
+
+#light #add_item_bg{
+    background-color: #ffffff;
+    border: 4px solid black;
+    padding: 10px 20px;
+    height: 150px;
+}
+
+#light #add_item_bg:hover{
+    background-color: #b9f0f8;
+    border: 4px solid #23d7f3;
+    cursor: pointer;
+    padding: 10px 20px;
+    height: 150px;
 }
 
 
@@ -393,38 +423,35 @@
 /*LIGHT MODE*/
 #light  .memory_title_memory h2{
     color: var(--text-color);;
-      }
-      
+    }  
     #light .popup .content-popup {
         background:white;
         border: 3px solid black;
-      }
+    }
     /*DARK MODE*/
     #dark  .memory_title_memory h2{
         color: var(--dark-text-color);;
-          }
-          
+    }      
     #dark .popup .content-popup {
             background:var(--dark-primary-color-light);
             border: 3px solid black;
-          } 
+    } 
+
     
-          #dark .popup .popup-title {
-            color: var(--dark-text-color);
-       
-          } 
+    #dark .popup .popup-title {
+    color: var(--dark-text-color);
+    } 
     
-          #dark .popup .label-char{
-            color: var(--dark-primary-color);
-          
-          }
-    
-          #dark .colorDiv p{
-            color: var(--dark-primary-color);
-          }
-          #dark #colorPicker{
-            background-color: var(--dark-primary-color-light);
-          }
+    #dark .popup .label-char{
+    color: var(--dark-primary-color);
+    }
+
+    #dark .colorDiv p{
+    color: var(--dark-primary-color);
+    }
+    #dark #colorPicker{
+    background-color: var(--dark-primary-color-light);
+    }
 
 @media (max-width: 768px) {
 .memory .ag-format-container {

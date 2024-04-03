@@ -78,7 +78,7 @@ app.post('/user/tags/create', async (req, res) => {
 //<****************************FOLDER*******************************>
 
 // GET ALL USER SPECIFIC FOLDERS -- Many Folders
-app.get('/user/folder/:id', async (req, res) => {
+app.get('/user/folder/get/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const folders = await db.collection('users').doc(id).collection('File-Storage').get();

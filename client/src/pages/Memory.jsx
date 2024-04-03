@@ -34,23 +34,25 @@ const fetchUserFolder = async () => {
     console.log("No user logged in");
     return;
   }
-  // USER ID & FIRESTORE REF
-  const currentUserId = currentuser.uid;
-  //const colRef = collection(db, "users", currentUserId, "File-Storage");
-const folderResponse = await fetch(`http://localhost:3000/folder/${currentUserId}`,{
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-  if (folderResponse.status === 200) {
-    // Document exists, retrieve its data
-    const folderData = await folderResponse.json();
-    setFolders(folderData);
-  } else {
-    console.log("Document does not exist.");
-    setFolders([]); // Set to null or handle accordingly
-  }   
+  if(currentuser){
+    // USER ID & FIRESTORE REF
+    const currentUserId = currentuser.uid;
+    //const colRef = collection(db, "users", currentUserId, "File-Storage");
+      const folderResponse = await fetch(`http://localhost:3000/user/folder/get/${currentUserId}`,{
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    if (folderResponse.status === 200) {
+      // Document exists, retrieve its data
+      const folderData = await folderResponse.json();
+      setFolders(folderData);
+    } else {
+      console.log("Document does not exist.");
+      setFolders([]); // Set to null or handle accordingly
+    }
+  }
 }
 
 // UPDATES DEPENDING ON USER "FILE-Storage" DOCS.
