@@ -10,8 +10,7 @@ import '../../Css/folder.css'
 
   
   const Item = styled(Paper)(({ theme, isSelected }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    ...theme.typography.body2,
+
     padding: theme.spacing(1),
     textAlign: 'center',
     color: theme.palette.text.secondary,
@@ -37,7 +36,7 @@ import '../../Css/folder.css'
           className='card-stack'
         >
           <Item 
-            className={`card-item`}
+            className="card-item"
             onClick={() => handleItemClick(0)}
             isSelected={selectedItem === 0}
           ><div className='item-box-link'>

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import './global.css'
 import 'firebase/functions';
+import { ApiLocataion } from '../../firebase';
 
 function VideoUrlPicker({ showVideo, handleChange, children }) {
 
@@ -21,7 +22,7 @@ const handleUrlChange = async (event) => {
 const handleConvert = async () => {
   try {
     setLoading(true);
-    const youtubeMP4_response = await fetch(`http://localhost:3000/youtube-mp4`, {
+    const youtubeMP4_response = await fetch(`${ApiLocataion}/youtube-mp4`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

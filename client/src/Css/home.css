@@ -90,7 +90,8 @@
     flex-direction: column;
     align-items: left;
     justify-content: center;
-    width: 100%; 
+    width: 100%;
+    margin-top: -10px;
     
 }
   

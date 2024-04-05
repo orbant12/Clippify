@@ -16,7 +16,7 @@ import '../Css/pricing.css';
 //FIREBASE
 import { app } from "../firebase";
 
-
+import { ApiLocataion } from '../firebase';
 
 const Subscription = () =>{
 
@@ -85,7 +85,7 @@ useEffect(() => {
             if (currentuser) {
                 const currentUserId = currentuser.uid;
                 //FETCH USER DATA
-                const response = await fetch(`http://localhost:3000/user/${currentUserId}`, {
+                const response = await fetch(`${ApiLocataion}/user/${currentUserId}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',

@@ -12,6 +12,9 @@ import { signInWithPopup, GoogleAuthProvider, sendPasswordResetEmail} from "fire
 import { collection, doc, setDoc} from "firebase/firestore";
 import { Link } from 'react-router-dom';
 
+//IMAGES
+import googleIcon from "../assets/Images/google.svg"
+
 const SignIn = () => { 
 
 
@@ -145,6 +148,16 @@ return(
           <button type='submit'>Sign in</button>
         </div>
       </form>
+    </div>
+        {/*OR*/}
+        <h6 style={{opacity:0.6,marginTop:10}}>
+        or
+    </h6>
+    {/*GOOGLE*/}
+    <div className='other-form'>
+      <div className='google-btn' onClick={googleSignIn}>
+        <img src={googleIcon} alt="" />
+      </div>
     </div>
     <div className='login-bottom'>
       <h6>Not a user yet ? <a href='/register'>Register</a></h6>

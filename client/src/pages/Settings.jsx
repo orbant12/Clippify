@@ -238,7 +238,7 @@ return(
                 <h5 className='text-settings'>User Name</h5>
                 <h6 style={{opacity:0.6}}>Type inside of the block</h6>
             </div>
-            <input type="text" style={{width:300}} value={newUsername} onChange={handleUsername} />
+            <input type="text" value={newUsername} onChange={handleUsername} />
             <div>
                 <button className='submit-settings-btn' onClick={handleSaveButtonUserName} >Save</button>
             </div>
@@ -252,8 +252,8 @@ return(
                 <h6 style={{opacity:0.6}}>Security</h6>
             </div>
             <div className='pass-inputs'>
-                <input type="password" style={{width:300}} placeholder="New Password" value={password} onChange={handlePassword}/>
-                <input type="password" style={{width:300}} placeholder="Confirm New Password" value={confirmPassword} onChange={handleConfirmPassword}/>
+                <input type="password" placeholder="New Password" value={password} onChange={handlePassword}/>
+                <input type="password" placeholder="Confirm New Password" value={confirmPassword} onChange={handleConfirmPassword}/>
                 {passMatch === true?
                     <div style={{display:"flex",flexDirection:"row",color:"green"}}>
                         <CheckIcon />
@@ -291,7 +291,7 @@ return(
             <button className='submit-settings-btn' onClick={handleUpload}>Upload</button>    
         </div>
 
-        <hr style={{marginTop:100}} />
+        <hr style={{marginTop:50}} />
 
         <div className='profile-first-row-details'>
             <div>
@@ -325,7 +325,7 @@ return(
             </div>
         </div>
 
-        <hr style={{marginTop:50}} />
+        <hr style={{marginTop:50,boxShadow:"1px 1px 6px 5px black"}} />
     </div>
     {/*Payment*/}
     <div className='payment-settings' id='payment-settings'>
@@ -371,7 +371,7 @@ return(
 
             <div className='card-selection'/>
         </div>
-        <hr style={{marginTop:50}} />
+        <hr style={{marginTop:50,boxShadow:"1px 1px 6px 5px black"}} />
     </div>
 
     {/*SUpport*/}
@@ -412,7 +412,7 @@ return(
             </div>
             
         </div>
-        <hr style={{marginTop:50}} />
+        <hr style={{marginTop:50,boxShadow:"1px 1px 6px 5px black"}} />
     </div>
 
     {/*History*/}
@@ -459,9 +459,9 @@ return(
                         payment && payment.id ? (
                             <div key={payment.id} className='history-data-row'>
                                 <h6>{payment.items[0].price.product.name}</h6>
-                                <h6 style={{paddingRight:110}}>{payment.created.toDate().toLocaleString('en-US', {year: 'numeric',month: '2-digit',day: '2-digit',hour: '2-digit',minute: '2-digit',second: '2-digit',hour12: false,})}</h6>
-                                <h5 style={{paddingRight:126,fontWeight:600}}>{payment.status}</h5>
-                                <h5 style={{paddingRight:12}}>{payment.items[0].price.unit_amount/100}$</h5>
+                                <h6 >{payment.created.toDate().toLocaleString('en-US', {year: 'numeric',month: '2-digit',day: '2-digit',hour: '2-digit',minute: '2-digit',second: '2-digit',hour12: false,})}</h6>
+                                <h5 style={{fontWeight:600}}>{payment.status}</h5>
+                                <h5>{payment.items[0].price.unit_amount/100}$</h5>
                             </div>
                         ):null
                     ))}

@@ -39,13 +39,13 @@ useEffect(() => {
     console.log(user)
     if (user) {
       setuser(user)
-      console.log("u are logged in")
-      if(window.location.pathname == "/login" && window.location.pathname == "/register"){
+      console.log(`Logged in user: ${user.uid}`)
+      if(window.location.pathname == "/login" || window.location.pathname == "/register"){
         window.location.href = "/"
       }
     }
     else {
-      if(window.location.pathname != "/login" && window.location.pathname != "/register" && window.location.pathname != "/support/contact-us" && window.location.pathname != "/support/feedback" && window.location.pathname != "/policies/legal" && window.location.pathname != "/policies/legal/terms" && window.location.pathname != "/policies/legal/cookie-policy" && window.location.pathname != "/policies/legal/privacy-policy" && window.location.pathname != "/policies/legal/acceptable-use-policy" && window.location.pathname != "/policies/security" && window.location.pathname != "/landing" && window.location.pathname != "/policies"){
+      if(window.location.pathname == "/" || window.location.pathname == "/memory"){
           window.location.href = "/landing"
         }
     }

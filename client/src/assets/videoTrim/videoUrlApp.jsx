@@ -9,6 +9,7 @@ import './global.css'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import Form from 'react-bootstrap/Form';
 import OutputVideo2 from "./outputNoDown"
+import { ApiLocataion } from "../../firebase";
 
 //CONTEXT
 import {useAuth} from "../../context/UserAuthContext";
@@ -76,7 +77,7 @@ const { currentuser } = useAuth();
 const fetchUserTags = async () => {
   if(currentuser){
     //FETCH TAGS
-    const userSnapshot = await fetch(`http://localhost:3000/user/tags/${currentuser.uid}`, {
+    const userSnapshot = await fetch(`${ApiLocataion}/user/tags/${currentuser.uid}`, {
       method: 'GET',
       headers: {
           'Content-Type': 'application/json',
@@ -387,7 +388,7 @@ const handleMediaTag = (event) => {
 const handleCreateTag = async () => {
   const userAddedTag = newTagInput;
   if(currentuser){
-    const response = await fetch(`http://localhost:3000/user/tags/create`,{
+    const response = await fetch(`${ApiLocataion}/user/tags/create`,{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

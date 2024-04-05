@@ -14,6 +14,10 @@ import { auth, db} from "../firebase";
 import { collection, doc, getDocs, setDoc} from "firebase/firestore";
 import { Link } from 'react-router-dom';
 
+//IMAGES
+import googleIcon from "../assets/Images/google.svg"
+
+
 
 const Login = () => {
 
@@ -31,58 +35,51 @@ const [user, setUser] = useState({
 
 // GOOGLE PROVIDER__________________________//
 const provider = new GoogleAuthProvider();
+
 const googleSignIn = async () => {
-  try{
-    // "signInWithPopup" FUNCTION
+  try {
     const result = await signInWithPopup(auth, provider);
-    const curruser = result.user
-    //FIRESTORE REF
+    const curruser = result.user;
     const colRef = collection(db, "users");
-    //USER ID
     const customDocId = curruser.uid;
-    //DISPLAY NAME
     const userFullname = curruser.displayName;
-    //EMAIL
-    const userName = "@"+"user"+Math.floor(Math.random() * 100000);
     const userEmail = curruser.email;
-    //PROFILE IMG URL
-    const  profilePictureURL = curruser.photoURL
-    //TAG FIRESTORE REF
+    const profilePictureURL = curruser.photoURL;
     const tagRef = collection(db, "users", customDocId, "Tags");
     const newTagRef = doc(tagRef);
-    //TAG DEFAULT ADD
     const basicTag = {
-      tags:[
-        "None"
-      ]
+      tags: ["None"]
     };
-    try{
-      //SET USER DATA TO FIRESTORE
-      await setDoc(doc(colRef, customDocId), {
-        id: customDocId,
-        fullname: userFullname,
-        email: userEmail,
-        subscription: false,
-        profilePictureURL: profilePictureURL,
-        storage_take: 0,
-        user_since: new Date().toLocaleDateString(),
-        followers: 0,
-        description:"",
-        user_name: userName,
-      });
-      //SETTING DEFAULT TAGS
-      await setDoc(newTagRef,basicTag);
-      console.log("Success Storing Google Document");
-    } catch(err) {
-      console.log(err)
-      console.log("Failed Setting user Documents");
-    };  
+
+    await setDoc(doc(colRef, customDocId), {
+      id: customDocId,
+      fullname: userFullname,
+      email: userEmail,
+      subscription: false,
+      profilePictureURL: profilePictureURL,
+      storage_take: 0,
+      user_since: new Date().toLocaleDateString(),
+      followers: 0,
+      description: ""
+    });
+
+    await setDoc(newTagRef, basicTag);
+    console.log("Success Storing Google Document");
     console.log("Successful Login With Google");
-  } catch(error) {
-    console.log(error.message)
-    console.log("Failed The signinwithPopup function");
-  };
+  } catch (error) {
+    if (error.code === "auth/popup-closed-by-user") {
+      console.log("User closed the login popup.");
+      // Inform the user that the login process was interrupted
+      // and provide them with an option to retry.
+      // For example:
+      alert("Login process was interrupted. Please try again.");
+    } else {
+      console.log(error.message);
+      console.log("Failed to sign in with Google.");
+    }
+  }
 };
+
 
 
 
@@ -137,6 +134,7 @@ return (
       <h1>Register</h1>
       <hr />
     </div>
+    {/*FORMS*/}
     <div className='login-form'>
       <form onSubmit={SubmitHandler}>
         <div className='login-input'>
@@ -172,8 +170,18 @@ return (
         </div>
       </form>
     </div>
+    {/*OR*/}
+    <h6 style={{opacity:0.6,marginTop:10}}>
+        or
+    </h6>
+    {/*GOOGLE*/}
+    <div className='other-form'>
+      <div className='google-btn' onClick={googleSignIn}>
+        <img src={googleIcon} alt="" />
+      </div>
+    </div>
     <div className='login-bottom'>
-      <h6>Have an account ? <a href='/register'>Sign up</a></h6>
+      <h6>Have an account ? <a href='/login'>Sign up</a></h6>
     </div>
   </div>
   <Link to={"/support/contact-us"} style={{marginTop:20}}> 

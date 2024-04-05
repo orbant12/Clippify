@@ -31,13 +31,15 @@ const [folderUrl, setFolderUrl] = useState("")
 const [mFileUrl, setMFileUrl] = useState("")
 
 //THEME SWITCH
-const [theme, setTheme] = useState(()=> localStorage.getItem('theme') || 'light');;
+const [theme, setTheme] = useState(()=> localStorage.getItem('theme') || 'dark');;
 
 const toggleTheme = () => {
   const newTheme = theme === 'light' ? 'dark' : 'light';
   setTheme(newTheme);
   localStorage.setItem('theme', newTheme);
 };
+
+
 
 return (
 

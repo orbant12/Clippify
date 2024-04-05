@@ -15,8 +15,10 @@
 }
 .zero_bar-row2{
   position: absolute;
-  left: 30px;
-  top: 70px;
+  left: 150px;
+  top: 20px;
+  width: 60px;
+  z-index: 9999;
 }
 .back-button{
   display: flex;
@@ -1112,16 +1114,21 @@ i.justify-align {
 
 /*RELATED*/
 
+.related{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
 .sec_bar-cont-related{
   display: flex;
   flex-direction: row;
-  width: 1000px;
+  width: 100%;
   justify-content: center;
   margin-top: 70px;
 
-}
-.sec_bar-video-related{
-margin-left: 180px;
 }
 
 /*Full Video Frame*/
@@ -1503,5 +1510,13 @@ padding: 10px;
     border-radius: 40px;
     z-index: 999999;  
     width: 400px;
+  }
+
+  .zero_bar-row2{
+    position: absolute;
+    left: 20px;
+    top: 65px;
+    width: 60px;
+    z-index: 9999;
   }
 }

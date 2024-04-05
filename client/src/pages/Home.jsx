@@ -15,7 +15,7 @@ import FileCard from '../assets/FileAdd/fileCard.jsx'
 import SnippetFolderIcon from '@mui/icons-material/SnippetFolder';
 import CloudSyncIcon from '@mui/icons-material/CloudSync';
 import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
-
+import { ApiLocataion } from '../firebase.js';
 
 export function Home({folderUrl}) {
 
@@ -42,7 +42,7 @@ const fetchData = async () => {
     if (currentuser) {
       const currentUserId = currentuser.uid;
       //const userDocRef = doc(db, "users", currentUserId);
-      const response = await fetch(`http://localhost:3000/user/${currentUserId}`, {
+      const response = await fetch(`${ApiLocataion}/user/${currentUserId}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -70,7 +70,7 @@ const fetchUserFolder = async () => {
   // USER ID & FIRESTORE REF
   const currentUserId = currentuser.uid;
   //const colRef = collection(db, "users", currentUserId, "File-Storage");
-const folderResponse = await fetch(`http://localhost:3000/user/folder/get/${currentUserId}`,{
+const folderResponse = await fetch(`${ApiLocataion}/user/folder/get/${currentUserId}`,{
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -102,7 +102,7 @@ useEffect(() => {
         const recentFolderId = userData.recent_folder_id;
         //FETCHIN FOR RECENT FILE
         if(recentFileId){
-          const response =  await fetch(`http://localhost:3000/recent`, {
+          const response =  await fetch(`${ApiLocataion}/recent`, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -153,7 +153,7 @@ function addFolder() {
       files_count: 0,
     };
     // HTTP POST
-    fetch(`http://localhost:3000/folder-create/${currentUserId}`, {
+    fetch(`${ApiLocataion}/folder-create/${currentUserId}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

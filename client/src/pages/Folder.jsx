@@ -21,7 +21,7 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Example from "../assets/FileAdd/VideoUpload";
-
+import { ApiLocataion } from '../firebase';
 //CSS
 import '../Css/folder.css';
 
@@ -62,6 +62,8 @@ const [tag,setTag] = useState("")
 //Provided LINK/FILE
 const [newTitle, setNewTitle] = useState(folderElements.title);
 
+const [show, setShow] = useState(false);
+
 
 //<******************************FUNCTIONS*******************************>
 
@@ -71,7 +73,7 @@ useEffect(() => {
     if(folderElements.length !== 0){
       const currentUserId = currentuser.uid;
       const urlID = id;
-      fetch(`http://localhost:3000/folder/update-count/${urlID}`,{
+      fetch(`${ApiLocataion}/folder/update-count/${urlID}`,{
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -90,13 +92,13 @@ const fetchData = async () => {
       const currentUserId = currentuser.uid;
       const urlID = id; 
       // Folder ELEMENT FETCH
-      const userSnapshot = await fetch(`http://localhost:3000/user/${currentUserId}`, {
+      const userSnapshot = await fetch(`${ApiLocataion}/user/${currentUserId}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
         },
       });
-      const docSnapshot = await fetch(`http://localhost:3000/folder/${urlID}`, {
+      const docSnapshot = await fetch(`${ApiLocataion}/folder/${urlID}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -138,7 +140,7 @@ const fetchUserFolder = async () => {
   const currentUserId = currentuser.uid;
   const urlID = id;
   //const colRef = collection(db, "users", currentUserId, "File-Storage");
-const folderResponse = await fetch(`http://localhost:3000/folder/file`,{
+const folderResponse = await fetch(`${ApiLocataion}/folder/file`,{
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -218,7 +220,7 @@ const createFile = async () => {
     };
 
     //UPDATE VIDEO
-    const createResponse = await fetch(`http://localhost:3000/folder/file-create/${folderID}`,{
+    const createResponse = await fetch(`${ApiLocataion}/folder/file-create/${folderID}`,{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -265,7 +267,7 @@ const createFile = async () => {
     // Image URL
     const userFileImage = fileImage
     // TAG NAME 
-    const userTag = tag
+    const userTag = fileTag
     //VIDEO SIZE
     const videoSize = metaData.videoSize 
     // DURATION
@@ -289,7 +291,7 @@ const createFile = async () => {
     };
 
     //UPDATE VIDEO
-    const createResponse = await fetch(`http://localhost:3000/folder/file-create/${folderID}`,{
+    const createResponse = await fetch(`${ApiLocataion}/folder/file-create/${folderID}`,{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -311,6 +313,7 @@ const createFile = async () => {
   }else{
     alert("Clip is too long for free users ! If you want to save longer then 10 minutes clips, please upgrade your account !")
   }
+  setShow(false)
   //HIDE POP UP LOGIC
   if (isLinkActive) { 
     setIsLinkActive(false)
@@ -329,7 +332,7 @@ const handleDelete = async () => {
     // USER UID
     const currentUserId = currentuser.uid;
     // FIRESTORE REF TO DELETE
-    const deleteResponse = await fetch(`http://localhost:3000/folder/delete/${folderID}`,{
+    const deleteResponse = await fetch(`${ApiLocataion}/folder/delete/${folderID}`,{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -366,7 +369,7 @@ const handleTitleBlur = async () => {
   //NEW TITLE
   const editedTitle = newTitle;
   if (editedTitle != "") {
-    await fetch(`http://localhost:3000/folder/update-title/${urlID}`,{
+    await fetch(`${ApiLocataion}/folder/update-title/${urlID}`,{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -377,7 +380,7 @@ const handleTitleBlur = async () => {
   } else {
     //IF STAYED EMPTY
     alert("No title were given !")
-    await fetch(`http://localhost:3000/folder/update-title/${urlID}`,{
+    await fetch(`${ApiLocataion}/folder/update-title/${urlID}`,{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -436,18 +439,38 @@ return(
 
     <Row style={{marginTop:10}}>
       <Col>
-      {userFile.map((file) => (
-        <Link to={`/folder/${id}/${file.id}`}>
-        <div key={file.id}>
-          <FileCard imgSrc={file.img} title={file.title} tags={file.tag} video_size={file.video_size} />
-        </div>
-        </Link>
-      ))}
+      {userFile.length != 0 ? (
+        <>
+        {userFile.map((file) => (
+          <Link to={`/folder/${id}/${file.id}`}>
+          <div key={file.id}>
+            <FileCard imgSrc={file.img} title={file.title} tags={file.tag} video_size={file.video_size} />
+          </div>
+          </Link>
+
+        ))}
+        </>
+        ):(
+          <div style={{display:"flex",flexDirection:"column",alignItems:"center",marginTop:150,justifyContent:"center"}}>
+              <h4>No media added yet...</h4>
+              <h6 onClick={() => setShow(true)} style={{padding:"10px 20px",border:"0.1px solid black",borderRadius:240,marginTop:10,cursor:"pointer",background:"black"}}>+ Upload New Media</h6>
+          </div>
+        )}
       </Col>
     </Row>
 
-  <Row>
-    <Example setTagInput={setFileTag} handleUploadTrigger={createFile} setTitleInput={setFileTitle} setFileImageEXT={setFileImage} setExtractMetaEXT={setMetaData} setPassedAudioDataUrlEXT={setAudioFile} setVideoUrlEXT={setTrimmedVideoFile} />
+  <Row style={{width:"100%"}}>
+    <Example
+      triggerPopUp={show}
+      setTagInput={setFileTag}
+      handleUploadTrigger={createFile}
+      setTitleInput={setFileTitle}
+      setFileImageEXT={setFileImage} 
+      setExtractMetaEXT={setMetaData} 
+      setPassedAudioDataUrlEXT={setAudioFile} 
+      setVideoUrlEXT={setTrimmedVideoFile} 
+      handleHideTrigger={() => setShow(false)}
+    />
   </Row>
   </Container>
 </div>

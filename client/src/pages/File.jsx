@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate} from "react-router-dom";
 import { useAuth } from '../context/UserAuthContext';
 //FIREBASE
-import { doc, collection, getDoc, query,setDoc,getDocs,startAfter,limit,endBefore,limitToLast,orderBy,deleteDoc, updateDoc } from "firebase/firestore";
+import { doc,deleteDoc, updateDoc } from "firebase/firestore";
 import { db,storage } from "../firebase";
 import { ref, uploadString, getDownloadURL,deleteObject,uploadBytes } from 'firebase/storage';
 import {v4} from "uuid";
@@ -30,7 +30,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 
 import Example from "../assets/FileAdd/VideoUpload";
-
+import { ApiLocataion } from '../firebase';
 
 function File({prevUrl,mainFileURL}) {
 
@@ -96,7 +96,7 @@ useEffect(() => {
         //USER DATA AND FIRESTORE REF
           const currentUserId = currentuser.uid; 
           const numberOfChild = childrenFiles.length
-          fetch(`http://localhost:3000/file/update-count/${currentURL}`, {
+          fetch(`${ApiLocataion}/file/update-count/${currentURL}`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -116,7 +116,7 @@ const setRecentlyOpenned = async () => {
   if (currentuser) {
     //USER DATA AND FIRESTORE REFS
     const currentUserId = currentuser.uid;
-    fetch(`http://localhost:3000/recent/update/${currentUserId}`, {
+    fetch(`${ApiLocataion}/recent/update/${currentUserId}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -138,8 +138,8 @@ const fetchData = async () => {
       const urlID = folderUrl;
       //Folder ELEMENT FETCH
       //await getDoc(userDocRef);
-      const userSnapshot = await fetch(`http://localhost:3000/user/${currentUserId}`)
-      const docSnapshot = await fetch(`http://localhost:3000/file/${currentURL}`,{
+      const userSnapshot = await fetch(`${ApiLocataion}/user/${currentUserId}`)
+      const docSnapshot = await fetch(`${ApiLocataion}/file/${currentURL}`,{
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -182,7 +182,7 @@ const fetchChildren = async () => {
     //PAGINATION INITIAL STATE FETCH FROM REST API
     const currentUserId = currentuser.uid;
     const urlID = folderUrl;
-    const queryResponse = await fetch(`http://localhost:3000/file/children/${currentURL}`, {
+    const queryResponse = await fetch(`${ApiLocataion}/file/children/${currentURL}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -289,7 +289,7 @@ const createRelatedFile = async () => {
       video_size: videoSize,
     };
     //SETTING THE CHILDREN FILE TO FIRESTORE
-    const response = await fetch(`http://localhost:3000/related-file/add`, {
+    const response = await fetch(`${ApiLocataion}/related-file/add`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -323,7 +323,7 @@ const nextPage = async () => {
     try {
       const currentUserId = currentuser.uid;
       const urlID = folderUrl;
-      const queryResponse = await fetch(`http://localhost:3000/file/children/${currentURL}`, {
+      const queryResponse = await fetch(`${ApiLocataion}/file/children/${currentURL}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -358,7 +358,7 @@ const fetchPreviousPage = async () => {
     try {
       const currentUserId = currentuser.uid;
       const urlID = folderUrl;
-      const queryResponse = await fetch(`http://localhost:3000/file/children/${currentURL}`, {
+      const queryResponse = await fetch(`${ApiLocataion}/file/children/${currentURL}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -530,11 +530,6 @@ useEffect(() => {
 
 return (
 <Container fluid>
-    <div className='zero_bar-row2'> 
-      <div className='back-button'>
-        <ArrowBackIosNewIcon onClick={navigateBack} sx={{p:1}}/> 
-      </div>
-    </div>
     <div className='file-page'>
       {/*1 BAR */}
       <Row style={{width:"70%",marginRight:"auto",marginLeft:"auto",paddingTop:70,alignItems:"center"}}>
@@ -563,6 +558,11 @@ return (
       <Col className='col-auto folder-delete-btn' style={{cursor:"pointer"}} >
           <DeleteIcon onClick={handleDelete}/>
       </Col>
+      <div className='zero_bar-row2'> 
+        <div className='back-button'>
+          <ArrowBackIosNewIcon onClick={navigateBack} sx={{p:1}}/> 
+        </div>
+      </div>
     </Row>
       {/*2 BAR */}
       <div className='sec_bar-cont'>

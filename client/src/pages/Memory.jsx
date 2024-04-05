@@ -10,6 +10,7 @@ import '../Css/memory.css';
 import SnippetFolderIcon from '@mui/icons-material/SnippetFolder';
 import CloudSyncIcon from '@mui/icons-material/CloudSync';
 
+import { ApiLocataion } from '../firebase';
 
 export function Memory() {
 
@@ -38,7 +39,7 @@ const fetchUserFolder = async () => {
     // USER ID & FIRESTORE REF
     const currentUserId = currentuser.uid;
     //const colRef = collection(db, "users", currentUserId, "File-Storage");
-      const folderResponse = await fetch(`http://localhost:3000/user/folder/get/${currentUserId}`,{
+      const folderResponse = await fetch(`${ApiLocataion}/user/folder/get/${currentUserId}`,{
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -76,7 +77,7 @@ function addFolder() {
       files_count: 0,
     };
     // HTTP POST
-    fetch(`http://localhost:3000/folder-create/${currentUserId}`, {
+    fetch(`${ApiLocataion}/folder-create/${currentUserId}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

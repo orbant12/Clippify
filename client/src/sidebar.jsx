@@ -5,6 +5,10 @@ import { useAuth } from './context/UserAuthContext';
 import Avatar from '@mui/material/Avatar';
 import MenuIcon from '@mui/icons-material/Menu';
 import '../src/Css/sidebar.css'
+import { ApiLocataion } from './firebase';
+
+import {auth} from "./firebase"
+import { signOut } from 'firebase/auth';
 
 function SideBar({themeSwitch}) {
 
@@ -24,7 +28,7 @@ useEffect(() => {
             if (currentuser) {
                 const currentUserId = currentuser.uid;
                 //FETCH USER DATA
-                const response = await fetch(`http://localhost:3000/user/${currentUserId}`, {
+                const response = await fetch(`${ApiLocataion}/user/${currentUserId}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -45,7 +49,6 @@ useEffect(() => {
     // Call fetchData
     fetchData();
     setCurrentPath(window.location.pathname);
-    console.log(currentuser)
 }, [currentuser]);
 
 
@@ -70,7 +73,7 @@ return (
 <div style={currentPath != "/landing" ?{}:{display:"none"}}>
     <div className='sidebaropener'>
         <MenuIcon onClick={() => setIsSidebarOpen(!isSidebarOpen)} />
-        <div className="sidebar" style={isSidebarOpen?{display:"block"}:null} >
+        <div className="sidebar" style={isSidebarOpen?{display:"flex",flexDirection:"column",justifyContent:"space-between",height:"100%",border:"2px solid black"}:null} >
         <header>
             <div className="image-text">
                 <div className='userURL'>
@@ -84,7 +87,7 @@ return (
             <i className='bx bx-chevron-right toggle' onClick={() => setIsSidebarOpen(!isSidebarOpen)} />
         </header>
         <div className="menu-bar">
-            <div className="menu">
+            <div className="menu-mobile">
                 <ul className="menu-links">
                     <li className="nav-link" >
                         <a href="/" >
