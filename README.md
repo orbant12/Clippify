@@ -20,7 +20,7 @@ Welcome to Clippify, a comprehensive and multifaceted project that showcases my 
 6. [Contributing](#contributing)
 7. [License](#license)
 8. [Contact Information](#contact-information)
-
+   
 ---
 
 ## Technologies Used
