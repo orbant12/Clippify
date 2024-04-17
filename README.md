@@ -1,8 +1,6 @@
 # Clippify
 
-[![Video]([https://img.youtube.com/vi/jXnoFqcAkQA/maxresdefault.jpg)](https://www.youtube.com/watch?v=jXnoFqcAkQA)](https://www.youtube.com/watch?v=u0Unxzzn6vc&ab_channel=Clippify)
-
-[![Video]https://www.youtube.com/watch?v=jXnoFqcAkQA]
+[![Video](https://img.youtube.com/vi/jXnoFqcAkQA/maxresdefault.jpg)](https://www.youtube.com/watch?v=u0Unxzzn6vc&ab_channel=Clippify)
 
 
 
