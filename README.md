@@ -1,6 +1,9 @@
 # Clippify
 
-[![Video](https://img.youtube.com/vi/jXnoFqcAkQA/maxresdefault.jpg)](https://www.youtube.com/watch?v=u0Unxzzn6vc&ab_channel=Clippify)
+
+
+Uploading klippify.mp4…
+
 
 
 
