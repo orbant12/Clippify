@@ -1,4 +1,4 @@
-# Clippify
+# Clippify WebApp
 
 
 
