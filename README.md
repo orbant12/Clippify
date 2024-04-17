@@ -2,6 +2,8 @@
 
 [![Video]([https://img.youtube.com/vi/jXnoFqcAkQA/maxresdefault.jpg)](https://www.youtube.com/watch?v=jXnoFqcAkQA)](https://www.youtube.com/watch?v=u0Unxzzn6vc&ab_channel=Clippify)
 
+[![Video](https://img.youtube.com/vi/jXnoFqcAkQA/maxresdefault.jpg)]((https://www.youtube.com/watch?v=u0Unxzzn6vc&ab_channel=Clippify))
+
 
 
 Welcome to Clippify, a comprehensive and multifaceted project that showcases my mastery of various technologies and skills relevant to the tech industry. This README is designed to provide a detailed insight into the key components and accomplishments of this project, specifically tailored for a tech job recruiter
