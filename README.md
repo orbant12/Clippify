@@ -1,6 +1,6 @@
 # Clippify
 
-
+https://www.youtube.com/watch?v=vYPQjuio1zo&ab_channel=LostTasteBuds
 
 
 Welcome to Clippify, a comprehensive and multifaceted project that showcases my mastery of various technologies and skills relevant to the tech industry. This README is designed to provide a detailed insight into the key components and accomplishments of this project, specifically tailored for a tech job recruiter
