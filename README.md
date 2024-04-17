@@ -4,7 +4,9 @@
 
 
 
-https://github.com/orbant12/Clippify/assets/124793231/c0385fd3-6eb4-4b5c-92ba-ad72342ce0e7
+https://github.com/orbant12/Clippify/assets/124793231/7433a6f0-e758-4867-8dbc-74fb009748c4
+
+
 
 
 
