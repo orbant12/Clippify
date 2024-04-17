@@ -2,7 +2,9 @@
 
 
 
-Uploading klippify.mp4…
+
+
+https://github.com/orbant12/Clippify/assets/124793231/c0385fd3-6eb4-4b5c-92ba-ad72342ce0e7
 
 
 
