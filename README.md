@@ -172,8 +172,7 @@ Implemented secure user authentication and managed data flow using Firebase, ens
 
 2. **You will need:**
 - Create a Clippify Account
-questions or need further clarification, feel free to reach out.
 
-[Your Name]  
-[Your Email]  
-[Your LinkedIn or other relevant profiles]
+  
+
+
