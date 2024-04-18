@@ -57,6 +57,14 @@ Welcome to Clippify, a comprehensive and multifaceted project that showcases my 
 - Express
 - Firebase Functions
 - REST
+
+  ### Machine Learning
+
+  - Tensorflow
+  - Python
+  - Numpy
+  - Pandas
+  - Firebase ML
   
 ---
 
