@@ -65,7 +65,7 @@ Welcome to Clippify, a comprehensive and multifaceted project that showcases my 
   
 ---
 
-## Key Achievements
+## App Features
 
 1. **Mastery of FFMPEG Syntax:** Proficient in manipulating media files (mp3, mp4, blob, blob64, URL, data URL) using FFMPEG, showcasing a deep understanding of multimedia processing.
 
