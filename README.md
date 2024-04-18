@@ -61,7 +61,7 @@ Welcome to Clippify, a comprehensive and multifaceted project that showcases my 
 - Python
 - Numpy
 - Pandas
-- Firebase ML
+- Firebase ML Integration
   
 ---
 
