@@ -1,6 +1,4 @@
-# Clippify WebApp
-
-## Clippify Introduction Video
+# Clippify Introduction Video
 
 
 
