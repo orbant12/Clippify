@@ -172,16 +172,7 @@ Implemented secure user authentication and managed data flow using Firebase, ens
 
 2. **You will need:**
 - Create a Clippify Account
-
----
-
-## Contact Information
-
-[Provide your contact information or ways in which interested parties can reach out to you for further inquiries or collaboration.]
-
---- 
-
-Thank you for exploring [Your Project Name]! I hope this README provides a comprehensive understanding of the project and my capabilities as a tech professional. If you have any questions or need further clarification, feel free to reach out.
+questions or need further clarification, feel free to reach out.
 
 [Your Name]  
 [Your Email]  
