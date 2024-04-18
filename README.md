@@ -55,13 +55,13 @@ Welcome to Clippify, a comprehensive and multifaceted project that showcases my 
 - Firebase Functions
 - REST
 
-  ### Machine Learning
+### Machine Learning
 
-  - Tensorflow
-  - Python
-  - Numpy
-  - Pandas
-  - Firebase ML
+- Tensorflow
+- Python
+- Numpy
+- Pandas
+- Firebase ML
   
 ---
 
