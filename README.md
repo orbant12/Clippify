@@ -10,6 +10,7 @@ https://github.com/orbant12/Clippify/assets/124793231/7433a6f0-e758-4867-8dbc-74
 
 
 
+---
 
 Welcome to Clippify, a comprehensive and multifaceted project that showcases my mastery of various technologies and skills relevant to the tech industry. This README is designed to provide a detailed insight into the key components and accomplishments of this project, specifically tailored for a tech job recruiter
 
