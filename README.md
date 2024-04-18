@@ -40,11 +40,8 @@ Welcome to Clippify, a comprehensive and multifaceted project that showcases my 
 ### Frontend
 
 - FFmpeg
-- REACT
-- Python
-- TensorFlow
-- Numpy
-- Pandas
+- React
+- Vite
 - Stripe API
 - OpenAI API
 - Firebase Firestore
