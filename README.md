@@ -37,6 +37,8 @@ Welcome to Clippify, a comprehensive and multifaceted project that showcases my 
 
 ## Technologies Used
 
+### Frontend
+
 - FFmpeg
 - REACT
 - Python
@@ -48,6 +50,13 @@ Welcome to Clippify, a comprehensive and multifaceted project that showcases my 
 - Firebase Firestore
 - Firebase Authentication
 - Firebase Storage
+
+### Backend
+
+- Node
+- Express
+- Firebase Functions
+- REST
   
 ---
 
