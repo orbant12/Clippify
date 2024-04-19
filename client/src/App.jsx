@@ -22,6 +22,7 @@ import Cookie from './pages/Policies/Cookie';
 import Contact from './pages/Policies/Contact';
 import Feedback from './pages/Policies/Feedback';
 
+import './Css/modal.css'
 
 export const ThemeContext = createContext(null)
 

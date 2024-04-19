@@ -1,7 +1,6 @@
 //CSS
-import "../Css/login.css"
-import "../Css/style.css"
-import "../Css/styles.css"
+import "../Css/landingpage.css"
+import "../Css/navbar.css"
 //REACT
 import React, {useState} from "react"
 //ASSETS AND IMAGES AND ICONS
@@ -17,6 +16,28 @@ import aiFeature3 from '../assets/Images/landing-ai-f-chat.svg';
 
 import { Link } from "react-router-dom";
 
+//ICONS
+import ContentCutIcon from '@mui/icons-material/ContentCut';
+import AppShortcutIcon from '@mui/icons-material/AppShortcut';
+import YouTubeIcon from '@mui/icons-material/YouTube';
+import PsychologyIcon from '@mui/icons-material/Psychology';
+import FindReplaceIcon from '@mui/icons-material/FindReplace';
+import EditNoteIcon from '@mui/icons-material/EditNote';
+import EditNote from "@mui/icons-material/EditNote";
+import FolderCopyIcon from '@mui/icons-material/FolderCopy';
+import CloudDoneIcon from '@mui/icons-material/CloudDone';
+import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
+import MoreTimeIcon from '@mui/icons-material/MoreTime';
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
+import DocumentScannerIcon from '@mui/icons-material/DocumentScanner';
+import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
+import MoreTime from "@mui/icons-material/MoreTime";
+import AutoFixHigh from "@mui/icons-material/AutoFixHigh";
+import QuickreplyIcon from '@mui/icons-material/Quickreply';
+
+import InstagramIcon from '@mui/icons-material/Instagram';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 const LandingPage = () => {
 
@@ -43,45 +64,59 @@ const [isActive, setIsActive] = useState(false);
 return(
 <div className="landing-page">
    {/*NAV HEADER*/}
-   <nav className={isActive ? "active":""}>
-    <div className="nav-bar active">
+   <div className="add">
+            <h6>BETA OUT NOW - 100% Free to use</h6>
+   </div>
+   <nav style={{position:"sticky"}} className={isActive ? "active sticky":"sticky"}>
+  
       <i className='bx bx-menu sidebarOpen' onClick={handleBurgerMenuOpen2}/>
-      <span className="logo navLogo"><a style={{marginRight:20,fontWeight:600,color:"black",opacity:0.6}} href="/">Clippfiy</a></span>
+      <span className="logo navLogo"><a style={{fontWeight:500,opacity:1}} href="/">Clippfiy</a></span>
       <div className="menu show">
-        <div className="logo-toggle ">
-          <span className="logo"><a href="#">Clippify</a></span>
-          <i className='bx bx-x siderbarClose' onClick={handleBurgerMenuClose2}></i>
-        </div>
-        <ul className="nav-links">
-          <li><a href="/">Home</a></li>
-          <li><a  href="#clipping">Features</a></li>
-          <li><a href="/portfolio">Policies</a></li>
-          <li><a href="#pricing">Pricing</a></li>
-          <li><a href="/support/contact-us">Contact</a></li>
-        </ul>
+         <div className="logo-toggle ">
+            <span className="logo"><a href="#">Clippify</a></span>
+            <i className='bx bx-x siderbarClose' onClick={handleBurgerMenuClose2}></i>
+         </div>
+         <ul className="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a  href="#clipping">Features</a></li>
+            <li><a href="/policies">Policies</a></li>
+            <li><a href="/support/contact-us">Contact</a></li>
+         </ul>
       </div>
       <div className="darkLight-searchBox">
-   
-          <Link style={{color:"black",paddingTop:5,position:"absolute",right:20}} to={"/login"}>
-            <h6 style={{border:"2px solid black",borderRadius:20,padding:8,fontSize:10,backgroundColor:"white",fontWeight:600}}>Try for Free</h6>
-          </Link>
-          
+
+            <Link to={"/login"}>
+               <h6 className="try-for-free-btn" >Try for Free</h6>
+            </Link>
+            
 
       </div>
-    </div>
-  </nav>
+   </nav>
         
 
 
    {/*1Row*/}
-   <section id="welcome-page" >
+   <section id="welcome-page" className="on-appear-animation" >
       <div className="welcome-text">
-         <h2>Create Your <span className="w_text_animated">Second Brain</span> and Store</h2> 
+         <h2>Save <span className="w_text_animated">Valuable Clips</span> and Store</h2> 
          <h3>Endless Infromation with <span className="w_highlight">Clippify</span></h3>
-         <h6>Clippify enables you to effortlessly collect and store video clips from various sources. Whether it's the funny moments from your family gatherings, educational tutorials, or mesmerizing travel snippets, you can create your collection without any hassle.</h6>
-        
+         <div className="welcome-desc-row">
+            <h6 className="desc-tag">100% Free Beta</h6>
+            <h6 className="desc-tag">Avalible on App-Store</h6>
+            <h6 className="desc-tag">Neural Network Powered</h6>
+            <h6 className="desc-tag">Open-Source</h6>
+         </div>
+         <div className="welcome-buttons">
+            <Link className="welcome-btn" to={"/login"}>
+               <h6 >Try for Free</h6>
+            </Link>
+
+            <a className="welcome-btn" href="#ai-feature">
+               <h6 >Clippify AI</h6>
+            </a>
+         </div>
       </div>
-   </section>
+ 
 
    {/*2Row*/}
    {/*Slider Row*/}
@@ -89,45 +124,54 @@ return(
       <img className="laptopOnly-show" src={laptopOnly} alt="laptop-note-feature" />
       <img className="phoneOnly-show" src={phoneOnly} alt="laptop-note-feature" />
    </div>
-
-   {/*3Row*/}
-   <section id="usecase2">
-      <div className="block2">
-         <h1 style={{fontWeight:600}}>More Then 100 + Users</h1>
-         <h3 style={{opacity:0.6,fontSize:10}}>Join The Community</h3>
-      </div>
    </section>
 
-   <section id="ai-feature" className="slider_container">
-      <div style={{marginLeft:"auto",marginRight:"auto",textAlign:"center",marginTop:40}}>
-         <h4 style={{opacity:0.6,fontSize:16}}>Everything Clippify has to offer</h4>
+   <section  className="slider_container">
+      <div style={{marginLeft:"auto",marginRight:"auto",textAlign:"center",marginTop:10}}>
+         <h4 style={{opacity:0.6,fontSize:16,marginBottom:19,boxShadow:"inset 0px 0px 3px 0px black",padding:"8px 20px",borderRadius:30}}>Everything Clippify has to offer</h4>
          <h1>Features</h1>
       </div>
       <hr style={{width:"10%",marginLeft:"auto",marginRight:"auto", border:"1px solid black"}} />
       <div className="feature-row-1" id="clipping"> 
          <div className="feature-desc-landing">
+            <div className="feature-icon-row">
+               <ContentCutIcon style={{width:40,height:40}}/>
+               <AppShortcutIcon style={{width:40,height:40}} />
+               <YouTubeIcon style={{width:40,height:40}} />
+            </div>
             <h6>Gather Inspiration</h6>
-            <h3>The fastest way to get ideas out of your head.</h3>
-            <h5>Upload & Clip out the part you want to remember or use with clippify's features</h5>
+            <h3>Clip any part you want to store and use with clippify's features.</h3>
+            <h5>The fastest way to get ideas out of your head and store / manage them in any form you like...</h5>
          </div>
          <img src={clippingFeature} alt="clipping feature" />
       </div>
 
-      <hr style={{width:"10%",marginLeft:"auto",marginRight:"auto", border:"1px solid black"}} />
+      <hr style={{width:"70%",marginLeft:"auto",marginRight:"auto", border:"1px solid black",marginTop:30,marginBottom:20,boxShadow:"0px 0px 10px 0px black"}} />
 
       <div className="feature-row-1" id="notes"> 
          <img src={notesFeature} alt="clipping feature" />
-         <div className="feature-desc-landing">
+         <div className="feature-desc-landing" id="reversed-desc-landing">
+            <div className="feature-icon-row">
+               <PsychologyIcon style={{width:40,height:40}}/>
+               <FindReplaceIcon style={{width:40,height:40}} />
+               <EditNote style={{width:40,height:40}} />
+            </div>
             <h6>Make It Your Own</h6>
             <h3>Note Out The Best Parts.</h3>
             <h5>You can make Notes that you can save and come back to when you need to remember something...</h5>
          </div>
       </div>
-      <hr style={{width:"10%",marginLeft:"auto",marginRight:"auto", border:"1px solid black"}} />
+
+      <hr style={{width:"70%",marginLeft:"auto",marginRight:"auto", border:"1px solid black",marginTop:30,marginBottom:20,boxShadow:"0px 0px 10px 0px black"}} />
       <div className="feature-row-1" style={{marginBottom:100}} id="organise"> 
          <div className="feature-desc-landing">
+            <div className="feature-icon-row">
+               <FolderCopyIcon style={{width:40,height:40}}/>
+               <CloudDoneIcon style={{width:40,height:40}} />
+               <HealthAndSafetyIcon style={{width:40,height:40}} />
+            </div>
             <h6>All In One Place</h6>
-            <h3>Save & Organise Your Clips.</h3>
+            <h3>Save & Organise Your Clips and Notes</h3>
             <h5>You can find your Clips & Notes all in one place related to each other </h5>
          </div>
          <img src={relatedFeature} alt="clipping feature" />
@@ -136,65 +180,25 @@ return(
 
    {/*5Row*/}
    <section id="usecase">
-      <div className="block">
-         <h1 className="block-title">Clippify is best for Saving :</h1>
-         <div className="echo-for-container">
-            <div className="echo-for">
-               <div className="usecase-type">
-                 
-                     <h5>Students</h5>
-              
-               </div>
-
-               <div className="usecase-type">
-               
-                     <h5>Content Creators</h5>
-               
-               </div>
-            </div>
-
-            <div className="echo-for">
-               <div className="usecase-type">
-             
-                     <h5>Idea / Inspiration </h5>
-          
-               </div>
-               <div className="usecase-type">
-               
-                     <h5>Podcast Listeners</h5>
-         
-               </div>
-            </div>
+      <div className="dev-team">
+         <h5>Support our efforts:</h5>
+         <div className="support-options">
+            <a href="https://www.instagram.com/clippify.app/"><InstagramIcon style={{width:40,height:40,color:"#ff7c7c"}}/></a>
+            <a href="https://www.linkedin.com/in/tamas-orban-30921524b/"><LinkedInIcon style={{width:40,height:40,color:"#72b1ff"}}/></a>
+            <a href="https://github.com/orbant12"><GitHubIcon style={{width:40,height:40,color:"white"}}/></a>
+            <a href="https://www.youtube.com/@clippify_app"><YouTubeIcon style={{width:40,height:40,color:"#dd1b1b"}}/></a>
          </div>
       </div>
    </section>
 
    <section id="ai-feature" className="slider_container">
       <div style={{marginLeft:"auto",marginRight:"auto",textAlign:"center",marginTop:50}}>
-         <h4 style={{opacity:0.6,fontSize:15}}>Ai Feature</h4>
+         <h4 style={{opacity:0.6,fontSize:15,opacity:0.6,fontSize:16,marginBottom:19,boxShadow:"inset 0px 0px 3px 0px black",padding:"8px 20px",borderRadius:30}}>Ai Feature</h4>
          <h1>Clippify Ai</h1>
       </div>
+      <hr style={{width:"10%",marginLeft:"auto",marginRight:"auto", border:"1px solid black"}} />
 
       <div className="ai-feature-row-1" id="clipping"> 
-         <div className="feature-desc-landing">
-            <h6>Script Analasis</h6>
-            <h3>Click Analise the Script and Ask Whatever.</h3>
-            <h5>Ai will firstly save the transcript of your video and then it can analise it..</h5>
-         </div>
-         <img src={aiFeature1} alt="clipping feature" />
-      </div>
-
-      <div className="feature-row-1" id="notes"> 
-         <img src={aiFeature2} alt="clipping feature" />
-         <div className="feature-desc-landing">
-      
-            <h6>Easy & Convenient</h6>
-            <h3>You can Ask For a Summerie</h3>
-            <h5>Click the Summerize, and sit back and watch Clippify's Magic</h5>
-         </div>
-      </div>
-      <hr style={{width:"10%",marginLeft:"auto",marginRight:"auto", border:"1px solid black"}} />
-      <div className="feature-row-1" id="organise"> 
          <div className="feature-desc-landing">
             <h6>Ai Chat</h6>
             <h3>You can Simply Chat with Clippify</h3>
@@ -202,10 +206,40 @@ return(
          </div>
          <img src={aiFeature3} alt="clipping feature" />
       </div>
+
+      <hr style={{width:"70%",marginLeft:"auto",marginRight:"auto", border:"1px solid black",marginTop:50,marginBottom:30,boxShadow:"0px 0px 10px 0px black"}} />
+
+      <div className="feature-row-1" id="organise"> 
+         <div className="feature-desc-landing">
+         <div className="feature-icon-row">
+               <DocumentScannerIcon style={{width:40,height:40}}/>
+               <AutoFixHigh style={{width:40,height:40}} />
+               <QuickreplyIcon style={{width:40,height:40}} />
+            </div>
+            <h6>Script Analasis</h6>
+            <h3>Click Analise the Script and Ask Whatever.</h3>
+            <h5>Ai will firstly save the transcript of your video and then it can analise it..</h5>
+         </div>
+         <img src={aiFeature1} alt="clipping feature" />
+      </div>
+      <hr style={{width:"70%",marginLeft:"auto",marginRight:"auto", border:"1px solid black",marginTop:50,marginBottom:30,boxShadow:"0px 0px 10px 0px black"}} />
+
+      <div className="feature-row-1" id="notes"> 
+         <img src={aiFeature2} alt="clipping feature" />
+         <div className="feature-desc-landing" id="reversed-desc-landing">
+            <div className="feature-icon-row">
+               <DocumentScannerIcon style={{width:40,height:40}}/>
+               <MoreTime style={{width:40,height:40}} />
+               <AutoAwesomeIcon style={{width:40,height:40}} />
+            </div>
+            <h6>Easy & Convenient</h6>
+            <h3>You can Ask For a Summarie</h3>
+            <h5>Click the Summerize, and sit back and watch Clippify's Magic</h5>
+         </div>
+      </div>
    </section>
 
-   {/*6Row*/}
-
+   {/*6Row
    <div style={{display:"flex",flexDirection:"column",width:"100%",marginRight:"auto",marginLeft:"auto",marginTop:50}}>
    <hr style={{marginBottom:50}} />
       <div style={{marginRight:"auto",marginLeft:"auto",marginBottom:-50}} >
@@ -427,6 +461,10 @@ return(
                 <h1 className='comp-nmbr' >Unlimited</h1>
             </div>
         </div>            
+    </div>*/}
+
+    <div className="start-clippify" onClick={() => window.location.href = "/login"}>
+      <h2>Start Now</h2>
     </div>
 
    <footer style={{alignSelf:"center"}} className="footer">

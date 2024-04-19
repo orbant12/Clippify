@@ -2,7 +2,7 @@ import { useContext, createContext, useEffect, useState } from "react"
 import { AuthErrorCodes, createUserWithEmailAndPassword, onAuthStateChanged,signInWithEmailAndPassword,sendEmailVerification  } from "firebase/auth";
 import { auth, db,app } from "../firebase";
 import { collection, doc, setDoc,getDoc, updateDoc} from "firebase/firestore";
-import { getPremiumStatus } from "../assets/Subscription/getPremiumStatus";
+import { getPremiumStatus } from "../assets/Components/Subscription/getPremiumStatus";
 
 const userContext = createContext();
 

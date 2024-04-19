@@ -3,13 +3,12 @@ import React, { useEffect, useState } from 'react'
 import { useAuth } from '../context/UserAuthContext'
 
 //CSS
-import '../Css/styles.css'
-import '../Css/sidebar.css'
 import '../Css/login.css'
 import '../Css/auth.css'
+import '../Css/navbar.css'
 
 //FIREBAE
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { signInWithPopup, GoogleAuthProvider,signInWithRedirect } from "firebase/auth";
 import { auth, db} from "../firebase";
 import { collection, doc, getDocs, setDoc} from "firebase/firestore";
 import { Link } from 'react-router-dom';
@@ -32,6 +31,15 @@ const [user, setUser] = useState({
   password: "",
 });
 
+const [isActive, setIsActive] = useState(false);
+
+const handleBurgerMenuOpen2 = () => {
+  setIsActive(!isActive);
+}
+
+const handleBurgerMenuClose2 = () => {
+  setIsActive(!isActive);
+}
 
 // GOOGLE PROVIDER__________________________//
 const provider = new GoogleAuthProvider();
@@ -66,6 +74,10 @@ const googleSignIn = async () => {
     await setDoc(newTagRef, basicTag);
     console.log("Success Storing Google Document");
     console.log("Successful Login With Google");
+    if (result.user) {
+      // Redirect to a different route on successful sign-in
+      window.location.href = '/';
+    }
   } catch (error) {
     if (error.code === "auth/popup-closed-by-user") {
       console.log("User closed the login popup.");
@@ -128,7 +140,39 @@ useEffect(() => {
 }, []);
 
 return (
-<div className='login-page'>
+  <>
+  <div className='landing-page'>
+  <div className="add">
+      <h6>BETA OUT NOW - 100% Free to use</h6>
+    </div>
+    <nav style={{position:"sticky"}} className={isActive ? "active sticky":"sticky"}>
+      <i className='bx bx-menu sidebarOpen' onClick={handleBurgerMenuOpen2}/>
+      <span className="logo navLogo"><a style={{fontWeight:500,opacity:1}} href="/">Clippfiy</a></span>
+      <div className="menu show">
+         <div className="logo-toggle ">
+            <span className="logo"><a href="#">Clippify</a></span>
+            <i className='bx bx-x siderbarClose' onClick={handleBurgerMenuClose2}></i>
+         </div>
+         <ul className="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a  href="#clipping">Features</a></li>
+            <li><a href="/policies">Policies</a></li>
+            <li><a href="/support/contact-us">Contact</a></li>
+         </ul>
+      </div>
+      <div className="darkLight-searchBox">
+
+            <Link to={"/login"}>
+               <h6 className="try-for-free-btn" >Try for Free</h6>
+            </Link>
+            
+
+      </div>
+    </nav>
+  </div>
+
+  <div className='login-page'>
+   
   <div className='login-container'>
     <div className='login-title'>
       <h1>Register</h1>
@@ -188,6 +232,8 @@ return (
       <h6 style={{fontSize:12}}>Contact / Support</h6>
   </Link>
 </div>
+  </>
+
 );
 };
 

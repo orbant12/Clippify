@@ -1,46 +1,51 @@
 //REACT AND CONTEXTS
 import React, { useState, useEffect } from 'react';
-import { useParams, Link, useNavigate} from "react-router-dom";
+import { useParams, useNavigate} from "react-router-dom";
 import { useAuth } from '../context/UserAuthContext';
+
 //FIREBASE
 import { doc,deleteDoc, updateDoc } from "firebase/firestore";
 import { db,storage } from "../firebase";
 import { ref, uploadString, getDownloadURL,deleteObject,uploadBytes } from 'firebase/storage';
-import {v4} from "uuid";
-//ICONS
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import DesignServicesIcon from '@mui/icons-material/DesignServices';
-//MUI
-import DeleteIcon from '@mui/icons-material/Delete';
 
-//ASSETS
-import FrameVideo from '../assets/File/videoFrame';
-import Editor from '../assets/File/txtEditor/txtEditor';
-import RelatedVideoBar from '../assets/File/relatedVideo';
-import PaginationUi from '../assets/File/paginationUI';
-import ToggleButtons from "../assets/File/mainShow"
-import FullFrameVideo from "../assets/File/fullVideoFrame"
+//UID GENERATOR
+import {v4} from "uuid";
+
+//PAGE COMPONENTS
+import TitleRow from '../assets/Components/File/PageComponents/TitleRow';
+import ContentRow from '../assets/Components/File/PageComponents/ContentRow';
+
+//COMPONENTS
+import Editor from '../assets/Components/File/txtEditor/txtEditor';
+import Example from "../assets/Components/FileAdd/VideoUpload";
 
 //CSS
 import '../Css/file.css'
 
 //BS
-import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 
-import Example from "../assets/FileAdd/VideoUpload";
+//REST API LOCATION
 import { ApiLocataion } from '../firebase';
+
 
 function File({prevUrl,mainFileURL}) {
 
-
 //<******************************VARIABLES*******************************>
-//FILE ELEMENT IN ARRAY 
-const [fileElements, setFileElements] = useState([])
-const [userData,setUserData] = useState([])
 
-//2Bar State
+//COMMON VARIABLES
+const { id } = useParams();
+const { currentuser } = useAuth();
+const folderUrl = prevUrl; 
+const currentURL = id; 
+const navigate  = useNavigate();
+
+//USER DATA
+const [fileElements, setFileElements] = useState([]);
+const [userData,setUserData] = useState([]);
+
+//TOGGLE STATES
 const [secBarState, setSecBarState] = useState(false);
 
 //PAGINATION
@@ -48,88 +53,45 @@ const [childrenFiles, setChildrenFiles] = useState([]);
 const [lastVisible, setLastVisible] = useState(null);
 const [firstVisible, setFirstVisible] = useState(null);
 const [currentPage, setCurrentPage] = useState(1);
-const [totalPages, setTotalPages] = useState(1); // Calculate the total number of pages
-
-//MODAL STATES
-const [isLinkActive, setIsLinkActive] = useState(false);
-const [isUploadActive, setIsUploadActive] = useState(false);
-const [isActive, setIsActive] = useState(false);
-const [selectedPopUp, setSelectedPopUp] = useState(null);
-const [isAddedOn, setIsAddedOn] = useState(false);
-const [linkProvided, setLinkProvided] = useState(true);
-const [uploadProvided, setUploadProvided] = useState(true);
+const [totalPages, setTotalPages] = useState(1);
 
 //FILE CREATION
-const [fileTitle , setFileTitle] = useState("Untitled")
-const [fileImage, setFileImage] = useState("")
+const [fileTitle , setFileTitle] = useState("Untitled");
+const [fileImage, setFileImage] = useState("");
 const [trimmedVideoFile, setTrimmedVideoFile] = useState(null);
 const [audioFile, setAudioFile] = useState(null);
-const [metaData, setMetaData] = useState(null)
-const [tag,setTag] = useState("")
-const [transcriptionData, setTranscriptionData]= useState("")
+const [metaData, setMetaData] = useState(null);
+const [transcriptionData, setTranscriptionData]= useState("");
+const [fileTag, setFileTag ] = useState("")
 
 //RICH TXT EDITOR
-const [generatedHtml,setGeneratedHtml] = useState(null)
-const [newContentUpdate,setNewContentUpdate] = useState(null)
-const [saveContent,setSaveContent] = useState(null)
+const [generatedHtml,setGeneratedHtml] = useState(null);
+const [newContentUpdate,setNewContentUpdate] = useState(null);
+const [saveContent,setSaveContent] = useState(null);
 
 //File Title Edit
 const [isEditing, setIsEditing] = useState(false);
 const [newTitle, setNewTitle] = useState(fileElements.title);
 
-//FREQUENT VARIABLES________________________________//
-const { id } = useParams();
-const { currentuser } = useAuth();
-const folderUrl = prevUrl // FOLDER URL
-const currentURL = id //File URL
-const navigate  = useNavigate()
-
 
 //<******************************FUNCTIONS*******************************>
 
+//<====> RECENT FILE UPDATE <====>
 
-//SET CHILDREN COUNT
-useEffect(() => {
-  if(currentuser){
-    if(fileElements.length !== 0){
-      if(childrenFiles){
-        //USER DATA AND FIRESTORE REF
-          const currentUserId = currentuser.uid; 
-          const numberOfChild = childrenFiles.length
-          fetch(`${ApiLocataion}/file/update-count/${currentURL}`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              relatedCount: numberOfChild,
-              userId: currentUserId,
-            }),
-          });
-      }
-    } 
-  }
-}, [childrenFiles]);
-
-//RECENT LOAD SETTER
 const setRecentlyOpenned = async () => {
   if (currentuser) {
-    //USER DATA AND FIRESTORE REFS
     const currentUserId = currentuser.uid;
-    fetch(`${ApiLocataion}/recent/update/${currentUserId}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        recent_folder_id: folderUrl,
-        recent_file_id: currentURL,
-      }),
-    });
+    updateRecentFile({
+      currentUserId: currentUserId,
+      folderUrl: folderUrl,
+      currentURL: currentURL,
+    })
   }
 }
 
-//FECT FILE ELEMENTS
+
+//<====> USER DATA <====>
+
 const fetchData = async () => {  
   try {
     if (currentuser) {
@@ -176,7 +138,6 @@ const fetchData = async () => {
   }
 };
 
-//FECT CHILDREN ELEMENTS
 const fetchChildren = async () => {
   if(currentuser){
     //PAGINATION INITIAL STATE FETCH FROM REST API
@@ -213,111 +174,135 @@ const fetchChildren = async () => {
 }
 }
 
-//ON LOAD FETCH DATA
 useEffect(() => {
   mainFileURL(currentURL)
+  //USER DATA
   fetchData();
   fetchChildren();
+  //RECENT FILE UPDATE
+  setRecentlyOpenned();
 }, [id, currentuser]);
 
-//RECENT LOAD useEffect Call
-useEffect(() => {
-  if (userData !== null) {
-    setRecentlyOpenned();
-  // Call the function when userData is set
-  }
-}, [userData]);
 
-//RELATED FILE CREATION
+//<====> CREATE RELATED FILE <====>
+
+const uploadToStorage = async ({
+
+  trimmedVideoFile,
+  audioFile,
+  metaData,
+  storagePathVideo,
+  storagePathAudio
+
+}) => {
+  const audioMetadata = {
+    contentType: 'audio/mp3',
+  };
+  //== STORAGE UPLOAD ==//
+  const videoRef = ref(storage, storagePathVideo);
+  const audioRef = ref(storage, storagePathAudio);
+  await uploadString(videoRef, trimmedVideoFile,'data_url',metaData)
+  await uploadBytes(audioRef, audioFile,audioMetadata)
+  const storageURL =  await getDownloadURL(videoRef);
+  console.log("Video Uploaded")
+  return storageURL
+}
+
+const uploadToFirestore = async ({
+  storageURL,
+  storagePathVideo,
+  storagePathAudio,
+  relatedFileUID,
+  folderID,
+  currentUserId,
+  userData,
+  metaData,
+  fileTitle,
+  fileImage,
+  fileTag
+}) => {
+      //== FILE META DATA ==//
+      const userFileTitle = fileTitle
+      const userFileImage = fileImage
+      const userTag = fileTag
+      const videoSize = metaData.videoSize 
+      const formattedDuration = metaData.videoDuration;
+      const userVideoURL = storageURL
+      const newRelatedFile = {
+        title: userFileTitle,
+        img: userFileImage,
+        url: userVideoURL,
+        id: relatedFileUID,
+        folder_id: folderUrl,
+        tag: userTag,
+        duration: formattedDuration,
+        storage_path_video:storagePathVideo,
+        storage_path_audio:storagePathAudio,
+        content: generatedHtml,
+        transcription:"",
+        video_size: videoSize,
+      };
+  
+      //== FIRESTORE UPLOAD ==//
+      const createResponse = await createRelatedFile({
+        newRelatedFile: newRelatedFile,
+        folderID: folderID,
+        fileID: currentURL,
+        currentUserId: currentUserId,
+        userData: userData,
+        videoSize: videoSize,
+        currentStorageTake: userData.storage_take,
+      })
+      if (createResponse.status === 200) {
+        const StatusLog = await createResponse.json();
+        alert("Your clip has been uploaded succesfully !")
+      }else if (createResponse.status === 400) {
+        alert("Something went wrong, try refreshing the page !");
+      }
+}
+
 const createRelatedFile = async () => {
-  //STORAGE SETUP
   if (currentuser){
-    //Fodler PATH
     const urlID = folderUrl;
-    //CURRENT FILE PATH
     const currentURL = id
-    //TYPE for AUDIO
-    const audioMetadata = {
-        contentType: 'audio/mp3',
-    };
-    //VIDE & AUDIO NAME
     const allName = `${v4() + metaData.videoName}`
     const metaName = `videos/${allName}`
     const audioName = `audio/${allName}`
     const relatedFileUID = `r_file_${v4()}`
-    //STORAGE PATH NAMES
     const storagePathVideo = `${"users"+ "/" + currentuser.uid + "/" + urlID + "/" + currentURL + "/" + relatedFileUID + "/" + metaName}`
     const storagePathAudio = `${"users"+ "/" + currentuser.uid + "/" + urlID + "/" + currentURL + "/" + relatedFileUID + "/" + audioName}`
-    //STORAGE REFRENCES
-    const videoRef = ref(storage, storagePathVideo);
-    const audioRef = ref(storage, storagePathAudio);
-    //UPLOAD TO STORAGE
-    await uploadString(videoRef, trimmedVideoFile,'data_url')
-    await uploadBytes(audioRef, audioFile,audioMetadata)
-    //DOWNLOAD URL
-    const storageURL =  await getDownloadURL(videoRef);
-    //CONSOLE OF SUCCESS
-    console.log("Video Uploaded")
+    const currentUserId = currentuser.uid;
 
-    //File Title
-    const userFileTitle = fileTitle
-    //Image URL
-    const userFileImage = fileImage 
-    // TAG NAME
-    const userTag = tag 
-    //VIDEO SIZE
-    const videoSize = metaData.videoSize 
-    //STORAGE URL
-    const userVideoURL = storageURL
-
+    //== 1.) STORAGE UPLOAD ==//
+    const storageURL = await uploadToStorage({
+      trimmedVideoFile,
+      audioFile,
+      metaData,
+      storagePathVideo,
+      storagePathAudio
+    })
+    //== 2.) FIRESTORE UPLOAD ==//
+    await uploadToFirestore({
+      storageURL: storageURL,
+      storagePathVideo,
+      storagePathAudio,
+      folderFileId,
+      relatedFileUID,
+      currentUserId,
+      userData,
+      metaData,
+      fileTitle,
+      fileImage,
+      fileTag
+    })
+    //== 3.) UPDATE DATA IN THE END ==//
     await fetchData()
-    console.log("recent sett succ")
-
-    //CHILDREN FILE ELEMENTS & CREATION
-    const newRelatedFile = {
-      title: userFileTitle,
-      img: userFileImage,
-      url: userVideoURL,
-      id: relatedFileUID,
-      folder_id: folderUrl,
-      tag: userTag,
-      duration: metaData.videoDurationString,
-      storage_path_video:storagePathVideo,
-      storage_path_audio:storagePathAudio,
-      content: generatedHtml,
-      transcription:"",
-      video_size: videoSize,
-    };
-    //SETTING THE CHILDREN FILE TO FIRESTORE
-    const response = await fetch(`${ApiLocataion}/related-file/add`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        folderId: folderUrl,
-        userId: currentuser.uid,
-        fileId: currentURL,
-        relatedFile: newRelatedFile,
-        currentStorageTake: userData.storage_take,
-        videoSize: videoSize,
-      }),
-    });
-    if (response.status === 200) {
-      console.log("Related file added successfully");
-    } else {
-      console.log("Error adding related file");
-    }
   };
-  //HIDE POP UP LOGIC
-  if(isLinkActive){ 
-    setIsLinkActive(false)
-  }else if (isUploadActive){
-    setIsUploadActive(false)
-  }
 };
 
-// Pagination NEXT PAGE
+
+//<====> PAGINATION <====>
+
 const nextPage = async () => {
   if (currentuser) {
     try {
@@ -352,7 +337,6 @@ const nextPage = async () => {
   }
 };
 
-// Pagination PREVIOUS PAGE
 const fetchPreviousPage = async () => {
   if (currentuser) {
     try {
@@ -388,9 +372,8 @@ const fetchPreviousPage = async () => {
 };
 
 
-//CHECKPOINT _____!!!
+//<====> RICH TEXT EDITOR <====> CHECKOPOINT !!!!!
 
-//SAVE RICH TEXT EDITOR CONTENT
 useEffect(() => {
   const storeHTMLContentInFirestore = async (htmlContent) => {
     try {
@@ -416,9 +399,9 @@ useEffect(() => {
   storeHTMLContentInFirestore(saveContent)
 }, [saveContent]);
 
-//<*********************DELETE*********************>
 
-//DELETE FOLDER CODE
+//<====> HANDLERS <====>
+
 const handleDelete = async () => {
   //USER DATA
   const currentUserId = currentuser.uid;
@@ -458,7 +441,6 @@ const handleDelete = async () => {
   navigate(`/folder/${folderUrl}`);   
 };
 
-//EDIT FOLDER TITLE
 const handleTitleClick = () => {
   setIsEditing(true);
   console.log(isEditing)
@@ -501,12 +483,13 @@ const handleKeyUp = (e) => {
   }
 };
 
-//BACK BTN
 const navigateBack = () => {
   navigate(`/folder/${folderUrl}`);
 };
 
-//  TRANSCRIPTION UPDATE
+
+//<====> TRANSCRIPT UPDATER <====>
+
 useEffect(() => {
   if(currentuser){ 
     try{
@@ -514,13 +497,11 @@ useEffect(() => {
       const userDocRef = doc(db, "users", currentUserId);
       const folderElementRef = doc(userDocRef, "File-Storage", folderUrl);
       const fileChildrenRef = doc(folderElementRef ,"Files",currentURL);
-      //Transcription Text
       const transcription_data = transcriptionData
-      // Create a new document in Firestore with the HTML content
+
       updateDoc(fileChildrenRef, {
         transcription: transcription_data,
       });
-      console.log("Transcription Stored");
     } catch(error) {
       console.log(error)
     }
@@ -528,105 +509,75 @@ useEffect(() => {
 }, [transcriptionData]);
 
 
-return (
-<Container fluid>
-    <div className='file-page'>
-      {/*1 BAR */}
-      <Row style={{width:"70%",marginRight:"auto",marginLeft:"auto",paddingTop:70,alignItems:"center"}}>
-        <Col >
-        {isEditing ? (
-              <input
-                className="folder-input-change"
-                type="text"
-                value={newTitle}
-                onChange={handleTitleChange}
-                onKeyPress={handleKeyUp}
-                autoFocus
-              />
-            ) : (
-              <h2 className="first_bar-txt" onClick={handleTitleClick}>
-                {newTitle}
-              </h2>
-            )}
-            {isEditing ? 
-              <h5 style={{opacity:0.8,paddingTop:5}}>Press Enter to OK</h5>:null
-            }
-        </Col>
-        <Col className='col-auto folder-edit-btn' style={{cursor:"pointer"}} >
-          <DesignServicesIcon onClick={handleTitleClick}/>
-      </Col>
-      <Col className='col-auto folder-delete-btn' style={{cursor:"pointer"}} >
-          <DeleteIcon onClick={handleDelete}/>
-      </Col>
-      <div className='zero_bar-row2'> 
-        <div className='back-button'>
-          <ArrowBackIosNewIcon onClick={navigateBack} sx={{p:1}}/> 
-        </div>
-      </div>
-    </Row>
-      {/*2 BAR */}
-      <div className='sec_bar-cont'>
-        {/*VIDEO FRAME With PAG*/}
-        {!secBarState?
-          <>
-            <div className='sec_bar-video'>
-              <FrameVideo crossOrigin="anonymous" videoSrc={fileElements.url} />
-            </div>
-            {/*CLIPS COLLECTION*/}
-            <div className='sec_bar-clips-cont'>
-              {childrenFiles.length === 0 ? (
-                <p style={{textAlign:"center",marginTop:80,opacity:0.6}} >No related videos added</p>
-              ) : (
-                childrenFiles.map(element => (
-                  element && element.id ? (
-                    <div className="clip-sec" key={element.id}>
-                      {/* You might want to uncomment the Link component if needed */}
-                      <Link to={`/folder/${folderUrl}/${currentURL}/${element.id}`}> 
-                        <RelatedVideoBar imgURL={element.img} relatedDuration={(element.duration).match(/\d+:\d+:\d+/)[0]} relatedTag={element.tag} relatedTitle={element.title}/>
-                      </Link> 
-                    </div>
-                  ):null
-                ))
-              )}
-                
-              <div className='pagination-bar'>
-                <PaginationUi 
-                  fetchNextPage={nextPage} 
-                  fetchPreviousPage={fetchPreviousPage}
-                  currentPage={currentPage}
-                  totalPages={totalPages}
-                /> {/*Pagination Bottom Bar*/}
-              </div>
-            </div>
-          </>:(
-            <div className='sec_bar-video-main'>
-              <FullFrameVideo crossOrigin="anonymous" videoSrc={fileElements.url} />
-            </div>
-          )}
-      </div>
-       {/*TOGGLE BUTTON */}
-      <div className='main-view-select'>
-        <ToggleButtons secBarState={setSecBarState}/>
-      </div>
-      {/*3 BAR*/}
-      <div className='third_bar-features-cont'>
-        <div className='rich-txt-editor'>
-          {/*EDITOR*/}
-          <Editor 
-            isSubscribed={userData.subscription}  
-            data={setGeneratedHtml} 
-            setData={newContentUpdate} 
-            setContent={setSaveContent} 
-            audioUrl={fileElements.storage_path_audio} 
-            passTranscription={setTranscriptionData}
-          /> 
-        </div>
-      </div>
-    </div>
-    <Row>
-      <Example handleUploadTrigger={createRelatedFile} setTitleInput={setFileTitle} setFileImageEXT={setFileImage} setExtractMetaEXT={setMetaData} setPassedAudioDataUrlEXT={setAudioFile} setVideoUrlEXT={setTrimmedVideoFile} />
-    </Row>
+//<====> RELATED FILE COUNTER TRACKER <====>
 
-</Container>
+useEffect(() => {
+  if(currentuser){
+    if(fileElements.length !== 0){
+      if(childrenFiles){
+        //USER DATA AND FIRESTORE REF
+          const currentUserId = currentuser.uid; 
+          const numberOfChild = childrenFiles.length
+          fetch(`${ApiLocataion}/file/update-count/${currentURL}`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              relatedCount: numberOfChild,
+              userId: currentUserId,
+            }),
+          });
+      }
+    } 
+  }
+}, [childrenFiles]);
+
+
+return (
+  <Container fluid>
+      <div className='file-page'>
+        {/*1 BAR */}
+        <TitleRow
+          newTitle={newTitle}
+          isEditing={isEditing}
+          handleTitleChange={handleTitleChange}
+          handleKeyUp={handleKeyUp}
+          handleTitleClick={handleTitleClick}
+          handleDelete={handleDelete}
+          navigateBack={navigateBack}
+        />
+        {/*2 BAR */}
+        <ContentRow
+          secBarState={secBarState}
+          setSecBarState={setSecBarState}
+          fileElements={fileElements}
+          childrenFiles={childrenFiles}
+          folderUrl={folderUrl}
+          currentURL={currentURL}
+          nextPage={nextPage}
+          fetchPreviousPage={fetchPreviousPage}
+          currentPage={currentPage}
+          totalPages={totalPages}
+        />
+        {/*3 BAR*/}
+        <div className='third_bar-features-cont'>
+          <div className='rich-txt-editor'>
+            <Editor 
+              isSubscribed={userData.subscription}  
+              data={setGeneratedHtml} 
+              setData={newContentUpdate} 
+              setContent={setSaveContent} 
+              audioUrl={fileElements.storage_path_audio} 
+              passTranscription={setTranscriptionData}
+            /> 
+          </div>
+        </div>
+      </div>
+
+      <Row>
+        <Example handleUploadTrigger={createRelatedFile} setTitleInput={setFileTitle} setFileImageEXT={setFileImage} setExtractMetaEXT={setMetaData} setPassedAudioDataUrlEXT={setAudioFile} setVideoUrlEXT={setTrimmedVideoFile} />
+      </Row>
+  </Container>
 )}
 export default File

@@ -5,7 +5,7 @@ import VpnLockIcon from '@mui/icons-material/VpnLock';
 import BugReportIcon from '@mui/icons-material/BugReport';
 import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
 import StorageIcon from '@mui/icons-material/Storage';
-import MultipleSelectChip from "../../assets/Policy/FeedbackSelector"
+import MultipleSelectChip from "../../assets/Components/Policy/FeedbackSelector"
 import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
 import { db, storage } from "../../firebase"
 import { doc,setDoc } from "firebase/firestore";

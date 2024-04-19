@@ -9,7 +9,7 @@ import GavelIcon from '@mui/icons-material/Gavel';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import PsychologyAltIcon from '@mui/icons-material/PsychologyAlt';
 import ApartmentIcon from '@mui/icons-material/Apartment';
-import FaqBar from "../../assets/Pricing/faqBar";
+import FaqBar from "../../assets/Components/Pricing/faqBar";
 import { Link } from "react-router-dom";
 const Policies = () =>{
 
@@ -150,7 +150,7 @@ return(
                     Our main focus is your smooth experience using our Software. Help us in our goal and if you found something unordenary please contact us !
                 </h5>
 
-                <a className="highlighted-a" href="/support/report"><h5>More</h5></a>
+                <a className="highlighted-a" href="/support/report"><h5>Report</h5></a>
             </div>
             <div className="bug-pic" />
         </div>

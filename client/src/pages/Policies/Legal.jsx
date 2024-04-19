@@ -1,7 +1,7 @@
 
 
 import "../../Css/policies.css"
-import FaqBar from "../../assets/Pricing/faqBar";
+import FaqBar from "../../assets/Components/Pricing/faqBar";
 import { Link } from "react-router-dom";
 
 const Legal = () =>{

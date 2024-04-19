@@ -1,7 +1,7 @@
 //REACT
 import { useEffect, useState } from 'react';
 import { useAuth } from '../context/UserAuthContext';
-import { getPortalUrl } from "../assets/Subscription/checkOutUrl";
+import { getPortalUrl } from "../assets/Components/Subscription/checkOutUrl";
 
 //CSS
 import '../Css/settings.css';

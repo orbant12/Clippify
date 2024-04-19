@@ -5,6 +5,7 @@ import { useAuth } from '../context/UserAuthContext'
 //CSS
 import '../Css/auth.css'
 import '../Css/login.css'
+import '../Css/navbar.css'
 
 //FIREBASE
 import { auth, db} from "../firebase";
@@ -28,6 +29,16 @@ const [user, setUser] = useState({
   email: "",
   password: "",
 })
+
+const [isActive, setIsActive] = useState(false);
+
+const handleBurgerMenuOpen2 = () => {
+  setIsActive(!isActive);
+}
+
+const handleBurgerMenuClose2 = () => {
+  setIsActive(!isActive);
+}
 
 //<******************************FUNCTIONS*******************************>
 
@@ -118,6 +129,37 @@ const handleForgotPass = async() => {
 
 
 return(
+  <>
+  <div className='landing-page'>
+  <div className="add">
+      <h6>BETA OUT NOW - 100% Free to use</h6>
+    </div>
+    <nav style={{position:"sticky"}} className={isActive ? "active sticky":"sticky"}>
+      <i className='bx bx-menu sidebarOpen' onClick={handleBurgerMenuOpen2}/>
+      <span className="logo navLogo"><a style={{fontWeight:500,opacity:1}} href="/">Clippfiy</a></span>
+      <div className="menu show">
+         <div className="logo-toggle ">
+            <span className="logo"><a href="#">Clippify</a></span>
+            <i className='bx bx-x siderbarClose' onClick={handleBurgerMenuClose2}></i>
+         </div>
+         <ul className="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a  href="#clipping">Features</a></li>
+            <li><a href="/policies">Policies</a></li>
+            <li><a href="/support/contact-us">Contact</a></li>
+         </ul>
+      </div>
+      <div className="darkLight-searchBox">
+
+            <Link to={"/login"}>
+               <h6 className="try-for-free-btn" >Try for Free</h6>
+            </Link>
+            
+
+      </div>
+    </nav>
+  </div>
+
 <div className='login-page'>
   <div className='login-container'>
     <div className='login-title'>
@@ -167,6 +209,7 @@ return(
       <h6 style={{fontSize:12}}>Contact / Support</h6>
   </Link>
 </div>
+</>
 )};
 
 export default SignIn;

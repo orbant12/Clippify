@@ -8,6 +8,28 @@
     padding-top: 50px;
 }
 
+.memory_title{
+    display: flex;
+    flex-direction: row;
+    width: 95%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.memory_title a{
+    color: rgb(255, 255, 255);
+    opacity: 0.3;
+    padding: 0;
+    font-size: 15px;
+    margin: 0;
+}
+
+.memory_title a:hover{
+    color: rgb(255, 255, 255);
+    opacity: 0.8;
+    cursor: pointer;
+}
+
 .memory_title_memory{
     display: flex;
     flex-direction: column;
@@ -392,7 +414,8 @@
     background-color: #121212;
     border: 4px solid black;
     padding: 10px 20px;
-    height: 150px;
+    height: 300px;
+    width: 350px;
 }
 
 #dark #add_item_bg:hover{

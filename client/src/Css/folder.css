@@ -1,6 +1,27 @@
 
 /*****************< 1.) FILES IN FOLDER >*******************/
 
+.sidebar-close .folder-page{
+  padding-left: 200px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.folder-page{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.folder-page-container{
+  width: 100%;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .file-map-container{
   width: 100%;
   display: grid;
@@ -582,6 +603,19 @@ background-color: none;
     width: 100%;
     margin: 20px;
     padding: 20px;
+  }
+
+  .sidebar-close .folder-page{
+    padding-left: 0px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .folder-page{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
   }
 }
 

@@ -15,8 +15,8 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 
 // ASSETS
-import FullFrameVideo from '../assets/File/fullVideoFrame';
-import Editor from '../assets/File/txtEditor/txtEditor';
+import FullFrameVideo from '../assets/Components/File/fullVideoFrame';
+import Editor from '../assets/Components/File/txtEditor/txtEditor';
 
 // ICONS
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
@@ -32,7 +32,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 
 //COMPONETS
-import ToggleButtons from "../assets/File/mainShow"
+import ToggleButtons from "../assets/Components/File/mainShow"
 
 function Related({ prevUrl, mainFileURL }) {
 

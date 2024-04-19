@@ -16,6 +16,8 @@
 
 .legal .legal-nav-bar h4{
   font-size: 15px;
+  padding: 0;
+  margin: 0;
 }
 
 .legal h6{
@@ -685,14 +687,14 @@ transition: ease-in-out .2s;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    width: 50%;
+    width: 40%;
 }
 
 .bug-column a{
-padding: 6px;
-width: 49px;    
- border: 2px solid black;
- border-radius: 10px;
+  padding: 6px;
+  width: 49px;    
+  border: 2px solid black;
+  border-radius: 10px; 
 }
 
 .bug-column a:hover{
@@ -957,6 +959,12 @@ width: 49px;
   
   #dark .highlighted-a{
     color: var(--dark-primary-color);
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
   }
   
   #dark .bug-column a{
