@@ -29,9 +29,6 @@ Welcome to Clippify, a comprehensive and multifaceted project that showcases my 
     - [9. Own Policies and Terms of Use](#own-policies-and-terms-of-use)
 4. [Getting Started](#getting-started)
 5. [Usage and Demos](#usage-and-demos)
-6. [Contributing](#contributing)
-7. [License](#license)
-8. [Contact Information](#contact-information)
    
 ---
 
