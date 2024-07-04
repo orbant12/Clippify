@@ -177,9 +177,9 @@ Implemented secure user authentication and managed data flow using Firebase, ens
     npm install
     ```
 
-## Or visit from your browser at:
-https://clippify.net
-  **You will need:**
+## Or visit from your browser at: https://clippify.net
+
+**You will need:**
  - Create a Clippify Account
 
   
