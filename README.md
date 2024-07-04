@@ -94,9 +94,8 @@ Welcome to Clippify, a comprehensive and multifaceted project that showcases my 
 
 ### 1. FFMPEG Syntax and Media Manipulation
 
-[Include a brief description of how FFMPEG was used in your project and the specific functionalities it provides.]
-Code Here : https://github.com/orbant12/Node-Express-Clippify/blob/main/src/assets/videoTrim/videoApp.jsx
-All Video Trimming Components : https://github.com/orbant12/Node-Express-Clippify/tree/main/src/assets/videoTrim
+ - Code Here : https://github.com/orbant12/Node-Express-Clippify/blob/main/src/assets/videoTrim/videoApp.jsx
+ - All Video Trimming Components : https://github.com/orbant12/Node-Express-Clippify/tree/main/src/assets/videoTrim
 
 ### 2. Self-trained Neural Network for Video Transcript Extraction
 
