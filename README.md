@@ -43,7 +43,7 @@ Welcome to Clippify, a comprehensive and multifaceted project that showcases my 
 - React
 - JS
 - HTML
-- CSS
+- CSS & Tailwind
 - Vite
 - Cross Origin Isolation Middleware
 - Lexical Editor 
