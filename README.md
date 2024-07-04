@@ -166,6 +166,7 @@ Implemented secure user authentication and managed data flow using Firebase, ens
 
 
 ---
+
 ## Usage & Installation
 1. Clone the repository:
     ```sh
