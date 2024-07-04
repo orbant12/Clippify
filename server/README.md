@@ -23,4 +23,4 @@ This feature allows for downloading YouTube videos. It integrates with YouTube's
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/your-repo-url](https://github.com/orbant12/Clippify/tree/master/server
+   git clone https://github.com/orbant12/Clippify/tree/master/server
