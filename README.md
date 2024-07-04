@@ -41,6 +41,9 @@ Welcome to Clippify, a comprehensive and multifaceted project that showcases my 
 
 - FFmpeg
 - React
+- JS
+- HTML
+- CSS
 - Vite
 - Cross Origin Isolation Middleware
 - Lexical Editor 
