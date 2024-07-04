@@ -165,6 +165,17 @@ Implemented secure user authentication and managed data flow using Firebase, ens
 
 
 ---
+## Installation
+1. Clone the repository:
+    ```sh
+    git clone https://github.com/yourusername/your-repo-name.git
+    cd your-repo-name
+    ```
+
+2. Install dependencies:
+    ```sh
+    npm install
+    ```
 
 ## Usage and Demos
 
