@@ -37,7 +37,7 @@ Welcome to Clippify, a comprehensive and multifaceted project that showcases my 
 
 ## Technologies Used
 
-### 💻 Frontend
+### 💻 Frontend  [client,https://github.com/orbant12/Clippify/tree/master/client]
 
 - FFmpeg
 - React
