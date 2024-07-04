@@ -1,4 +1,4 @@
-# My REST API
+# REST API
 
 This is a REST API built using Node.js and Express, integrating Firebase Storage, Firebase Firestore, and YouTube download functionalities.
 
