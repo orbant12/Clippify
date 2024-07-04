@@ -61,7 +61,7 @@ Welcome to Clippify, a comprehensive and multifaceted project that showcases my 
 - Stripe API
 - OpenAI API
 
-### 👾 Machine Learning • Dir: [RNN_model](https://github.com/orbant12/Clippify/tree/master/client)
+### 👾 Machine Learning • Dir: [RNN_model](https://github.com/orbant12/Clippify/tree/master/RNN_model)
 
 - Tensorflow
 - Python
