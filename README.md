@@ -42,11 +42,10 @@ Welcome to Clippify, a comprehensive and multifaceted project that showcases my 
 - FFmpeg
 - React
 - Vite
-- Stripe API
-- OpenAI API
-- Firebase Firestore
-- Firebase Authentication
-- Firebase Storage
+- CORS
+- Lexical Editor 
+- Stripe 
+- OpenAI 
 
 ### 👨🏻‍💻 Backend • Dir: [server](https://github.com/orbant12/Clippify/tree/master/server)
 
@@ -56,6 +55,8 @@ Welcome to Clippify, a comprehensive and multifaceted project that showcases my 
 - Firebase Firestore
 - Firebase Authentication
 - Firebase Storage
+- Stripe API
+- OpenAI API
 
 ### 👾 Machine Learning • Dir: [RNN_model](https://github.com/orbant12/Clippify/tree/master/client)
 
