@@ -27,7 +27,7 @@ Welcome to Clippify, a comprehensive and multifaceted project that showcases my 
     - [7. Stripe API Integration](#stripe-api-integration)
     - [8. Plain CSS styling from scratch](#css-styling)
     - [9. Own Policies and Terms of Use](#own-policies-and-terms-of-use)
-4. [Getting Started](#getting-started)
+4. [Problems & Solutions](#problems-&-solutions)
 5. [Usage & Installation](#usage-&-installation)
    
 ---
