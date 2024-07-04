@@ -16,7 +16,7 @@ Welcome to Clippify, a comprehensive and multifaceted project that showcases my 
  
 ### Table of Contents
 1. [Technologies Used](#technologies-used)
-2. [App Features](#key-achievements)
+2. [App Features](#app-features)
 3. [Project Components](#project-components)
     - [1. FFMPEG Syntax and Media Manipulation](#ffmpeg-syntax-and-media-manipulation)
     - [2. Self-trained Neural Network for Video Transcript Extraction](#self-trained-neural-network-for-video-transcript-extraction)
@@ -28,7 +28,7 @@ Welcome to Clippify, a comprehensive and multifaceted project that showcases my 
     - [8. Plain CSS styling from scratch](#css-styling)
     - [9. Own Policies and Terms of Use](#own-policies-and-terms-of-use)
 4. [Getting Started](#getting-started)
-5. [Usage & Installation](#Usage-&-Installation)
+5. [Usage & Installation](#usage-&-installation)
    
 ---
 
