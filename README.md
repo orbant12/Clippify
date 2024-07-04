@@ -37,7 +37,7 @@ Welcome to Clippify, a comprehensive and multifaceted project that showcases my 
 
 ## Technologies Used
 
-### 💻 Frontend  Dir: [client](https://github.com/orbant12/Clippify/tree/master/client)
+### 💻 Frontend • Dir: [client](https://github.com/orbant12/Clippify/tree/master/client)
 
 - FFmpeg
 - React
@@ -48,7 +48,7 @@ Welcome to Clippify, a comprehensive and multifaceted project that showcases my 
 - Firebase Authentication
 - Firebase Storage
 
-### 👨🏻‍💻 Backend Dir: [client](https://github.com/orbant12/Clippify/tree/master/client)
+### 👨🏻‍💻 Backend • Dir: [server](https://github.com/orbant12/Clippify/tree/master/server)
 
 - Node
 - Express
@@ -57,7 +57,7 @@ Welcome to Clippify, a comprehensive and multifaceted project that showcases my 
 - Firebase Authentication
 - Firebase Storage
 
-### 👾 Machine Learning Dir: [client](https://github.com/orbant12/Clippify/tree/master/client)
+### 👾 Machine Learning • Dir: [RNN_model](https://github.com/orbant12/Clippify/tree/master/client)
 
 - Tensorflow
 - Python
