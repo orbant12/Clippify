@@ -165,7 +165,7 @@ Implemented secure user authentication and managed data flow using Firebase, ens
 
 
 ---
-## Installation
+## Usage & Installation
 1. Clone the repository:
     ```sh
     git clone https://github.com/yourusername/your-repo-name.git
@@ -177,14 +177,9 @@ Implemented secure user authentication and managed data flow using Firebase, ens
     npm install
     ```
 
-## Usage and Demos
-
-1. **You can access the software:**
-- https://clippify.net
-- https://github.com/orbant12/Node-Express-Clippify.git
-
-2. **You will need:**
-- Create a Clippify Account
+3. https://clippify.net
+     **You will need:**
+    - Create a Clippify Account
 
   
 
