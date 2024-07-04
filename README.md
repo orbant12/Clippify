@@ -153,15 +153,15 @@ After considering the limitations, I have decided to use CORS Isolation to be ab
 
 ### 3. CORS Isolated Storage Access
 
-Google Console
+Needed to manually edit Google Console's header's
 
 ### 4. Rich Text Editor State Extraction for Cross Platform Accessability
 
-Implemented secure user authentication and managed data flow using Firebase, ensuring a robust and scalable user management system.
+Lexical Editor has nummerous extraction methods that is why I choose this technology. Lexical allowed me to extract the content into JSON
 
 ### 5. Youtube URL Downloader - MUST move from serverless to REST
 
-Implemented secure user authentication and managed data flow using Firebase, ensuring a robust and scalable user management system.
+I used 
 
 
 ---
