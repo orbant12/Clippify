@@ -42,7 +42,7 @@ Welcome to Clippify, a comprehensive and multifaceted project that showcases my 
 - FFmpeg
 - React
 - Vite
-- CORS Middleware
+- CROS ORIGIN ISOLATION Middleware
 - Lexical Editor 
 - Stripe 
 - OpenAI 
