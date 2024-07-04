@@ -52,8 +52,10 @@ Welcome to Clippify, a comprehensive and multifaceted project that showcases my 
 
 - Node
 - Express
-- Firebase Functions
-- REST
+- EST
+- Firebase Firestore
+- Firebase Authentication
+- Firebase Storage
 
 ### 👾 Machine Learning
 
