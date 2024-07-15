@@ -1,45 +1,65 @@
-# Clippify README
+# ✂️ Clippify Introduction Video 🎞️
+
+
+
+
+
+https://github.com/orbant12/Clippify/assets/124793231/7433a6f0-e758-4867-8dbc-74fb009748c4
+
+
+
+
+
+---
 
 Welcome to Clippify, a comprehensive and multifaceted project that showcases my mastery of various technologies and skills relevant to the tech industry. This README is designed to provide a detailed insight into the key components and accomplishments of this project, specifically tailored for a tech job recruiter
-
+ 
 ### Table of Contents
 1. [Technologies Used](#technologies-used)
-2. [Key Achievements](#key-achievements)
+2. [App Features](#app-features)
 3. [Project Components](#project-components)
-    - [1. FFMPEG Syntax and Media Manipulation](#ffmpeg-syntax-and-media-manipulation)
-    - [2. Self-trained Neural Network for Video Transcript Extraction](#self-trained-neural-network-for-video-transcript-extraction)
-    - [3. OpenAI API Implementation](#openai-api-implementation)
-    - [4. Authentication and User Data Flow with Firebase](#authentication-and-user-data-flow-with-firebase)
-    - [5. Live Database with Firebase Changes on Snapshot](#live-database-with-firebase-changes-on-snapshot)
-    - [6. Lexical Editor for Rich Text Editor State Management](#lexical-editor-for-rich-text-editor-state-management)
-    - [7. Stripe API Integration](#stripe-api-integration)
-    - [8. Plain CSS styling from scratch](#css-styling)
-    - [9. Own Policies and Terms of Use](#own-policies-and-terms-of-use)
-4. [Getting Started](#getting-started)
-5. [Usage and Demos](#usage-and-demos)
-6. [Contributing](#contributing)
-7. [License](#license)
-8. [Contact Information](#contact-information)
-
+4. [Problems & Solutions](#problems--solutions)
+5. [Usage & Installation](#usage--installation)
+   
 ---
 
 ## Technologies Used
 
+### 💻 Frontend • Dir: [client](https://github.com/orbant12/Clippify/tree/master/client)
+
 - FFmpeg
-- REACT
-- Python
-- TensorFlow
-- Numpy
-- Pandas
-- Stripe API
-- OpenAI API
+- React
+- JS
+- HTML
+- CSS & Tailwind
+- Vite
+- Cross Origin Isolation Middleware
+- Lexical Editor 
+- Stripe 
+- OpenAI 
+
+### 👨🏻‍💻 Backend • Dir: [server](https://github.com/orbant12/Clippify/tree/master/server)
+
+- Node
+- Express
+- EST
 - Firebase Firestore
 - Firebase Authentication
 - Firebase Storage
+- Stripe API
+- OpenAI API
+
+### 👾 Machine Learning • Dir: [RNN_model](https://github.com/orbant12/Clippify/tree/master/RNN_model)
+
+- Tensorflow
+- Python
+- Numpy
+- Pandas
+- Firebase ML Integration
   
 ---
 
-## Key Achievements
+## App Features
 
 1. **Mastery of FFMPEG Syntax:** Proficient in manipulating media files (mp3, mp4, blob, blob64, URL, data URL) using FFMPEG, showcasing a deep understanding of multimedia processing.
 
@@ -65,51 +85,43 @@ Welcome to Clippify, a comprehensive and multifaceted project that showcases my 
 
 ### 1. FFMPEG Syntax and Media Manipulation
 
-[Include a brief description of how FFMPEG was used in your project and the specific functionalities it provides.]
-Code Here : https://github.com/orbant12/Node-Express-Clippify/blob/main/src/assets/videoTrim/videoApp.jsx
-All Video Trimming Components : https://github.com/orbant12/Node-Express-Clippify/tree/main/src/assets/videoTrim
+ - Code Here : https://github.com/orbant12/Node-Express-Clippify/blob/main/src/assets/videoTrim/videoApp.jsx
+ - All Video Trimming Components : https://github.com/orbant12/Node-Express-Clippify/tree/main/src/assets/videoTrim
 
 ### 2. Self-trained Neural Network for Video Transcript Extraction
 
-[Provide an overview of the neural network you built, its architecture, and how it is utilized for video transcript extraction.]
-Jupiter Notebook: https://github.com/orbant12/Automatic_Speech_Recognition-CNN
+ - Jupiter Notebook: https://github.com/orbant12/Automatic_Speech_Recognition-CNN
 
 ### 3. OpenAI API Implementation
 
-[Explain the integration of the OpenAI API and how it enhances the project's capabilities, particularly in the development of the ChatBot.]
-Code Here: https://github.com/orbant12/Node-Express-Clippify/blob/main/functions/src/index.ts
+ - Code Here: https://github.com/orbant12/Node-Express-Clippify/blob/main/functions/src/index.ts
 
 ### 4. Authentication and User Data Flow with Firebase
 
-[Detail the implementation of user authentication and data flow using Firebase, emphasizing security measures and user management.]
-Context: https://github.com/orbant12/Node-Express-Clippify/blob/main/src/context/UserAuthContext.jsx
-Login: https://github.com/orbant12/Node-Express-Clippify/blob/main/src/pages/SignIn.jsx
-Registration: https://github.com/orbant12/Node-Express-Clippify/blob/main/src/pages/Login.jsx
+ - Context: https://github.com/orbant12/Node-Express-Clippify/blob/main/src/context/UserAuthContext.jsx
+ - Login: https://github.com/orbant12/Node-Express-Clippify/blob/main/src/pages/SignIn.jsx
+ - Registration: https://github.com/orbant12/Node-Express-Clippify/blob/main/src/pages/Login.jsx
 
 ### 5. Live Database with Firebase Changes on Snapshot
 
-[Describe the real-time database synchronization feature and its significance in providing users with up-to-date information.]
+
 
 ### 6. Lexical Editor for Rich Text Editor State Management
 
-[Discuss the purpose and functionality of the lexical editor, emphasizing its role in managing rich text editor states.]
-Code Here: https://github.com/orbant12/Node-Express-Clippify/blob/main/src/assets/File/txtEditor/txtEditor.jsx
+ - Code Here: https://github.com/orbant12/Node-Express-Clippify/blob/main/src/assets/File/txtEditor/txtEditor.jsx
 
 ### 7. Stripe API Integration
 
-[Provide insights into the integration of the Stripe API, its setup, and how it facilitates payment processing and information storage.]
-Code Here: https://github.com/orbant12/Node-Express-Clippify/tree/main/src/assets/Subscription
+ - Code Here: https://github.com/orbant12/Node-Express-Clippify/tree/main/src/assets/Subscription
 
 ### 8. CSS Styling
 
-[Provide insights into the integration of the Stripe API, its setup, and how it facilitates payment processing and information storage.]
-Code Here : https://github.com/orbant12/Node-Express-Clippify/tree/main/src/Css
-Theme Switch: https://github.com/orbant12/Node-Express-Clippify/blob/main/src/App.jsx
+ - Code Here : https://github.com/orbant12/Node-Express-Clippify/tree/main/src/Css
+ - Theme Switch: https://github.com/orbant12/Node-Express-Clippify/blob/main/src/App.jsx
 
 ### 9. Own Policies and Terms of Use
 
-[Explain the development and implementation of custom policies and terms of use, underlining the commitment to legal and ethical standards.]
-Code Here: https://github.com/orbant12/Node-Express-Clippify/tree/main/src/pages/Policies
+ - Code Here: https://github.com/orbant12/Node-Express-Clippify/tree/main/src/pages/Policies
 
 ---
 
@@ -125,33 +137,36 @@ After considering the limitations, I have decided to use CORS Isolation to be ab
 
 ### 3. CORS Isolated Storage Access
 
-Google Console
+Needed to manually edit Google Console's header's
 
 ### 4. Rich Text Editor State Extraction for Cross Platform Accessability
 
-Implemented secure user authentication and managed data flow using Firebase, ensuring a robust and scalable user management system.
+Lexical Editor has nummerous extraction methods that is why I choose this technology. Lexical allowed me to extract the content into JSON
+
+### 5. Youtube URL Downloader - MUST move from serverless to REST
+
+I used 
+
 
 ---
 
-## Usage and Demos
+## Usage & Installation
+1. Clone the repository:
+    ```sh
+    git clone https://github.com/yourusername/your-repo-name.git
+    cd your-repo-name
+    ```
 
-1. **You can access the software:**
-- https://clippify.net
-- https://github.com/orbant12/Node-Express-Clippify.git
+2. Install dependencies:
+    ```sh
+    npm install
+    ```
 
-2. **You will need:**
-- Create a Clippify Account
+## Or visit from your browser at: https://clippify.net
 
----
+**You will need:**
+ - Create a Clippify Account
 
-## Contact Information
+  
 
-[Provide your contact information or ways in which interested parties can reach out to you for further inquiries or collaboration.]
 
---- 
-
-Thank you for exploring [Your Project Name]! I hope this README provides a comprehensive understanding of the project and my capabilities as a tech professional. If you have any questions or need further clarification, feel free to reach out.
-
-[Your Name]  
-[Your Email]  
-[Your LinkedIn or other relevant profiles]
