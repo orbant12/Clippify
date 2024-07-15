@@ -2,7 +2,7 @@ import { useContext, createContext, useEffect, useState } from "react"
 import { AuthErrorCodes, createUserWithEmailAndPassword, onAuthStateChanged,signInWithEmailAndPassword,sendEmailVerification  } from "firebase/auth";
 import { auth, db,app } from "../firebase";
 import { collection, doc, setDoc,getDoc, updateDoc} from "firebase/firestore";
-import { getPremiumStatus } from "../assets/Subscription/getPremiumStatus";
+import { getPremiumStatus } from "../assets/Components/Subscription/getPremiumStatus";
 
 const userContext = createContext();
 
@@ -39,13 +39,13 @@ useEffect(() => {
     console.log(user)
     if (user) {
       setuser(user)
-      console.log("u are logged in")
-      if(window.location.pathname == "/login" && window.location.pathname == "/register"){
-        window.location.href = "/"
+      console.log(`Logged in user: ${user.uid}`)
+      if(window.location.pathname == "/login" || window.location.pathname == "/register"){
+        
       }
     }
     else {
-      if(window.location.pathname != "/login" && window.location.pathname != "/register" && window.location.pathname != "/support/contact-us" && window.location.pathname != "/support/feedback" && window.location.pathname != "/policies/legal" && window.location.pathname != "/policies/legal/terms" && window.location.pathname != "/policies/legal/cookie-policy" && window.location.pathname != "/policies/legal/privacy-policy" && window.location.pathname != "/policies/legal/acceptable-use-policy" && window.location.pathname != "/policies/security" && window.location.pathname != "/landing" && window.location.pathname != "/policies"){
+      if(window.location.pathname == "/" || window.location.pathname == "/memory"){
           window.location.href = "/landing"
         }
     }
@@ -111,13 +111,13 @@ const SignUp = async (email, password, FullName) => {
     const signeduser = result.user;
     //Setting Fresh Registrated user To the Document
     const userId = signeduser.uid;
-    const colRef = collection(db, "users");
+    const colRef = doc(db, "users",userId);
     const tagRef = collection(db, "users", userId, "Tags");
     //const newTagRef = doc(tagRef);
     console.log(userId);
     //SETTING USER DOCUMENT TO FIRESTORE
     try {
-      await setDoc(doc(colRef, userId),{
+      await setDoc(colRef,{
         id: userId,
         fullname: userName,
         email: regEmail,
@@ -126,6 +126,8 @@ const SignUp = async (email, password, FullName) => {
         profilePictureURL: "",
         recent:"",
         user_since: new Date().toLocaleDateString(),
+        recent_file_id: "",
+        recent_folder_id:"",
       });
 
       await setDoc(doc(tagRef,userId),{

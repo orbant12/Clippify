@@ -15,17 +15,24 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 
 // ASSETS
-import FullFrameVideo from '../assets/File/fullVideoFrame';
-import Editor from '../assets/File/txtEditor/txtEditor';
+import FullFrameVideo from '../assets/Components/File/fullVideoFrame';
+import Editor from '../assets/Components/File/txtEditor/txtEditor';
 
 // ICONS
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import DesignServicesIcon from '@mui/icons-material/DesignServices';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-
+import DeleteIcon from '@mui/icons-material/Delete';
 // CSS
 import '../Css/file.css';
 
+//BS
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+
+//COMPONETS
+import ToggleButtons from "../assets/Components/File/mainShow"
 
 function Related({ prevUrl, mainFileURL }) {
 
@@ -45,6 +52,7 @@ const [newContentUpdate, setNewContentUpdate] = useState(null);
 const [isEditing, setIsEditing] = useState(false);
 const [newTitle, setNewTitle] = useState(fileElements.title);
 const [transcriptionData, setTranscriptionData] = useState(null);
+const [generatedHtml,setGeneratedHtml] = useState(null)
 
 // COMMON VARIABLES
 const { id } = useParams();
@@ -368,87 +376,69 @@ const navigateBack = () => {
 
 
 return (
-<div className='related'>
-  {/* BACK */}
-  <div className='zero_bar-row'>
-    <div className='back-button'>
-      <ArrowBackIosNewIcon onClick={navigateBack} />
-    </div>
-  </div>
+<Container fluid>
 
-  <div className='file-page'>
-    {/* 1 BAR */}
-    <div className='first_bar-title'>
-      {/* LEFT Side */}
-      <div className='first_bar-left'>
-        {fileElements.tag}
+    <div className='file-page'>
+      {/*1 BAR */}
+      <Row style={{width:"70%",marginRight:"auto",marginLeft:"auto",paddingTop:70,alignItems:"center"}}>
+        <Col >
         {isEditing ? (
-          <input
-            className="folder-input-change"
-            type="text"
-            value={newTitle}
-            onChange={handleTitleChange}
-            onKeyPress={handleKeyUp}
-            autoFocus
-          />
-        ) : (
-          <h2 className="first_bar-txt" onClick={handleTitleClick}>
-            {newTitle}
-          </h2>
-        )}
-        {isEditing ? <h5 style={{ opacity: 0.8, paddingTop: 5 }}>Press Enter to OK</h5> : null}
+              <input
+                className="folder-input-change"
+                type="text"
+                value={newTitle}
+                onChange={handleTitleChange}
+                onKeyPress={handleKeyUp}
+                autoFocus
+              />
+            ) : (
+              <h2 className="first_bar-txt" onClick={handleTitleClick}>
+                {newTitle}
+              </h2>
+            )}
+            {isEditing ? 
+              <h5 style={{opacity:0.8,paddingTop:5}}>Press Enter to OK</h5>:null
+            }
+        </Col>
+        <Col className='col-auto folder-edit-btn' style={{cursor:"pointer"}} >
+          <DesignServicesIcon onClick={handleTitleClick}/>
+      </Col>
+      <Col className='col-auto folder-delete-btn' style={{cursor:"pointer"}} >
+          <DeleteIcon onClick={handleDelete}/>
+      </Col>
+        <div className='zero_bar-row2'> 
+          <div className='back-button'>
+            <ArrowBackIosNewIcon onClick={navigateBack} sx={{p:1}}/> 
+          </div>
+        </div>
+    </Row>
+      {/*2 BAR */}
+      <div className='sec_bar-cont'>
+        {/*VIDEO FRAME With PAG*/}
+      {/* 2 BAR */}
+        {/* VIDEO FRAME */}
+        <div className='sec_bar-video-main'>
+          <FullFrameVideo crossOrigin="anonymous" videoSrc={fileElements.url} />
+        </div>
+
+        {/* CLIPS COLLECTION */}
       </div>
-
-      {/* RIGHT Side */}
-      <div>
-        <DesignServicesIcon sx={{ fontSize: 30 }} className='first_bar-edit' onClick={handleTitleClick} />
-        <DeleteForeverIcon sx={{ fontSize: 30, ml: 3 }} className='first_bar-delete' onClick={handleOpen} />
-        <Modal
-          open={open}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Are You Sure ?
-            </Typography>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              You will lose all of your documents permanently
-            </Typography>
-            <Button sx={{ color: 'red', ml: 32, mt: 5 }} onClick={handleDelete}>
-              DELETE
-            </Button>
-          </Box>
-        </Modal>
-      </div>
-    </div>
-
-    {/* 2 BAR */}
-    <div className='sec_bar-cont-related'>
-      {/* VIDEO FRAME */}
-      <div className='sec_bar-video-related'>
-        <FullFrameVideo crossOrigin="anonymous" videoSrc={fileElements.url} />
-      </div>
-
-      {/* CLIPS COLLECTION */}
-    </div>
-
-    {/* 3 BAR */}
-    <div className='third_bar-features-cont'>
-      <div className='third_bar-top'>{/* Add content as needed */}</div>
-      <div className='rich-txt-editor'>
-        <Editor
-          isSubscribed={userData.subscription}
-          setData={newContentUpdate}
-          setContent={setSaveContent}
-          audioUrl={fileElements.storage_path_audio}
-          passTranscription={setTranscriptionData}
-        />
-        {/* EDITOR */}
+      {/*3 BAR*/}
+      <div className='third_bar-features-cont'>
+        <div className='rich-txt-editor'>
+          {/*EDITOR*/}
+          <Editor 
+            isSubscribed={userData.subscription}  
+            data={setGeneratedHtml} 
+            setData={newContentUpdate} 
+            setContent={setSaveContent} 
+            audioUrl={fileElements.storage_path_audio} 
+            passTranscription={setTranscriptionData}
+          /> 
+        </div>
       </div>
     </div>
-  </div>
-</div>
+</Container>
 );}
 
 export default Related

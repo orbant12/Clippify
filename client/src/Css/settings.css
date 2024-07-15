@@ -1,27 +1,43 @@
 
+.settings{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
 
 .f-settings{
-    margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .f-title-sections{
     padding-top: 20px;
     display: flex;
     flex-direction: row;
-    
+    width: 60%;
 }
 
+.f-title-sections h5{
+  font-size: 15px;
+}
+
+
 .section-settings-left{
-    padding: 5px;
+    padding: 7px 15px;
     border: 2px solid black;
 }
 .section-settings-right{
-    padding: 5px;
+    padding: 7px 15px;
+
     border: 2px solid black;
 }
 
 .section-settings{
-    padding: 5px;
+    padding: 7px 15px;
     border: 2px solid black;
     border-left: 0px solid black;
 
@@ -41,12 +57,17 @@
 }
 
 .profile-settings{
-    margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 100px;
 }
 
 .profile-title-txt{
     font-weight: 500;
-    font-size: 20px;
+    font-size: 25px;
 }
 
 .profile-title-desc{
@@ -58,14 +79,18 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    
+}
+
+.title-row h5{
+  font-size: 17px;
+  opacity: 0.3;
 }
 
 .profile-first-row{
     margin-top: 50px;
     display: flex;
     flex-direction: row;
-    width: 990px;
+    width: 100%;
     justify-content: space-between;
 }
 
@@ -73,7 +98,7 @@
     margin-top: 50px;
     display: flex;
     flex-direction: row;
-    width: 1450px;
+    width: 100%;
     justify-content: space-between;
 }
 
@@ -81,24 +106,40 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 700px;
+    width: 60%;
 }
 
+.pass-inputs input{
+  font-weight: 400;
+  padding: 10px;
+  height: 50px;
+  width: 300px;
+  border-radius: 10px;
+}
+
+
+
+
 .profile-first-row-picture{
-    margin-top: 100px;
+    margin-top: 10px;
     display: flex;
     flex-direction: row;
-    width: 1500px;
+    width: 100%;
+    height: 400px;
     align-items: center;
     justify-content: space-between;
 }
 
 .profile-first-row-details{
-    margin-top: 50px;
+    margin-top: 0px;
     display: flex;
     flex-direction: row;
-    width: 1400px;
+    width: 100%;
     justify-content: space-between;
+}
+
+.profile-first-row-details h5{
+  font-size: 15px;
 }
 
 
@@ -110,11 +151,23 @@
 }
 
 .payment-settings{
-    margin-top: 200px;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
+
+
 .support-settings{
-    margin-top: 200px;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin-right: auto;
+    margin-left: auto;
  
 }
 
@@ -136,32 +189,41 @@
 
 
 .history-f-row{
-   
     padding-top: 20px;
     display: flex;
-    margin-left: 100px;
     flex-direction: row;
     justify-content: space-between;
-    width: 1300px;
+    width: 100%;
 }
+
+
 
 .history-f-row2{
     padding-top: 20px;
     display: flex;
-    margin-left: 100px;
     flex-direction: column;
     justify-content: space-between;
-    width: 1300px;
+    width: 100%;
     margin-bottom: 200px;
 }
 
 .history-data-row{
     padding-top: 20px;
-    width: 1300px;
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
- 
+}
+
+
+
+
+.settings input{
+  font-weight: 400;
+  padding: 10px;
+  height: 50px;
+  width: 300px;
+  border-radius: 10px;
 }
 
 
@@ -195,20 +257,19 @@
   }
   
   #dark .settings .section-settings-left{
-    padding: 5px;
     border: 2px solid var(--dark-primary-color);
     color: var(--text-color);
   }
   
   #dark .settings .section-settings-right{
-    padding: 5px;
+  
     border: 2px solid var(--dark-primary-color);
     border-left: 0px solid black;
     color: var(--text-color);
   }
   
   #dark .settings .section-settings{
-    padding: 5px;
+ 
     border: 2px solid var(--dark-primary-color);
     border-left: 0px solid black;
     color: var(--text-color);
@@ -254,8 +315,6 @@
   #dark .settings input{
     background-color: var(--dark-primary-color-light);
     color:var(--dark-text-color);
-    font-weight: 400;
-    padding: 10px;
     border: 1px solid var(--dark-primary-color);
     opacity: 0.8;
   }
@@ -315,20 +374,17 @@
   }
   
   #light .settings .section-settings-left{
-    padding: 5px;
     border: 2px solid var(--primary-color);
     color: var(--dark-primary-color-light);
   }
   
   #light .settings .section-settings-right{
-    padding: 5px;
     border: 2px solid var(--primary-color);
     border-left: 0px solid gray;
     color: var(--dark-primary-color-light);
   }
   
   #light .settings .section-settings{
-    padding: 5px;
     border: 2px solid var(--primary-color);
     border-left: 0px solid gray;
     color: var(--dark-primary-color-light);
@@ -403,324 +459,86 @@
   
   
   
-  
-
-
-@media (1590px <= width <= 1750px) {
-
-.settings{
-    width: 1350px;
+@media (max-width: 768px) {
+  .profile-title-txt{
+    font-weight: 500;
+    font-size: 18px;
 }
 
-.settings .profile-first-row{
-    margin-top: 50px;
-    display: flex;
-    flex-direction: row;
-    width: 790px;
-    justify-content: space-between;
-}
-.settings .profile-first-row-pass{
-    margin-top: 50px;
-    display: flex;
-    flex-direction: row;
-    width: 1250px;
-    justify-content: space-between;
+.title-row h5{
+  font-size: 13px;
+  opacity: 0.3;
 }
 
-.settings .pass-inputs{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 700px;
+.settings input{
+  font-weight: 400;
+  padding: 10px;
+  height: 40px;
+  width: 100px;
+  border-radius: 10px;
 }
 
-.settings .profile-first-row-picture{
-    margin-top: 100px;
-    display: flex;
-    flex-direction: row;
-    width: 1300px;
-    align-items: center;
-    justify-content: space-between;
+.profile-first-row div h5{
+  font-size: 15px;
 }
 
-.settings .profile-first-row-details{
-    margin-top: 50px;
-    display: flex;
-    flex-direction: row;
-    width: 1200px;
-    justify-content: space-between;
+.profile-first-row div h6{
+  font-size: 10px;
 }
 
-.history-f-row{
-   
-    padding-top: 20px;
-    display: flex;
-    margin-left: 100px;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 1200px;
+.pass-inputs input{
+  font-weight: 400;
+  padding: 10px;
+  height: 40px;
+  width: 100px;
+  border-radius: 10px;
 }
 
-.history-f-row2{
-    padding-top: 20px;
-    display: flex;
-    margin-left: 100px;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 1200px;
-    margin-bottom: 200px;
+.profile-first-row-pass div h5{
+  font-size: 15px;
 }
 
-.history-data-row{
-    padding-top: 20px;
-    width: 1400px;
-    display: flex;
-    flex-direction: row;
-  
-    justify-content: space-between;
- 
+.profile-first-row-pass div h6{
+  font-size: 10px;
+}
+
+.profile-first-row-picture{
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 400px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.profile-first-row-picture h5{
+  font-size: 15px;
+}
+
+.profile-first-row-picture h6{
+  font-size: 10px;
 }
 
 
-    
+.profile-first-row-details h5{
+  font-size: 7px;
 }
 
-@media (1450px <= width < 1590px) {
-
-    .settings{
-        width: 1200px;
-    }
-
-    .profile-first-row{
-        margin-top: 50px;
-        display: flex;
-        flex-direction: row;
-        width: 640px;
-        justify-content: space-between;
-    }
-    .profile-first-row-pass{
-        margin-top: 50px;
-        display: flex;
-        flex-direction: row;
-        width: 1100px;
-        justify-content: space-between;
-    }
-    
-    .pass-inputs{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        width: 700px;
-    }
-    
-    .profile-first-row-picture{
-        margin-top: 100px;
-        display: flex;
-        flex-direction: row;
-        width: 1113px;
-        align-items: center;
-        justify-content: space-between;
-    }
-    
-    .profile-first-row-details{
-        margin-top: 50px;
-        display: flex;
-        flex-direction: row;
-        width: 1100px;
-        justify-content: space-between;
-    }
-
-    .history-f-row{
-   
-        padding-top: 20px;
-        display: flex;
-        margin-left: 100px;
-        flex-direction: row;
-        justify-content: space-between;
-        width: 1000px;
-
-    }
-    
-    .history-f-row2{
-        padding-top: 20px;
-        display: flex;
-        margin-left: 100px;
-        flex-direction: row;
-        justify-content: space-between;
-        width: 1000px;
-        margin-bottom: 200px;
-    }
-    
-    .history-data-row{
-        padding-top: 20px;
-        width: 1200px;
-        display: flex;
-        flex-direction: row;
-      
-        justify-content: space-between;
-     
-    }
-      
-        
+.profile-first-row-details h6{
+  font-size: 7px;
 }
 
-@media (1350px <= width < 1450px) {
-
-        .settings{
-            width: 1100px;
-            
-        }
-    
-        .profile-first-row{
-            margin-top: 50px;
-            display: flex;
-            flex-direction: row;
-            width: 740px;
-            justify-content: space-between;
-        }
-        .profile-first-row-pass{
-            margin-top: 50px;
-            display: flex;
-            flex-direction: row;
-            width: 1000px;
-            justify-content: space-between;
-        }
-        
-        .pass-inputs{
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            width: 700px;
-        }
-        
-        .profile-first-row-picture{
-            margin-top: 100px;
-            display: flex;
-            flex-direction: row;
-            width: 1013px;
-            align-items: center;
-            justify-content: space-between;
-        }
-        
-        .profile-first-row-details{
-            margin-top: 50px;
-            display: flex;
-            flex-direction: row;
-            width: 1100px;
-            justify-content: space-between;
-        }
-
-        .history-f-row{
-   
-            padding-top: 20px;
-            display: flex;
-            margin-left: 100px;
-            flex-direction: row;
-            justify-content: space-between;
-            width: 900px;
-    
-        }
-        
-        .history-f-row2{
-            padding-top: 20px;
-            display: flex;
-            margin-left: 100px;
-            flex-direction: row;
-            justify-content: space-between;
-            width: 900px;
-            margin-bottom: 200px;
-        }
-        
-        .history-data-row{
-            padding-top: 20px;
-            width: 1100px;
-            display: flex;
-            flex-direction: row;
-          
-            justify-content: space-between;
-         
-        }
-          
-            
+.history-f-row h3{
+  font-size: 15px;
 }
 
-@media (1024px <= width < 1350px) {
-
-    .settings{
-        width: 1000px;
-    
-    }
-
-    .profile-first-row{
-        margin-top: 50px;
-        display: flex;
-        flex-direction: row;
-        width: 940px;
-        justify-content: space-between;
-    }
-    .profile-first-row-pass{
-        margin-top: 50px;
-        display: flex;
-        flex-direction: row;
-        width: 1000px;
-        justify-content: space-between;
-    }
-    
-    .pass-inputs{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        width: 700px;
-    }
-    
-    .profile-first-row-picture{
-        margin-top: 100px;
-        display: flex;
-        flex-direction: row;
-        width: 1013px;
-        align-items: center;
-        justify-content: space-between;
-    }
-    
-    .profile-first-row-details{
-        margin-top: 50px;
-        display: flex;
-        flex-direction: row;
-        width: 1000px;
-        justify-content: space-between;
-    }
-
-    .history-f-row{
-   
-        padding-top: 20px;
-        display: flex;
-        margin-left: 100px;
-        flex-direction: row;
-        justify-content: space-between;
-        width: 800px;
-
-    }
-    
-    .history-f-row2{
-        padding-top: 20px;
-        display: flex;
-        margin-left: 100px;
-        flex-direction: row;
-        justify-content: space-between;
-        width: 800px;
-        margin-bottom: 200px;
-    }
-    
-    .history-data-row{
-        padding-top: 20px;
-        width: 1000px;
-        display: flex;
-        flex-direction: row;
-      
-        justify-content: space-between;
-     
-    }
-      
-        
+.history-data-row h6{
+  font-size: 10px;
 }
 
+.history-data-row h5{
+  font-size: 10px;
+}
+
+}

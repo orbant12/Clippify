@@ -22,5 +22,6 @@ export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const storage = getStorage();
 
+export const ApiLocataion = "https://us-central1-orcaapp-dfa9b.cloudfunctions.net/app"
 
 

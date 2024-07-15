@@ -1,5 +1,18 @@
 
 /*****************< 1.) Welcome Row >*******************/
+
+.sidebar-close .home{
+  display: flex;
+  flex-direction: column;
+  padding-left: 300px;
+  top: 0;
+  left: 350px;
+  width: 100%;
+  transition: all 0.3s ease;
+  overflow: hidden;
+
+}
+
 .home{
   display: flex;
   flex-direction: column;
@@ -9,7 +22,9 @@
   width: 100%;
   transition: all 0.3s ease;
   overflow: hidden;
+
 }
+
 
 #dark .cloud{
     display: flex;
@@ -70,10 +85,10 @@
 }
 
 .memory_title h2 {
-    padding: 10px 25px;
+    padding: 10px 20px;
     font-size: 25px;
     border-radius: 10px;
-    box-shadow: inset -1px -1px 6px 1px rgb(173, 173, 173);
+    /*box-shadow: inset -1px -1px 6px 1px rgb(173, 173, 173);*/
     font-weight: 600;
   }
 
@@ -90,7 +105,7 @@
     flex-direction: column;
     align-items: left;
     justify-content: center;
-    width: 100%; 
+    width: 100%;
     
 }
   
@@ -104,8 +119,9 @@
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   align-items: center;
-  
-  padding: 50px 0;
+  justify-content: center;
+  padding:20px 0px;
+  width: 98%;
 }
 
 .ag-courses_box2 {
@@ -134,10 +150,10 @@
   z-index: 9;
 }
   
-.ag-courses-item_link:hover .ag-courses-item_bg {
+.home-folder:hover .ag-courses-item_bg {
   -webkit-transform: scale(10);
   -ms-transform: scale(10);
-  transform: scale(10);
+  transform: scale(1.2);
 }
   
 .ag-courses-item_link {
@@ -161,13 +177,13 @@
 }
   
 .ag-courses-item_bg {
-  height: 128px;
-  width: 128px;
+  height: 50px;
+  width: 50px;
   z-index: 1;
   position: absolute;
-  top: -75px;
-  right: -75px;
-  border-radius: 50%;
+  top: 10px;
+  right: 10px;
+  border-radius: 10%;
   -webkit-transition: all .5s ease;
   -o-transition: all .5s ease;
   transition: all .5s ease;
@@ -287,6 +303,597 @@ opacity: 1;
   display: inline;
 }
 
+/*< FOLDERS >*/
+
+.home-folder{
+  position: relative;
+  width: 350px;
+  height: 300px;
+  border: 5px solid black;
+  background-color: rgb(8, 8, 8);
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px 0px black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+#dark .home-folder{
+  border: 5px solid black;
+  background-color: rgb(8, 8, 8);
+  box-shadow: 0px 0px 20px 0px black;
+}
+
+#light .home-folder{
+  border: 5px solid rgb(255, 255, 255);
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0px 0px 10px 0px rgb(0, 0, 0);
+}
+
+/**/
+
+#dark .folder-title{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+#light .folder-title{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+/**/
+
+#dark .folder-title h6{
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+  color: rgb(108, 108, 108);
+}
+
+#light .folder-title h6{
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+  color: rgb(0, 0, 0);
+  opacity: 0.5;
+}
+
+#dark .folder-title h4{
+  font-size: 23px;
+  color: rgb(169, 168, 168);
+}
+
+#light .folder-title h4{
+  font-size: 23px;
+  color: rgb(0, 0, 0);
+}
+
+/**/
+
+.folder-bottom{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.folder-bottom-left{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.folder-tags{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding-bottom: 20px;
+}
+
+/**/
+
+.f-tag{
+  padding: 6px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--dark-primary-color);
+  border-radius: 50px;
+  margin-right: 10px;
+}
+
+#dark .f-tag{
+  border: 1px solid var(--dark-primary-color);
+
+}
+
+#light .f-tag{
+  border: 3px solid var(--primary-color);
+}
+
+/**/
+
+#dark .f-tag h6{
+  padding: 0;
+  margin: 0;
+  font-size: 10px;
+  color: rgb(213, 251, 203);
+}
+
+#light .f-tag h6{
+  padding: 0;
+  margin: 0;
+  font-size: 10px;
+  color: rgb(0, 0, 0);
+}
+
+/**/
+
+
+.folder-open-btn{
+  display: flex;
+  flex-direction: column;
+  width: 100px;
+  height: 50px;
+  border: 1px solid var(--dark-primary-color);
+  border-radius: 20px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: black;
+  opacity: 0.6;
+}
+
+#dark .folder-open-btn{
+  border: 1px solid var(--dark-primary-color);
+  background-color: black;
+  opacity: 0.6;
+}
+
+#light .folder-open-btn{
+  border: 3px solid var(--primary-color);
+  background-color: black;
+  opacity: 0.6;
+}
+
+#dark .home-folder:hover .folder-open-btn{
+  opacity: 1;
+  cursor: pointer;
+}
+
+#light .home-folder:hover .folder-open-btn{
+  opacity: 1;
+  cursor: pointer;
+}
+
+/**/
+
+#dark .folder-open-btn:hover{
+  background-color: var(--dark-primary-color);
+  box-shadow: 0px 0px 10px 10px black;
+  border: 3px solid rgb(0, 0, 0);
+}
+
+#light .folder-open-btn:hover{
+  background-color: var(--primary-color);
+  box-shadow: 0px 0px 5px 2px black;
+  border: 3px solid rgb(0, 0, 0);
+}
+
+/**/
+
+#dark .folder-open-btn:hover h6{
+  color: black;
+  font-weight: 600;
+}
+
+#light .folder-open-btn:hover h6{
+  color: black;
+  font-weight: 600;
+}
+
+#dark .folder-open-btn h6{
+  padding: 0;
+  margin: 0;
+  color: white;
+}
+
+#light .folder-open-btn h6{
+  padding: 0;
+  margin: 0;
+  color: white;
+}
+
+/**/
+
+#dark .f-created-by{
+  font-size: 10px;
+  color: white;
+  opacity: 0.5;
+}
+
+#light .f-created-by{
+  font-size: 10px;
+  color: rgb(0, 0, 0);
+  opacity: 0.5;
+}
+
+/**/
+
+#dark .f-created-by span {
+  color: var(--dark-primary-color);
+}
+
+#light .f-created-by span {
+  color: var(--primary-color);
+  opacity: 1;
+}
+
+
+
+/*ADD*/
+
+.add-home-folder{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 350px;
+  height: 300px;
+  border: 3px dashed black;
+  background-color: transparent;
+  border-radius: 10px;
+  box-shadow: inset 0px 0px 2px 0px black;
+  margin: 10px;
+  cursor: pointer;
+}
+
+#dark .add-home-folder{
+  border: 3px dashed black;
+  background-color: transparent;
+  box-shadow: inset 0px 0px 2px 0px black;
+}
+
+#light .add-home-folder{
+  border: 3px dashed black;
+  background-color: transparent;
+  box-shadow: inset 0px 0px 2px 0px black;
+}
+
+/**/
+
+#dark .add-home-folder h3{
+  font-size: 25px;
+  color: white;
+  opacity: 0.2;
+}
+
+#light .add-home-folder h3{
+  font-size: 25px;
+  color: black;
+  opacity: 0.2;
+}
+
+/**/
+
+#dark .add-home-folder:hover{
+  border: 3px solid black;
+  transform: scale(0.93);
+}
+
+#light .add-home-folder:hover{
+  border: 3px solid black;
+  transform: scale(0.93);
+}
+
+/**/
+
+#dark .add-home-folder:hover h3{
+  opacity: 0.5;
+}
+
+#light .add-home-folder:hover h3{
+  opacity: 0.5;
+}
+
+/**/
+
+#dark .add-home-folder:active{
+  transform: scale(0.9);
+}
+
+#light .add-home-folder:active{
+  transform: scale(0.9);
+}
+
+/*CREATE*/
+
+.add-folder-create{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 350px;
+  height: 300px;
+  border: 5px solid black;
+  margin: 10px;
+  padding: 20px 20px 30px 20px; 
+  background-color: rgb(0, 0, 0);
+  box-shadow: 0px 0px 20px 0px black;
+  border-radius: 20px;
+  position: relative;
+}
+
+#dark .add-folder-create{
+  border: 5px solid black;
+  background-color: rgb(0, 0, 0);
+  box-shadow: 0px 0px 20px 0px black;
+}
+
+#light .add-folder-create{
+  border: 5px solid rgb(255, 255, 255);
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0px 0px 10px 0px rgb(0, 0, 0);
+}
+
+/**/
+
+#dark .add-folder-create h3{
+  font-size: 22px;
+  color: white;
+  opacity: 0.7;
+  font-weight: 450;
+  border-bottom: 2px groove white;
+}
+
+#light .add-folder-create h3{
+  font-size: 22px;
+  color: black;
+  opacity: 0.7;
+  font-weight: 450;
+  border-bottom: 2px groove black;
+}
+
+/**/
+
+.create-top{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0px 10;
+  align-items: center;
+}
+
+#dark .create-title{
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+}
+
+#light .create-title{
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+}
+
+#dark .create-title input:hover{
+  opacity: 1;
+}
+
+#light .create-title input:hover{
+  opacity: 1;
+}
+
+#dark .create-title h5{
+  padding: 0;
+  margin: 10;
+  font-size: 16px;
+  color: white;
+  opacity: 0.6;
+}
+
+#light .create-title h5{
+  padding: 0;
+  margin: 10;
+  font-size: 16px;
+  color: black;
+  opacity: 0.6;
+}
+
+/**/
+
+#dark .create-title input{
+  padding: 8px;
+  background-color: rgb(0, 0, 0);
+  border: 1px solid var(--dark-primary-color);
+  border-radius: 10px;
+  color: white;
+  opacity: 0.8;
+}
+
+#light .create-title input{
+  padding: 8px;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  color: black;
+  opacity: 0.8;
+}
+
+/**/
+
+#dark .add-color{
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+}
+
+#light .add-color{
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+}
+
+#dark .add-color h5{
+  padding: 0;
+  margin: 10;
+  font-size: 16px;
+  color: white;
+  opacity: 0.6;
+}
+
+#light .add-color h5{
+  padding: 0;
+  margin: 10;
+  font-size: 16px;
+  color: black;
+  opacity: 0.6;
+}
+
+#dark .add-color input{
+  padding: 5px;
+  background-color: rgb(0, 0, 0);
+  border: 1px solid var(--dark-primary-color);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#light .add-color input{
+  padding: 5px;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.create-bottom{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+#dark .visibility{
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  justify-content: space-between;
+}
+
+#light .visibility{
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  justify-content: space-between;
+}
+
+#dark .visibility h5{
+  padding: 0;
+  margin: 10;
+  font-size: 16px;
+  color: white;
+  opacity: 0.6;
+}
+
+#light .visibility h5{
+  padding: 0;
+  margin: 10;
+  font-size: 16px;
+  color: black;
+  opacity: 0.6;
+}
+
+#dark .visibility select{
+  padding: 8px;
+  background-color: rgb(0, 0, 0);
+  border: 1px solid var(--dark-primary-color);
+  border-radius: 10px;
+  color: white;
+}
+
+#light .visibility select{
+  padding: 8px;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  color: black;
+}
+
+#dark .create-folder-btn{
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  margin-top: 25px;
+}
+
+#light .create-folder-btn{
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  margin-top: 25px;
+}
+
+#dark .create-folder-btn button{
+  padding: 10px;
+  background-color: black;
+  border: 1px solid var(--dark-primary-color);
+  border-radius: 10px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  opacity: 0.2;
+}
+
+#light .create-folder-btn button{
+  padding: 10px;
+  background-color: black;
+  border: 3px solid var(--primary-color);
+  border-radius: 10px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  opacity: 0.2;
+}
+
+#dark .create-folder-btn button:hover{
+  transform: scale(0.95);
+}
+
+#light .create-folder-btn button:hover{
+  transform: scale(0.95);
+}
+
+#dark .add-folder-close-icon{
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  color: white;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+}
+
+#light .add-folder-close-icon{
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  color: black;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+}
+
 /* ===== HOME ===== */
 
 /*DARK _ MODE*/
@@ -385,10 +992,10 @@ color: var(--dark-primary-color-light);
 }
 
 #dark .memory_title h2 {
-  padding: 12px 30px;
+  padding: 12px 20px;
   font-size: 25px;
   border-radius: 10px;
-  box-shadow: inset 1px -1px 4px 1px rgb(173, 173, 173);
+  /*box-shadow: inset 1px -1px 4px 1px rgb(173, 173, 173);*/
   font-weight: 600;
 }
 
@@ -479,15 +1086,24 @@ color: var(--primary-color-light);
     top: 0;
     width: 100%;  
     transition: all 0.3s ease;
+}
+
+.sidebar-close .home{
+  padding-left: 0px;
+  top: 0;
+  width: 100%;  
+  transition: all 0.3s ease;
 
 }
 
-.sidebar.close ~ .home{
-  left: 0px;
-  display: flex;
-  width: 100%;
-  overflow: hidden;
+.home{
+  padding-left: 0px;
+  top: 0;
+  width: 100%;  
+  transition: all 0.3s ease;
+
 }
+
 .home .ag-format-container {
   width: 100%;
 
@@ -541,3 +1157,5 @@ color: var(--primary-color-light);
   font-weight: 600;
 }
 }
+
+

@@ -6,9 +6,9 @@ import { Link } from 'react-router-dom';
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
 import { sendEmailVerification } from "firebase/auth";
 //ASSETS
-import AnualSwitch from "../assets/Pricing/anualSwitch"
-import FaqBar from "../assets/Pricing/faqBar"
-import { getCheckoutUrl,getPortalUrl } from "../assets/Subscription/checkOutUrl"
+import AnualSwitch from "../assets/Components/Pricing/anualSwitch"
+import FaqBar from "../assets/Components/Pricing/faqBar"
+import { getCheckoutUrl,getPortalUrl } from "../assets/Components/Subscription/checkOutUrl"
 
 //CSS
 import '../Css/pricing.css';
@@ -16,7 +16,7 @@ import '../Css/pricing.css';
 //FIREBASE
 import { app } from "../firebase";
 
-
+import { ApiLocataion } from '../firebase';
 
 const Subscription = () =>{
 
@@ -85,7 +85,7 @@ useEffect(() => {
             if (currentuser) {
                 const currentUserId = currentuser.uid;
                 //FETCH USER DATA
-                const response = await fetch(`http://localhost:3000/user/${currentUserId}`, {
+                const response = await fetch(`${ApiLocataion}/user/${currentUserId}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',

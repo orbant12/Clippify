@@ -1,6 +1,27 @@
 
 /*****************< 1.) FILES IN FOLDER >*******************/
 
+.sidebar-close .folder-page{
+  padding-left: 200px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.folder-page{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.folder-page-container{
+  width: 100%;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .file-map-container{
   width: 100%;
   display: grid;
@@ -94,6 +115,7 @@
   justify-content: center;
   padding-left: 0px;
   overflow-x: hidden;
+  padding: 100px 00px;
 }
 
 .item-box-link{
@@ -164,6 +186,13 @@
   cursor: pointer;
 }
 
+#light .card-item{
+  background-color: #ffffff;
+}
+
+#dark .card-item{
+  background-color: #0000;
+}
 
 /* ================ COLOR FODLER ====================== */
 
@@ -317,6 +346,7 @@ background-color: none;
 
 #dark .card-item{
   background-color: var(--dark-body-color);
+  display: none;
 }
 
 #dark .item-box-link {
@@ -360,33 +390,29 @@ height: 110%;
 box-shadow: 2000 0 5px 10px red, -400px 0 5px -10px red;
 transform: translateY(-5%);
 border-radius: 10px;
-
 }
 
 #dark .clip_box_des {
-width: 1.3rem;
-height: 100%;
-background-color: var(--dark-primary-color);
-position: absolute;
-z-index: -1;
-display: flex;
-gap: 3px;
-align-items: center;
-justify-content: space-around;
+  width: 1.3rem;
+  height: 100%;
+  background-color: var(--dark-primary-color);
+  position: absolute;
+  z-index: -1;
+  display: flex;
+  gap: 3px;
+  align-items: center;
+  justify-content: space-around;
 }
 
 #dark div .btn2 {
- 
-border-radius: 10px;
-padding-top: 8px;
-font-size: 20px;
-font-weight: 600;
-width: 200px;
-height: 50px;
-background-color: var(--dark-primary-color);
-color: var(--dark-body-color);
-
-
+  border-radius: 10px;
+  padding-top: 8px;
+  font-size: 20px;
+  font-weight: 600;
+  width: 200px;
+  height: 50px;
+  background-color: var(--dark-primary-color);
+  color: var(--dark-body-color);
 }
 
 /*LIGHT _ MODE*/
@@ -578,4 +604,18 @@ background-color: none;
     margin: 20px;
     padding: 20px;
   }
+
+  .sidebar-close .folder-page{
+    padding-left: 0px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .folder-page{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
 }
+

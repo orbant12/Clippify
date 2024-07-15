@@ -1,0 +1,352 @@
+
+/* GOOGLE FONTS*/
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap");
+
+:root {
+  --header-height: 3.5rem;
+
+  /*Colors*/
+  --black-color: black;
+  --black-color-light: hsl(220, 24%, 15%);
+  --black-color-lighten: hsl(220, 20%, 18%);
+  --accent-color: #61ffdf;
+  --secoundary-color: #9effb1;
+  --white-color: #fff;
+  --body-color: hsl(220, 100%, 97%);
+  /*Fonts*/
+  --body-font: 'Poppins', sans-serif;;
+  --normal-font-size: .938rem;
+  /*Font weight*/
+  --font-regular: 400;
+  --font-semi-bold: 600;
+  /*z index*/
+  --z-tooltip: 10;
+  --z-fixed: 100;
+
+  /**/
+  --card-clr: #161922;
+	--body-clr: #191d28;
+	--primary-clr: #f0bf6a;
+	--heading-clr: #dadada;
+	--text-clr: #767a86;
+  --yellow: #FFBD13;
+	--blue: #4383FF;
+	--blue-d-1: #3278FF;
+	--light: #F5F5F5;
+	--grey: #AAA;
+	--white: #FFF;
+	--shadow: 8px 8px 30px rgba(0,0,0,.05);
+}
+
+/*Responsive typography*/
+@media screen and (min-width: 1024px) {
+  :root {
+    --normal-font-size: 1rem;
+  }
+
+}
+
+
+/* ===== Google Font Import - Poppins ===== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.4s ease;;
+}
+
+/*NAV BAR*/
+/* ===== Colours ===== */
+:root{
+    --body-color: white;
+    --nav-color: rgb(0, 0, 0);
+    --side-nav: #010718;
+    --text-color: #000000;
+    --search-bar: #F2F2F2;
+    --search-text: #010718;
+}
+
+a{
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul{
+    list-style: none;
+}
+
+
+body{
+    height: 100vh;
+    background-color: var(--body-color);
+
+}
+
+body.dark{
+    --body-color: #18191A;
+    --nav-color: #242526;
+    --side-nav: #242526;
+    --text-color: #CCC;
+    --search-bar: #242526;
+}
+
+/*< NAVBAR >*/
+
+.landing-page nav{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    box-shadow: 1px 1px 10px 1px black;
+    padding: 10px 50px;
+    height: 70px;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(0, 0, 0);
+    z-index: 99999;
+}
+
+.landing-page .sticky {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+     /* Set a z-index if needed */
+}
+
+.landing-page nav .sidebarOpen{
+    color: var(--text-color);
+    font-size: 25px;
+    padding: 5px;
+    cursor: pointer;
+    display: none;
+    background-color: var(--nav-color);
+}
+
+.landing-page nav .logo a{
+    font-size: 25px;
+    font-weight: 500;
+    text-decoration: none;
+    color: white;
+    padding: 0;
+    margin: 0;
+}
+
+.menu .logo-toggle{
+    display: none;
+}
+
+nav .nav-links{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
+    padding: 0;
+    margin: 0;
+
+}
+
+nav .nav-links li{
+    list-style: none;
+}
+
+.nav-links li a{
+    position: relative;
+    font-size: 17px;
+    font-weight: 400;
+    color: white;
+    text-decoration: none;
+    padding: 10px 25px;
+}
+
+.nav-links li a::before{
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    height: 6px;
+    width: 6px;
+    border-radius: 50%;
+    background-color: var(--text-color);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.nav-links li:hover a::before{
+    opacity: 1;
+}
+
+.try-for-free-btn{
+    border: 2px solid rgb(255, 255, 255);
+    box-shadow: 0px 0px 1px 0px rgb(255, 255, 255);
+    border-radius: 20px;
+    padding: 10px 13px;
+    font-size: 12px;
+    color: rgb(255, 255, 255);
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.try-for-free-btn:hover {
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    font-weight: 600;
+    box-shadow: 1px 1px 1px 1px rgb(0, 0, 0);
+}
+
+
+/*OPENNED FOLDER*/
+
+.folder-bar h2{
+    text-align: center;
+}
+
+.userURL{
+    padding: 10px;
+    padding-right: 15px;
+}
+
+.add{
+    width: 100%;
+    padding: 10px 0px;
+    background: linear-gradient(200deg, rgba(137, 246, 206, 0.5) 0%, rgba(59, 249, 173, 0.5) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.add h6{
+    color: rgb(0, 0, 0);
+    font-size: 10px;
+    opacity: 0.7;
+    width: 100%;
+    padding: 0;
+    margin-right: auto;
+    margin-left: auto;
+    margin: 0;
+    align-items: center;
+}
+
+/*horizontal animation to add h6 moving*/
+
+.add h6{
+    animation: moveing 50s infinite linear;
+}
+
+.add h6:hover{
+    animation-play-state: paused;
+    opacity: 1;
+    cursor: pointer;
+}
+
+/*Smoother at Repeat*/
+
+@keyframes moveing {
+    0% {transform: translateX(0%);}
+    50% {transform: translateX(100%);}
+    100% {transform: translateX(0%);}
+}
+
+.start-clippify{
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    cursor: pointer;;
+}
+
+.start-clippify h2{
+    font-size: 20px;
+    border: 2px solid rgb(146, 253, 113);
+    padding: 10px 20px;
+    color: white;
+    background: black;
+    border-radius: 30px;
+}
+
+.start-clippify h2:hover{
+    background: rgb(146, 253, 113);
+    color: black;
+    font-weight: 600;
+}
+
+/* < RESPONSIVE > */
+
+@media (max-width: 790px) {
+    .landing-page nav .sidebarOpen{
+        display: block;
+        background-color: var(--nav-color);
+    }
+
+    .menu{
+        position: fixed;
+        height: 100%;
+        width: 320px;
+        left: -100%;
+        top: 0;
+        padding: 20px;
+        z-index: 100;
+        box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+        transition: all 0.4s ease;
+        z-index: 9999;
+        background-color: var(--nav-color);
+    }
+
+    nav.active .menu{
+        left: -0%;
+    }
+
+    nav.active .navLogo a{
+        opacity: 0;
+        transition: all 0.3s ease;
+        color: white;
+    }
+
+    .menu .logo-toggle{
+        display: block;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: white;
+    }
+
+    .logo-toggle .siderbarClose{
+        color: var(--text-color);
+        font-size: 24px;
+        cursor: pointer;
+    }
+
+    nav .nav-links{
+        flex-direction: column;
+        padding-top: 30px;
+    }
+
+    .nav-links li a{
+        display: block;
+        margin-top: 20px;
+    }
+
+
+    .welcome-buttons{
+        display: none;
+    }
+
+}
+
+
+@media (max-width: 790px) {
+    .start-clippify{
+        display: none;
+    }
+
+}
