@@ -307,7 +307,7 @@ return (
           }
           ErrorBoundary={LexicalErrorBoundary}
         />
-        <OnChangePlugin onChange={editorState => editorStateRef.current = editorState} />
+        <OnChangePlugin onChange={editorState => {editorStateRef.current = editorState}} />
         <OnChangePlugin onChange={() => {
   if (editorStateRef.current) {
     setContent(JSON.stringify(editorStateRef.current))

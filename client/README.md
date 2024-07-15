@@ -1,10 +1,22 @@
-# Clippify README
+# ✂️ Clippify Introduction Video 🎞️
 
-Welcome to Clippify, a comprehensive and multifaceted project that showcases my mastery of various technologies and skills relevant to the tech industry. This README is designed to provide a detailed insight into the key components and accomplishments of this project, specifically tailored for a tech job recruiter.
+
+
+
+
+https://github.com/orbant12/Clippify/assets/124793231/7433a6f0-e758-4867-8dbc-74fb009748c4
+
+
+
+
+
+---
+
+Welcome to Clippify, a comprehensive and multifaceted project that showcases my mastery of various technologies and skills relevant to the tech industry. This README is designed to provide a detailed insight into the key components and accomplishments of this project, specifically tailored for a tech job recruiter
 
 ### Table of Contents
 1. [Technologies Used](#technologies-used)
-2. [Key Achievements](#key-achievements)
+2. [App Features](#key-achievements)
 3. [Project Components](#project-components)
     - [1. FFMPEG Syntax and Media Manipulation](#ffmpeg-syntax-and-media-manipulation)
     - [2. Self-trained Neural Network for Video Transcript Extraction](#self-trained-neural-network-for-video-transcript-extraction)
@@ -20,26 +32,40 @@ Welcome to Clippify, a comprehensive and multifaceted project that showcases my 
 6. [Contributing](#contributing)
 7. [License](#license)
 8. [Contact Information](#contact-information)
-
+   
 ---
 
 ## Technologies Used
 
+### 💻 Frontend
+
 - FFmpeg
-- REACT
-- Python
-- TensorFlow
-- Numpy
-- Pandas
+- React
+- Vite
 - Stripe API
 - OpenAI API
 - Firebase Firestore
 - Firebase Authentication
 - Firebase Storage
+
+### 👨🏻‍💻 Backend
+
+- Node
+- Express
+- Firebase Functions
+- REST
+
+### 👾 Machine Learning
+
+- Tensorflow
+- Python
+- Numpy
+- Pandas
+- Firebase ML Integration
   
 ---
 
-## Key Achievements
+## App Features
 
 1. **Mastery of FFMPEG Syntax:** Proficient in manipulating media files (mp3, mp4, blob, blob64, URL, data URL) using FFMPEG, showcasing a deep understanding of multimedia processing.
 
@@ -131,6 +157,11 @@ Google Console
 
 Implemented secure user authentication and managed data flow using Firebase, ensuring a robust and scalable user management system.
 
+### 5. Youtube URL Downloader - MUST move from serverless to REST
+
+Implemented secure user authentication and managed data flow using Firebase, ensuring a robust and scalable user management system.
+
+
 ---
 
 ## Usage and Demos
@@ -142,16 +173,6 @@ Implemented secure user authentication and managed data flow using Firebase, ens
 2. **You will need:**
 - Create a Clippify Account
 
----
+  
 
-## Contact Information
 
-[Provide your contact information or ways in which interested parties can reach out to you for further inquiries or collaboration.]
-
---- 
-
-Thank you for exploring [Your Project Name]! I hope this README provides a comprehensive understanding of the project and my capabilities as a tech professional. If you have any questions or need further clarification, feel free to reach out.
-
-[Your Name]  
-[Your Email]  
-[Your LinkedIn or other relevant profiles]

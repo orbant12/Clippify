@@ -1,3 +1,6 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+
 const FolderBox = ({ folder }) => {
     return(
         <div className='home-folder' key={folder.id}>
@@ -20,9 +23,9 @@ const FolderBox = ({ folder }) => {
                     </div>
                     <h6 className='f-created-by'>Created: <span>{folder.creator_name}</span></h6>
                 </div>
-                <div className='folder-open-btn' onClick={() => handleFolderNavigation(folder.id)}>
+                <Link className='folder-open-btn' to={`/folder/${folder.id}`} >
                     <h6>Open</h6>
-                </div>
+                </Link>
             </div>
         </div>
     )

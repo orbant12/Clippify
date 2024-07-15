@@ -41,7 +41,7 @@ useEffect(() => {
       setuser(user)
       console.log(`Logged in user: ${user.uid}`)
       if(window.location.pathname == "/login" || window.location.pathname == "/register"){
-        window.location.href = "/"
+        
       }
     }
     else {
@@ -111,13 +111,13 @@ const SignUp = async (email, password, FullName) => {
     const signeduser = result.user;
     //Setting Fresh Registrated user To the Document
     const userId = signeduser.uid;
-    const colRef = collection(db, "users");
+    const colRef = doc(db, "users",userId);
     const tagRef = collection(db, "users", userId, "Tags");
     //const newTagRef = doc(tagRef);
     console.log(userId);
     //SETTING USER DOCUMENT TO FIRESTORE
     try {
-      await setDoc(doc(colRef, userId),{
+      await setDoc(colRef,{
         id: userId,
         fullname: userName,
         email: regEmail,
@@ -126,6 +126,8 @@ const SignUp = async (email, password, FullName) => {
         profilePictureURL: "",
         recent:"",
         user_since: new Date().toLocaleDateString(),
+        recent_file_id: "",
+        recent_folder_id:"",
       });
 
       await setDoc(doc(tagRef,userId),{

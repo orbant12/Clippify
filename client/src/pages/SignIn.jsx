@@ -22,7 +22,7 @@ const SignIn = () => {
 //<******************************VARIABLES*******************************>
 
 //AUTH CONTEXT
-const {Login, currentuser} = useAuth()
+const {Login, currentuser, SignUp} = useAuth()
 
 //USER useSTATE
 const [user, setUser] = useState({
@@ -117,6 +117,24 @@ const SubmitHandler = async (e) => {
   };
 };
 
+const HandleGuests = async (e) => {
+  e.preventDefault()
+  const UID = await generateUID(6)
+  const email = `guest_${UID}@clippify.com`
+  const password = UID
+  const FullName = `Guest_${UID}`
+  await SignUp(email, password, FullName)
+}
+
+const generateUID = (len) => {
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let autoId = "";
+  for (let i = 0; i < len; i++) {
+    autoId += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return autoId;
+}
+
 //FORGOT PASSWORD
 const handleForgotPass = async() => {
   if(user.email != ""){
@@ -188,6 +206,9 @@ return(
         </div>
         <div className='login-input'>
           <button type='submit'>Sign in</button>
+        </div>
+        <div className='login-input' style={{background:"transparent"}}>
+          <button type='button' style={{background:"white"}} onClick={HandleGuests}>Use as guest</button>
         </div>
       </form>
     </div>
