@@ -10,7 +10,7 @@ return videoSrc ? (
 <>
   <article className="grid">
     <div className="bord_g_2">
-      <video crossOrigin="anonymous" autoPlay controls muted width="450">
+      <video style={{boxShadow:"4px 4px 10px 1px black"}} crossOrigin="anonymous" autoPlay controls muted width="450">
         <source src={videoSrc} type="video/mp4" crossOrigin="anonymous" />
       </video>
     </div>

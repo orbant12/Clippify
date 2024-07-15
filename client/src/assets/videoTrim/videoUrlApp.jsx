@@ -1,5 +1,5 @@
 
-import { useState} from "react";
+import { useEffect, useState} from "react";
 import { createFFmpeg, fetchFile } from "@ffmpeg/ffmpeg/src/index.js"
 import * as helpers from "./utils/helpers";
 import VideoUrlPicker from "./videoUrlPicker";
@@ -10,6 +10,8 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import Form from 'react-bootstrap/Form';
 import OutputVideo2 from "./outputNoDown"
 
+//CONTEXT
+import {useAuth} from "../../context/UserAuthContext";
 
 //FFMPEG Setup
 const FF = createFFmpeg({
@@ -22,7 +24,15 @@ const FF = createFFmpeg({
   })();
   
 
-function VideoUrlApp({fileImage,setPassedDataUrl,setExtractMeta,setPassedAudioDataUrl,subscriptionState,handleTitleInput}) {
+function VideoUrlApp({
+  fileImage,
+  setPassedDataUrl,
+  setExtractMeta,
+  setPassedAudioDataUrl,
+  subscriptionState,
+  handleTitleInput,
+  handleTagInput
+}) {
 
 //<====================================VARIABLES=============================================>
 
@@ -53,8 +63,38 @@ const [loadingText, setLoadingText] = useState("Loading...");
 
 //MEDIA TITLE
 const [mediaTitle,setMediaTitle] = useState("Untitled")
+//TAG
+const [isNewTagAddActive, setNewTagAddActive] = useState(false)
+const [newTagInput, setNewTagInput] = useState("")
+const [userTags, setUserTags] = useState([])
+const [selectedTag,setSelectedTag] = useState("")
+
+const { currentuser } = useAuth();
 
 //<====================================FUNCTIONS==========================================>
+
+const fetchUserTags = async () => {
+  if(currentuser){
+    //FETCH TAGS
+    const userSnapshot = await fetch(`http://localhost:3000/user/tags/${currentuser.uid}`, {
+      method: 'GET',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+    });
+    if(userSnapshot.status === 200){
+      const elementData = await userSnapshot.json();
+      setUserTags(elementData)
+    }
+  }
+}
+
+//UPDATE THE NUM OF ELEMENTS IN FOLDER
+useEffect(() => {
+  if (currentuser){
+    fetchUserTags()
+  }
+}, [currentuser]);
 
 const handleVideoFileChange = async (videoFile) => {
   setInputVideoFile(videoFile);
@@ -339,6 +379,32 @@ const handleMediaTitle = (event) => {
   handleTitleInput(event.target.value)
 }
 
+const handleMediaTag = (event) => {
+  setSelectedTag(event.target.value)
+  handleTagInput(event.target.value)
+}
+
+const handleCreateTag = async () => {
+  const userAddedTag = newTagInput;
+  if(currentuser){
+    const response = await fetch(`http://localhost:3000/user/tags/create`,{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ 
+        userId: currentuser.uid,
+        tagName: [...userTags,userAddedTag]
+      }),
+    })
+    if(response.status == 200){
+      fetchUserTags()
+      console.log(response)
+      setNewTagAddActive(false)
+      setNewTagInput("")
+    }
+  }
+}
 
 return (
 <>
@@ -442,14 +508,30 @@ return (
         <div style={{marginTop:10}}>
         <hr />
         <label htmlFor="">Add Tags</label>
-        <Form.Select aria-label="Default select example">
-        <option>Tags</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </Form.Select>
+        <Form.Select onChange={(e) => handleMediaTag(e)} aria-label="Default select example">
+          {userTags.length != 0 ?(
+            userTags.map((tag) => (
+              <option value={tag}>{tag}</option>
+            ))
+          ):null}
+        </Form.Select>
         </div>
-       
+
+        <div style={{display:"flex",flexDirection:"column",alignItems:"center",width:"100%",marginRight:"auto",marginLeft:"auto"}}>
+          {!isNewTagAddActive?(
+            <>
+              <h6 onClick={()=> setNewTagAddActive(true)} className="tag-add-btn">+ Add New Tag</h6>
+            </>
+          ):(
+            <div className="add-your-tag">
+              <h6>Add your own Tag</h6>
+              <input type="text" value={newTagInput} onChange={(e) => setNewTagInput(e.target.value)} />
+              <h5 className="tag-add-btn" onClick={handleCreateTag}>+ Create</h5>
+              <h1 onClick={()=> setNewTagAddActive(false)}>X</h1>
+            </div>
+          )}
+          
+        </div>
     </div>:null        
   }
 </>

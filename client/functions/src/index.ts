@@ -6,10 +6,9 @@ import OpenAI from "openai";
 
 // const corsHandler = cors({origin: true});
 
-
 const openai = new OpenAI({
-  organization: "org-1j559n72fko7IZSsTd5gtAAm",
-  apiKey: "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",
+    organization: "org-1j559n72fko7IZSsTd5gtAAm",
+    apiKey: "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",
 });
 //
 
@@ -24,9 +23,3 @@ export const openAIHttpFunctionSec = functions.https.onCall(async (data, respons
   return {"data": openAPIResponse};
 });
 //  params?.query?.toString()
-
-
-
-
-
-

@@ -46,11 +46,39 @@ app.get('/user/:id', async (req, res) => {
     }
 });
 
+//<************************USER TAGS*******************************>
+
+// GET USER DETAILS -- 1 User
+app.get('/user/tags/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const fetchTags = await db.collection('users').doc(id).collection("Tags").doc(id).get();
+        const tagData = fetchTags.data();
+        res.json(tagData.tags);
+    } catch (error) {
+        res.json(error);
+    }
+});
+
+app.post('/user/tags/create', async (req, res) => {
+    try {
+        const userId = req.body.userId;
+        const tagName = req.body.tagName;
+        console.log(tagName)
+        // Update the 'tags' array in the user document
+        const userRef = await db.collection('users').doc(userId).collection('Tags').doc(userId).update({ tags: tagName })
+
+        res.json({ success: true, message: 'Tag created successfully' });
+    } catch (error) {
+        res.json(error);
+    }
+});
+
 
 //<****************************FOLDER*******************************>
 
 // GET ALL USER SPECIFIC FOLDERS -- Many Folders
-app.get('/user/folder/:id', async (req, res) => {
+app.get('/user/folder/get/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const folders = await db.collection('users').doc(id).collection('File-Storage').get();
@@ -239,13 +267,12 @@ app.post('/file/children/:id', async (req, res) => {
 //FETCH RECENT FILE -- NOT WORKING
 app.post('/recent', async (req, res) => {
     try {
-        const id = req.body.fileChildrenRef;
-        console.log("2" + id)
-        const transformedFromJson = JSON.parse(id)
-        console.log("2" + transformedFromJson)
-        const recentFile = await transformedFromJson.get();
-        const recentFileData = recentFile.data();
-        res.json(recentFileData);
+        const RecentFolderId= req.body.recent_folder_id;
+        const RecentFileId = req.body.recent_file_id;
+        const userID = req.body.user_Id;
+        const recentFileData = await db.collection('users').doc(userID).collection('File-Storage').doc(RecentFolderId).collection('Files').doc(RecentFileId).get();
+        const recentFileDataFetched = recentFileData.data();
+        res.json(recentFileDataFetched);
     } catch (error) {
         res.json(error);
     }
@@ -255,8 +282,9 @@ app.post('/recent', async (req, res) => {
 app.post('/recent/update/:id', async (req, res) => {
     try {
         const userID = req.params.id;
-        const recentFileRef = req.body.recent;
-        const response = await db.collection('users').doc(userID).update({ recent: recentFileRef });
+        const recentFileId = req.body.recent_file_id;
+        const recentFolderId = req.body.recent_folder_id;
+        const response = await db.collection('users').doc(userID).update({ recent_folder_id: recentFolderId, recent_file_id: recentFileId });
         res.json(response);
     } catch (error) {
         res.json(error);
