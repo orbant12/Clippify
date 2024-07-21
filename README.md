@@ -28,7 +28,7 @@ Welcome to Clippify, a comprehensive and multifaceted project that showcases my 
 ### 💻 Frontend • Dir: [client](https://github.com/orbant12/Clippify/tree/master/client)
 
 - FFmpeg
-- React
+- React 
 - JS
 - HTML
 - CSS & Tailwind
