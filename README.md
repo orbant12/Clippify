@@ -159,7 +159,7 @@ I used
 1. Clone the repository:
     ```sh
     https://github.com/orbant12/Clippify.git
-    cd your-repo-name
+    cd Clippify
     ```
 
 2. Install dependencies:
