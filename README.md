@@ -158,7 +158,7 @@ I used
 ## Usage & Installation
 1. Clone the repository:
     ```sh
-    git clone https://github.com/orbant12/your-repo-name.git
+    https://github.com/orbant12/Clippify.git
     cd your-repo-name
     ```
 
